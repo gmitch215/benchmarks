@@ -1,0 +1,27 @@
+- language: Python
+  id: python
+  run: python main.py
+- language: JavaScript (Node.js)
+  id: js-node
+  run: node main.js
+- language: JavaScript (Bun)
+  id: js-bun
+  run: bun run main.js
+- language: Java
+  id: java
+  run: java Main.java
+- language: Kotlin (JVM)
+  id: kotlin-jvm
+  location: KOTLIN_HOME
+  compile: kotlinc main.kt -include-runtime -d main.kt.jar
+  run: java -jar main.kt.jar
+  cleanup:
+    - main.kt.jar
+- language: Kotlin (Native)
+  id: kotlin-native
+  location: KOTLIN_NATIVE_HOME
+  compile: kotlinc-native main.kt -o main.kt
+  run: main.kt
+  cleanup:
+    - main.kt.exe
+    - main.kt.kexe

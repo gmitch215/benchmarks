@@ -1,0 +1,4 @@
+name: Powers of Two
+description: Programs that iterate through powers of two up to 2^30, through repeated multiplication.
+measure: NANOSECONDS
+output: MICROSECONDS
