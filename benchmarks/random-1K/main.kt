@@ -3,7 +3,7 @@ import kotlin.random.Random
 
 fun main() {
     val time = measureTime {
-        var n = 0;
+        var n = 0.0;
         for (i in 0..1000) {
             n = Random.nextDouble()
         }
