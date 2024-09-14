@@ -9,5 +9,5 @@ fun main() {
         }
     }
 
-    println(time.inWholeMilliseconds)
+    println(time.inWholeNanoseconds)
 }
