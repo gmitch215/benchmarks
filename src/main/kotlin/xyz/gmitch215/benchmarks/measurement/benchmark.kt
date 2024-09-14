@@ -61,8 +61,8 @@ suspend fun runBenchmark(benchmark: Benchmark, folder: File, out: File) = withCo
         if (compile != null) {
             if (benchmark.location != null) {
                 val home = System.getenv(benchmark.location)
-
-                compile = "${home}${s}bin${s}$compile"
+                if (home != null)
+                    compile = "${home}${s}bin${s}$compile"
             }
 
             if (os == "windows") {
