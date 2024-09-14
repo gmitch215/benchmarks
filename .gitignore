@@ -4,6 +4,7 @@
 .kotlin/
 build/
 benchmarks/output/
+site/output/
 
 *.o
 *.obj
