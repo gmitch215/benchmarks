@@ -1,7 +1,9 @@
 .vscode/
 .idea/
 .gradle/
+.kotlin/
 build/
+benchmarks/output/
 
 *.o
 *.obj
