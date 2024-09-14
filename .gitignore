@@ -1,0 +1,14 @@
+.vscode/
+.idea/
+.gradle/
+build/
+
+*.o
+*.obj
+*.class
+*.exe
+*.kexe
+*.dll
+*.jar
+
+!gradle-wrapper.jar
