@@ -11,6 +11,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.*
+import xyz.gmitch215.benchmarks.BenchmarkResult
 import xyz.gmitch215.benchmarks.Measurement
 import java.io.File
 
@@ -27,7 +28,7 @@ suspend fun main(args: Array<String>) = coroutineScope {
     val output = File(input, "output")
 
     val file = File(input, "config.yml").readText(Charsets.UTF_8)
-    val benchmarks = Yaml.default.decodeFromString<List<Benchmark>>(file)
+    val benchmarkRuns = Yaml.default.decodeFromString<List<BenchmarkRun>>(file)
 
     println("Starting Benchmarks on $os")
 
@@ -36,7 +37,7 @@ suspend fun main(args: Array<String>) = coroutineScope {
     if (folders.isEmpty())
         error("No benchmarks found")
 
-    for (benchmark in benchmarks) {
+    for (benchmark in benchmarkRuns) {
         val out = File(output, benchmark.id)
         if (!out.exists())
             out.mkdirs()
@@ -48,33 +49,33 @@ suspend fun main(args: Array<String>) = coroutineScope {
     }
 }
 
-suspend fun runBenchmark(benchmark: Benchmark, folder: File, out: File) = withContext(Dispatchers.IO) {
+suspend fun runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: File) = withContext(Dispatchers.IO) {
     val configFile = File(folder, "config.yml").readText(Charsets.UTF_8)
     val config = Yaml.default.decodeFromString<BenchmarkConfiguration>(configFile)
 
     val results = mutableListOf<Double>()
 
     launch(Dispatchers.Default) {
-        var compile = benchmark.compile
+        var compile = benchmarkRun.compile
         val s = File.separator
 
         if (compile != null) {
-            if (benchmark.location != null) {
-                val home = System.getenv(benchmark.location)
+            if (benchmarkRun.location != null) {
+                val home = System.getenv(benchmarkRun.location)
                 if (home != null)
                     compile = "${home}${s}bin${s}$compile"
             }
 
             if (os == "windows") {
-                val executableSuffix = if (benchmark.id.contains("kotlin")) ".bat" else ".exe"
+                val executableSuffix = if (benchmarkRun.id.contains("kotlin")) ".bat" else ".exe"
                 compile = compile.replaceFirst(" ", "$executableSuffix ")
             }
 
             compile.runCommand(folder)
         }
 
-        var run = benchmark.run
-        if (benchmark.id == "kotlin-native")
+        var run = benchmarkRun.run
+        if (benchmarkRun.id == "kotlin-native")
             run = "$folder${s}$run$kotlinNativeSuffix"
 
         for (i in 0 until RUN_COUNT)
@@ -86,33 +87,20 @@ suspend fun runBenchmark(benchmark: Benchmark, folder: File, out: File) = withCo
             }
     }.join()
 
-    if (benchmark.cleanup != null)
-        for (cleanup in benchmark.cleanup) {
+    if (benchmarkRun.cleanup != null)
+        for (cleanup in benchmarkRun.cleanup) {
             val file = File(folder, cleanup)
             if (file.exists())
                 file.delete()
         }
 
     if (results.isEmpty())
-        error("No results found for '${config.name}' on ${benchmark.language}")
+        error("No results found for '${config.name}' on ${benchmarkRun.language}")
 
-    val low = results.min()
-    val high = results.max()
-    val avg = results.average()
+    val id = folder.name
+    val data = BenchmarkResult(id, config, results)
 
-    val data = buildJsonObject {
-        put("name", config.name)
-        put("description", config.description)
-        put("measure", config.measure.name)
-        put("output", config.output.name)
-        put("low", config.measure.formatOutput(low, config.output))
-        put("high", config.measure.formatOutput(high, config.output))
-        put("avg", config.measure.formatOutput(avg, config.output))
-
-        put("results", JsonArray(results.map { JsonPrimitive(it) }))
-    }
-
-    val file = File(out, "${folder.name}.json")
+    val file = File(out, "$id.json")
     println("Writing to ${file.absolutePath}")
 
     if (!file.exists())
@@ -153,7 +141,7 @@ data class BenchmarkConfiguration(
 )
 
 @Serializable
-data class Benchmark(
+data class BenchmarkRun(
     val language: String,
     val id: String,
     val location: String? = null,
