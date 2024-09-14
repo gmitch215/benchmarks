@@ -1,0 +1,38 @@
+name: Benchmark Request
+description: Request an additional benchmark.
+labels: [enhancement, benchmark]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for suggesting a new benchmark feature. Please fill out the information below.
+  - type: input
+    attributes:
+      label: Name
+      description: What should the benchmark be called?
+      placeholder: |
+        Ex: Ultra Slow Algorithm
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Description of Benchmark
+      placeholder: |
+        Ex: Implement a benchmark that tests the speed of an algorithm.
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: |
+        If you can implement the algorithm in any language or provide a code snippet, please do so below.
+  - type: textarea
+    attributes:
+      label: Example Implementation
+      placeholder: |
+        ```java
+        public void run() {
+          // Code to benchmark
+        }
+        ````
+    validations:
+      required: false
