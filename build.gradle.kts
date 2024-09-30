@@ -18,7 +18,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
     implementation("com.charleskorn.kaml:kaml:0.61.0")
-    implementation("org.jetbrains.kotlinx:kandy-lets-plot:0.7.0")
+    implementation("org.jetbrains.kotlinx:kandy-lets-plot:0.7.1")
 }
 
 tasks {
