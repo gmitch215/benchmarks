@@ -15,13 +15,13 @@ import xyz.gmitch215.benchmarks.BenchmarkResult
 import xyz.gmitch215.benchmarks.Measurement
 import java.io.File
 
-private const val RUN_COUNT = 25
+const val RUN_COUNT = 25
+val json = Json {
+    prettyPrint = true
+}
 
 private val os = System.getProperty("os.name").substringBefore(" ").lowercase()
 private val kotlinNativeSuffix = if (os == "windows") ".exe" else ".kexe"
-private val json = Json {
-    prettyPrint = true
-}
 
 suspend fun main(args: Array<String>) = coroutineScope {
     val input = File(args[0])
@@ -32,21 +32,34 @@ suspend fun main(args: Array<String>) = coroutineScope {
 
     println("Starting Benchmarks on $os")
 
-    val folders = input.listFiles { f -> f?.let { it.isDirectory && it.name != "output" } ?: false } ?: emptyArray()
+    val folders = input.listFiles { f -> f?.let { it.isDirectory && it.name != "output" } == true } ?: emptyArray()
 
     if (folders.isEmpty())
         error("No benchmarks found")
 
-    for (benchmark in benchmarkRuns) {
-        val out = File(output, benchmark.id)
-        if (!out.exists())
-            out.mkdirs()
+    // Run Benchmarks
 
-        launch {
-            for (f in folders)
-                runBenchmark(benchmark, f, out)
+    val results = mutableMapOf<String, List<BenchmarkResult>>()
+    launch {
+        for (benchmark in benchmarkRuns) {
+            val out = File(output, benchmark.id)
+            if (!out.exists())
+                out.mkdirs()
+
+            launch {
+                for (f in folders) {
+                    val result = runBenchmark(benchmark, f, out)
+                    if (results.contains(f.name))
+                        results[f.name] = results[f.name]!! + result
+                    else
+                        results[f.name] = listOf(result)
+                }
+            }
         }
-    }
+    }.join()
+
+    // Rank Benchmarks
+    rankBenchmarks(results, output)
 }
 
 suspend fun runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: File) = withContext(Dispatchers.IO) {
@@ -75,8 +88,12 @@ suspend fun runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: File) = 
         }
 
         var run = benchmarkRun.run
+
+        if (benchmarkRun.file)
+            run = "$folder${s}$run"
+
         if (benchmarkRun.id == "kotlin-native")
-            run = "$folder${s}$run$kotlinNativeSuffix"
+            run += kotlinNativeSuffix
 
         for (i in 0 until RUN_COUNT)
             launch {
@@ -98,7 +115,7 @@ suspend fun runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: File) = 
         error("No results found for '${config.name}' on ${benchmarkRun.language}")
 
     val id = folder.name
-    val data = BenchmarkResult(id, config, results)
+    val data = BenchmarkResult(id, benchmarkRun, config, results)
 
     val file = File(out, "$id.json")
     println("Writing to ${file.absolutePath}")
@@ -107,6 +124,58 @@ suspend fun runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: File) = 
         file.createNewFile()
 
     file.writeText(json.encodeToString(data))
+
+    return@withContext data
+}
+
+suspend fun rankBenchmarks(results: Map<String, List<BenchmarkResult>>, out: File) = coroutineScope {
+    val obj = buildJsonObject {
+        val scores = mutableMapOf<String, Int>()
+
+        for ((name, results) in results) {
+            launch {
+                val sorted = results.sortedBy { it.results.sum() }
+
+                put(name, buildJsonObject {
+                    put("summary", JsonArray(sorted.map { JsonPrimitive(it.languageId) }.toList()))
+                    put("verbose", buildJsonObject {
+                        for ((i, result) in sorted.withIndex()) {
+                            scores[result.languageId] = scores.getOrDefault(result.languageId, 0) + i
+                            put(result.languageId, buildJsonObject {
+                                put("rank", i + 1)
+                                put("avg", result.avg)
+                                put("low", result.low)
+                                put("high", result.high)
+                            })
+                        }
+                    })
+                })
+            }
+        }
+
+        put("overall", buildJsonObject {
+            val sorted = scores.toList().sortedBy { it.second }
+            put("summary", JsonArray(sorted.map { JsonPrimitive(it.first) }.toList()))
+            put("verbose", buildJsonObject {
+                for ((i, pair) in sorted.withIndex()) {
+                    put(pair.first, buildJsonObject {
+                        put("rank", i + 1)
+                        put("score", pair.second)
+                    })
+                }
+            })
+        })
+    }
+
+    val file = File(out, "rankings.json")
+    println("Writing rankings to ${file.absolutePath}")
+
+    withContext(Dispatchers.IO) {
+        if (!file.exists())
+            file.createNewFile()
+
+        file.writeText(json.encodeToString(obj))
+    }
 }
 
 private fun String.runCommand(folder: File): String? {
@@ -144,6 +213,8 @@ data class BenchmarkConfiguration(
 data class BenchmarkRun(
     val language: String,
     val id: String,
+    val color: String,
+    val file: Boolean = false,
     val location: String? = null,
     val run: String,
     val compile: String? = null,
