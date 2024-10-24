@@ -26,11 +26,30 @@ tasks {
         delete("benchmarks/output")
     }
 
+    // Benchmarking Tasks
+
     register("createBenchmarks", JavaExec::class) {
         mainClass.set("xyz.gmitch215.benchmarks.measurement.Benchmarker")
         classpath = sourceSets["main"].runtimeClasspath
         args = listOf(
             file("benchmarks").absolutePath
+        )
+    }
+
+    register("graphBenchmarks", JavaExec::class) {
+        mustRunAfter("createBenchmarks")
+
+        mainClass.set("xyz.gmitch215.benchmarks.site.Grapher")
+        classpath = sourceSets["main"].runtimeClasspath
+        args = listOf(
+            file("benchmarks").absolutePath
+        )
+    }
+
+    register("benchmark") {
+        dependsOn(
+            "createBenchmarks",
+            "graphBenchmarks"
         )
     }
 }
