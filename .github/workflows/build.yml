@@ -58,10 +58,11 @@ jobs:
         uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
-      - name: Install SDKMAN Dependencies
-        uses: sfesenko/setup-sdkman@v1
+      - name: Install Kotlin
+        uses: gmitch215/setup-kotlin@main
         with:
-          deps: kotlin
+          version: '2.0.21'
+          install-native: true
       # Benchmarking
       - name: Create Benchmarks
         run: ./gradlew benchmark
