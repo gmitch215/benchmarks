@@ -60,7 +60,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: Install JavaScript (Bun.sh)
+      - name: Install JavaScript (Deno)
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+      - name: Install JavaScript (Bun)
         uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest

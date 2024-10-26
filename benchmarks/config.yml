@@ -2,10 +2,14 @@
   id: python
   color: "3572a5"
   run: python main.py
-- language: JavaScript (Node.js)
+- language: JavaScript (Node)
   id: js-node
   color: "f1e05a"
   run: node main.js
+- language: JavaScript (Deno)
+  id: js-deno
+  color: "70ffaf"
+  run: deno run main.js
 - language: JavaScript (Bun)
   id: js-bun
   color: "5d5986"
