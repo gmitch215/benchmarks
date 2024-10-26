@@ -44,7 +44,7 @@ jobs:
           - name: windows
             os: windows-latest
 
-    name: Benchmark on ${{ matrix.os }}
+    name: Benchmark on ${{ matrix.name }}
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK 21
