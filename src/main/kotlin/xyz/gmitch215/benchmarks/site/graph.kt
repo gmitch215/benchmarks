@@ -15,8 +15,13 @@ import org.jetbrains.kotlinx.kandy.dsl.plot
 import org.jetbrains.kotlinx.kandy.letsplot.export.toPNG
 import org.jetbrains.kotlinx.kandy.letsplot.feature.layout
 import org.jetbrains.kotlinx.kandy.letsplot.layers.bars
+import org.jetbrains.kotlinx.kandy.letsplot.layers.builders.BarsBuilder
 import org.jetbrains.kotlinx.kandy.letsplot.layers.line
+import org.jetbrains.kotlinx.kandy.letsplot.layers.points
+import org.jetbrains.kotlinx.kandy.letsplot.settings.Symbol
 import org.jetbrains.kotlinx.kandy.letsplot.style.Theme
+import org.jetbrains.kotlinx.kandy.letsplot.x
+import org.jetbrains.kotlinx.kandy.letsplot.y
 import org.jetbrains.kotlinx.kandy.util.color.Color
 import xyz.gmitch215.benchmarks.BenchmarkResult
 import xyz.gmitch215.benchmarks.measurement.BenchmarkRun
@@ -108,26 +113,38 @@ suspend fun createGraphs(benchmarks: List<Pair<String, String>>, out: File) = wi
             "language" to labels,
             "time" to values
         ).groupBy("language").plot {
+            layout {
+                title = example.name
+                caption = "All-time Graph over $RUN_COUNT runs in ${example.output.name.lowercase()}"
+                theme = Theme.HIGH_CONTRAST_DARK
+                size = 1400 to 600
+            }
+
+            x(runs) {
+                axis.name = "Run Index"
+                axis.breaksLabeled(runs, runs.map { "#${it}" })
+            }
+
+            y("time") {
+                axis.name = "Time (${example.output.unit})"
+            }
+
             line {
-                layout {
-                    title = example.name
-                    theme = Theme.HIGH_CONTRAST_DARK
-                }
-
-                x("runs") {
-                    axis.name = "Run Index"
-                }
-
-                y("time") {
-                    axis.name = "Time (${example.output.unit})"
-                }
-
                 color(labels) {
                     legend.name = "Language"
                     scale = categorical(languageColors.map { it.second }, languageColors.map { it.first })
                 }
 
                 width = 2.0
+            }
+
+            points {
+                size = 4.0
+
+                color(labels) {
+                    symbol = Symbol.CIRCLE
+                    scale = categorical(languageColors.map { it.second }, languageColors.map { it.first })
+                }
             }
         }
 
@@ -137,9 +154,22 @@ suspend fun createGraphs(benchmarks: List<Pair<String, String>>, out: File) = wi
         allTimeF.writeBytes(allTime.toPNG())
     }
 
+    val labels = data.map { it.first }
+
+    fun BarsBuilder.settings() {
+        fillColor(labels) {
+            legend.name = "Language"
+            scale = categorical(languageColors.map { it.second }, languageColors.map { it.first })
+        }
+
+        borderLine.apply {
+            color = Color.WHITE
+            width = 0.75
+        }
+    }
+
     // Create Average Graph
     launch {
-        val labels = data.map { it.first }
         val values = data.map { it.second.avgDouble }
 
         val average = dataFrameOf(
@@ -149,7 +179,9 @@ suspend fun createGraphs(benchmarks: List<Pair<String, String>>, out: File) = wi
             bars {
                 layout {
                     title = "${example.name} - Averages"
+                    caption = "Average Time over $RUN_COUNT runs in ${example.output.name.lowercase()}"
                     theme = Theme.HIGH_CONTRAST_DARK
+                    size = 1200 to 600
                 }
 
                 x("language") {
@@ -160,10 +192,7 @@ suspend fun createGraphs(benchmarks: List<Pair<String, String>>, out: File) = wi
                     axis.name = "Average Time (${data.first().second.output.unit})"
                 }
 
-                fillColor(labels) {
-                    legend.name = "Language"
-                    scale = categorical(languageColors.map { it.second }, languageColors.map { it.first })
-                }
+                settings()
             }
         }
 
@@ -185,7 +214,9 @@ suspend fun createGraphs(benchmarks: List<Pair<String, String>>, out: File) = wi
             bars {
                 layout {
                     title = "${example.name} - Best Case"
+                    caption = "Lowest Time from $RUN_COUNT runs in ${example.output.name.lowercase()}"
                     theme = Theme.HIGH_CONTRAST_DARK
+                    size = 1200 to 600
                 }
 
                 x("language") {
@@ -197,10 +228,7 @@ suspend fun createGraphs(benchmarks: List<Pair<String, String>>, out: File) = wi
                     axis.name = "Low Time (${data.first().second.output.unit})"
                 }
 
-                fillColor(labels) {
-                    legend.name = "Language"
-                    scale = categorical(languageColors.map { it.second }, languageColors.map { it.first })
-                }
+                settings()
             }
         }
 
@@ -222,7 +250,9 @@ suspend fun createGraphs(benchmarks: List<Pair<String, String>>, out: File) = wi
             bars {
                 layout {
                     title = "${example.name} - Worst Case"
+                    caption = "Highest Time from $RUN_COUNT runs in ${example.output.name.lowercase()}"
                     theme = Theme.HIGH_CONTRAST_DARK
+                    size = 1200 to 600
                 }
 
                 x("language") {
@@ -234,10 +264,7 @@ suspend fun createGraphs(benchmarks: List<Pair<String, String>>, out: File) = wi
                     axis.name = "High Time (${data.first().second.output.unit})"
                 }
 
-                fillColor(labels) {
-                    legend.name = "Language"
-                    scale = categorical(languageColors.map { it.second }, languageColors.map { it.first })
-                }
+                settings()
             }
         }
 
