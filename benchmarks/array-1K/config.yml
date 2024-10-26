@@ -1,0 +1,4 @@
+name: Array Assignment (1K)
+description: Assigns 1,000 elements to an array.
+measure: NANOSECONDS
+output: MICROSECONDS
