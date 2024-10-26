@@ -47,13 +47,14 @@ suspend fun main(args: Array<String>) = coroutineScope {
                 out.mkdirs()
 
             launch {
-                for (f in folders) {
-                    val result = runBenchmark(benchmark, f, out)
-                    if (results.contains(f.name))
-                        results[f.name] = results[f.name]!! + result
-                    else
-                        results[f.name] = listOf(result)
-                }
+                for (f in folders)
+                    launch {
+                        val result = runBenchmark(benchmark, f, out)
+                        if (results.contains(f.name))
+                            results[f.name] = results[f.name]!! + result
+                        else
+                            results[f.name] = listOf(result)
+                    }
             }
         }
     }.join()
@@ -68,7 +69,7 @@ suspend fun runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: File) = 
 
     val results = mutableListOf<Double>()
 
-    launch(Dispatchers.Default) {
+    launch(Dispatchers.Unconfined) {
         var compile = benchmarkRun.compile
         val s = File.separator
 
