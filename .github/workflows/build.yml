@@ -50,16 +50,16 @@ jobs:
       - name: Change Permissions
         run: chmod +x ./gradlew
       # Runtimes
-      - uses: actions/setup-node@v4
+      - name: Install JavaScript (Node)
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - uses: oven-sh/setup-bun@v2
+      - name: Install JavaScript (Bun.sh)
+        uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
-      - uses: fwilhe2/setup-kotlin@0.9.0
-        with:
-          version: '2.0.21'
-          install-native: true
+      - name: Install Kotlin
+        run: sdk install kotlin
       # Benchmarking
       - name: Create Benchmarks
         run: ./gradlew benchmark
