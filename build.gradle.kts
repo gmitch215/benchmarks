@@ -32,8 +32,9 @@ tasks {
         mainClass.set("xyz.gmitch215.benchmarks.measurement.Benchmarker")
         classpath = sourceSets["main"].runtimeClasspath
         args = listOf(
-            file("benchmarks").absolutePath
-        )
+            file("benchmarks").absolutePath,
+            project.findProperty("benchmarkFilter")?.toString()
+        ).filterNotNull()
     }
 
     register("graphBenchmarks", JavaExec::class) {
@@ -42,8 +43,9 @@ tasks {
         mainClass.set("xyz.gmitch215.benchmarks.site.Grapher")
         classpath = sourceSets["main"].runtimeClasspath
         args = listOf(
-            file("benchmarks").absolutePath
-        )
+            file("benchmarks").absolutePath,
+            project.findProperty("benchmarkFilter")?.toString()
+        ).filterNotNull()
     }
 
     register("benchmark") {

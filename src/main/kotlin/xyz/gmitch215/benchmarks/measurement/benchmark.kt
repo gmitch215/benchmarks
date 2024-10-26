@@ -27,6 +27,10 @@ suspend fun main(args: Array<String>) = coroutineScope {
     val input = File(args[0])
     val output = File(input, "output")
 
+    val filter = args.getOrNull(1)?.let { Regex(it) }
+    if (filter != null)
+        println("Filtering benchmarks with '$filter'")
+
     val file = File(input, "config.yml").readText(Charsets.UTF_8)
     val benchmarkRuns = Yaml.default.decodeFromString<List<BenchmarkRun>>(file)
 
@@ -47,14 +51,19 @@ suspend fun main(args: Array<String>) = coroutineScope {
                 out.mkdirs()
 
             launch {
-                for (f in folders)
+                for (f in folders) {
+                    val name = f.name
+                    if (filter != null && !filter.matches(name))
+                        continue
+
                     launch {
                         val result = runBenchmark(benchmark, f, out)
-                        if (results.contains(f.name))
+                        if (results.contains(name))
                             results[f.name] = results[f.name]!! + result
                         else
                             results[f.name] = listOf(result)
                     }
+                }
             }
         }
     }.join()
@@ -70,19 +79,19 @@ suspend fun runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: File) = 
     val results = mutableListOf<Double>()
 
     launch(Dispatchers.Unconfined) {
-        var compile = benchmarkRun.compile
         val s = File.separator
 
+        var compile = benchmarkRun.compile
         if (compile != null) {
             if (benchmarkRun.location != null) {
                 val home = System.getenv(benchmarkRun.location)
                 if (home != null)
                     compile = "${home}${s}bin${s}$compile"
-            }
 
-            if (os == "windows") {
-                val executableSuffix = if (benchmarkRun.id.contains("kotlin")) ".bat" else ".exe"
-                compile = compile.replaceFirst(" ", "$executableSuffix ")
+                if (os == "windows") {
+                    val executableSuffix = if (benchmarkRun.id.contains("kotlin")) ".bat" else ".exe"
+                    compile = compile.replaceFirst(" ", "$executableSuffix ")
+                }
             }
 
             compile.runCommand(folder)

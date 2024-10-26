@@ -35,6 +35,10 @@ suspend fun main(args: Array<String>) = coroutineScope {
     val rootDir = File(args[0])
     val outputDir = File(rootDir, "output")
 
+    val filter = args.getOrNull(1)?.let { Regex(it) }
+    if (filter != null)
+        println("Filtering graphs with '$filter'")
+
     if (!outputDir.exists()) {
         error("Output Directory does not exist")
     }
@@ -51,15 +55,19 @@ suspend fun main(args: Array<String>) = coroutineScope {
     for (run in config) {
         val id = run.id
         for (folder in folders) {
-            val location = File(outputDir, "${id}/${folder.name}.json")
+            val name = folder.name
+            if (filter != null && !filter.matches(name))
+                continue
+
+            val location = File(outputDir, "${id}/$name.json")
             if (!location.exists()) {
-                error("Benchmark $id for ${folder.name} does not exist")
+                error("Benchmark $id for $name does not exist")
             }
 
-            if (benchmarkLocations.contains(folder.name)) {
-                benchmarkLocations[folder.name] = benchmarkLocations[folder.name]!! + Pair(run.language, location.absolutePath)
+            if (benchmarkLocations.contains(name)) {
+                benchmarkLocations[name] = benchmarkLocations[name]!! + Pair(run.language, location.absolutePath)
             } else {
-                benchmarkLocations[folder.name] = listOf(Pair(run.language, location.absolutePath))
+                benchmarkLocations[name] = listOf(Pair(run.language, location.absolutePath))
             }
         }
     }
