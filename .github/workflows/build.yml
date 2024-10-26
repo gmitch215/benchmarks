@@ -36,7 +36,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        include:
+          - name: linux
+            os: ubuntu-latest
+          - name: macos
+            os: macos-latest
+          - name: windows
+            os: windows-latest
 
     name: Benchmark on ${{ matrix.os }}
     steps:
@@ -69,6 +75,6 @@ jobs:
       - name: Upload Benchmarks
         uses: actions/upload-artifact@v4
         with:
-          name: benchmarks
+          name: benchmarks-${{ matrix.name }}
           path: benchmarks/output
           overwrite: true
