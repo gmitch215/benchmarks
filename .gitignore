@@ -5,6 +5,7 @@
 build/
 benchmarks/output/
 site/output/
+site/Gemfile.lock
 
 *.o
 *.obj
