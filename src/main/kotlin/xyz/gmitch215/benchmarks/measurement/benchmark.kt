@@ -7,6 +7,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
@@ -14,6 +15,7 @@ import kotlinx.serialization.json.*
 import xyz.gmitch215.benchmarks.BenchmarkResult
 import xyz.gmitch215.benchmarks.Measurement
 import java.io.File
+import kotlin.time.measureTime
 
 const val RUN_COUNT = 25
 val json = Json {
@@ -44,7 +46,7 @@ suspend fun main(args: Array<String>) = coroutineScope {
     // Run Benchmarks
 
     val results = mutableMapOf<String, List<BenchmarkResult>>()
-    launch {
+    launch(Dispatchers.Unconfined) {
         for (benchmark in benchmarkRuns) {
             val out = File(output, benchmark.id)
             if (!out.exists())
@@ -78,7 +80,7 @@ suspend fun runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: File) = 
 
     val results = mutableListOf<Double>()
 
-    launch(Dispatchers.Unconfined) {
+    launch {
         val s = File.separator
 
         var compile = benchmarkRun.compile
@@ -100,7 +102,7 @@ suspend fun runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: File) = 
         var run = benchmarkRun.run
 
         if (benchmarkRun.file)
-            run = "$folder${s}$run"
+            run = "${folder.absolutePath}${s}$run"
 
         if (benchmarkRun.id == "kotlin-native")
             run += kotlinNativeSuffix
@@ -109,7 +111,6 @@ suspend fun runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: File) = 
             launch {
                 val runTime0 = run.runCommand(folder)!!
                 val runTime = runTime0.toDoubleOrNull() ?: error("Failed to parse output: '$runTime0'")
-
                 results.add(runTime)
             }
     }.join()
@@ -142,26 +143,28 @@ suspend fun rankBenchmarks(results: Map<String, List<BenchmarkResult>>, out: Fil
     val obj = buildJsonObject {
         val scores = mutableMapOf<String, Int>()
 
-        for ((name, results) in results) {
-            launch {
-                val sorted = results.sortedBy { it.results.sum() }
+        launch {
+            for ((name, results) in results) {
+                launch {
+                    val sorted = results.sortedBy { it.results.sum() }
 
-                put(name, buildJsonObject {
-                    put("summary", JsonArray(sorted.map { JsonPrimitive(it.languageId) }.toList()))
-                    put("verbose", buildJsonObject {
-                        for ((i, result) in sorted.withIndex()) {
-                            scores[result.languageId] = scores.getOrDefault(result.languageId, 0) + i
-                            put(result.languageId, buildJsonObject {
-                                put("rank", i + 1)
-                                put("avg", result.avg)
-                                put("low", result.low)
-                                put("high", result.high)
-                            })
-                        }
+                    put(name, buildJsonObject {
+                        put("summary", JsonArray(sorted.map { JsonPrimitive(it.languageName) }.toList()))
+                        put("verbose", buildJsonObject {
+                            for ((i, result) in sorted.withIndex()) {
+                                scores[result.languageName] = scores.getOrDefault(result.languageName, 0) + i
+                                put(result.languageName, buildJsonObject {
+                                    put("rank", i + 1)
+                                    put("avg", result.avg)
+                                    put("low", result.low)
+                                    put("high", result.high)
+                                })
+                            }
+                        })
                     })
-                })
+                }
             }
-        }
+        }.join()
 
         put("overall", buildJsonObject {
             val sorted = scores.toList().sortedBy { it.second }
@@ -204,8 +207,7 @@ private fun String.runCommand(folder: File): String? {
 
         return process.inputStream.bufferedReader().use { it.readText() }
     } catch (e: Exception) {
-        e.printStackTrace()
-        return null
+        throw IllegalStateException("Failed to run command: '$this'", e)
     }
 }
 
