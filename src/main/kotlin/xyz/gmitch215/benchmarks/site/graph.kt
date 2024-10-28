@@ -8,9 +8,14 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.int
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
 import org.jetbrains.kotlinx.dataframe.api.dataFrameOf
 import org.jetbrains.kotlinx.dataframe.api.groupBy
 import org.jetbrains.kotlinx.kandy.dsl.categorical
+import org.jetbrains.kotlinx.kandy.dsl.internal.LayerCreatorScope
 import org.jetbrains.kotlinx.kandy.dsl.plot
 import org.jetbrains.kotlinx.kandy.letsplot.export.toPNG
 import org.jetbrains.kotlinx.kandy.letsplot.feature.layout
@@ -18,6 +23,7 @@ import org.jetbrains.kotlinx.kandy.letsplot.layers.bars
 import org.jetbrains.kotlinx.kandy.letsplot.layers.builders.BarsBuilder
 import org.jetbrains.kotlinx.kandy.letsplot.layers.line
 import org.jetbrains.kotlinx.kandy.letsplot.layers.points
+import org.jetbrains.kotlinx.kandy.letsplot.layers.text
 import org.jetbrains.kotlinx.kandy.letsplot.settings.Symbol
 import org.jetbrains.kotlinx.kandy.letsplot.style.Theme
 import org.jetbrains.kotlinx.kandy.letsplot.x
@@ -31,7 +37,13 @@ import xyz.gmitch215.benchmarks.repeat
 import xyz.gmitch215.benchmarks.times
 import java.io.File
 
-suspend fun main(args: Array<String>) = coroutineScope {
+val PRIMARY_GRAPH_SIZE = 1200 to 600
+val SECONDARY_GRAPH_SIZE = 1000 to 600
+
+const val BAR_LABEL_OFFSET = 35
+const val BAR_LABEL_SIZE = 6.5
+
+suspend fun main(args: Array<String>): Unit = coroutineScope {
     val rootDir = File(args[0])
     val outputDir = File(rootDir, "output")
 
@@ -76,6 +88,12 @@ suspend fun main(args: Array<String>) = coroutineScope {
         launch {
             createGraphs(benchmarks, File(graphsFolder, name))
         }
+
+    // Create Rank Graph
+    launch {
+        val rankings = File(outputDir, "rankings.json").readText(Charsets.UTF_8)
+        createRanksGraphs(json.decodeFromString(rankings), graphsFolder)
+    }
 }
 
 suspend fun createGraphs(benchmarks: List<Pair<String, String>>, out: File) = withContext(Dispatchers.IO) {
@@ -125,7 +143,7 @@ suspend fun createGraphs(benchmarks: List<Pair<String, String>>, out: File) = wi
                 title = example.name
                 caption = "All-time Graph over $RUN_COUNT runs in ${example.output.name.lowercase()}"
                 theme = Theme.HIGH_CONTRAST_DARK
-                size = 1400 to 600
+                size = PRIMARY_GRAPH_SIZE
             }
 
             x(runs) {
@@ -176,6 +194,18 @@ suspend fun createGraphs(benchmarks: List<Pair<String, String>>, out: File) = wi
         }
     }
 
+    fun LayerCreatorScope.labels(labels: List<String>, values: List<Double>) {
+        text {
+            x(labels)
+
+            val yOffset = values.max() / BAR_LABEL_OFFSET
+            y(values.map { it + yOffset })
+
+            label(values.map { example.output.formatOutput(it, 2, true) })
+            font.size = BAR_LABEL_SIZE
+        }
+    }
+
     // Create Average Graph
     launch {
         val values = data.map { it.second.avgDouble }
@@ -189,7 +219,7 @@ suspend fun createGraphs(benchmarks: List<Pair<String, String>>, out: File) = wi
                     title = "${example.name} - Averages"
                     caption = "Average Time over $RUN_COUNT runs in ${example.output.name.lowercase()}"
                     theme = Theme.HIGH_CONTRAST_DARK
-                    size = 1200 to 600
+                    size = SECONDARY_GRAPH_SIZE
                 }
 
                 x("language") {
@@ -197,17 +227,62 @@ suspend fun createGraphs(benchmarks: List<Pair<String, String>>, out: File) = wi
                 }
 
                 y("time") {
-                    axis.name = "Average Time (${data.first().second.output.unit})"
+                    axis.name = "Average Time (${example.output.unit})"
                 }
 
                 settings()
             }
+
+            labels(labels, values)
         }
 
         val averageF = File(out, "average.png")
 
         println("Writing graph to ${averageF.absolutePath}")
         averageF.writeBytes(average.toPNG())
+    }
+
+    // Create Median Graph
+    launch {
+        val values = data.map { it.second.results.sorted().let { results ->
+            val size = results.size
+            if (size % 2 == 0) {
+                (results[size / 2] + results[size / 2 - 1]) / 2
+            } else {
+                results[size / 2]
+            }
+        } / it.second.output.multiplier }
+
+        val median = dataFrameOf(
+            "language" to labels,
+            "time" to values
+        ).plot {
+            bars {
+                layout {
+                    title = "${example.name} - Median"
+                    caption = "Median Time over $RUN_COUNT runs in ${example.output.name.lowercase()}"
+                    theme = Theme.HIGH_CONTRAST_DARK
+                    size = SECONDARY_GRAPH_SIZE
+                }
+
+                x("language") {
+                    axis.name = "Language"
+                }
+
+                y("time") {
+                    axis.name = "Median Time (${example.output.unit})"
+                }
+
+                settings()
+            }
+
+            labels(labels, values)
+        }
+
+        val medianF = File(out, "median.png")
+
+        println("Writing graph to ${medianF.absolutePath}")
+        medianF.writeBytes(median.toPNG())
     }
 
     // Create Low Graph
@@ -224,7 +299,7 @@ suspend fun createGraphs(benchmarks: List<Pair<String, String>>, out: File) = wi
                     title = "${example.name} - Best Case"
                     caption = "Lowest Time from $RUN_COUNT runs in ${example.output.name.lowercase()}"
                     theme = Theme.HIGH_CONTRAST_DARK
-                    size = 1200 to 600
+                    size = SECONDARY_GRAPH_SIZE
                 }
 
                 x("language") {
@@ -233,11 +308,13 @@ suspend fun createGraphs(benchmarks: List<Pair<String, String>>, out: File) = wi
                 }
 
                 y("time") {
-                    axis.name = "Low Time (${data.first().second.output.unit})"
+                    axis.name = "Low Time (${example.output.unit})"
                 }
 
                 settings()
             }
+
+            labels(labels, values)
         }
 
         val lowF = File(out, "low.png")
@@ -260,7 +337,7 @@ suspend fun createGraphs(benchmarks: List<Pair<String, String>>, out: File) = wi
                     title = "${example.name} - Worst Case"
                     caption = "Highest Time from $RUN_COUNT runs in ${example.output.name.lowercase()}"
                     theme = Theme.HIGH_CONTRAST_DARK
-                    size = 1200 to 600
+                    size = SECONDARY_GRAPH_SIZE
                 }
 
                 x("language") {
@@ -269,11 +346,13 @@ suspend fun createGraphs(benchmarks: List<Pair<String, String>>, out: File) = wi
                 }
 
                 y("time") {
-                    axis.name = "High Time (${data.first().second.output.unit})"
+                    axis.name = "High Time (${example.output.unit})"
                 }
 
                 settings()
             }
+
+            labels(labels, values)
         }
 
         val highF = File(out, "high.png")
@@ -281,4 +360,76 @@ suspend fun createGraphs(benchmarks: List<Pair<String, String>>, out: File) = wi
         println("Writing graph to ${highF.absolutePath}")
         highF.writeBytes(high.toPNG())
     }
+}
+
+suspend fun createRanksGraphs(rankings: JsonObject, out: File) = withContext(Dispatchers.IO) {
+    val ranks = mutableMapOf<String, Int>()
+
+    for ((name, run) in rankings) {
+        if (name == "overall") continue
+        val scores = run.jsonObject["verbose"]!!.jsonObject.mapValues { it.value.jsonObject["rank"]!!.jsonPrimitive.int }
+        for ((language, score) in scores) {
+            ranks[language] = ranks.getOrDefault(language, 0) + score
+        }
+    }
+
+    val sorted = ranks.toList().sortedBy { it.second }
+    val labels = sorted.map { it.first }
+    val values = sorted.map { it.second }
+
+    val rankLabels = labels.mapIndexed { i, _ -> "#${i + 1}" }
+
+    val rank = dataFrameOf(
+        "language" to labels,
+        "score" to values
+    ).plot {
+        bars {
+            layout {
+                title = "Overall Rankings"
+                caption = "Score is calculated from their rank against other languages added together (lower is better)"
+                theme = Theme.HIGH_CONTRAST_DARK
+                size = PRIMARY_GRAPH_SIZE
+            }
+
+            x("language") {
+                axis.name = "Language"
+            }
+
+            y("score") {
+                axis.name = "Score"
+            }
+
+            fillColor(labels) {
+                legend.name = "Language"
+                scale = categorical(rankLabels.map {
+                    when (it) {
+                        "#1" -> Color.hex("#ffd700")
+                        "#2" -> Color.hex("#c0c0c0")
+                        "#3" -> Color.hex("#cd7f32")
+                        else -> Color.BLUE
+                    }
+                }, labels)
+            }
+
+            borderLine.apply {
+                color = Color.WHITE
+                width = 0.75
+            }
+
+            text {
+                x(labels)
+
+                val yOffset = values.max() / BAR_LABEL_OFFSET
+                y(values.map { it + yOffset })
+
+                label(rankLabels.mapIndexed { i, l -> "$l - ${values[i]}" })
+                font.size = 6.5
+            }
+        }
+    }
+
+    val rankF = File(out, "rank.png")
+
+    println("Writing graph to ${rankF.absolutePath}")
+    rankF.writeBytes(rank.toPNG())
 }
