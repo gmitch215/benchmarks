@@ -5,25 +5,48 @@ import xyz.gmitch215.benchmarks.measurement.BenchmarkConfiguration
 import xyz.gmitch215.benchmarks.measurement.BenchmarkRun
 import java.util.*
 
+private const val NANO = "ns"
+private const val MICRO = "µs"
+private const val MILLI = "ms"
+private const val SEC = "s"
+private const val MIN = "m"
+
 @Serializable
 enum class Measurement(val multiplier: Double, val unit: String) {
 
-    NANOSECONDS(1.0, "ns"),
+    NANOSECONDS(1.0, NANO),
 
-    MICROSECONDS(1_000.0, "µs"),
+    MICROSECONDS(1_000.0, MICRO),
 
-    MILLISECONDS(1_000_000.0, "ms"),
+    MILLISECONDS(1_000_000.0, MILLI),
 
-    SECONDS(1_000_000_000.0, "s"),
+    SECONDS(1_000_000_000.0, SEC),
 
-    MINUTES(60_000_000_000.0, "m"),
+    MINUTES(60_000_000_000.0, MIN),
 
     ;
 
-    fun formatOutput(number: Number, output: Measurement): String {
-        val value = "%,.3f".format(Locale.US, convert(number, output))
-        return "$value${output.unit}"
+    fun formatOutput(number: Number, places: Int = 3, floor: Boolean = false): String {
+        var num = number.toDouble()
+        var unit = this.unit
+        if (floor) {
+            while (num >= 1000) {
+                num /= 1000
+                unit = when (unit) {
+                    NANO -> MICRO
+                    MICRO -> MILLI
+                    MILLI -> SEC
+                    SEC -> MIN
+                    else -> MIN
+                }
+            }
+        }
+
+        val value = "%,.${places}f".format(Locale.US, num)
+        return "$value$unit"
     }
+
+    fun formatOutput(number: Number, output: Measurement, places: Int = 3, floor: Boolean = false): String = output.formatOutput(convert(number, output), places, floor)
 
     fun convert(number: Number, output: Measurement): Double = number.toDouble() * multiplier / output.multiplier
 
