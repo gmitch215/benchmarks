@@ -21,6 +21,12 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kandy-lets-plot:0.7.1")
 }
 
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(21))
+    }
+}
+
 tasks {
     clean {
         delete("benchmarks/output")
