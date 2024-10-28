@@ -73,6 +73,11 @@ jobs:
         with:
           version: '2.0.21'
           install-native: true
+      - name: Install Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
       # Benchmarking
       - name: Create Benchmarks
         run: ./gradlew benchmark

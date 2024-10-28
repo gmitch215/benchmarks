@@ -44,3 +44,7 @@
   run: main.cpp.o
   cleanup:
     - main.cpp.o
+- language: Ruby
+  id: ruby
+  color: "701516"
+  run: ruby main.rb
