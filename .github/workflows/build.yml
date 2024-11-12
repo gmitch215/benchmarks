@@ -69,7 +69,7 @@ jobs:
         with:
           bun-version: latest
       - name: Install Kotlin
-        uses: gmitch215/setup-kotlin@main
+        uses: fwilhe2/setup-kotlin@main
         with:
           version: '2.0.21'
           install-native: true
