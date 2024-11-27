@@ -1,0 +1,4 @@
+name: Count to 1 Billion
+description: Programs that count to 1 billion
+measure: NANOSECONDS
+output: SECONDS

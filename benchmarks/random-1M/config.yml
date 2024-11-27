@@ -1,0 +1,4 @@
+name: 1,000,000 Random Numbers
+description: Programs that generate 1,000,000 random numbers.
+measure: NANOSECONDS
+output: MILLISECONDS

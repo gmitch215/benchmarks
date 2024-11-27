@@ -1,0 +1,4 @@
+name: List Creation (10K)
+description: Creats a list with 10,000 elements. List implementations are initialized to their default capacity.
+measure: NANOSECONDS
+output: MICROSECONDS

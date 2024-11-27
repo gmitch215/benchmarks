@@ -1,11 +1,10 @@
 import kotlin.time.measureTime
-import kotlin.random.Random
 
 fun main() {
     val time = measureTime {
-        var n = 0.0;
-        for (i in 0..<1000) {
-            n = Random.nextDouble()
+        val arr = mutableListOf<Int>()
+        for (i in 0..<10000) {
+            arr.add(i)
         }
     }
 

@@ -1,4 +1,4 @@
-name: List Creation
+name: List Creation (100)
 description: Creats a list with 100 elements. List implementations are initialized to their default capacity.
 measure: NANOSECONDS
 output: MICROSECONDS
