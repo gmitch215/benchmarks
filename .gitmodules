@@ -1,0 +1,3 @@
+[submodule "lib/nanotime"]
+	path = lib/nanotime
+	url = https://github.com/nightmareci/nanotime

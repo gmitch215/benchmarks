@@ -17,13 +17,13 @@
 - language: Java
   id: java
   color: "b07219"
-  run: java Main.java
+  run: java Main.java -Xmx128m -Xms128m
 - language: Kotlin (JVM)
   id: kotlin-jvm
   color: "5f3bbe"
   location: KOTLIN_HOME
   compile: kotlinc main.kt -include-runtime -d main.kt.jar
-  run: java -jar main.kt.jar
+  run: java -jar main.kt.jar -Xmx128m -Xms128m
   cleanup:
     - main.kt.jar
 - language: Kotlin (Native)
@@ -44,7 +44,23 @@
   run: main.cpp.o
   cleanup:
     - main.cpp.o
+- language: C
+  file: true
+  id: c
+  color: "555555"
+  compile: gcc main.c ../../lib/nanotime/nanotime.c -o main.c.o
+  run: main.c.o
+  cleanup:
+    - main.c.o
 - language: Ruby
   id: ruby
   color: "701516"
   run: ruby main.rb
+- language: Go
+  file: true
+  id: go
+  color: "375eab"
+  compile: go build -o main.go.o main.go
+  run: main.go.o
+  cleanup:
+    - main.go.o
