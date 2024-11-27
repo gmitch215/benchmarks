@@ -3,6 +3,7 @@
 .gradle/
 .kotlin/
 build/
+bin/
 benchmarks/output/
 site/output/
 site/Gemfile.lock
