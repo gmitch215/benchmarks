@@ -1,9 +1,12 @@
 package xyz.gmitch215.benchmarks
 
+import io.github.oshai.kotlinlogging.KotlinLogging
 import kotlinx.serialization.Serializable
 import xyz.gmitch215.benchmarks.measurement.BenchmarkConfiguration
 import xyz.gmitch215.benchmarks.measurement.BenchmarkRun
 import java.util.*
+
+val logger = KotlinLogging.logger("Benchmarks")
 
 private const val NANO = "ns"
 private const val MICRO = "µs"
@@ -26,10 +29,10 @@ enum class Measurement(val multiplier: Double, val unit: String) {
 
     ;
 
-    fun formatOutput(number: Number, places: Int = 3, floor: Boolean = false): String {
+    fun formatOutput(number: Number, places: Int = 3, round: Boolean = false): String {
         var num = number.toDouble()
         var unit = this.unit
-        if (floor) {
+        if (round) {
             while (num >= 1000) {
                 num /= 1000
                 unit = when (unit) {
@@ -38,6 +41,17 @@ enum class Measurement(val multiplier: Double, val unit: String) {
                     MILLI -> SEC
                     SEC -> MIN
                     else -> MIN
+                }
+            }
+
+            if (num <= 0.1) {
+                num *= 1000
+                unit = when (unit) {
+                    MIN -> SEC
+                    SEC -> MILLI
+                    MILLI -> MICRO
+                    MICRO -> NANO
+                    else -> NANO
                 }
             }
         }

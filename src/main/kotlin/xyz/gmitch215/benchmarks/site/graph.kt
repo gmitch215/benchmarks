@@ -30,6 +30,7 @@ import org.jetbrains.kotlinx.kandy.letsplot.x
 import org.jetbrains.kotlinx.kandy.letsplot.y
 import org.jetbrains.kotlinx.kandy.util.color.Color
 import xyz.gmitch215.benchmarks.BenchmarkResult
+import xyz.gmitch215.benchmarks.logger
 import xyz.gmitch215.benchmarks.measurement.BenchmarkRun
 import xyz.gmitch215.benchmarks.measurement.RUN_COUNT
 import xyz.gmitch215.benchmarks.measurement.json
@@ -49,13 +50,16 @@ suspend fun main(args: Array<String>): Unit = coroutineScope {
 
     val filter = args.getOrNull(1)?.let { Regex(it) }
     if (filter != null)
-        println("Filtering graphs with '$filter'")
+        logger.info { "Filtering graphs with '$filter'" }
 
     if (!outputDir.exists()) {
+        logger.debug { "Output directory '${outputDir.absolutePath}' does not exist" }
         error("Output Directory does not exist")
     }
 
     val configFile = File(rootDir, "config.yml").readText(Charsets.UTF_8)
+    logger.debug { "Reading config from $configFile" }
+
     val config = Yaml.default.decodeFromString<List<BenchmarkRun>>(configFile)
 
     val graphsFolder = File(outputDir, "graphs")
@@ -73,11 +77,13 @@ suspend fun main(args: Array<String>): Unit = coroutineScope {
 
             val location = File(outputDir, "${id}/$name.json")
             if (!location.exists()) {
+                logger.debug { "Benchmark '$id' for '$name' does not exist at ${location.absolutePath}" }
                 error("Benchmark $id for $name does not exist")
             }
 
             if (benchmarkLocations.contains(name)) {
                 benchmarkLocations[name] = benchmarkLocations[name]!! + Pair(run.language, location.absolutePath)
+                logger.debug { "Adding $id for $name at ${location.absolutePath}" }
             } else {
                 benchmarkLocations[name] = listOf(Pair(run.language, location.absolutePath))
             }
@@ -176,7 +182,7 @@ suspend fun createGraphs(benchmarks: List<Pair<String, String>>, out: File) = wi
 
         val allTimeF = File(out, "all-time.png")
 
-        println("Writing graph to ${allTimeF.absolutePath}")
+        logger.info { "Writing graph to ${allTimeF.absolutePath}" }
         allTimeF.writeBytes(allTime.toPNG())
     }
 
@@ -238,7 +244,7 @@ suspend fun createGraphs(benchmarks: List<Pair<String, String>>, out: File) = wi
 
         val averageF = File(out, "average.png")
 
-        println("Writing graph to ${averageF.absolutePath}")
+        logger.info { "Writing graph to ${averageF.absolutePath}" }
         averageF.writeBytes(average.toPNG())
     }
 
@@ -281,7 +287,7 @@ suspend fun createGraphs(benchmarks: List<Pair<String, String>>, out: File) = wi
 
         val medianF = File(out, "median.png")
 
-        println("Writing graph to ${medianF.absolutePath}")
+        logger.info { "Writing graph to ${medianF.absolutePath}" }
         medianF.writeBytes(median.toPNG())
     }
 
@@ -319,7 +325,7 @@ suspend fun createGraphs(benchmarks: List<Pair<String, String>>, out: File) = wi
 
         val lowF = File(out, "low.png")
 
-        println("Writing graph to ${lowF.absolutePath}")
+        logger.info { "Writing graph to ${lowF.absolutePath}" }
         lowF.writeBytes(low.toPNG())
     }
 
@@ -357,7 +363,7 @@ suspend fun createGraphs(benchmarks: List<Pair<String, String>>, out: File) = wi
 
         val highF = File(out, "high.png")
 
-        println("Writing graph to ${highF.absolutePath}")
+        logger.info { "Writing graph to ${highF.absolutePath}" }
         highF.writeBytes(high.toPNG())
     }
 }
@@ -430,6 +436,6 @@ suspend fun createRanksGraphs(rankings: JsonObject, out: File) = withContext(Dis
 
     val rankF = File(out, "rank.png")
 
-    println("Writing graph to ${rankF.absolutePath}")
+    logger.info { "Writing graph to ${rankF.absolutePath}" }
     rankF.writeBytes(rank.toPNG())
 }

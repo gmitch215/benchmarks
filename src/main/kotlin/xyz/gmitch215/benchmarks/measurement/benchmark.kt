@@ -7,15 +7,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.*
 import xyz.gmitch215.benchmarks.BenchmarkResult
 import xyz.gmitch215.benchmarks.Measurement
+import xyz.gmitch215.benchmarks.logger
 import java.io.File
-import kotlin.time.measureTime
 
 const val RUN_COUNT = 25
 val json = Json {
@@ -31,14 +30,15 @@ suspend fun main(args: Array<String>) = coroutineScope {
 
     val filter = args.getOrNull(1)?.let { Regex(it) }
     if (filter != null)
-        println("Filtering benchmarks with '$filter'")
+        logger.info { "Filtering benchmarks with '$filter'" }
 
     val file = File(input, "config.yml").readText(Charsets.UTF_8)
     val benchmarkRuns = Yaml.default.decodeFromString<List<BenchmarkRun>>(file)
 
-    println("Starting Benchmarks on $os")
+    logger.info { "Starting Benchmarks on $os" }
 
     val folders = input.listFiles { f -> f?.let { it.isDirectory && it.name != "output" } == true } ?: emptyArray()
+    logger.debug { "Found ${folders.size} folders" }
 
     if (folders.isEmpty())
         error("No benchmarks found")
@@ -46,11 +46,13 @@ suspend fun main(args: Array<String>) = coroutineScope {
     // Run Benchmarks
 
     val results = mutableMapOf<String, List<BenchmarkResult>>()
-    launch(Dispatchers.Unconfined) {
+    launch {
         for (benchmark in benchmarkRuns) {
             val out = File(output, benchmark.id)
             if (!out.exists())
                 out.mkdirs()
+
+            logger.debug { "Running benchmark '${benchmark.id}'" }
 
             launch {
                 for (f in folders) {
@@ -96,7 +98,11 @@ suspend fun runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: File) = 
                 }
             }
 
-            compile.runCommand(folder)
+            logger.debug { "Running Compile Command for '${benchmarkRun.id}': '$compile'" }
+
+            val res = compile.runCommand(folder)
+            if (res != null)
+                logger.debug { "Compile result: $res" }
         }
 
         var run = benchmarkRun.run
@@ -107,9 +113,11 @@ suspend fun runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: File) = 
         if (benchmarkRun.id == "kotlin-native")
             run += kotlinNativeSuffix
 
+        logger.debug { "Running Command for '${benchmarkRun.id}': '$run'" }
+
         for (i in 0 until RUN_COUNT)
             launch {
-                val runTime0 = run.runCommand(folder)!!
+                val runTime0 = run.runCommand(folder)!!.trim().replace("[\\s\\n]+".toRegex(), "")
                 val runTime = runTime0.toDoubleOrNull() ?: error("Failed to parse output: '$runTime0'")
                 results.add(runTime)
             }
@@ -129,7 +137,7 @@ suspend fun runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: File) = 
     val data = BenchmarkResult(id, benchmarkRun, config, results)
 
     val file = File(out, "$id.json")
-    println("Writing to ${file.absolutePath}")
+    logger.info { "Writing to ${file.absolutePath}" }
 
     if (!file.exists())
         file.createNewFile()
@@ -181,7 +189,7 @@ suspend fun rankBenchmarks(results: Map<String, List<BenchmarkResult>>, out: Fil
     }
 
     val file = File(out, "rankings.json")
-    println("Writing rankings to ${file.absolutePath}")
+    logger.info { "Writing rankings to ${file.absolutePath}" }
 
     withContext(Dispatchers.IO) {
         if (!file.exists())

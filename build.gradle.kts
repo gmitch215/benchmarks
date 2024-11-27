@@ -19,6 +19,9 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
     implementation("com.charleskorn.kaml:kaml:0.66.0")
     implementation("org.jetbrains.kotlinx:kandy-lets-plot:0.7.1")
+
+    runtimeOnly("org.slf4j:slf4j-api:2.0.16")
+    implementation("io.github.oshai:kotlin-logging:7.0.0")
 }
 
 java {
@@ -30,6 +33,14 @@ java {
 tasks {
     clean {
         delete("benchmarks/output")
+
+        delete(
+            "benchmarkks/**/*.exe",
+            "benchmarkks/**/*.kexe",
+            "benchmarkks/**/*.o",
+            "benchmarkks/**/*.class",
+            "benchmarkks/**/*.jar",
+        )
     }
 
     // Benchmarking Tasks
@@ -37,10 +48,10 @@ tasks {
     register("createBenchmarks", JavaExec::class) {
         mainClass.set("xyz.gmitch215.benchmarks.measurement.Benchmarker")
         classpath = sourceSets["main"].runtimeClasspath
-        args = listOf(
+        args = listOfNotNull(
             file("benchmarks").absolutePath,
             project.findProperty("benchmarkFilter")?.toString()
-        ).filterNotNull()
+        )
     }
 
     register("graphBenchmarks", JavaExec::class) {
