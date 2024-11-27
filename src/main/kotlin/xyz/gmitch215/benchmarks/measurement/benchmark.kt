@@ -6,6 +6,8 @@ import com.charleskorn.kaml.Yaml
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
@@ -81,6 +83,7 @@ suspend fun runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: File) = 
     val config = Yaml.default.decodeFromString<BenchmarkConfiguration>(configFile)
 
     val results = mutableListOf<Double>()
+    val mutex = Mutex()
 
     launch {
         val s = File.separator
@@ -119,7 +122,10 @@ suspend fun runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: File) = 
             launch {
                 val runTime0 = run.runCommand(folder)!!.trim().replace("[\\s\\n]+".toRegex(), "")
                 val runTime = runTime0.toDoubleOrNull() ?: error("Failed to parse output: '$runTime0'")
-                results.add(runTime)
+
+                mutex.withLock {
+                    results.add(runTime)
+                }
             }
     }.join()
 

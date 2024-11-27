@@ -6,6 +6,8 @@ import com.charleskorn.kaml.Yaml
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.JsonObject
@@ -104,11 +106,16 @@ suspend fun main(args: Array<String>): Unit = coroutineScope {
 
 suspend fun createGraphs(benchmarks: List<Pair<String, String>>, out: File) = withContext(Dispatchers.IO) {
     val data0 = mutableListOf<Pair<String, BenchmarkResult>>()
+    val mutex = Mutex()
+
     launch {
         for ((language, location) in benchmarks) {
             launch {
                 val content = File(location).readText(Charsets.UTF_8)
-                data0.add(Pair(language, json.decodeFromString(content)))
+
+                mutex.withLock {
+                    data0.add(Pair(language, json.decodeFromString(content)))
+                }
             }
         }
     }.join()
