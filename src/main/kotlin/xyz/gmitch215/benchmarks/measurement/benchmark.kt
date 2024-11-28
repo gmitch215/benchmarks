@@ -230,9 +230,11 @@ private fun String.runCommand(folder: File): String? {
 @Serializable
 data class BenchmarkConfiguration(
     val name: String,
+    var id: String = name,
     val description: String,
     val measure: Measurement,
-    val output: Measurement
+    val output: Measurement,
+    val tags: List<String> = emptyList()
 )
 
 @Serializable
