@@ -2,3 +2,6 @@ name: 1,000 Random Numbers
 description: Programs that generate 1,000 random numbers.
 measure: NANOSECONDS
 output: MICROSECONDS
+tags:
+  - "random"
+  - "1K"

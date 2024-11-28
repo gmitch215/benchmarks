@@ -2,3 +2,6 @@ name: Array Assignment (100K)
 description: Assigns 100,000 elements to an array.
 measure: NANOSECONDS
 output: MILLISECONDS
+tags:
+  - "array"
+  - "100K"

@@ -2,3 +2,7 @@ name: Count to 1 Million
 description: Programs that count to 1 million
 measure: NANOSECONDS
 output: MILLISECONDS
+tags:
+  - "number"
+  - "count"
+  - "1M"
