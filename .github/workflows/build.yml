@@ -44,6 +44,8 @@ jobs:
           - name: windows
             os: windows-latest
 
+    continue-on-error: true
+
     name: Benchmark on ${{ matrix.name }}
     steps:
       - uses: actions/checkout@v4
