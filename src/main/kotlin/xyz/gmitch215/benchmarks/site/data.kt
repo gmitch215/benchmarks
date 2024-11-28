@@ -21,6 +21,7 @@ import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.util.zip.ZipEntry
 import java.util.zip.ZipInputStream
+import kotlin.io.path.Path
 
 suspend fun main(args: Array<String>): Unit = coroutineScope {
     val input = File(args[0])
@@ -127,7 +128,7 @@ private fun unzip(zipFile: String, destFolder: String) {
         var entry: ZipEntry?
         val buffer = ByteArray(1024)
         while (zis.nextEntry.also { entry = it } != null) {
-            val newFile = File(destFolder + File.separator + entry!!.name)
+            val newFile = File(destFolder + File.separator + Path(entry!!.name).normalize())
             if (entry.isDirectory)
                 newFile.mkdirs()
             else {
