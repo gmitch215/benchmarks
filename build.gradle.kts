@@ -23,6 +23,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kandy-lets-plot:0.7.1")
 
     runtimeOnly("org.slf4j:slf4j-api:2.0.16")
+    runtimeOnly("org.slf4j:slf4j-simple:2.0.16")
     implementation("io.github.oshai:kotlin-logging:7.0.0")
 }
 
@@ -32,17 +33,25 @@ java {
     }
 }
 
+val debug = project.findProperty("debug")?.toString()?.toBoolean() == true
+
 tasks {
     clean {
         delete("benchmarks/output")
 
         delete(
-            "benchmarkks/**/*.exe",
-            "benchmarkks/**/*.kexe",
-            "benchmarkks/**/*.o",
-            "benchmarkks/**/*.class",
-            "benchmarkks/**/*.jar",
+            "benchmarks/**/*.exe",
+            "benchmarks/**/*.kexe",
+            "benchmarks/**/*.o",
+            "benchmarks/**/*.class",
+            "benchmarks/**/*.jar",
         )
+    }
+
+    processResources {
+        filesMatching("simplelogger.properties") {
+            expand(mapOf("logLevel" to if (debug) "debug" else "info"))
+        }
     }
 
     // Benchmarking Tasks
