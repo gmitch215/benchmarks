@@ -1,0 +1,25 @@
+---
+layout: default
+---
+
+<div class="box">
+    <img src="/favicon.png" id="logo" class="dynamic" alt="Logo" title="Benchmarks" />
+</div>
+
+<div class="box">
+    {{ content }}
+</div>
+
+<div class="box">
+    <h1>Language List</h1>
+</div>
+
+<div class="box horizontal">
+    {% assign langs = site.data.langs | sort: "id" %}
+    {% for lang in langs %}
+    <div class="box">
+        <img src="/assets/lang/{{ lang.id }}.png" class="dynamic medium-img" alt="{{ lang.language }}" title="{{ lang.language }}" />
+        <p class="small-text">{{ lang.language }}</p>
+    </div>
+    {% endfor %}
+</div>

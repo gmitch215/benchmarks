@@ -1,0 +1,141 @@
+/* Copyright 2024 Gregory Mitchell */
+
+:root {
+    --bg: #3d3d3d;
+    --bg-2: #2c2c2c;
+    --bg-gradient: linear-gradient(180deg, #212121 0%, var(--bg) 100%);
+
+    --text: #fff;
+    --color-text: cyan;
+    --link-color: greenyellow;
+    --shadow: 0 10px 20px -5px rgb(0, 0, 0);
+}
+
+html {
+    overflow-y: auto;
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    overflow-y: hidden;
+    min-height: 100%;
+}
+
+html, body {
+    font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    transition: color 0.25s ease-in-out;
+}
+
+a:hover {
+    color: var(--link-color);
+    transition: color 0.25s ease-in-out;
+}
+
+h1, h2 {
+    text-shadow: black 0 2px 8px;
+}
+
+h3 {
+    font-size: 1em;
+}
+
+h1, h2, h3, p, a {
+    color: var(--text);
+}
+
+p img {
+    box-shadow: var(--shadow);
+}
+
+.box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: column;
+    row-gap: 2vh;
+
+    margin-top: 2vh;
+
+    color: var(--text);
+}
+
+.horizontal {
+    flex-direction: row;
+    column-gap: 2vw;
+}
+
+#logo {
+    min-width: 96px;
+    min-height: 96px;
+    width: auto;
+    height: 20vh;
+    max-width: 256px;
+    max-height: 256px;
+}
+
+.medium-img {
+    min-width: 64px;
+    min-height: 64px;
+    width: auto;
+    height: 10vh;
+    max-width: 128px;
+    max-height: 128px;
+}
+
+.dynamic {
+    transition: transform 0.5s ease-in-out;
+}
+
+.dynamic:hover {
+    transform: scale(1.1);
+    transition: transform 0.5s ease-in-out;
+}
+
+.banner {
+    height: auto;
+    width: 50vw;
+    justify-self: center;
+    box-shadow: var(--shadow);
+    border-radius: 5em !important;
+    transition: transform 0.5s ease-in-out;
+}
+
+.banner:hover {
+    transform: scale(1.05) rotateZ(-3deg);
+    transition: transform 0.5s ease-in-out;
+}
+
+header {
+    background: var(--bg-gradient);
+
+    min-height: 7vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    padding-left: 6vw;
+
+    overflow-x: auto;
+}
+
+header a {
+    font-weight: bold;
+    font-size: 1.25em;
+    text-shadow: black 0 2px 8px;
+}
+
+.header-links {
+    display: flex;
+    column-gap: 3vw;
+    align-items: center;
+}

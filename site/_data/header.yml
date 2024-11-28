@@ -1,0 +1,10 @@
+- name: Home
+  url: /
+- name: Windows
+  url: /windows/
+- name: MacOS
+  url: /macos/
+- name: Linux
+  url: /linux/
+- name: About
+  url: /about/
