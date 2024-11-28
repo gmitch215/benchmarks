@@ -92,17 +92,6 @@ tasks {
         destinationDir = file("build/site")
     }
 
-    register("generatePages", JavaExec::class) {
-        mustRunAfter("copyResourcesToSite")
-
-        mainClass.set("xyz.gmitch215.benchmarks.site.PagesCreator")
-        classpath = sourceSets["main"].runtimeClasspath
-        args = listOfNotNull(
-            file("build/site/_data").absolutePath,
-            file("build/site").absolutePath
-        )
-    }
-
     register("unzipSiteData", JavaExec::class) {
         mustRunAfter("zipBenchmarks")
 
@@ -112,6 +101,17 @@ tasks {
             file("benchmarks").absolutePath,
             file("build/benchmarks").absolutePath,
             file("build/site/_data").absolutePath
+        )
+    }
+
+    register("generatePages", JavaExec::class) {
+        mustRunAfter("copyResourcesToSite", "unzipSiteData")
+
+        mainClass.set("xyz.gmitch215.benchmarks.site.PagesCreator")
+        classpath = sourceSets["main"].runtimeClasspath
+        args = listOfNotNull(
+            file("build/site/_data").absolutePath,
+            file("build/site").absolutePath
         )
     }
 
