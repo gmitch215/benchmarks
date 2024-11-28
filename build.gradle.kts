@@ -1,3 +1,5 @@
+import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
+
 plugins {
     kotlin("jvm") version "2.0.21"
     kotlin("plugin.serialization") version "2.0.21"
@@ -59,10 +61,10 @@ tasks {
 
         mainClass.set("xyz.gmitch215.benchmarks.site.Grapher")
         classpath = sourceSets["main"].runtimeClasspath
-        args = listOf(
+        args = listOfNotNull(
             file("benchmarks").absolutePath,
             project.findProperty("benchmarkFilter")?.toString()
-        ).filterNotNull()
+        )
     }
 
     register("benchmark") {
@@ -71,4 +73,71 @@ tasks {
             "graphBenchmarks"
         )
     }
+
+    // Site Tasks
+
+    register("copyResourcesToSite", Copy::class) {
+        from("site")
+
+        from("benchmarks/config.yml") {
+            into("_data")
+            rename { _ -> "langs.yml" }
+        }
+
+        filesMatching("benchmarks/*.yml") {
+            exclude("config.yml")
+            into("_data")
+        }
+
+        destinationDir = file("build/site")
+    }
+
+    register("generatePages", JavaExec::class) {
+        mustRunAfter("copyResourcesToSite")
+
+        mainClass.set("xyz.gmitch215.benchmarks.site.PagesCreator")
+        classpath = sourceSets["main"].runtimeClasspath
+        args = listOfNotNull(
+            file("build/site/_data").absolutePath,
+            file("build/site").absolutePath
+        )
+    }
+
+    register("unzipSiteData", JavaExec::class) {
+        mustRunAfter("zipBenchmarks")
+
+        mainClass.set("xyz.gmitch215.benchmarks.site.DataCreator")
+        classpath = sourceSets["main"].runtimeClasspath
+        args = listOfNotNull(
+            file("benchmarks").absolutePath,
+            file("build/benchmarks").absolutePath,
+            file("build/site/_data").absolutePath
+        )
+    }
+
+    register("site") {
+        mustRunAfter("zipBenchmarks")
+
+        dependsOn(
+            "copyResourcesToSite",
+            "generatePages",
+            "unzipSiteData"
+        )
+    }
+
+    // Site Preview Tasks
+
+    register("zipBenchmarks", Zip::class) {
+        mustRunAfter("createBenchmarks", "graphBenchmarks")
+
+        from("benchmarks/output")
+
+        archiveFileName.set("benchmarks-${DefaultNativePlatform.getCurrentOperatingSystem().toFamilyName()}.zip")
+        destinationDirectory.set(file("build/benchmarks"))
+    }
+
+    register("preview") {
+        dependsOn("zipBenchmarks", "site")
+    }
+
 }
