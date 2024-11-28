@@ -1,7 +1,7 @@
 before = Process.clock_gettime(Process::CLOCK_MONOTONIC, :nanosecond)
 
 count = 0
-1_000_000_000.times do
+100_000_000.times do
   count += 1
 end
 

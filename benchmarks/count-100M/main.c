@@ -7,7 +7,7 @@ int main() {
     uint64_t before = nanotime_now();
 
     int count;
-    for (int i = 0; i < 1000000000; i++) {
+    for (int i = 0; i < 100000000; i++) {
         count++;
     }
 

@@ -1,0 +1,8 @@
+name: Count to 100 Million
+description: Programs that count to 100 million
+measure: NANOSECONDS
+output: SECONDS
+tags:
+  - "number"
+  - "count"
+  - "100M"

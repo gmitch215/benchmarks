@@ -7,7 +7,7 @@ func main() {
 	var before = time.Now().UnixNano()
 
 	var count = 0
-	for i := 0; i < 1000000000; i++ {
+	for i := 0; i < 100000000; i++ {
 		count++
 	}
 

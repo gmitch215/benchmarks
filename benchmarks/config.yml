@@ -5,15 +5,15 @@
 - language: JavaScript (Node)
   id: js-node
   color: "f1e05a"
-  run: node main.js
+  run: node main.cjs
 - language: JavaScript (Deno)
   id: js-deno
   color: "70ffaf"
-  run: deno run main.js
+  run: deno run -A main.cjs
 - language: JavaScript (Bun)
   id: js-bun
   color: "5d5986"
-  run: bun run main.js
+  run: bun run main.cjs
 - language: Java
   id: java
   color: "b07219"
