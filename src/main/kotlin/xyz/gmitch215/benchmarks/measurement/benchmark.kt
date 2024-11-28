@@ -17,6 +17,7 @@ import xyz.gmitch215.benchmarks.BenchmarkResult
 import xyz.gmitch215.benchmarks.Measurement
 import xyz.gmitch215.benchmarks.logger
 import java.io.File
+import java.util.concurrent.TimeUnit
 
 const val RUN_COUNT = 25
 val json = Json {
@@ -85,7 +86,7 @@ suspend fun runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: File) = 
     val results = mutableListOf<Double>()
     val mutex = Mutex()
 
-    launch {
+    launch(Dispatchers.Default) {
         val s = File.separator
 
         var compile = benchmarkRun.compile
@@ -101,10 +102,10 @@ suspend fun runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: File) = 
                 }
             }
 
-            logger.debug { "Running Compile Command for '${benchmarkRun.id}': '$compile'" }
+            logger.debug { "Running Compile Command for '${benchmarkRun.id}': '$compile' in ${folder.absolutePath}" }
 
             val res = compile.runCommand(folder)
-            if (res != null)
+            if (res != null && res.isNotEmpty())
                 logger.debug { "Compile result: $res" }
         }
 
@@ -116,7 +117,7 @@ suspend fun runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: File) = 
         if (benchmarkRun.id == "kotlin-native")
             run += kotlinNativeSuffix
 
-        logger.debug { "Running Command for '${benchmarkRun.id}': '$run'" }
+        logger.debug { "Running Command for '${benchmarkRun.id}': '$run' in ${folder.absolutePath}" }
 
         for (i in 0 until RUN_COUNT)
             launch {
@@ -132,8 +133,10 @@ suspend fun runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: File) = 
     if (benchmarkRun.cleanup != null)
         for (cleanup in benchmarkRun.cleanup) {
             val file = File(folder, cleanup)
-            if (file.exists())
+            if (file.exists()) {
                 file.delete()
+                logger.debug { "Deleted file from cleanup: ${file.absolutePath}" }
+            }
         }
 
     if (results.isEmpty())
@@ -205,7 +208,9 @@ suspend fun rankBenchmarks(results: Map<String, List<BenchmarkResult>>, out: Fil
     }
 }
 
-private fun String.runCommand(folder: File): String? {
+private suspend fun String.runCommand(folder: File): String? = coroutineScope {
+    val str = this@runCommand
+
     try {
         val parts = split("\\s".toRegex())
         val process = ProcessBuilder(*parts.toTypedArray())
@@ -214,14 +219,21 @@ private fun String.runCommand(folder: File): String? {
             .redirectError(ProcessBuilder.Redirect.PIPE)
             .start()
 
-        process.waitFor()
+        val success = process.waitFor(120, TimeUnit.SECONDS)
+        val exitCode = process.exitValue()
 
-        if (process.exitValue() != 0)
+        if (!success)
+            error("Process timed out: '$str' in ${folder.absolutePath}")
+
+        if (exitCode != 0) {
             error(process.errorStream.bufferedReader().use { it.readText() })
+            logger.debug { "Failed to run command: '$str' in ${folder.absolutePath} with exit code $exitCode" }
+        }
 
-        return process.inputStream.bufferedReader().use { it.readText() }
+        return@coroutineScope process.inputStream.bufferedReader().use { it.readText() }
     } catch (e: Exception) {
-        throw IllegalStateException("Failed to run command: '$this'", e)
+        logger.debug { "Failed to run command: '$str' in ${folder.absolutePath}" }
+        throw IllegalStateException("Failed to run command: '$str'", e)
     }
 }
 
