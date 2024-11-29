@@ -9,6 +9,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
@@ -25,6 +26,18 @@ val json = Json {
 }
 
 private val os = System.getProperty("os.name").substringBefore(" ").lowercase()
+private val arch = when(System.getProperty("os.arch").lowercase()) {
+    "amd64", "x86_64" -> "x64"
+    "aarch64", "arm", "arm64" -> "arm64"
+    "x86" -> "x86"
+    else -> error("Unsupported architecture")
+}
+
+private val kotlinOs = when (os) {
+    "windows" -> "mingw"
+    "mac" -> "macos"
+    else -> os
+}
 private val kotlinNativeSuffix = if (os == "windows") ".exe" else ".kexe"
 
 suspend fun main(args: Array<String>) = coroutineScope {
@@ -49,13 +62,16 @@ suspend fun main(args: Array<String>) = coroutineScope {
     // Run Benchmarks
 
     val results = mutableMapOf<String, List<BenchmarkResult>>()
+    val disabledForRanking = mutableSetOf<String>()
+    val mutex = Mutex()
+
     launch {
         for (benchmark in benchmarkRuns) {
             val out = File(output, benchmark.id)
             if (!out.exists())
                 out.mkdirs()
 
-            logger.debug { "Running benchmark '${benchmark.id}'" }
+            logger.debug { "Starting language '${benchmark.id}'" }
 
             launch {
                 for (f in folders) {
@@ -63,8 +79,17 @@ suspend fun main(args: Array<String>) = coroutineScope {
                     if (filter != null && !filter.matches(name))
                         continue
 
+                    logger.debug { "Starting benchmark '$name' for '${benchmark.id}'" }
                     launch {
                         val result = runBenchmark(benchmark, f, out)
+                        if (result == null) {
+                            mutex.withLock {
+                                disabledForRanking.add(benchmark.id)
+                            }
+
+                            return@launch // Disabled Language
+                        }
+
                         if (results.contains(name))
                             results[f.name] = results[f.name]!! + result
                         else
@@ -76,12 +101,14 @@ suspend fun main(args: Array<String>) = coroutineScope {
     }.join()
 
     // Rank Benchmarks
-    rankBenchmarks(results, output)
+    rankBenchmarks(results.filterKeys { it !in disabledForRanking }, output)
 }
 
 suspend fun runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: File) = withContext(Dispatchers.IO) {
     val configFile = File(folder, "config.yml").readText(Charsets.UTF_8)
     val config = Yaml.default.decodeFromString<BenchmarkConfiguration>(configFile)
+
+    if (config.disabled.contains(benchmarkRun.id)) return@withContext null
 
     val results = mutableListOf<Double>()
     val mutex = Mutex()
@@ -100,6 +127,13 @@ suspend fun runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: File) = 
                     val executableSuffix = if (benchmarkRun.id.contains("kotlin")) ".bat" else ".exe"
                     compile = compile.replaceFirst(" ", "$executableSuffix ")
                 }
+            }
+
+            if (benchmarkRun.compileExtra.isNotEmpty()) {
+                val extra = benchmarkRun.compileExtra["$os-$arch"] ?: benchmarkRun.compileExtra[os]
+
+                if (extra != null)
+                    compile += " $extra"
             }
 
             logger.debug { "Running Compile Command for '${benchmarkRun.id}': '$compile' in ${folder.absolutePath}" }
@@ -226,13 +260,13 @@ private suspend fun String.runCommand(folder: File): String? = coroutineScope {
             error("Process timed out: '$str' in ${folder.absolutePath}")
 
         if (exitCode != 0) {
+            logger.error { "Failed to run command: '$str' in ${folder.absolutePath} with exit code $exitCode" }
             error(process.errorStream.bufferedReader().use { it.readText() })
-            logger.debug { "Failed to run command: '$str' in ${folder.absolutePath} with exit code $exitCode" }
         }
 
         return@coroutineScope process.inputStream.bufferedReader().use { it.readText() }
     } catch (e: Exception) {
-        logger.debug { "Failed to run command: '$str' in ${folder.absolutePath}" }
+        logger.error(e) { "Failed to run command: '$str' in ${folder.absolutePath}" }
         throw IllegalStateException("Failed to run command: '$str'", e)
     }
 }
@@ -246,7 +280,8 @@ data class BenchmarkConfiguration(
     val description: String,
     val measure: Measurement,
     val output: Measurement,
-    val tags: List<String> = emptyList()
+    val tags: List<String> = emptyList(),
+    val disabled: List<String> = emptyList()
 )
 
 @Serializable
@@ -258,5 +293,7 @@ data class BenchmarkRun(
     val location: String? = null,
     val run: String,
     val compile: String? = null,
-    val cleanup: List<String>? = null
+    @SerialName("compile-extra")
+    val compileExtra: Map<String, String> = emptyMap(),
+    val cleanup: List<String>? = null,
 )

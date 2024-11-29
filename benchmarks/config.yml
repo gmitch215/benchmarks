@@ -41,6 +41,8 @@
   id: cpp
   color: "004283"
   compile: g++ main.cpp -o main.cpp.o
+  compile-extra:
+    windows: "-lws2_32"
   run: main.cpp.o
   cleanup:
     - main.cpp.o
@@ -49,6 +51,8 @@
   id: c
   color: "555555"
   compile: gcc main.c ../../lib/nanotime/nanotime.c -o main.c.o
+  compile-extra:
+    windows: "-lws2_32"
   run: main.c.o
   cleanup:
     - main.c.o
