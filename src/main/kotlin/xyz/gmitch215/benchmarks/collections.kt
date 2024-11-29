@@ -9,7 +9,7 @@ operator fun <T> List<T>.times(n: Int): List<T> {
     return result
 }
 
-fun <T> List<T>.repeat(times: Int): List<T> {
+fun <T> Collection<T>.repeat(times: Int): List<T> {
     val result = mutableListOf<T>()
     for (t in this) {
         result.addAll(List(times) { t })
