@@ -8,3 +8,11 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+  - package-ecosystem: "pip"
+    directory: "benchmarks/"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "bundler"
+    directory: "site/"
+    schedule:
+      interval: "daily"
