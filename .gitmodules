@@ -1,3 +1,6 @@
 [submodule "lib/nanotime"]
 	path = lib/nanotime
 	url = https://github.com/nightmareci/nanotime
+[submodule "lib/clibs"]
+	path = lib/clibs
+	url = https://github.com/mattiasgustavsson/libs
