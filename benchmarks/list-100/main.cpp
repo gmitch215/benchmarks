@@ -3,15 +3,15 @@
 #include <chrono>
 
 int main() {
-    const auto start = std::chrono::steady_clock::now();
+    const auto before = std::chrono::steady_clock::now();
 
     std::vector<int> arr;
     for (int i = 0; i < 100; i++) {
         arr.push_back(i);
     }
 
-    const auto end = std::chrono::steady_clock::now();
-    const auto duration = end - start;
+    const auto after = std::chrono::steady_clock::now();
+    const auto duration = after - before;
 
     std::cout << std::chrono::duration_cast<std::chrono::nanoseconds>(duration).count() << std::endl;
 

@@ -22,7 +22,7 @@ int binarySearch(int arr[], int x) {
 }
 
 int main() {
-    const auto start = std::chrono::steady_clock::now();
+    const auto before = std::chrono::steady_clock::now();
 
     int arr[] = {2, 3, 6, 10, 23, 45, 78, 129, 213, 294, 299, 301, 332, 423, 521, 543, 571, 612, 634, 678, 712, 745, 789, 812, 834};
 
@@ -32,8 +32,8 @@ int main() {
     binarySearch(arr, arr[15]);
     binarySearch(arr, arr[20]);
 
-    const auto end = std::chrono::steady_clock::now();
-    const auto duration = end - start;
+    const auto after = std::chrono::steady_clock::now();
+    const auto duration = after - before;
 
     std::cout << std::chrono::duration_cast<std::chrono::nanoseconds>(duration).count() << std::endl;
 
