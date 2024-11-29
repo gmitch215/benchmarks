@@ -84,6 +84,8 @@ jobs:
         uses: actions/setup-go@v5
         with:
           go-version: '1.23.3'
+      - name: Install Python Dependencies
+        run: pip install -r benchmarks/requirements.txt
       # Benchmarking
       - name: Create Benchmarks
         run: ./gradlew benchmark -Pdebug=true
