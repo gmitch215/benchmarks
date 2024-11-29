@@ -39,6 +39,7 @@ import xyz.gmitch215.benchmarks.measurement.json
 import xyz.gmitch215.benchmarks.repeat
 import xyz.gmitch215.benchmarks.times
 import java.io.File
+import kotlin.collections.first
 
 val PRIMARY_GRAPH_SIZE = 1200 to 600
 val SECONDARY_GRAPH_SIZE = 1000 to 600
@@ -60,7 +61,7 @@ suspend fun main(args: Array<String>): Unit = coroutineScope {
     }
 
     val configFile = File(rootDir, "config.yml").readText(Charsets.UTF_8)
-    logger.debug { "Reading config from $configFile" }
+    logger.debug { "Configuration File: \n$configFile\n" }
 
     val config = Yaml.default.decodeFromString<List<BenchmarkRun>>(configFile)
 
@@ -78,10 +79,7 @@ suspend fun main(args: Array<String>): Unit = coroutineScope {
                 continue
 
             val location = File(outputDir, "${id}/$name.json")
-            if (!location.exists()) {
-                logger.debug { "Benchmark '$id' for '$name' does not exist at ${location.absolutePath}" }
-                error("Benchmark $id for $name does not exist")
-            }
+            if (!location.exists()) continue
 
             if (benchmarkLocations.contains(name)) {
                 benchmarkLocations[name] = benchmarkLocations[name]!! + Pair(run.language, location.absolutePath)
@@ -92,19 +90,26 @@ suspend fun main(args: Array<String>): Unit = coroutineScope {
         }
     }
 
+    // Create Benchmark Graphs
     for ((name, benchmarks) in benchmarkLocations)
         launch {
-            createGraphs(benchmarks, File(graphsFolder, name))
+            createBenchmarkGraphs(benchmarks, File(graphsFolder, name))
+        }
+
+    // Create Versus Graphs
+    for ((name, benchmarks) in benchmarkLocations)
+        launch {
+            createVersusGraphs(benchmarks, config, File(graphsFolder, name))
         }
 
     // Create Rank Graph
     launch {
         val rankings = File(outputDir, "rankings.json").readText(Charsets.UTF_8)
-        createRanksGraphs(json.decodeFromString(rankings), graphsFolder)
+        createRanksGraph(json.decodeFromString(rankings), graphsFolder)
     }
 }
 
-suspend fun createGraphs(benchmarks: List<Pair<String, String>>, out: File) = withContext(Dispatchers.IO) {
+suspend fun createBenchmarkGraphs(benchmarks: List<Pair<String, String>>, out: File) = withContext(Dispatchers.IO) {
     val data0 = mutableListOf<Pair<String, BenchmarkResult>>()
     val mutex = Mutex()
 
@@ -375,7 +380,120 @@ suspend fun createGraphs(benchmarks: List<Pair<String, String>>, out: File) = wi
     }
 }
 
-suspend fun createRanksGraphs(rankings: JsonObject, out: File) = withContext(Dispatchers.IO) {
+suspend fun createVersusGraphs(benchmarks: List<Pair<String, String>>, runs: List<BenchmarkRun>, out: File) = withContext(Dispatchers.IO) {
+    val pairs = mutableListOf<Pair<BenchmarkRun, BenchmarkRun>>()
+    for (i in 0 until runs.size) {
+        for (j in i + 1 until runs.size) {
+            pairs.add(runs[i] to runs[j])
+        }
+    }
+
+    val data = mutableMapOf<String, BenchmarkResult>()
+    val mutex = Mutex()
+
+    launch {
+        for ((language, location) in benchmarks) {
+            launch {
+                val content = File(location).readText(Charsets.UTF_8)
+
+                mutex.withLock {
+                    data[language] = json.decodeFromString(content)
+                }
+            }
+        }
+    }.join()
+
+    out.mkdirs()
+
+    val languageColors = data.map {
+        val hex = Integer.parseInt(it.value.languageColor, 16)
+        val color = Color.rgb(hex shr 16 and 0xFF, hex shr 8 and 0xFF, hex and 0xFF)
+        return@map Pair(it.key, color)
+    }
+
+    val example = data.values.first()
+
+    launch {
+        for (match in pairs)
+            launch {
+                val l1: BenchmarkRun; val l2: BenchmarkRun
+                if (match.first.id < match.second.id) {
+                    l1 = match.first
+                    l2 = match.second
+                } else {
+                    l1 = match.second
+                    l2 = match.first
+                }
+
+                val colors = languageColors.filter { it.first == l1.language || it.first == l2.language }.sortedBy { it.first }
+                val runs = (List(RUN_COUNT) { it + 1 }) * 2
+                val labels = listOf(l1.language, l2.language).repeat(RUN_COUNT)
+
+                val values = data.filterValues { it.languageId == l1.id || it.languageId == l2.id }.flatMap { entry ->
+                    val results = entry.value.results.map { it / entry.value.output.multiplier }.toMutableList()
+                    if (results.size != RUN_COUNT) {
+                        // Data loss, add average value
+                        val avg = results.average()
+                        results.addAll(List(RUN_COUNT - results.size) { avg })
+                    }
+
+                    return@flatMap results
+                }
+
+                // Language was skipped
+                if (values.size != RUN_COUNT * 2) return@launch
+
+                val versus = dataFrameOf(
+                    "runs" to runs,
+                    "language" to labels,
+                    "time" to values
+                ).groupBy("language").plot {
+                    layout {
+                        title = "${l1.language} vs ${l2.language} - ${example.name}"
+                        caption = "${l1.language} and ${l2.language}, against $RUN_COUNT runs in ${example.output.name.lowercase()}"
+                        theme = Theme.HIGH_CONTRAST_DARK
+                        size = PRIMARY_GRAPH_SIZE
+                    }
+
+                    x(runs) {
+                        axis.name = "Run Index"
+                        axis.breaksLabeled(runs, runs.map { "#${it}" })
+                    }
+
+                    y("time") {
+                        axis.name = "Time (${example.output.unit})"
+                    }
+
+                    line {
+                        color(labels) {
+                            legend.name = "Match"
+                            scale = categorical(colors.map { it.second }, colors.map { it.first })
+                        }
+
+                        width = 2.0
+                    }
+
+                    points {
+                        size = 6.0
+
+                        color(labels) {
+                            symbol = Symbol.CIRCLE
+                            scale = categorical(colors.map { it.second }, colors.map { it.first })
+                        }
+                    }
+                }
+
+                val file = File(out, "${l1.id}-vs-${l2.id}.png")
+
+                logger.info { "Writing versus graph [${l1.language}, ${l2.language}] to ${file.absolutePath}" }
+                file.writeBytes(versus.toPNG())
+            }
+    }.join()
+
+    logger.info { "Finished writing versus graphs in ${out.absolutePath}" }
+}
+
+suspend fun createRanksGraph(rankings: JsonObject, out: File) = withContext(Dispatchers.IO) {
     val ranks = mutableMapOf<String, Int>()
 
     for ((name, run) in rankings) {
