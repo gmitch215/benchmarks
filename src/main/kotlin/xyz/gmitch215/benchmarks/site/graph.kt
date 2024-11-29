@@ -142,7 +142,8 @@ suspend fun createBenchmarkGraphs(benchmarks: List<Pair<String, String>>, out: F
         val labels = data.map { it.first }.repeat(RUN_COUNT)
 
         val values = data.flatMap { pair ->
-            val results = pair.second.results.map { it / pair.second.output.multiplier }.toMutableList()
+            val result = pair.second
+            val results = result.results.map { (it * result.measure.multiplier) / result.output.multiplier }.toMutableList()
             if (results.size != RUN_COUNT) {
                 // Data loss, add average value
                 val avg = results.average()
