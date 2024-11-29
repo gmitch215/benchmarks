@@ -1,0 +1,9 @@
+name: HTTP GET Request
+description: Performs an HTTP GET Request to a specified URL.
+measure: MILLISECONDS
+output: MILLISECONDS
+tags:
+  - "web"
+  - "request"
+disabled:
+  - "kotlin-native"
