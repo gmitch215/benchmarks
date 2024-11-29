@@ -254,10 +254,10 @@ private suspend fun String.runCommand(folder: File): String? = coroutineScope {
             .start()
 
         val success = process.waitFor(120, TimeUnit.SECONDS)
-        val exitCode = process.exitValue()
-
         if (!success)
             error("Process timed out: '$str' in ${folder.absolutePath}")
+
+        val exitCode = process.exitValue()
 
         if (exitCode != 0) {
             logger.error { "Failed to run command: '$str' in ${folder.absolutePath} with exit code $exitCode" }
