@@ -1,0 +1,9 @@
+name: HTTP POST Request
+description: Performs an HTTP POST Request to a specified URL with "Hello World" as the request body.
+measure: MILLISECONDS
+output: MILLISECONDS
+tags:
+  - "web"
+  - "request"
+disabled:
+  - "kotlin-native"
