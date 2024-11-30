@@ -16,15 +16,17 @@ val INDEX_FILE_TEMPLATE: (String) -> String = { platform ->
     """
     ---
     layout: platform
+    platform: $platform
     title: ${platform.replaceFirstChar { it.uppercase() }}
     ---
     """.trimIndent()
 }
 
-val INFO_FILE_TEMPLATE: (BenchmarkConfiguration) -> String = { config ->
+val INFO_FILE_TEMPLATE: (String, BenchmarkConfiguration) -> String = { platform, config ->
     """
     ---
     layout: benchmark
+    platform: $platform
     id: ${config.id}
     title: ${config.name}
     summary: ${config.description}
@@ -37,6 +39,7 @@ val VERSUS_INDEX_TEMPLATE: (String) -> String = { platform ->
     """
     ---
     layout: versus
+    platform: $platform
     title: Versus - ${platform.replaceFirstChar { it.uppercase() }}
     ---
     """.trimIndent()
@@ -76,7 +79,8 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
 
     for (folder in topFolders)
         launch {
-            val rootFolder = File(output, folder.name)
+            val platform = folder.name
+            val rootFolder = File(output, platform)
             rootFolder.mkdirs()
 
             logger.debug { "Creating index page for ${folder.absolutePath}" }
@@ -85,7 +89,7 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
                 if (!indexFile.exists())
                     indexFile.createNewFile()
 
-                indexFile.writeText(INDEX_FILE_TEMPLATE(folder.name))
+                indexFile.writeText(INDEX_FILE_TEMPLATE(platform))
                 logger.info { "Created ${indexFile.absolutePath}" }
             }
 
@@ -98,7 +102,7 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
                         if (!benchmarkFile.exists())
                             benchmarkFile.createNewFile()
 
-                        benchmarkFile.writeText(INFO_FILE_TEMPLATE(benchmark))
+                        benchmarkFile.writeText(INFO_FILE_TEMPLATE(platform, benchmark))
                         logger.info { "Created ${benchmarkFile.absolutePath}" }
                     }
             }
@@ -113,10 +117,6 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
 
                 val versus = Yaml.default.decodeFromString<List<Map<String, BenchmarkRun>>>(versusFile.readText())
 
-                val rootFolder = File(output, folder.name)
-                if (!rootFolder.exists())
-                    error("Root folder does not exist")
-
                 val versusFolder = File(rootFolder, "versus")
                 if (!versusFolder.exists())
                     versusFolder.mkdirs()
@@ -126,7 +126,7 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
                     if (!indexFile.exists())
                         indexFile.createNewFile()
 
-                    indexFile.writeText(VERSUS_INDEX_TEMPLATE(folder.name))
+                    indexFile.writeText(VERSUS_INDEX_TEMPLATE(platform))
                     logger.debug { "Created index file for versus" }
                 }
 
