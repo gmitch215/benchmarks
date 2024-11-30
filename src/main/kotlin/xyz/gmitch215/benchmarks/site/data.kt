@@ -48,7 +48,7 @@ suspend fun main(args: Array<String>): Unit = coroutineScope {
             config.id = folder.name
 
             return@map config
-        })
+        }.sortedBy { it.id })
 
         benchmarksData.writeText(configs)
         logger.info { "Created benchmarks.yml" }
