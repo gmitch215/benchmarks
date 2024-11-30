@@ -9,13 +9,14 @@ import kotlinx.coroutines.withContext
 import kotlinx.serialization.decodeFromString
 import xyz.gmitch215.benchmarks.logger
 import xyz.gmitch215.benchmarks.measurement.BenchmarkConfiguration
+import xyz.gmitch215.benchmarks.measurement.BenchmarkRun
 import java.io.File
 
 val INDEX_FILE_TEMPLATE: (String) -> String = { platform ->
     """
     ---
     layout: platform
-    title: $platform
+    title: ${platform.replaceFirstChar { it.uppercase() }}
     ---
     """.trimIndent()
 }
@@ -32,7 +33,29 @@ val INFO_FILE_TEMPLATE: (BenchmarkConfiguration) -> String = { config ->
     """.trimIndent()
 }
 
-suspend fun main(args: Array<String>) = withContext(Dispatchers.IO) {
+val VERSUS_INDEX_TEMPLATE: (String) -> String = { platform ->
+    """
+    ---
+    layout: versus
+    title: Versus - ${platform.replaceFirstChar { it.uppercase() }}
+    ---
+    """.trimIndent()
+}
+
+val VERSUS_FILE_TEMPLATE: (BenchmarkConfiguration, BenchmarkRun, BenchmarkRun) -> String = { config, l1, l2 ->
+    """
+    ---
+    layout: versus
+    l1: ${l1.id}
+    l2: ${l2.id}
+    title: ${l1.language} vs ${l2.language}
+    summary: ${config.description}
+    tags: [${config.tags.joinToString()}]
+    ---
+    """.trimIndent()
+}
+
+suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
     val data = File(args[0])
     val output = File(args[1])
 
@@ -51,22 +74,23 @@ suspend fun main(args: Array<String>) = withContext(Dispatchers.IO) {
 
     logger.debug { "Found ${topFolders.size} platforms" }
 
-    launch {
-        for (folder in topFolders)
+    for (folder in topFolders)
+        launch {
+            val rootFolder = File(output, folder.name)
+            rootFolder.mkdirs()
+
+            logger.debug { "Creating index page for ${folder.absolutePath}" }
             launch {
-                val rootFolder = File(output, folder.name)
-                rootFolder.mkdirs()
+                val indexFile = File(rootFolder, "index.md")
+                if (!indexFile.exists())
+                    indexFile.createNewFile()
 
-                logger.debug { "Creating index page for ${folder.absolutePath}" }
-                launch {
-                    val indexFile = File(rootFolder, "index.md")
-                    if (!indexFile.exists())
-                        indexFile.createNewFile()
+                indexFile.writeText(INDEX_FILE_TEMPLATE(folder.name))
+                logger.info { "Created ${indexFile.absolutePath}" }
+            }
 
-                    indexFile.writeText(INDEX_FILE_TEMPLATE(folder.name))
-                    logger.info { "Created ${indexFile.absolutePath}" }
-                }
-
+            // Benchmark Pages
+            launch {
                 logger.debug { "Creating info files for ${folder.absolutePath}" }
                 for (benchmark in benchmarks)
                     launch {
@@ -78,7 +102,54 @@ suspend fun main(args: Array<String>) = withContext(Dispatchers.IO) {
                         logger.info { "Created ${benchmarkFile.absolutePath}" }
                     }
             }
-    }.join()
 
-    logger.info { "Finished writing benchmark info files" }
+            // Versus Pages
+            launch {
+                logger.debug { "Creating versus files for ${folder.absolutePath}" }
+
+                val versusFile = File(data, "versus.yml")
+                if (!versusFile.exists())
+                    error("Versus data file does not exist")
+
+                val versus = Yaml.default.decodeFromString<List<Map<String, BenchmarkRun>>>(versusFile.readText())
+
+                val rootFolder = File(output, folder.name)
+                if (!rootFolder.exists())
+                    error("Root folder does not exist")
+
+                val versusFolder = File(rootFolder, "versus")
+                if (!versusFolder.exists())
+                    versusFolder.mkdirs()
+
+                launch {
+                    val indexFile = File(versusFolder, "index.md")
+                    if (!indexFile.exists())
+                        indexFile.createNewFile()
+
+                    indexFile.writeText(VERSUS_INDEX_TEMPLATE(folder.name))
+                    logger.debug { "Created index file for versus" }
+                }
+
+                for (benchmark in benchmarks)
+                    launch {
+                        val folder = File(rootFolder, "versus/${benchmark.id}")
+                        if (!folder.exists())
+                            folder.mkdirs()
+
+                        for (match in versus)
+                            launch {
+                                val l1 = match["l1"] ?: error("l1 not found")
+                                val l2 = match["l2"] ?: error("l2 not found")
+
+                                val versusFile = File(folder, "${l1.id}-vs-${l2.id}.md")
+                                if (!versusFile.exists())
+                                    versusFile.createNewFile()
+
+                                versusFile.writeText(VERSUS_FILE_TEMPLATE(benchmark, l1, l2))
+                                logger.info { "Created ${versusFile.absolutePath}" }
+                            }
+                    }
+
+            }
+        }
 }

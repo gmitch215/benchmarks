@@ -9,6 +9,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.JsonObject
@@ -53,15 +54,14 @@ suspend fun main(args: Array<String>): Unit = coroutineScope {
         logger.info { "Created benchmarks.yml" }
     }
 
+    val runs = Yaml.default.decodeFromString<List<BenchmarkRun>>(File(input, "config.yml").readText())
+
     // stats.yml
     launch {
         val statsData = File(output, "stats.yml")
         if (!statsData.exists())
             statsData.createNewFile()
-
-        val languagesCount = Yaml.default.decodeFromString<List<BenchmarkRun>>(
-            File(input, "config.yml").readText()
-        ).map { it.id }.distinct().count()
+        val languagesCount = runs.map { it.id }.distinct().count()
 
         val stats = Yaml.default.encodeToString(mapOf<String, Int>(
             "benchmarks" to folders.size,
@@ -71,6 +71,45 @@ suspend fun main(args: Array<String>): Unit = coroutineScope {
 
         statsData.writeText(stats)
         logger.info { "Created stats.yml" }
+    }
+
+    // versus.yml
+    launch {
+        val versusData = File(output, "versus.yml")
+        if (!versusData.exists())
+            versusData.createNewFile()
+
+        val pairs0 = mutableListOf<Pair<BenchmarkRun, BenchmarkRun>>()
+        for (i in 0 until runs.size) {
+            for (j in i + 1 until runs.size) {
+                pairs0.add(runs[i] to runs[j])
+            }
+        }
+
+        // Sort Pairs Alphabetically
+        val pairs = mutableListOf<Map<String, BenchmarkRun>>()
+        for (match in pairs0) {
+            val l1: BenchmarkRun; val l2: BenchmarkRun
+            if (match.first.id < match.second.id) {
+                l1 = match.first
+                l2 = match.second
+            } else {
+                l1 = match.second
+                l2 = match.first
+            }
+
+            pairs.add(mapOf<String, BenchmarkRun>(
+                "l1" to l1,
+                "l2" to l2
+            ))
+        }
+
+        val versus = Yaml.default.encodeToString(
+            pairs.sortedBy { map -> "${map["l1"]!!.id}-vs-${map["l2"]!!.id}" }
+        )
+
+        versusData.writeText(versus)
+        logger.info { "Created versus.yml" }
     }
 
     logger.info { "Unzipping Benchmarks..." }
