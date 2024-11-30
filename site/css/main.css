@@ -68,6 +68,14 @@ p img {
     color: var(--text);
 }
 
+.box p {
+    text-align: center;
+}
+
+.condensed {
+    padding: 0 20%;
+}
+
 .horizontal {
     flex-direction: row;
     column-gap: 2vw;

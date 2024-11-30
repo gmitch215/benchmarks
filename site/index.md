@@ -12,7 +12,7 @@ summary: "Programming benchmarks across different languages and platforms."
 
 Providing **{{ site.data.stats.benchmarks | number_with_delimiter: "," }}** benchmarks across **{{ site.data.stats.languages | number_with_delimiter: "," }}** languages on **{{ site.data.stats.platforms | number_with_delimiter: "," }}** platforms.
 
-This is a collection of benchmarks across different languages and platforms.
+This is a collection of benchmarks across different languages and platforms. The goal is to provide a consistent set of benchmarks to compare the performance of different languages and platforms. The benchmarks are intended to be simple and easy to understand, focusing on performance and efficiency. However, not all benchmarks are guarenteed to be available for each language.
 
 Get started with your operating system from above.
 
