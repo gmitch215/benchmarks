@@ -68,3 +68,7 @@
   run: main.go.o
   cleanup:
     - main.go.o
+- language: PHP
+  id: php
+  color: "777bb3"
+  run: php main.php
