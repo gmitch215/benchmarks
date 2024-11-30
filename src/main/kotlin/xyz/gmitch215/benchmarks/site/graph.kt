@@ -71,24 +71,26 @@ suspend fun main(args: Array<String>): Unit = coroutineScope {
     val folders = rootDir.listFiles { f -> f?.let { it.isDirectory && it.name != "output" } == true } ?: emptyArray()
     val benchmarkLocations = mutableMapOf<String, List<Pair<String, String>>>()
 
-    for (run in config) {
-        val id = run.id
-        for (folder in folders) {
-            val name = folder.name
-            if (filter != null && !filter.matches(name))
-                continue
+    launch {
+        for (run in config) launch {
+            val id = run.id
+            for (folder in folders) launch {
+                val name = folder.name
+                if (filter != null && !filter.matches(name))
+                    return@launch
 
-            val location = File(outputDir, "${id}/$name.json")
-            if (!location.exists()) continue
+                val location = File(outputDir, "${id}/$name.json")
+                if (!location.exists()) return@launch
 
-            if (benchmarkLocations.contains(name)) {
-                benchmarkLocations[name] = benchmarkLocations[name]!! + Pair(run.language, location.absolutePath)
-                logger.debug { "Adding $id for $name at ${location.absolutePath}" }
-            } else {
-                benchmarkLocations[name] = listOf(Pair(run.language, location.absolutePath))
+                if (benchmarkLocations.contains(name)) {
+                    benchmarkLocations[name] = benchmarkLocations[name]!! + Pair(run.language, location.absolutePath)
+                    logger.debug { "Adding $id for $name at ${location.absolutePath}" }
+                } else {
+                    benchmarkLocations[name] = listOf(Pair(run.language, location.absolutePath))
+                }
             }
         }
-    }
+    }.join()
 
     // Create Benchmark Graphs
     for ((name, benchmarks) in benchmarkLocations)
@@ -426,23 +428,27 @@ suspend fun createVersusGraphs(benchmarks: List<Pair<String, String>>, runs: Lis
                     l2 = match.first
                 }
 
-                val colors = languageColors.filter { it.first == l1.language || it.first == l2.language }.sortedBy { it.first }
-                val runs = (List(RUN_COUNT) { it + 1 }) * 2
-                val labels = listOf(l1.language, l2.language).repeat(RUN_COUNT)
+                val values = data.filterValues { it.languageId == l1.id || it.languageId == l2.id }
+                    .toList()
+                    .sortedBy { it.first }
+                    .flatMap { pair ->
+                        val result = pair.second
+                        val results = result.results.map { (it * result.measure.multiplier) / result.output.multiplier }.toMutableList()
+                        if (results.size != RUN_COUNT) {
+                            // Data loss, add average value
+                            val avg = results.average()
+                            results.addAll(List(RUN_COUNT - results.size) { avg })
+                        }
 
-                val values = data.filterValues { it.languageId == l1.id || it.languageId == l2.id }.flatMap { entry ->
-                    val results = entry.value.results.map { it / entry.value.output.multiplier }.toMutableList()
-                    if (results.size != RUN_COUNT) {
-                        // Data loss, add average value
-                        val avg = results.average()
-                        results.addAll(List(RUN_COUNT - results.size) { avg })
+                        return@flatMap results
                     }
-
-                    return@flatMap results
-                }
 
                 // Language was skipped
                 if (values.size != RUN_COUNT * 2) return@launch
+
+                val colors = listOf(l1, l2).map { languageColors.first { (lang, _) -> lang == it.language } }
+                val runs = (List(RUN_COUNT) { it + 1 }) * 2
+                val labels = listOf(l1.language, l2.language).repeat(RUN_COUNT)
 
                 val versus = dataFrameOf(
                     "runs" to runs,
