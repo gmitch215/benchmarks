@@ -3,16 +3,20 @@
 :root {
     --bg: #3d3d3d;
     --bg-2: #2c2c2c;
+    --bg-3: #4f4f4f;
     --bg-gradient: linear-gradient(180deg, #212121 0%, var(--bg) 100%);
 
     --text: #fff;
     --color-text: cyan;
+    --color-text-2: darkcyan;
     --link-color: greenyellow;
+
     --shadow: 0 10px 20px -5px rgb(0, 0, 0);
 }
 
 html {
     overflow-y: auto;
+    scroll-behavior: smooth;
     height: 100%;
     width: 100%;
 }
@@ -122,6 +126,8 @@ p img {
     transition: transform 0.5s ease-in-out;
 }
 
+/* Header */
+
 header {
     background: var(--bg-gradient);
 
@@ -146,4 +152,65 @@ header a {
     display: flex;
     column-gap: 3vw;
     align-items: center;
+}
+
+/* Benchmark Items */
+
+.benchmark-parent {
+    display: grid;
+
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    column-gap: 10vw;
+    row-gap: 5vh;
+
+    min-height: 30vh;
+    margin: 0 5vw;
+}
+
+.benchmark {
+    border: var(--bg) 4px solid;
+    background-color: var(--bg-3);
+    box-shadow: var(--shadow);
+
+    width: 20vw;
+    min-height: 128px;
+    min-width: 64px;
+    max-height: 512px;
+    max-width: 256px;
+
+    padding: 1vh 1vw 2vh 1vw;
+
+    transition: transform 0.5s ease-in-out;
+}
+
+.benchmark:hover {
+    transform: scale(1.1);
+    transition: transform 0.5s ease-in-out;
+}
+
+.benchmark h2 {
+    margin: 0;
+}
+
+.benchmark h3 {
+    font-size: small;
+    font-weight: normal;
+    color: var(--color-text-2);
+}
+
+.benchmark a {
+    color: var(--text);
+}
+
+.benchmark-top {
+    margin-bottom: 4vh;
+}
+
+.benchmark-top span {
+    opacity: 70%;
+    background-color: var(--bg-2);
+    border: 1px solid black;
+
+    padding: 4px;
 }

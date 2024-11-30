@@ -1,0 +1,21 @@
+---
+layout: default
+---
+
+<div class="benchmark-parent">
+    {% for benchmark in site.data.benchmarks %}
+    {% assign tags = benchmark.tags | join: ' ' %}
+    <div class="benchmark {{ tags }}" id="{{ benchmark.id }}">
+        <a href="/{{ page.platform }}/{{ benchmark.id }}">
+            <div class="benchmark-top">
+                {% for tag in benchmark.tags %}
+                <span>{{ tag }}</span>
+                {% endfor %}
+            </div>
+
+            <h2 title="{{ benchmark.name }} | {{ benchmark.description }}">{{ benchmark.name }}</h2>
+            <p>{{ benchmark.description }}</p>
+        </a>
+    </div>
+    {% endfor %}
+</div>
