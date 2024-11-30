@@ -116,7 +116,32 @@ tasks {
         )
     }
 
+    register("moveGraphs", Copy::class) {
+        mustRunAfter("copyResourcesToSite", "unzipSiteData")
+
+        from("build/site/_data/results/windows/graphs/") {
+            into("assets/graphs/windows/")
+        }
+
+        from("build/site/_data/results/macos/graphs/") {
+            into("ssets/graphs/macos/")
+        }
+
+        from("build/site/_data/results/linux/graphs/") {
+            into("assets/graphs/linux/")
+        }
+
+        doLast {
+            delete("build/site/_data/results/windows/graphs/")
+            delete("build/site/_data/results/macos/graphs/")
+            delete("build/site/_data/results/linux/graphs/")
+        }
+
+        destinationDir = file("build/site")
+    }
+
     register("generatePages", JavaExec::class) {
+        dependsOn("moveGraphs")
         mustRunAfter("copyResourcesToSite", "unzipSiteData")
 
         mainClass.set("xyz.gmitch215.benchmarks.site.PagesCreator")
