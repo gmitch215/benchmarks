@@ -117,14 +117,14 @@ tasks {
     }
 
     register("moveGraphs", Copy::class) {
-        mustRunAfter("copyResourcesToSite", "unzipSiteData")
+        mustRunAfter("graphBenchmarks", "copyResourcesToSite", "unzipSiteData")
 
         from("build/site/_data/results/windows/graphs/") {
             into("assets/graphs/windows/")
         }
 
         from("build/site/_data/results/macos/graphs/") {
-            into("ssets/graphs/macos/")
+            into("assets/graphs/macos/")
         }
 
         from("build/site/_data/results/linux/graphs/") {
