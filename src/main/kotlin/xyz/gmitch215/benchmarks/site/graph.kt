@@ -69,28 +69,29 @@ suspend fun main(args: Array<String>): Unit = coroutineScope {
     graphsFolder.mkdirs()
 
     val folders = rootDir.listFiles { f -> f?.let { it.isDirectory && it.name != "output" } == true } ?: emptyArray()
+
     val benchmarkLocations = mutableMapOf<String, List<Pair<String, String>>>()
+    for (run in config) {
+        val id = run.id
+        for (folder in folders) {
+            val name = folder.name
+            if (filter != null && !filter.matches(name))
+                continue
 
-    launch {
-        for (run in config) launch {
-            val id = run.id
-            for (folder in folders) launch {
-                val name = folder.name
-                if (filter != null && !filter.matches(name))
-                    return@launch
+            val location = File(outputDir, "${id}/$name.json")
+            if (!location.exists()) {
+                logger.debug { "Skipping $id for $name, no data found or disabled" }
+                continue
+            }
 
-                val location = File(outputDir, "${id}/$name.json")
-                if (!location.exists()) return@launch
-
-                if (benchmarkLocations.contains(name)) {
-                    benchmarkLocations[name] = benchmarkLocations[name]!! + Pair(run.language, location.absolutePath)
-                    logger.debug { "Adding $id for $name at ${location.absolutePath}" }
-                } else {
-                    benchmarkLocations[name] = listOf(Pair(run.language, location.absolutePath))
-                }
+            if (benchmarkLocations.contains(name)) {
+                benchmarkLocations[name] = (benchmarkLocations[name] ?: emptyList()) + Pair(run.language, location.absolutePath)
+                logger.debug { "Adding $id for $name at ${location.absolutePath}" }
+            } else {
+                benchmarkLocations[name] = listOf(Pair(run.language, location.absolutePath))
             }
         }
-    }.join()
+    }
 
     // Create Benchmark Graphs
     for ((name, benchmarks) in benchmarkLocations)
@@ -106,7 +107,11 @@ suspend fun main(args: Array<String>): Unit = coroutineScope {
 
     // Create Rank Graph
     launch {
-        val rankings = File(outputDir, "rankings.json").readText(Charsets.UTF_8)
+        val file = File(outputDir, "rankings.json")
+        if (!file.exists())
+            error("Rankings data file does not exist: ${file.absolutePath}")
+
+        val rankings = file.readText(Charsets.UTF_8)
         createRanksGraph(json.decodeFromString(rankings), graphsFolder)
     }
 }
@@ -118,7 +123,11 @@ suspend fun createBenchmarkGraphs(benchmarks: List<Pair<String, String>>, out: F
     launch {
         for ((language, location) in benchmarks) {
             launch {
-                val content = File(location).readText(Charsets.UTF_8)
+                val file = File(location)
+                if (!file.exists())
+                    error("Benchmark Data does not exist: ${file.absolutePath}")
+
+                val content = file.readText(Charsets.UTF_8)
 
                 mutex.withLock {
                     data0.add(Pair(language, json.decodeFromString(content)))
@@ -397,7 +406,11 @@ suspend fun createVersusGraphs(benchmarks: List<Pair<String, String>>, runs: Lis
     launch {
         for ((language, location) in benchmarks) {
             launch {
-                val content = File(location).readText(Charsets.UTF_8)
+                val file = File(location)
+                if (!file.exists())
+                    error("Benchmark Data does not exist: ${file.absolutePath}")
+
+                val content = file.readText(Charsets.UTF_8)
 
                 mutex.withLock {
                     data[language] = json.decodeFromString(content)
