@@ -35,7 +35,7 @@ private val arch = when(System.getProperty("os.arch").lowercase()) {
 
 private val kotlinNativeSuffix = if (os == "windows") ".exe" else ".kexe"
 
-suspend fun main(args: Array<String>) = coroutineScope {
+suspend fun main(args: Array<String>) = withContext(Dispatchers.IO) {
     val input = File(args[0])
     val output = File(input, "output")
 
@@ -60,7 +60,7 @@ suspend fun main(args: Array<String>) = coroutineScope {
     val disabledForRanking = mutableSetOf<String>()
     val mutex = Mutex()
 
-    launch {
+    launch(Dispatchers.Default) {
         for (benchmark in benchmarkRuns) {
             val out = File(output, benchmark.id)
             if (!out.exists())
