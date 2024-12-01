@@ -63,7 +63,7 @@ tasks {
             file("benchmarks").absolutePath,
             project.findProperty("benchmarkFilter")?.toString()
         )
-        jvmArgs = listOf("-Xms4G", "-XX:+HeapDumpOnOutOfMemoryError")
+        jvmArgs = listOf("-Xms6G", "-XX:+HeapDumpOnOutOfMemoryError")
     }
 
     register("graphBenchmarks", JavaExec::class) {
@@ -76,7 +76,7 @@ tasks {
             project.findProperty("benchmarkFilter")?.toString()
         )
 
-        jvmArgs = listOf("-Xms4G", "-XX:+HeapDumpOnOutOfMemoryError")
+        jvmArgs = listOf("-Xms6G", "-XX:+HeapDumpOnOutOfMemoryError")
     }
 
     register("benchmark") {
