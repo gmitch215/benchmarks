@@ -33,11 +33,6 @@ private val arch = when(System.getProperty("os.arch").lowercase()) {
     else -> error("Unsupported architecture")
 }
 
-private val kotlinOs = when (os) {
-    "windows" -> "mingw"
-    "mac" -> "macos"
-    else -> os
-}
 private val kotlinNativeSuffix = if (os == "windows") ".exe" else ".kexe"
 
 suspend fun main(args: Array<String>) = coroutineScope {
@@ -206,6 +201,7 @@ suspend fun rankBenchmarks(results: Map<String, List<BenchmarkResult>>, out: Fil
                                 scores[result.languageName] = scores.getOrDefault(result.languageName, 0) + i
                                 put(result.languageName, buildJsonObject {
                                     put("rank", i + 1)
+                                    put("id", result.languageId)
                                     put("avg", result.avg)
                                     put("low", result.low)
                                     put("high", result.high)
