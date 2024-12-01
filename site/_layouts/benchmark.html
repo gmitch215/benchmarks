@@ -1,0 +1,45 @@
+---
+layout: default
+---
+
+<div class="box" id="top">
+    <h1>Benchmark: {{ page.display }}</h1>
+    <p>{{ page.description }}</p>
+    <div class="box horizontal" id="tags">
+        {% for tag in page.tags %}
+        <span>{{ tag }}</span>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="box" id="all-time">
+    <h2>All-Time Rankings</h2>
+    <div>
+        <div>
+            <img src="/assets/graphs/{{ page.platform }}/{{ page.id }}/all-time.png" class="dynamic rounded" title="All-Time Graph" alt="All-Time Graph" />
+        </div>
+        <div>
+            <table class="benchmark-table">
+                {% assign rankings = site.data.results[page.platform].rankings[page.id].verbose %}
+                <tr>
+                    <th>Rank</th>
+                    <th>Language</th>
+                    <th>Average Time</th>
+                    <th>Best Time</th>
+                    <th>Worst Time</th>
+                </tr>
+                {% for obj in rankings %}
+                {% assign key = obj[0] %}
+                {% assign value = obj[1] %}
+                <tr>
+                    <td>{{ value.rank }}</td>
+                    <td>{{ key }}</td>
+                    <td>{{ value.avg }}</td>
+                    <td>{{ value.low }}</td>
+                    <td>{{ value.high }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>

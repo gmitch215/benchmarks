@@ -6,6 +6,10 @@
     --bg-3: #4f4f4f;
     --bg-gradient: linear-gradient(180deg, #212121 0%, var(--bg) 100%);
 
+    --dark-gold: #b8860b;
+    --dark-silver: #aaaaaa;
+    --dark-bronze: #cd7f32;
+
     --text: #fff;
     --color-text: cyan;
     --color-text-2: darkcyan;
@@ -63,6 +67,7 @@ p img {
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
 
     flex-direction: column;
     row-gap: 2vh;
@@ -110,6 +115,11 @@ p img {
 .dynamic:hover {
     transform: scale(1.1);
     transition: transform 0.5s ease-in-out;
+}
+
+.rounded {
+    border-radius: 1em;
+    border: 2px solid white;
 }
 
 .banner {
@@ -213,4 +223,63 @@ header a {
     border: 1px solid black;
 
     padding: 4px;
+}
+
+/* Benchmark Page */
+#top {
+    row-gap: 1vh;
+}
+
+#tags {
+    margin: 0;
+}
+
+#tags span {
+    color: var(--link-color);
+    background-color: var(--bg-2);
+    padding: 1vh 1vw;
+    border: 1px solid white;
+    border-radius: 1em;
+}
+
+#all-time div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+#all-time div div {
+    display: flex;
+    align-items: center;
+    width: 46%;
+}
+
+#all-time div div img {
+    width: 100%;
+    height: auto;
+}
+
+.benchmark-table td, th {
+    border: 1px solid white;
+    padding: 1vh 1vw;
+}
+
+.benchmark-table tr:nth-child(2) {
+    background-color: var(--dark-gold) !important;
+}
+
+.benchmark-table tr:nth-child(3) {
+    background-color: var(--dark-silver) !important;
+}
+
+.benchmark-table tr:nth-child(4) {
+    background-color: var(--dark-bronze) !important;
+}
+
+.benchmark-table tr:nth-child(even) {
+    background-color: var(--bg-2);
+}
+
+.benchmark-table tr:nth-child(odd) {
+    background-color: var(--bg-3);
 }
