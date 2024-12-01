@@ -28,7 +28,8 @@ val INFO_FILE_TEMPLATE: (String, BenchmarkConfiguration) -> String = { platform,
     layout: benchmark
     platform: $platform
     id: ${config.id}
-    title: ${config.name}
+    display: ${config.name}
+    title: ${config.name} | ${platform.replaceFirstChar { it.uppercase() }}
     summary: ${config.description}
     tags: [${config.tags.joinToString()}]
     ---
@@ -45,13 +46,13 @@ val VERSUS_INDEX_TEMPLATE: (String) -> String = { platform ->
     """.trimIndent()
 }
 
-val VERSUS_FILE_TEMPLATE: (BenchmarkConfiguration, BenchmarkRun, BenchmarkRun) -> String = { config, l1, l2 ->
+val VERSUS_FILE_TEMPLATE: (String, BenchmarkConfiguration, BenchmarkRun, BenchmarkRun) -> String = { platform, config, l1, l2 ->
     """
     ---
     layout: versus
     l1: ${l1.id}
     l2: ${l2.id}
-    title: ${l1.language} vs ${l2.language}
+    title: ${l1.language} vs ${l2.language} | ${platform.replaceFirstChar { it.uppercase() }}
     summary: ${config.description}
     tags: [${config.tags.joinToString()}]
     ---
@@ -145,7 +146,7 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
                                 if (!versusFile.exists())
                                     versusFile.createNewFile()
 
-                                versusFile.writeText(VERSUS_FILE_TEMPLATE(benchmark, l1, l2))
+                                versusFile.writeText(VERSUS_FILE_TEMPLATE(platform, benchmark, l1, l2))
                                 logger.info { "Created ${versusFile.absolutePath}" }
                             }
                     }
