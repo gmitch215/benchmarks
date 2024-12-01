@@ -4,7 +4,10 @@ package xyz.gmitch215.benchmarks.measurement
 
 import com.charleskorn.kaml.Yaml
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
@@ -19,6 +22,7 @@ import xyz.gmitch215.benchmarks.Measurement
 import xyz.gmitch215.benchmarks.logger
 import java.io.File
 import java.util.concurrent.TimeUnit
+import java.util.concurrent.atomic.AtomicInteger
 
 const val RUN_COUNT = 25
 val json = Json {
@@ -35,7 +39,12 @@ private val arch = when(System.getProperty("os.arch").lowercase()) {
 
 private val kotlinNativeSuffix = if (os == "windows") ".exe" else ".kexe"
 
-suspend fun main(args: Array<String>) = withContext(Dispatchers.IO) {
+private fun countChildren(count: AtomicInteger, job: Job) {
+    count.incrementAndGet()
+    job.children.forEach { countChildren(count, it) }
+}
+
+suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
     val input = File(args[0])
     val output = File(input, "output")
 
@@ -60,7 +69,7 @@ suspend fun main(args: Array<String>) = withContext(Dispatchers.IO) {
     val disabledForRanking = mutableSetOf<String>()
     val mutex = Mutex()
 
-    launch(Dispatchers.Default) {
+    val job = launch(Dispatchers.Default) {
         for (benchmark in benchmarkRuns) {
             val out = File(output, benchmark.id)
             if (!out.exists())
@@ -68,14 +77,14 @@ suspend fun main(args: Array<String>) = withContext(Dispatchers.IO) {
 
             logger.debug { "Starting language '${benchmark.id}'" }
 
-            launch {
+            val langJob = launch {
                 for (f in folders) {
                     val name = f.name
                     if (filter != null && !filter.matches(name))
                         continue
 
                     logger.debug { "Starting benchmark '$name' for '${benchmark.id}'" }
-                    launch {
+                    val benchmarkJob = launch {
                         val result = runBenchmark(benchmark, f, out)
                         if (result == null) {
                             mutex.withLock {
@@ -89,14 +98,59 @@ suspend fun main(args: Array<String>) = withContext(Dispatchers.IO) {
                             results[f.name] = results[f.name]!! + result
                         else
                             results[f.name] = listOf(result)
+
+                        logger.debug { "Finished benchmark '$name' for '${benchmark.id}'" }
                     }
+
+                    if (logger.isDebugEnabled())
+                        launch(Dispatchers.Default) {
+                            while (benchmarkJob.isActive) {
+                                val count = AtomicInteger()
+                                countChildren(count, benchmarkJob)
+
+                                logger.debug { "Benchmark '$name' for language '${benchmark.id}' task running with $count children" }
+                                delay(5000)
+                            }
+
+                            logger.debug { "Benchmark '$name' for language '${benchmark.id}' task finished" }
+                        }
                 }
             }
+
+            if (logger.isDebugEnabled())
+                launch(Dispatchers.Default) {
+                    while (langJob.isActive) {
+                        val count = AtomicInteger()
+                        countChildren(count, langJob)
+
+                        logger.debug { "--- Language '${benchmark.id}' parent task running with $count children" }
+                        delay(5000)
+                    }
+
+                    logger.debug { "Language '${benchmark.id}' parent task finished" }
+                }
         }
-    }.join()
+    }
 
     // Rank Benchmarks
-    rankBenchmarks(results.filterKeys { it !in disabledForRanking }, output)
+    job.invokeOnCompletion {
+        launch {
+            rankBenchmarks(results.filterKeys { it !in disabledForRanking }, output)
+        }
+    }
+
+    if (logger.isDebugEnabled())
+        launch(Dispatchers.Default) {
+            while (job.isActive) {
+                val count = AtomicInteger()
+                countChildren(count, job)
+
+                logger.debug { "----- Benchmarking task running with $count children" }
+                delay(5000)
+            }
+
+            logger.debug { "Benchmarking task finished" }
+        }
 }
 
 suspend fun runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: File) = withContext(Dispatchers.IO) {
@@ -136,6 +190,8 @@ suspend fun runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: File) = 
             val res = compile.runCommand(folder)
             if (res != null && res.isNotEmpty())
                 logger.debug { "Compile result: $res" }
+
+            logger.debug { "Compile command finished for '${benchmarkRun.id}' in ${folder.absolutePath}" }
         }
 
         var run = benchmarkRun.run
@@ -148,16 +204,43 @@ suspend fun runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: File) = 
 
         logger.debug { "Running Command for '${benchmarkRun.id}': '$run' in ${folder.absolutePath}" }
 
-        for (i in 0 until RUN_COUNT)
-            launch {
+        val jobs = mutableListOf<Job>()
+
+        repeat(RUN_COUNT) { i ->
+            val job = launch {
                 val runTime0 = run.runCommand(folder)!!.trim().replace("[\\s\\n]+".toRegex(), "")
                 val runTime = runTime0.toDoubleOrNull() ?: error("Failed to parse output: '$runTime0'")
 
                 mutex.withLock {
                     results.add(runTime)
                 }
+
+                logger.debug { "${benchmarkRun.language} Run in '${folder.name}': $runTime${config.measure.unit} (#${i + 1})" }
+            }
+
+            jobs.add(job)
+        }
+
+        if (logger.isDebugEnabled())
+            launch {
+                while (jobs.any { it.isActive }) {
+                    val active = jobs.count { it.isActive }
+                    logger.debug { "Waiting for $active / ${jobs.size} jobs to finish for '${benchmarkRun.id}' on ${folder.name}" }
+                    delay(5000)
+                }
             }
     }.join()
+
+    logger.debug {
+        """
+        --
+        ---
+        Finished running benchmark commands for '${benchmarkRun.id}' in ${folder.absolutePath}
+        Had ${config.disabled.size} disabled languages
+        Collected ${results.size} results
+        -----
+        """.trimIndent()
+    }
 
     if (benchmarkRun.cleanup != null)
         for (cleanup in benchmarkRun.cleanup) {
@@ -249,9 +332,21 @@ private suspend fun String.runCommand(folder: File): String? = coroutineScope {
             .redirectError(ProcessBuilder.Redirect.PIPE)
             .start()
 
+        val waiting = launch {
+            if (!logger.isDebugEnabled()) return@launch
+
+            while (process.isAlive) {
+                logger.debug { "Process '$str' is still running in ${folder.absolutePath}" }
+                delay(5000)
+            }
+        }
+
         val success = process.waitFor(120, TimeUnit.SECONDS)
         if (!success)
             error("Process timed out: '$str' in ${folder.absolutePath}")
+
+        waiting.cancel("Process finished")
+        logger.debug { "Process '$str' finished in ${folder.absolutePath}" }
 
         val exitCode = process.exitValue()
 
@@ -263,7 +358,7 @@ private suspend fun String.runCommand(folder: File): String? = coroutineScope {
         return@coroutineScope process.inputStream.bufferedReader().use { it.readText() }
     } catch (e: Exception) {
         logger.error(e) { "Failed to run command: '$str' in ${folder.absolutePath}" }
-        throw IllegalStateException("Failed to run command: '$str'", e)
+        error("Failed to run command: '$str'")
     }
 }
 
