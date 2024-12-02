@@ -24,7 +24,7 @@ dependencies {
 
     runtimeOnly("org.slf4j:slf4j-api:2.0.16")
     runtimeOnly("org.slf4j:slf4j-simple:2.0.16")
-    implementation("io.github.oshai:kotlin-logging:7.0.0")
+    implementation("io.github.oshai:kotlin-logging:7.0.3")
 }
 
 java {
