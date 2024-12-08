@@ -77,6 +77,8 @@ jobs:
             ${{ runner.os }}-konan-
       - name: Change Permissions
         run: chmod +x ./gradlew
+      - name: Gradle Information
+        run: ./gradlew project tasks dependencies
       # Runtimes
       - name: Install JavaScript (Node)
         uses: actions/setup-node@v4
@@ -117,6 +119,8 @@ jobs:
           name: benchmarks-${{ matrix.name }}
           path: benchmarks/output
           overwrite: true
+      - name: Stop Gradle
+        run: ./gradlew --stop
 
   site:
     runs-on: ubuntu-latest
