@@ -22,8 +22,7 @@ dependencies {
     implementation("com.charleskorn.kaml:kaml:0.66.0")
     implementation("org.jetbrains.kotlinx:kandy-lets-plot:0.7.1")
 
-    runtimeOnly("org.slf4j:slf4j-api:2.0.16")
-    runtimeOnly("org.slf4j:slf4j-simple:2.0.16")
+    runtimeOnly("ch.qos.logback:logback-classic:1.5.12")
     implementation("io.github.oshai:kotlin-logging:7.0.3")
 }
 
@@ -37,14 +36,18 @@ val debug = project.findProperty("debug")?.toString()?.toBoolean() == true
 
 tasks {
     clean {
+        delete("bin")
         delete("benchmarks/output")
+        delete("logs")
 
         delete(
-            "benchmarks/**/*.exe",
-            "benchmarks/**/*.kexe",
-            "benchmarks/**/*.o",
-            "benchmarks/**/*.class",
-            "benchmarks/**/*.jar",
+            fileTree("benchmarks") {
+                include("**/*.exe")
+                include("**/*.kexe")
+                include("**/*.o")
+                include("**/*.class")
+                include("**/*.jar")
+            }
         )
     }
 
