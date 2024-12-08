@@ -3,8 +3,10 @@
 package xyz.gmitch215.benchmarks.measurement
 
 import com.charleskorn.kaml.Yaml
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.async
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
@@ -85,7 +87,9 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
 
                     logger.debug { "Starting benchmark '$name' for '${benchmark.id}'" }
                     val benchmarkJob = launch {
-                        val result = runBenchmark(benchmark, f, out)
+                        val result = runBenchmark(benchmark, f, out).await()
+                        logger.debug { "Received result for '$name' under '${benchmark.id}'" }
+
                         if (result == null) {
                             mutex.withLock {
                                 disabledForRanking.add(benchmark.id)
@@ -153,11 +157,11 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
         }
 }
 
-suspend fun runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: File) = withContext(Dispatchers.IO) {
+fun CoroutineScope.runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: File) = async(Dispatchers.IO) {
     val configFile = File(folder, "config.yml").readText(Charsets.UTF_8)
     val config = Yaml.default.decodeFromString<BenchmarkConfiguration>(configFile)
 
-    if (config.disabled.contains(benchmarkRun.id)) return@withContext null
+    if (config.disabled.contains(benchmarkRun.id)) return@async null
 
     val results = mutableListOf<Double>()
     val mutex = Mutex()
@@ -225,7 +229,7 @@ suspend fun runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: File) = 
             launch {
                 while (jobs.any { it.isActive }) {
                     val active = jobs.count { it.isActive }
-                    logger.debug { "Waiting for $active / ${jobs.size} jobs to finish for '${benchmarkRun.id}' on ${folder.name}" }
+                    logger.debug { "Waiting for ${jobs.size - active} / ${jobs.size} jobs to finish for '${benchmarkRun.id}' on ${folder.name}" }
                     delay(5000)
                 }
             }
@@ -265,7 +269,7 @@ suspend fun runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: File) = 
 
     file.writeText(json.encodeToString(data))
 
-    return@withContext data
+    return@async data
 }
 
 suspend fun rankBenchmarks(results: Map<String, List<BenchmarkResult>>, out: File) = coroutineScope {
