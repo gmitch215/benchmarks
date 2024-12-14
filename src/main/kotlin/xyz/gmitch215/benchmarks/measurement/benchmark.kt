@@ -21,6 +21,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.*
 import xyz.gmitch215.benchmarks.BenchmarkResult
 import xyz.gmitch215.benchmarks.Measurement
+import xyz.gmitch215.benchmarks.cancelAfter
 import xyz.gmitch215.benchmarks.logger
 import java.io.File
 import java.util.concurrent.TimeUnit
@@ -136,6 +137,8 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
         }
     }
 
+    job.cancelAfter(60 * 15) // 15 minutes
+
     // Rank Benchmarks
     job.invokeOnCompletion {
         launch {
@@ -161,7 +164,12 @@ fun CoroutineScope.runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: F
     val configFile = File(folder, "config.yml").readText(Charsets.UTF_8)
     val config = Yaml.default.decodeFromString<BenchmarkConfiguration>(configFile)
 
-    if (config.disabled.contains(benchmarkRun.id)) return@async null
+    logger.debug { "Starting benchmark '${config.name}' for '${benchmarkRun.id}'" }
+
+    if (config.disabled.contains(benchmarkRun.id)) {
+        logger.info { "Benchmark '${benchmarkRun.id}' is disabled for '${config.name}'" }
+        return@async null
+    }
 
     val results = mutableListOf<Double>()
     val mutex = Mutex()
@@ -222,6 +230,7 @@ fun CoroutineScope.runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: F
                 logger.debug { "${benchmarkRun.language} Run in '${folder.name}': $runTime${config.measure.unit} (#${i + 1})" }
             }
 
+            job.cancelAfter(30)
             jobs.add(job)
         }
 
@@ -229,7 +238,8 @@ fun CoroutineScope.runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: F
             launch {
                 while (jobs.any { it.isActive }) {
                     val active = jobs.count { it.isActive }
-                    logger.debug { "Waiting for ${jobs.size - active} / ${jobs.size} jobs to finish for '${benchmarkRun.id}' on ${folder.name}" }
+                    val completed = jobs.count { it.isCompleted }
+                    logger.debug { "Waiting for ${jobs.size - active} / ${jobs.size} jobs to finish for '${benchmarkRun.id}' on ${folder.name} ($completed completed)" }
                     delay(5000)
                 }
             }
@@ -264,11 +274,13 @@ fun CoroutineScope.runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: F
     val file = File(out, "$id.json")
     logger.info { "Writing to ${file.absolutePath}" }
 
+    if (file.exists())
+        file.delete()
+
     if (!file.exists())
         file.createNewFile()
 
     file.writeText(json.encodeToString(data))
-
     return@async data
 }
 

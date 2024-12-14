@@ -1,10 +1,15 @@
 package xyz.gmitch215.benchmarks
 
 import io.github.oshai.kotlinlogging.KotlinLogging
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
 import xyz.gmitch215.benchmarks.measurement.BenchmarkConfiguration
 import xyz.gmitch215.benchmarks.measurement.BenchmarkRun
 import java.util.*
+import kotlin.coroutines.EmptyCoroutineContext
 
 val logger = KotlinLogging.logger("Benchmarks")
 
@@ -108,4 +113,18 @@ data class BenchmarkResult(
         results
     )
 
+}
+
+fun Job.cancelAfter(sec: Long) = CoroutineScope(EmptyCoroutineContext).launch {
+    var t = 0
+    while (t < sec) {
+        if (this@cancelAfter.isCompleted) return@launch
+        delay(1000)
+        t++
+    }
+
+    if (this@cancelAfter.isCompleted) return@launch
+
+    logger.debug { "Cancelling Job after ${sec}s" }
+    this@cancelAfter.cancel()
 }
