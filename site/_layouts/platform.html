@@ -2,10 +2,21 @@
 layout: default
 ---
 
+<script src="/js/benchmark-search.js"></script>
+
+<div class="benchmark-root">
+    <img src="/assets/platform/{{ page.platform }}.png" alt="{{ page.platform | capitalize }}" title="{{ page.platform | capitalize }} Platform" class="platform-logo" />
+    <h1>{{ page.platform | capitalize }} Platform</h1>
+</div>
+
+<div class="box">
+    <input type="text" id="benchmark-search" placeholder="Search..." />
+</div>
+
 <div class="benchmark-parent">
     {% for benchmark in site.data.benchmarks %}
     {% assign tags = benchmark.tags | join: ' ' %}
-    <div class="benchmark {{ tags }}" id="{{ benchmark.id }}">
+    <div class="benchmark {{ tags }}" id="{{ benchmark.id }}" title="{{ benchmark.name }}">
         <a href="/{{ page.platform }}/{{ benchmark.id }}">
             <div class="benchmark-top">
                 {% for tag in benchmark.tags %}
