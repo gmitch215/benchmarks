@@ -3,10 +3,12 @@
 package xyz.gmitch215.benchmarks.site
 
 import com.charleskorn.kaml.Yaml
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import xyz.gmitch215.benchmarks.logger
@@ -120,21 +122,23 @@ suspend fun main(args: Array<String>): Unit = coroutineScope {
 
                 if (!file.renameTo(dataOut))
                     file.copyRecursively(dataOut, true)
+
+                logger.debug { "Copied ${file.name} to ${dataOut.absolutePath}" }
             }
     }.join()
 
     logger.info { "Finished Site Data Creation" }
 }
 
-suspend fun unzipBenchmarks(folder: File): List<File> = coroutineScope {
+suspend fun unzipBenchmarks(folder: File): List<File> = withContext(Dispatchers.IO) {
     val files = folder.listFiles { file -> file.extension == "zip" }
 
     val unzipped = mutableListOf<File>()
     val mutex = Mutex()
 
     launch {
-        launch {
-            files.forEach { file ->
+        files.forEach { file ->
+            launch {
                 val os = file.nameWithoutExtension.substringAfter('-')
                 val dest = File(folder, os)
 
@@ -154,7 +158,8 @@ suspend fun unzipBenchmarks(folder: File): List<File> = coroutineScope {
         }
     }.join()
 
-    return@coroutineScope unzipped
+    logger.debug { "Unzipped ${unzipped.size} Files" }
+    return@withContext unzipped
 }
 
 private fun unzip(zipFile: String, destFolder: String) {
