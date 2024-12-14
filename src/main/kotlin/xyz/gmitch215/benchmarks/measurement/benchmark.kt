@@ -137,7 +137,7 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
         }
     }
 
-    job.cancelAfter(60 * 15) // 15 minutes
+    job.cancelAfter(60 * 14) // 14 minutes
 
     // Rank Benchmarks
     job.invokeOnCompletion {
@@ -239,7 +239,7 @@ fun CoroutineScope.runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: F
                 while (jobs.any { it.isActive }) {
                     val active = jobs.count { it.isActive }
                     val completed = jobs.count { it.isCompleted }
-                    logger.debug { "Waiting for ${jobs.size - active} / ${jobs.size} jobs to finish for '${benchmarkRun.id}' on ${folder.name} ($completed completed)" }
+                    logger.debug { "Waiting for $active / ${jobs.size} jobs to finish for '${benchmarkRun.id}' on ${folder.name} ($completed completed)" }
                     delay(5000)
                 }
             }
