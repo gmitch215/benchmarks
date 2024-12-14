@@ -4,7 +4,7 @@ layout: default
 
 <div class="box" id="top">
     <h1>Benchmark: {{ page.display }}</h1>
-    <p>{{ page.description }}</p>
+    <p>{{ page.summary }}</p>
     <div class="box horizontal" id="tags">
         {% for tag in page.tags %}
         <span>{{ tag }}</span>
@@ -42,4 +42,28 @@ layout: default
             </table>
         </div>
     </div>
+</div>
+
+<div class="box">
+    <hr class="benchmark-separator">
+</div>
+
+<div class="box" id="average">
+    <h2>Average Times</h2>
+    <img src="/assets/graphs/{{ page.platform }}/{{ page.id }}/average.png" class="dynamic rounded" title="Average Graph" alt="Average Graph" />
+</div>
+
+<div class="box" id="median">
+    <h2>Median Times</h2>
+    <img src="/assets/graphs/{{ page.platform }}/{{ page.id }}/median.png" class="dynamic rounded" title="Median Graph" alt="Median Graph" />
+</div>
+
+<div class="box" id="low">
+    <h2>Best-Case Scenario Times</h2>
+    <img src="/assets/graphs/{{ page.platform }}/{{ page.id }}/low.png" class="dynamic rounded" title="Best-Case Graph" alt="Best-Case Graph" />
+</div>
+
+<div class="box" id="high">
+    <h2>Worst-Case Scenario Times</h2>
+    <img src="/assets/graphs/{{ page.platform }}/{{ page.id }}/high.png" class="dynamic rounded" title="Worst-Case Graph" alt="Worst-Case Graph" />
 </div>
