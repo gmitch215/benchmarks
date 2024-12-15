@@ -36,8 +36,12 @@ suspend fun main(args: Array<String>): Unit = coroutineScope {
     // benchmarks.yml
     launch {
         val benchmarksData = File(output, "benchmarks.yml")
-        if (!benchmarksData.exists())
-            benchmarksData.createNewFile()
+        if (benchmarksData.exists()) {
+            logger.info { "benchmarks.yml already exists" }
+            return@launch
+        }
+
+        benchmarksData.createNewFile()
 
         val configs = Yaml.default.encodeToString(folders.map { folder ->
             val configFile = File(folder, "config.yml").readText()
@@ -56,8 +60,13 @@ suspend fun main(args: Array<String>): Unit = coroutineScope {
     // stats.yml
     launch {
         val statsData = File(output, "stats.yml")
-        if (!statsData.exists())
-            statsData.createNewFile()
+        if (statsData.exists()) {
+            logger.info { "stats.yml already exists" }
+            return@launch
+        }
+
+        statsData.createNewFile()
+
         val languagesCount = runs.map { it.id }.distinct().count()
 
         val stats = Yaml.default.encodeToString(mapOf<String, Int>(
@@ -73,8 +82,12 @@ suspend fun main(args: Array<String>): Unit = coroutineScope {
     // versus.yml
     launch {
         val versusData = File(output, "versus.yml")
-        if (!versusData.exists())
-            versusData.createNewFile()
+        if (versusData.exists()) {
+            logger.info { "versus.yml already exists" }
+            return@launch
+        }
+
+        versusData.createNewFile()
 
         val pairs0 = mutableListOf<Pair<BenchmarkRun, BenchmarkRun>>()
         for (i in 0 until runs.size) {
@@ -100,6 +113,8 @@ suspend fun main(args: Array<String>): Unit = coroutineScope {
                 "l2" to l2
             ))
         }
+
+        logger.debug { "Found ${pairs.size} pairs for versus" }
 
         val versus = Yaml.default.encodeToString(
             pairs.sortedBy { map -> "${map["l1"]!!.id}-vs-${map["l2"]!!.id}" }
