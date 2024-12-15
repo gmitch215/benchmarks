@@ -21,10 +21,8 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.*
 import xyz.gmitch215.benchmarks.BenchmarkResult
 import xyz.gmitch215.benchmarks.Measurement
-import xyz.gmitch215.benchmarks.cancelAfter
 import xyz.gmitch215.benchmarks.logger
 import java.io.File
-import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicInteger
 
 const val RUN_COUNT = 25
@@ -137,8 +135,6 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
         }
     }
 
-    job.cancelAfter(60 * 30) // 30 minutes
-
     // Rank Benchmarks
     job.invokeOnCompletion {
         launch {
@@ -227,9 +223,7 @@ fun CoroutineScope.runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: F
                 return@async runTime
             }
 
-            job.cancelAfter(120)
             jobs.add(job)
-
             results.add(job.await())
         }
 
@@ -355,10 +349,6 @@ private suspend fun String.runCommand(folder: File): String? = coroutineScope {
                 delay(5000)
             }
         }
-
-        val success = process.waitFor(120, TimeUnit.SECONDS)
-        if (!success)
-            error("Process timed out: '$str' in ${folder.absolutePath}")
 
         waiting.cancel("Process finished")
         logger.debug { "Process '$str' finished in ${folder.absolutePath}" }

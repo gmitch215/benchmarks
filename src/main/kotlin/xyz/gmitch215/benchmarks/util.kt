@@ -114,17 +114,3 @@ data class BenchmarkResult(
     )
 
 }
-
-fun Job.cancelAfter(sec: Long) = CoroutineScope(Dispatchers.Default).launch {
-    var t = 0
-    while (t < sec) {
-        if (this@cancelAfter.isCompleted) return@launch
-        delay(1000)
-        t++
-    }
-
-    if (!this@cancelAfter.isCompleted) {
-        logger.debug { "Cancelling Job after ${sec}s" }
-        this@cancelAfter.cancel()
-    }
-}
