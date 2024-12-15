@@ -350,6 +350,7 @@ private suspend fun String.runCommand(folder: File): String? = coroutineScope {
             }
         }
 
+        process.waitFor()
         waiting.cancel("Process finished")
         logger.debug { "Process '$str' finished in ${folder.absolutePath}" }
 
