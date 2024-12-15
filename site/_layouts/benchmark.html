@@ -19,7 +19,7 @@ layout: default
             <img src="/assets/graphs/{{ page.platform }}/{{ page.id }}/all-time.png" class="dynamic rounded" title="All-Time Graph" alt="All-Time Graph" />
         </div>
         <div>
-            <table class="benchmark-table">
+            <table class="benchmark-table ranked">
                 {% assign rankings = site.data.results[page.platform].rankings[page.id].verbose %}
                 <tr>
                     <th>Rank</th>

@@ -1,3 +1,81 @@
 ---
 layout: default
 ---
+
+<script src="/js/versus.js"></script>
+
+{% assign langs = site.data.langs | sort: "id" %}
+
+<div class="box">
+    <img src="/favicon.png" id="logo" class="dynamic" alt="Logo" title="Benchmarks" />
+    <h1>Versus - {{ page.benchmark }}</h1>
+    <p>{{ page.summary }}</p>
+</div>
+
+<div class="box horizontal">
+    <div class="box">
+        <div class="language-logo">
+            {% if page.l1 %}
+                <img id="l1-img" src="/assets/lang/{{ page.l1 }}.png" alt="{{ page.l1-display }}" title="{{ page.l1-display }}" class="language-logo" />
+            {% endif %}
+        </div>
+        <select class="language-select" id="l1-select" onchange="checkVersus()">
+            <option value="" disabled {% unless page.l1 %}selected{% endunless %}>Select...</option>
+            {% for lang in langs %}
+                <option value="{{ lang.id }}" {% if page.l1 == lang.id %}selected{% endif %}>{{ lang.language }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <h2>VS</h2>
+    <div class="box">
+        <div class="language-logo">
+            {% if page.l2 %}
+                <img id="l2-img" src="/assets/lang/{{ page.l2 }}.png" alt="{{ page.l1-display }}" title="{{ page.l2-display }}" class="language-logo" />
+            {% endif %}
+        </div>
+        <select class="language-select" id="l2-select" onchange="checkVersus()">
+            <option value="" disabled {% unless page.l2 %}selected{% endunless %}>Select...</option>
+            {% for lang in langs %}
+                <option value="{{ lang.id }}" {% if page.l2 == lang.id %}selected{% endif %}>{{ lang.language }}</option>
+            {% endfor %}
+        </select>
+    </div>
+</div>
+
+<div class="box">
+    <p>Compare two languages above and see how they do against eachother.</p>
+</div>
+
+{% if page.l1 %}
+<div class="box">
+    <h2>{{ page.l1-display }} vs {{ page.l2-display }}</h2>
+</div>
+<div class="box horizontal">
+    <img src="/assets/graphs/{{ page.platform }}/{{ page.id }}/{{ page.l1 }}-vs-{{ page.l2 }}.png" class="rounded" alt="{{ page.l1-display }} vs {{ page.l2-display }}" title="{{ page.l1-display }} vs {{ page.l2-display }}" />
+    <div>
+        <table class="benchmark-table">
+            {% assign rankings = site.data.results[page.platform].rankings[page.id].verbose %}
+            <tr>
+                <th>Rank</th>
+                <th>Language</th>
+                <th>Average Time</th>
+                <th>Best Time</th>
+                <th>Worst Time</th>
+            </tr>
+            {% for obj in rankings %}
+                {% assign key = obj[0] %}
+                {% assign value = obj[1] %}
+                {% if value.id == page.l1 or value.id == page.l2 %}
+                    <tr>
+                        <td>{{ value.rank }}</td>
+                        <td>{{ key }}</td>
+                        <td>{{ value.avg }}</td>
+                        <td>{{ value.low }}</td>
+                        <td>{{ value.high }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endif %}

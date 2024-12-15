@@ -5,10 +5,17 @@ layout: default
 <script src="/js/benchmark-search.js"></script>
 
 <div class="benchmark-root">
-    <div>
+    <div class="platform-logo">
         <img src="/assets/platform/{{ page.platform }}.png" alt="{{ page.platform | capitalize }}" title="{{ page.platform | capitalize }} Platform" class="platform-logo" />
     </div>
-    <h1>{{ page.platform | capitalize }} Platform</h1>
+    <h1>{{ page.platform | capitalize }} Platform - {{ page.type }}</h1>
+    <div class="box horizontal">
+        {% for link in site.data.platform.header %}
+            <a href="/{{ page.platform }}{{ link.url }}">
+                <h2>{{ link.name }}</h2>
+            </a>
+        {% endfor %}
+    </div>
 </div>
 
 <div class="box">
@@ -19,7 +26,7 @@ layout: default
     {% for benchmark in site.data.benchmarks %}
     {% assign tags = benchmark.tags | join: ' ' %}
     <div class="benchmark {{ tags }}" id="{{ benchmark.id }}" title="{{ benchmark.name }}">
-        <a href="/{{ page.platform }}/{{ benchmark.id }}">
+        <a href="/{{ page.platform }}{{ page.suburl }}{{ benchmark.id }}">
             <div class="benchmark-top">
                 {% for tag in benchmark.tags %}
                 <span>{{ tag }}</span>

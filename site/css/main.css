@@ -31,7 +31,14 @@ body {
     min-height: 100%;
 }
 
-html, body {
+main {
+    height: 100%;
+    width: 100%;
+    min-height: 88vh;
+    min-width: 100vw;
+}
+
+html, body, main {
     font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     background: var(--bg);
     margin: 0;
@@ -80,6 +87,11 @@ p img {
 
 .box p {
     text-align: center;
+    margin: 0;
+}
+
+.box h1 {
+    margin-bottom: 0;
 }
 
 .condensed {
@@ -176,7 +188,11 @@ header a {
     margin-bottom: 6vh;
 }
 
-.benchmark-root > div {
+.benchmark-root > h1 {
+    margin-bottom: 0;
+}
+
+.benchmark-root > div.platform-logo {
     width: 10vw;
     height: auto;
     max-width: 128px;
@@ -190,15 +206,20 @@ header a {
     transition: transform 0.5s ease-in-out;
 }
 
-.benchmark-root > div:hover {
+.benchmark-root > div.platform-logo:hover {
     transform: scale(1.1);
     transition: transform 0.5s ease-in-out;
 }
 
-.platform-logo {
+img.platform-logo {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.benchmark-root h2 {
+    padding-bottom: 0.5vh;
+    border-bottom: 3px solid white;
 }
 
 #benchmark-search {
@@ -316,15 +337,15 @@ header a {
     padding: 1vh 1vw;
 }
 
-.benchmark-table tr:nth-child(2) {
+.ranked tr:nth-child(2) {
     background-color: var(--dark-gold) !important;
 }
 
-.benchmark-table tr:nth-child(3) {
+.ranked tr:nth-child(3) {
     background-color: var(--dark-silver) !important;
 }
 
-.benchmark-table tr:nth-child(4) {
+.ranked tr:nth-child(4) {
     background-color: var(--dark-bronze) !important;
 }
 
@@ -340,6 +361,28 @@ header a {
     width: 90%;
 }
 
+/* Versus Page */
+div.language-logo {
+    width: 8vw;
+    min-width: 110px;
+    height: 20vh;
+    min-height: 170px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: var(--bg-2);
+    border: 2px solid black;
+    border-radius: 0.25em;
+}
+
+img.language-logo {
+    height: auto;
+    width: 95%;
+    object-fit: cover;
+}
+
 /* Footer */
 footer {
     background-color: var(--bg-2);
@@ -347,7 +390,7 @@ footer {
     width: 100%;
 
     display: flex;
-    margin-top: 2vh;
+    margin-top: 4vh;
     padding-bottom: 3vh;
 
     justify-content: center;
