@@ -18,6 +18,20 @@ val INDEX_FILE_TEMPLATE: (String) -> String = { platform ->
     layout: platform
     platform: $platform
     title: ${platform.replaceFirstChar { it.uppercase() }}
+    type: Benchmarks
+    suburl: /
+    ---
+    """.trimIndent()
+}
+
+val VERSUS_INDEX_TEMPLATE: (String) -> String = { platform ->
+    """
+    ---
+    layout: platform
+    platform: $platform
+    title: Versus - ${platform.replaceFirstChar { it.uppercase() }}
+    type: Versus
+    suburl: /versus/
     ---
     """.trimIndent()
 }
@@ -36,12 +50,16 @@ val INFO_FILE_TEMPLATE: (String, BenchmarkConfiguration) -> String = { platform,
     """.trimIndent()
 }
 
-val VERSUS_INDEX_TEMPLATE: (String) -> String = { platform ->
+val VERSUS_FILE_INDEX_TEMPLATE: (String, BenchmarkConfiguration) -> String = { platform, config ->
     """
     ---
     layout: versus
+    benchmark: ${config.name}
+    id: ${config.id}
     platform: $platform
-    title: Versus - ${platform.replaceFirstChar { it.uppercase() }}
+    title: ${config.name} | Select Language | ${platform.replaceFirstChar { it.uppercase() }}
+    summary: ${config.description}
+    tags: [${config.tags.joinToString()}]
     ---
     """.trimIndent()
 }
@@ -50,9 +68,14 @@ val VERSUS_FILE_TEMPLATE: (String, BenchmarkConfiguration, BenchmarkRun, Benchma
     """
     ---
     layout: versus
+    benchmark: ${config.name}
+    id: ${config.id}
+    platform: $platform
     l1: ${l1.id}
+    l1-display: ${l1.language}
     l2: ${l2.id}
-    title: ${l1.language} vs ${l2.language} | ${platform.replaceFirstChar { it.uppercase() }}
+    l2-display: ${l2.language}
+    title: ${config.name} | ${l1.language} vs ${l2.language} | ${platform.replaceFirstChar { it.uppercase() }}
     summary: ${config.description}
     tags: [${config.tags.joinToString()}]
     ---
@@ -136,6 +159,15 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
                         val folder = File(rootFolder, "versus/${benchmark.id}")
                         if (!folder.exists())
                             folder.mkdirs()
+
+                        launch {
+                            val indexFile = File(folder, "index.md")
+                            if (!indexFile.exists())
+                                indexFile.createNewFile()
+
+                            indexFile.writeText(VERSUS_FILE_INDEX_TEMPLATE(platform, benchmark))
+                            logger.debug { "Created versus index file for ${benchmark.id}" }
+                        }
 
                         for (match in versus)
                             launch {
