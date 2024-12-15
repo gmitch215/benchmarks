@@ -287,7 +287,7 @@ suspend fun rankBenchmarks(results: Map<String, List<BenchmarkResult>>, out: Fil
     val obj = buildJsonObject {
         val scores = mutableMapOf<String, Int>()
 
-        launch {
+        coroutineScope {
             for ((name, results) in results) {
                 launch {
                     val sorted = results.sortedBy { it.results.sum() }
@@ -309,7 +309,7 @@ suspend fun rankBenchmarks(results: Map<String, List<BenchmarkResult>>, out: Fil
                     })
                 }
             }
-        }.join()
+        }
 
         put("overall", buildJsonObject {
             val sorted = scores.toList().sortedBy { it.second }

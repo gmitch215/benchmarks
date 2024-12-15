@@ -128,7 +128,7 @@ suspend fun main(args: Array<String>): Unit = coroutineScope {
     val unzipped = unzipBenchmarks(zipFiles)
     logger.info { "Unzipped Benchmarks" }
 
-    launch {
+    coroutineScope {
         for (file in unzipped)
             launch {
                 val dataOut = File(output, "results/${file.name}")
@@ -140,7 +140,7 @@ suspend fun main(args: Array<String>): Unit = coroutineScope {
 
                 logger.debug { "Copied ${file.name} to ${dataOut.absolutePath}" }
             }
-    }.join()
+    }
 
     logger.info { "Finished Site Data Creation" }
 }
