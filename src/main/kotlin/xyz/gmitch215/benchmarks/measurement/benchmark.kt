@@ -137,7 +137,7 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
         }
     }
 
-    job.cancelAfter(60 * 15) // 14 minutes
+    job.cancelAfter(60 * 30) // 30 minutes
 
     // Rank Benchmarks
     job.invokeOnCompletion {
@@ -227,7 +227,7 @@ fun CoroutineScope.runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: F
                 return@async runTime
             }
 
-            job.cancelAfter(30)
+            job.cancelAfter(120)
             jobs.add(job)
 
             results.add(job.await())
