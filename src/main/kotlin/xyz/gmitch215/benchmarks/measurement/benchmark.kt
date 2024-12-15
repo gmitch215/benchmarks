@@ -137,7 +137,7 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
         }
     }
 
-    job.cancelAfter(60 * 14) // 14 minutes
+    job.cancelAfter(60 * 15) // 14 minutes
 
     // Rank Benchmarks
     job.invokeOnCompletion {
@@ -172,9 +172,8 @@ fun CoroutineScope.runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: F
     }
 
     val results = mutableListOf<Double>()
-    val mutex = Mutex()
 
-    launch(Dispatchers.Default) {
+    coroutineScope {
         val s = File.separator
 
         var compile = benchmarkRun.compile
@@ -219,19 +218,19 @@ fun CoroutineScope.runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: F
         val jobs = mutableListOf<Job>()
 
         repeat(RUN_COUNT) { i ->
-            val job = launch {
+            val job = async {
                 val runTime0 = run.runCommand(folder)!!.trim().replace("[\\s\\n]+".toRegex(), "")
                 val runTime = runTime0.toDoubleOrNull() ?: error("Failed to parse output: '$runTime0'")
 
-                mutex.withLock {
-                    results.add(runTime)
-                }
-
                 logger.debug { "${benchmarkRun.language} Run in '${folder.name}': $runTime${config.measure.unit} (#${i + 1})" }
+
+                return@async runTime
             }
 
             job.cancelAfter(30)
             jobs.add(job)
+
+            results.add(job.await())
         }
 
         if (logger.isDebugEnabled())
@@ -243,7 +242,7 @@ fun CoroutineScope.runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: F
                     delay(5000)
                 }
             }
-    }.join()
+    }
 
     logger.debug {
         """
