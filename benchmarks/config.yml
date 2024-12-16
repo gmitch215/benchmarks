@@ -31,7 +31,7 @@
   id: kotlin-native
   color: "92316e"
   location: KOTLIN_NATIVE_HOME
-  compile: kotlinc-native main.kt -o main.kt
+  compile: kotlinc-native main.kt -o main.kt -opt
   run: main.kt
   cleanup:
     - main.kt.exe
