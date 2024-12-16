@@ -364,7 +364,7 @@ private suspend fun String.runCommand(folder: File): String? = coroutineScope {
         return@coroutineScope process.inputStream.bufferedReader().use { it.readText() }
     } catch (e: Exception) {
         logger.error(e) { "Failed to run command: '$str' in ${folder.absolutePath}" }
-        error("Failed to run command: '$str'")
+        error("Failed to run command: '$str' in ${folder.absolutePath}")
     }
 }
 
