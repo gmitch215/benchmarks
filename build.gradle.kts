@@ -107,7 +107,7 @@ tasks {
         destinationDir = file("build/site")
     }
 
-    register("unzipSiteData", JavaExec::class) {
+    register("createSiteData", JavaExec::class) {
         mustRunAfter("zipBenchmarks")
 
         mainClass.set("xyz.gmitch215.benchmarks.site.DataCreator")
@@ -120,7 +120,7 @@ tasks {
     }
 
     register("moveGraphs", Copy::class) {
-        mustRunAfter("graphBenchmarks", "copyResourcesToSite", "unzipSiteData")
+        mustRunAfter("graphBenchmarks", "copyResourcesToSite", "createSiteData")
 
         from("build/site/_data/results/windows/graphs/") {
             into("assets/graphs/windows/")
@@ -145,7 +145,7 @@ tasks {
 
     register("generatePages", JavaExec::class) {
         dependsOn("moveGraphs")
-        mustRunAfter("copyResourcesToSite", "unzipSiteData")
+        mustRunAfter("copyResourcesToSite", "createSiteData")
 
         mainClass.set("xyz.gmitch215.benchmarks.site.PagesCreator")
         classpath = sourceSets["main"].runtimeClasspath
@@ -161,7 +161,7 @@ tasks {
         dependsOn(
             "copyResourcesToSite",
             "generatePages",
-            "unzipSiteData"
+            "createSiteData"
         )
     }
 
