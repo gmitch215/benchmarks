@@ -17,13 +17,13 @@
 - language: Java
   id: java
   color: "b07219"
-  run: java Main.java -Xmx128m -Xms128m
+  run: java Main.java
 - language: Kotlin (JVM)
   id: kotlin-jvm
   color: "5f3bbe"
   location: KOTLIN_HOME
   compile: kotlinc main.kt -include-runtime -d main.kt.jar
-  run: java -jar main.kt.jar -Xmx128m -Xms128m
+  run: java -jar main.kt.jar
   cleanup:
     - main.kt.jar
 - language: Kotlin (Native)
