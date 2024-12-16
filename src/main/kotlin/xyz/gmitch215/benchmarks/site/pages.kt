@@ -88,6 +88,9 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
     val data = File(args[0])
     val output = File(args[1])
 
+    logger.debug { "Data: ${data.absolutePath}" }
+    logger.debug { "Output: ${output.absolutePath}" }
+
     logger.info { "Writing benchmark info files" }
 
     val benchmarksFile = File(data, "benchmarks.yml")

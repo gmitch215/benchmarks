@@ -152,9 +152,10 @@ jobs:
           path: build/benchmarks
       - name: Rename Folders
         run: |
-          mv build/benchmarks/benchmarks-linux build/benchmarks/linux
-          mv build/benchmarks/benchmarks-macos build/benchmarks/macos
-          mv build/benchmarks/benchmarks-windows build/benchmarks/windows
+          mkdir -p build/site/_data/results/
+          mv -fv build/benchmarks/benchmarks-linux build/site/_data/results/linux
+          mv -fv build/benchmarks/benchmarks-macos build/site/_data/results/macos
+          mv -fv build/benchmarks/benchmarks-windows build/site/_data/results/windows
       - name: Generate Site
         run: ./gradlew site
       - name: Upload Site

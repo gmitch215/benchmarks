@@ -128,10 +128,14 @@ suspend fun main(args: Array<String>): Unit = coroutineScope {
     val unzipped = unzipBenchmarks(zipFiles)
     logger.info { "Unzipped Benchmarks" }
 
+    val results = File(output, "results")
+    if (!results.exists())
+        results.mkdirs()
+
     coroutineScope {
         for (file in unzipped)
             launch {
-                val dataOut = File(output, "results/${file.name}")
+                val dataOut = File(results, "${file.name}")
                 if (dataOut.exists())
                     dataOut.deleteRecursively()
 
@@ -146,6 +150,10 @@ suspend fun main(args: Array<String>): Unit = coroutineScope {
 }
 
 suspend fun unzipBenchmarks(folder: File): List<File> = withContext(Dispatchers.IO) {
+    if (folder.list() == null) {
+        logger.info { "No Benchmarks to Unzip" }
+        return@withContext emptyList()
+    }
     val files = folder.listFiles { file -> file.extension == "zip" }
 
     val unzipped = mutableListOf<File>()
@@ -156,9 +164,6 @@ suspend fun unzipBenchmarks(folder: File): List<File> = withContext(Dispatchers.
             launch {
                 val os = file.nameWithoutExtension.substringAfter('-')
                 val dest = File(folder, os)
-
-                if (dest.exists())
-                    dest.deleteRecursively()
 
                 if (!dest.exists())
                     dest.mkdirs()
