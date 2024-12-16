@@ -9,7 +9,7 @@ int main() {
 
     for (int i = 0; i < 1000; i++) {
         double y = 1.1 + (i / 1000.0);
-        pow(2, y);
+        pow(2.0, y);
     }
 
     uint64_t after = nanotime_now();
