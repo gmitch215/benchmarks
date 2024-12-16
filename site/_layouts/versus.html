@@ -2,6 +2,7 @@
 layout: default
 ---
 
+<link href="/css/disqus.css" rel="stylesheet">
 <script src="/js/versus.js"></script>
 
 {% assign langs = site.data.langs | sort: "id" %}
@@ -47,35 +48,33 @@ layout: default
 </div>
 
 {% if page.l1 %}
-<div class="box">
-    <h2>{{ page.l1-display }} vs {{ page.l2-display }}</h2>
-</div>
-<div class="box horizontal">
-    <img src="/assets/graphs/{{ page.platform }}/{{ page.id }}/{{ page.l1 }}-vs-{{ page.l2 }}.png" class="rounded" alt="{{ page.l1-display }} vs {{ page.l2-display }}" title="{{ page.l1-display }} vs {{ page.l2-display }}" />
-    <div>
-        <table class="benchmark-table">
-            {% assign rankings = site.data.results[page.platform].rankings[page.id].verbose %}
-            <tr>
-                <th>Rank</th>
-                <th>Language</th>
-                <th>Average Time</th>
-                <th>Best Time</th>
-                <th>Worst Time</th>
-            </tr>
-            {% for obj in rankings %}
-                {% assign key = obj[0] %}
-                {% assign value = obj[1] %}
-                {% if value.id == page.l1 or value.id == page.l2 %}
-                    <tr>
-                        <td>{{ value.rank }}</td>
-                        <td>{{ key }}</td>
-                        <td>{{ value.avg }}</td>
-                        <td>{{ value.low }}</td>
-                        <td>{{ value.high }}</td>
-                    </tr>
-                {% endif %}
-            {% endfor %}
-        </table>
+    <hr class="benchmark-separator">
+    <div class="box">
+        <img src="/assets/graphs/{{ page.platform }}/{{ page.id }}/{{ page.l1 }}-vs-{{ page.l2 }}.png" class="rounded primary-graph" alt="{{ page.l1-display }} vs {{ page.l2-display }}" title="{{ page.l1-display }} vs {{ page.l2-display }}" />
+        <div>
+            <table class="benchmark-table">
+                {% assign rankings = site.data.results[page.platform].rankings[page.id].verbose %}
+                <tr>
+                    <th>Rank</th>
+                    <th>Language</th>
+                    <th>Average Time</th>
+                    <th>Best Time</th>
+                    <th>Worst Time</th>
+                </tr>
+                {% for obj in rankings %}
+                    {% assign key = obj[0] %}
+                    {% assign value = obj[1] %}
+                    {% if value.id == page.l1 or value.id == page.l2 %}
+                        <tr>
+                            <td>{{ value.rank }}</td>
+                            <td>{{ key }}</td>
+                            <td>{{ value.avg }}</td>
+                            <td>{{ value.low }}</td>
+                            <td>{{ value.high }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </table>
+        </div>
     </div>
-</div>
 {% endif %}

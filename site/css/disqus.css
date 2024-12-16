@@ -1,0 +1,9 @@
+#disqus_thread {
+    width: 80%;
+
+    padding: 4em;
+    border: 2px solid black;
+    margin-bottom: 5.5em;
+
+    background-color: var(--bg-2);
+}

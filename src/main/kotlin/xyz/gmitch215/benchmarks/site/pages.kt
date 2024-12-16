@@ -46,6 +46,7 @@ val INFO_FILE_TEMPLATE: (String, BenchmarkConfiguration) -> String = { platform,
     title: ${config.name} | ${platform.replaceFirstChar { it.uppercase() }}
     summary: ${config.description}
     tags: [${config.tags.joinToString()}]
+    comments: true
     ---
     """.trimIndent()
 }
@@ -78,6 +79,7 @@ val VERSUS_FILE_TEMPLATE: (String, BenchmarkConfiguration, BenchmarkRun, Benchma
     title: ${config.name} | ${l1.language} vs ${l2.language} | ${platform.replaceFirstChar { it.uppercase() }}
     summary: ${config.description}
     tags: [${config.tags.joinToString()}]
+    comments: true
     ---
     """.trimIndent()
 }

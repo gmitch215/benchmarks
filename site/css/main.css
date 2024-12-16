@@ -21,7 +21,6 @@
 
 html {
     overflow-y: auto;
-    scroll-behavior: smooth;
     height: 100%;
     width: 100%;
 }
@@ -39,6 +38,7 @@ main {
 }
 
 html, body, main {
+    scroll-behavior: smooth;
     font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     background: var(--bg);
     margin: 0;
@@ -76,11 +76,11 @@ p img {
     justify-content: center;
     align-items: center;
     text-align: center;
-
     flex-direction: column;
-    row-gap: 2vh;
 
     margin-top: 2vh;
+    row-gap: 2vh;
+    column-gap: 2vw;
 
     color: var(--text);
 }
@@ -175,6 +175,42 @@ header a {
     display: flex;
     column-gap: 3vw;
     align-items: center;
+}
+
+.primary-graph {
+    aspect-ratio: 2 / 1;
+
+    width: 65vw;
+    max-width: 1200px;
+    min-width: 300px;
+
+    height: auto;
+    max-height: 600px;
+    min-height: 150px;
+}
+
+.secondary-graph {
+    aspect-ratio: 5 / 3;
+
+    width: 65vw;
+    max-width: 1000px;
+    min-width: 300px;
+
+    height: auto;
+    max-height: 600px;
+    min-height: 180px;
+}
+
+/* Index */
+.language-list {
+    display: grid;
+
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    column-gap: 0.25vw;
+    row-gap: 1vh;
+
+    justify-items: center;
 }
 
 /* Benchmark Items Page */
