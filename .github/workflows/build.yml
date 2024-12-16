@@ -150,6 +150,11 @@ jobs:
         with:
           pattern: benchmarks-*
           path: build/benchmarks
+      - name: Rename Folders
+        run: |
+          mv build/benchmarks/benchmarks-linux build/benchmarks/linux
+          mv build/benchmarks/benchmarks-macos build/benchmarks/macos
+          mv build/benchmarks/benchmarks-windows build/benchmarks/windows
       - name: Generate Site
         run: ./gradlew site
       - name: Upload Site
