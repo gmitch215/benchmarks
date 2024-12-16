@@ -14,12 +14,12 @@ layout: default
     <h1>Language List</h1>
 </div>
 
-<div class="box horizontal">
+<div class="language-list">
     {% assign langs = site.data.langs | sort: "id" %}
     {% for lang in langs %}
-    <div class="box">
-        <img src="/assets/lang/{{ lang.id }}.png" class="dynamic medium-img" alt="{{ lang.language }}" title="{{ lang.language }}" />
-        <p class="small-text">{{ lang.language }}</p>
-    </div>
+        <div class="box">
+            <img src="/assets/lang/{{ lang.id }}.png" class="dynamic medium-img" alt="{{ lang.language }}" title="{{ lang.language }}" />
+            <p class="small-text">{{ lang.language }}</p>
+        </div>
     {% endfor %}
 </div>
