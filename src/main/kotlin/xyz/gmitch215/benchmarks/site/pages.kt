@@ -95,16 +95,19 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
 
     val benchmarksFile = File(data, "benchmarks.yml")
     if (!benchmarksFile.exists())
-        error("Benchmarks data file does not exist")
+        error("Benchmarks data file does not exist: ${benchmarksFile.absolutePath}")
 
     val benchmarks = Yaml.default.decodeFromString<List<BenchmarkConfiguration>>(benchmarksFile.readText())
 
     logger.debug { "Found ${benchmarks.size} benchmarks" }
 
     val results = File(data, "results")
+    if (!results.exists() || results.list() == null)
+        error("No results found. Run benchmarks first")
+
     val topFolders = results.listFiles { file -> file.isDirectory }
 
-    logger.debug { "Found ${topFolders.size} platforms" }
+    logger.debug { "Found ${topFolders.size} Platforms" }
 
     for (folder in topFolders)
         launch {

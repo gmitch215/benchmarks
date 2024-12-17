@@ -29,6 +29,12 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
     logger.debug { "Input: ${input.absolutePath}" }
     logger.debug { "Output: ${output.absolutePath}" }
 
+    val results = File(output, "results")
+    if (!results.exists() || results.list() == null)
+        error("No results found. Run benchmarks first")
+    
+    logger.info { "Found ${results.list()!!.size} Platforms" }
+
     val folders = input.listFiles { file -> file.isDirectory && file.name != "output" } ?: emptyArray()
     logger.debug { "Found ${folders.size} Benchmarks"}
 
@@ -53,6 +59,7 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
 
             benchmarksData.writeText(configs)
             logger.info { "Created benchmarks.yml" }
+            logger.debug { "Wrote ${benchmarksData.absolutePath}" }
         }
 
         val runs = Yaml.default.decodeFromString<List<BenchmarkRun>>(File(input, "config.yml").readText())
@@ -77,6 +84,7 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
 
             statsData.writeText(stats)
             logger.info { "Created stats.yml" }
+            logger.debug { "Wrote ${statsData.absolutePath}" }
         }
 
         // versus.yml
@@ -122,6 +130,7 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
 
             versusData.writeText(versus)
             logger.info { "Created versus.yml" }
+            logger.debug { "Wrote ${versusData.absolutePath}" }
         }
     }
 
