@@ -105,6 +105,10 @@ tasks {
             file("benchmarks").absolutePath,
             file("build/site/_data").absolutePath
         )
+
+        doLast {
+            Thread.sleep(3000) // Delay for Data to Finish Writing
+        }
     }
 
     register("moveGraphs", Copy::class) {
