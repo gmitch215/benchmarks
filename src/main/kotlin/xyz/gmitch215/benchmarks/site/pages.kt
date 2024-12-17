@@ -85,19 +85,19 @@ val VERSUS_FILE_TEMPLATE: (String, BenchmarkConfiguration, BenchmarkRun, Benchma
 }
 
 suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
-    val data = File(args[0])
-    val output = File(args[1])
+    val data = File(args[0]).absoluteFile
+    val output = File(args[1]).absoluteFile
 
     logger.debug { "Data: ${data.absolutePath}" }
     logger.debug { "Output: ${output.absolutePath}" }
+
+    if (!data.exists())
+        data.mkdirs()
 
     if (!output.exists())
         output.mkdirs()
 
     logger.info { "Writing benchmark info files" }
-
-    logger.debug { "Exists: ${data.exists()}" }
-    logger.debug { "Is Directory: ${data.isDirectory}" }
 
     if (!data.isDirectory)
         error("Data is not a directory: ${data.absolutePath}")
@@ -110,7 +110,7 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
     if (dataFiles.isEmpty())
         error("Data directory is empty: ${data.absolutePath}")
 
-    val benchmarksFile = File(data, "benchmarks.yml")
+    val benchmarksFile = File(data, "benchmarks.yml").absoluteFile
     if (!benchmarksFile.exists())
         error("Benchmarks data file does not exist: ${benchmarksFile.absolutePath}")
 
@@ -118,7 +118,7 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
 
     logger.debug { "Found ${benchmarks.size} benchmarks" }
 
-    val results = File(data, "results")
+    val results = File(data, "results").absoluteFile
     if (!results.exists() || results.list() == null)
         error("No results found. Run benchmarks first")
 

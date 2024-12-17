@@ -115,7 +115,6 @@ tasks {
         mustRunAfter(
             "graphBenchmarks",
             "createSiteData",
-            "tree",
             "preview"
         )
 
@@ -142,7 +141,7 @@ tasks {
 
     register("generatePages", JavaExec::class) {
         dependsOn("moveGraphs")
-        mustRunAfter("createSiteData", "tree", "preview")
+        mustRunAfter("createSiteData", "preview")
 
         mainClass.set("xyz.gmitch215.benchmarks.site.PagesCreator")
         classpath = sourceSets["main"].runtimeClasspath
@@ -172,19 +171,12 @@ tasks {
     register("site") {
         dependsOn(
             "createSiteData",
-            "tree",
             "generatePages",
             "copyResourcesToSite"
         )
     }
 
     // Site Preview Tasks
-
-    register("tree", Exec::class) {
-        mustRunAfter("createSiteData", "preview")
-
-        commandLine("tree", "build/site")
-    }
 
     register("preview", Copy::class) {
         from("benchmarks/output")
