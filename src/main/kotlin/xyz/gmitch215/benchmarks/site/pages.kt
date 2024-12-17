@@ -91,6 +91,9 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
     logger.debug { "Data: ${data.absolutePath}" }
     logger.debug { "Output: ${output.absolutePath}" }
 
+    if (!output.exists())
+        output.mkdirs()
+
     logger.info { "Writing benchmark info files" }
 
     logger.debug { "Exists: ${data.exists()}" }

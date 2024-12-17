@@ -29,6 +29,9 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
     logger.debug { "Input: ${input.absolutePath}" }
     logger.debug { "Output: ${output.absolutePath}" }
 
+    if (!output.exists())
+        output.mkdirs()
+
     val results = File(output, "results")
     if (!results.exists() || results.list() == null)
         error("No results found. Run benchmarks first")
