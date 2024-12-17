@@ -50,7 +50,7 @@ jobs:
           - name: linux
             os: ubuntu-latest
           - name: macos
-            os: macos-latest
+            os: macos-13
           - name: windows
             os: windows-latest
 
