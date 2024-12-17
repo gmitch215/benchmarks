@@ -93,6 +93,13 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
 
     logger.info { "Writing benchmark info files" }
 
+    val dataFiles = data.listFiles { file -> file.isFile } ?: emptyArray()
+    if (dataFiles.isEmpty())
+        error("Data directory is empty: ${data.absolutePath}")
+    
+    logger.debug { "Found ${dataFiles.size} data files" }
+    logger.debug { "Data files: ${dataFiles.joinToString()}" }
+
     val benchmarksFile = File(data, "benchmarks.yml")
     if (!benchmarksFile.exists())
         error("Benchmarks data file does not exist: ${benchmarksFile.absolutePath}")
