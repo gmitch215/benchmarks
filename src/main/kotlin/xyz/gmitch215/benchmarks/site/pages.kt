@@ -93,12 +93,19 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
 
     logger.info { "Writing benchmark info files" }
 
+    logger.debug { "Exists: ${data.exists()}" }
+    logger.debug { "Is Directory: ${data.isDirectory}" }
+
+    if (!data.isDirectory)
+        error("Data is not a directory: ${data.absolutePath}")
+
     val dataFiles = data.listFiles() ?: emptyArray()
+
+    logger.debug { "Found ${dataFiles.size} data files" }
+    logger.debug { "File Tree: ${dataFiles.joinToString()}" }
+
     if (dataFiles.isEmpty())
         error("Data directory is empty: ${data.absolutePath}")
-    
-    logger.debug { "Found ${dataFiles.size} data files" }
-    logger.debug { "Data files: ${dataFiles.joinToString()}" }
 
     val benchmarksFile = File(data, "benchmarks.yml")
     if (!benchmarksFile.exists())
@@ -186,8 +193,8 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
 
                         for (match in versus)
                             launch {
-                                val l1 = match["l1"] ?: error("l1 not found")
-                                val l2 = match["l2"] ?: error("l2 not found")
+                                val l1 = match["l1"] ?: error("l1 not found for ${benchmark.id}")
+                                val l2 = match["l2"] ?: error("l2 not found for ${benchmark.id}")
 
                                 val versusFile = File(folder, "${l1.id}-vs-${l2.id}.md")
                                 if (!versusFile.exists())
