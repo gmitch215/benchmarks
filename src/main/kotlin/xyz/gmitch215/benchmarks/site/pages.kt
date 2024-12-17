@@ -93,7 +93,7 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
 
     logger.info { "Writing benchmark info files" }
 
-    val dataFiles = data.listFiles { file -> file.isFile } ?: emptyArray()
+    val dataFiles = data.listFiles() ?: emptyArray()
     if (dataFiles.isEmpty())
         error("Data directory is empty: ${data.absolutePath}")
     

@@ -149,13 +149,12 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           pattern: benchmarks-*
-          path: build/benchmarks
+          path: build/site/_data/results/
       - name: Rename Folders
         run: |
-          mkdir -p build/site/_data/results/
-          mv -fv build/benchmarks/benchmarks-linux build/site/_data/results/linux
-          mv -fv build/benchmarks/benchmarks-macos build/site/_data/results/mac
-          mv -fv build/benchmarks/benchmarks-windows build/site/_data/results/windows
+          mv -fv build/site/_data/results/benchmarks-linux build/site/_data/results/linux
+          mv -fv build/site/_data/results/benchmarks-macos build/site/_data/results/mac
+          mv -fv build/site/_data/results/benchmarks-windows build/site/_data/results/windows
       - name: Generate Site
         run: ./gradlew site
       - name: Upload Site

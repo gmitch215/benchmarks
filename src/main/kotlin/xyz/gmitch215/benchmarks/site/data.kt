@@ -135,4 +135,12 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
     }
 
     logger.info { "Finished Site Data Creation" }
+
+    val outputFiles = output.listFiles() ?: emptyArray()
+    if (outputFiles.isEmpty()) {
+        logger.error { "No files were created" }
+        return@withContext
+    }
+
+    logger.debug { "Output Files: ${outputFiles.joinToString()}" }
 }
