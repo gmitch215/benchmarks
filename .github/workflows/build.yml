@@ -155,6 +155,8 @@ jobs:
           mv -fv build/site/_data/results/benchmarks-linux build/site/_data/results/linux
           mv -fv build/site/_data/results/benchmarks-macos build/site/_data/results/mac
           mv -fv build/site/_data/results/benchmarks-windows build/site/_data/results/windows
+      - name: Print File Tree
+        run: tree build/site
       - name: Generate Site
         run: ./gradlew site
       - name: Upload Site
