@@ -96,25 +96,21 @@ tasks {
 
     // Site Tasks
 
-    register("createSiteData", JavaExec::class) {
+    register("createSite", JavaExec::class) {
         mustRunAfter("preview")
 
-        mainClass.set("xyz.gmitch215.benchmarks.site.DataCreator")
+        mainClass.set("xyz.gmitch215.benchmarks.site.SiteCreator")
         classpath = sourceSets["main"].runtimeClasspath
         args = listOfNotNull(
             file("benchmarks").absolutePath,
-            file("build/site/_data").absolutePath
+            file("build/site").absolutePath
         )
-
-        doLast {
-            Thread.sleep(3000) // Delay for Data to Finish Writing
-        }
     }
 
     register("moveGraphs", Copy::class) {
         mustRunAfter(
             "graphBenchmarks",
-            "createSiteData",
+            "createSite",
             "preview"
         )
 
@@ -139,20 +135,8 @@ tasks {
         destinationDir = file("build/site")
     }
 
-    register("generatePages", JavaExec::class) {
-        dependsOn("moveGraphs")
-        mustRunAfter("createSiteData", "preview")
-
-        mainClass.set("xyz.gmitch215.benchmarks.site.PagesCreator")
-        classpath = sourceSets["main"].runtimeClasspath
-        args = listOfNotNull(
-            file("build/site/_data").absolutePath,
-            file("build/site").absolutePath
-        )
-    }
-
     register("copyResourcesToSite", Copy::class) {
-        mustRunAfter("generatePages", "moveGraphs", "createSiteData", "preview")
+        mustRunAfter("moveGraphs", "createSite", "preview")
         from("site")
 
         from("benchmarks/config.yml") {
@@ -170,8 +154,7 @@ tasks {
 
     register("site") {
         dependsOn(
-            "createSiteData",
-            "generatePages",
+            "createSite",
             "copyResourcesToSite"
         )
     }
