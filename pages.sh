@@ -1,6 +1,6 @@
 git config --local user.email "action@github.com"
 git config --local user.name "GitHub Action"
-git fetch origin master
+git fetch origin gh-pages
 
 if [ ! -d "site" ]; then
   mkdir site
