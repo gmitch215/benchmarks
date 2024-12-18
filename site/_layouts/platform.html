@@ -5,15 +5,13 @@ layout: default
 <script src="/js/benchmark-search.js"></script>
 
 <div class="benchmark-root">
-    <div class="platform-logo">
-        <img src="/assets/platform/{{ page.platform }}.png" alt="{{ page.platform | capitalize }}" title="{{ page.platform | capitalize }} Platform" class="platform-logo" />
-    </div>
+    <img src="/assets/platform/{{ page.platform }}.png" alt="{{ page.platform | capitalize }}" title="{{ page.platform | capitalize }} Platform" class="platform-logo" />
     <h1>{{ page.platform | capitalize }} Platform - {{ page.type }}</h1>
     <div class="box horizontal">
         {% for link in site.data.platform.header %}
-            <a href="/{{ page.platform }}{{ link.url }}">
-                <h2>{{ link.name }}</h2>
-            </a>
+        <a href="/{{ page.platform }}{{ link.url }}">
+            <h2>{{ link.name }}</h2>
+        </a>
         {% endfor %}
     </div>
 </div>
