@@ -1,6 +1,7 @@
 #disqus_thread {
-    width: 80%;
+    width: 100%;
 
+    margin-top: 6vh;
     padding: 4em;
     border: 2px solid black;
     margin-bottom: 5.5em;
