@@ -23,14 +23,13 @@ import kotlin.io.path.Path
 
 suspend fun main(args: Array<String>): Unit = coroutineScope {
     val input = File(args[0])
-    val zipFiles = File(args[1])
-    val output = File(args[2])
+    val output = File(args[1])
 
     logger.info { "Started Site Data Creation" }
     logger.debug { "Input: ${input.absolutePath}" }
     logger.debug { "Output: ${output.absolutePath}" }
 
-    val folders = input.listFiles { file -> file.isDirectory && file.name != "output" }
+    val folders = input.listFiles { file -> file.isDirectory && file.name != "output" } ?: emptyArray()
     logger.debug { "Found ${folders.size} Benchmarks"}
 
     // benchmarks.yml
@@ -124,81 +123,5 @@ suspend fun main(args: Array<String>): Unit = coroutineScope {
         logger.info { "Created versus.yml" }
     }
 
-    logger.info { "Unzipping Benchmarks..." }
-    val unzipped = unzipBenchmarks(zipFiles)
-    logger.info { "Unzipped Benchmarks" }
-
-    val results = File(output, "results")
-    if (!results.exists())
-        results.mkdirs()
-
-    coroutineScope {
-        for (file in unzipped)
-            launch {
-                val dataOut = File(results, "${file.name}")
-                if (dataOut.exists())
-                    dataOut.deleteRecursively()
-
-                if (!file.renameTo(dataOut))
-                    file.copyRecursively(dataOut, true)
-
-                logger.debug { "Copied ${file.name} to ${dataOut.absolutePath}" }
-            }
-    }
-
     logger.info { "Finished Site Data Creation" }
-}
-
-suspend fun unzipBenchmarks(folder: File): List<File> = withContext(Dispatchers.IO) {
-    if (folder.list() == null) {
-        logger.info { "No Benchmarks to Unzip" }
-        return@withContext emptyList()
-    }
-    val files = folder.listFiles { file -> file.extension == "zip" }
-
-    val unzipped = mutableListOf<File>()
-    val mutex = Mutex()
-
-    launch {
-        files.forEach { file ->
-            launch {
-                val os = file.nameWithoutExtension.substringAfter('-')
-                val dest = File(folder, os)
-
-                if (!dest.exists())
-                    dest.mkdirs()
-
-                logger.debug { "Unzipping ${file.name} to ${dest.absolutePath}" }
-                unzip(file.absolutePath, dest.absolutePath)
-
-                mutex.withLock {
-                    unzipped.add(dest)
-                }
-            }
-        }
-    }.join()
-
-    logger.debug { "Unzipped ${unzipped.size} Files" }
-    return@withContext unzipped
-}
-
-private fun unzip(zipFile: String, destFolder: String) {
-    ZipInputStream(FileInputStream(zipFile)).use { zis ->
-        var entry: ZipEntry?
-        val buffer = ByteArray(1024)
-        while (zis.nextEntry.also { entry = it } != null) {
-            val newFile = File(destFolder + File.separator + Path(entry!!.name).normalize())
-            if (entry.isDirectory)
-                newFile.mkdirs()
-            else {
-                newFile.parentFile.mkdirs()
-                FileOutputStream(newFile).use { fos ->
-                    var length: Int
-                    while (zis.read(buffer).also { length = it } > 0) {
-                        fos.write(buffer, 0, length)
-                    }
-                }
-            }
-        }
-    }
 }

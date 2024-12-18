@@ -3,7 +3,7 @@
 - name: Windows
   url: /windows/
 - name: MacOS
-  url: /macos/
+  url: /mac/
 - name: Linux
   url: /linux/
 - name: About

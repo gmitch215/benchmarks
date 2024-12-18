@@ -33,6 +33,10 @@ java {
 }
 
 val debug = project.findProperty("debug")?.toString()?.toBoolean() == true
+val os = when (val name = DefaultNativePlatform.getCurrentOperatingSystem().name.lowercase()) {
+    "osx", "mac os x", "darwin" -> "mac"
+    else -> name
+}
 
 tasks {
     clean {
@@ -47,6 +51,7 @@ tasks {
                 include("**/*.o")
                 include("**/*.class")
                 include("**/*.jar")
+                include("main.kt.kexe.*/**")
             }
         )
     }
@@ -91,7 +96,59 @@ tasks {
 
     // Site Tasks
 
+    register("createSiteData", JavaExec::class) {
+        mustRunAfter("preview")
+
+        mainClass.set("xyz.gmitch215.benchmarks.site.DataCreator")
+        classpath = sourceSets["main"].runtimeClasspath
+        args = listOfNotNull(
+            file("benchmarks").absolutePath,
+            file("build/site/_data").absolutePath
+        )
+    }
+
+    register("moveGraphs", Copy::class) {
+        mustRunAfter(
+            "graphBenchmarks",
+            "createSiteData",
+            "preview"
+        )
+
+        from("build/site/_data/results/windows/graphs/") {
+            into("assets/graphs/windows/")
+        }
+
+        from("build/site/_data/results/mac/graphs/") {
+            into("assets/graphs/mac/")
+        }
+
+        from("build/site/_data/results/linux/graphs/") {
+            into("assets/graphs/linux/")
+        }
+
+        doLast {
+            delete("build/site/_data/results/windows/graphs/")
+            delete("build/site/_data/results/mac/graphs/")
+            delete("build/site/_data/results/linux/graphs/")
+        }
+
+        destinationDir = file("build/site")
+    }
+
+    register("generatePages", JavaExec::class) {
+        dependsOn("moveGraphs")
+        mustRunAfter("createSiteData", "preview")
+
+        mainClass.set("xyz.gmitch215.benchmarks.site.PagesCreator")
+        classpath = sourceSets["main"].runtimeClasspath
+        args = listOfNotNull(
+            file("build/site/_data").absolutePath,
+            file("build/site").absolutePath
+        )
+    }
+
     register("copyResourcesToSite", Copy::class) {
+        mustRunAfter("generatePages", "moveGraphs", "createSiteData", "preview")
         from("site")
 
         from("benchmarks/config.yml") {
@@ -107,77 +164,20 @@ tasks {
         destinationDir = file("build/site")
     }
 
-    register("createSiteData", JavaExec::class) {
-        mustRunAfter("zipBenchmarks")
-
-        mainClass.set("xyz.gmitch215.benchmarks.site.DataCreator")
-        classpath = sourceSets["main"].runtimeClasspath
-        args = listOfNotNull(
-            file("benchmarks").absolutePath,
-            file("build/benchmarks").absolutePath,
-            file("build/site/_data").absolutePath
-        )
-    }
-
-    register("moveGraphs", Copy::class) {
-        mustRunAfter("graphBenchmarks", "copyResourcesToSite", "createSiteData")
-
-        from("build/site/_data/results/windows/graphs/") {
-            into("assets/graphs/windows/")
-        }
-
-        from("build/site/_data/results/macos/graphs/") {
-            into("assets/graphs/macos/")
-        }
-
-        from("build/site/_data/results/linux/graphs/") {
-            into("assets/graphs/linux/")
-        }
-
-        doLast {
-            delete("build/site/_data/results/windows/graphs/")
-            delete("build/site/_data/results/macos/graphs/")
-            delete("build/site/_data/results/linux/graphs/")
-        }
-
-        destinationDir = file("build/site")
-    }
-
-    register("generatePages", JavaExec::class) {
-        dependsOn("moveGraphs")
-        mustRunAfter("copyResourcesToSite", "createSiteData")
-
-        mainClass.set("xyz.gmitch215.benchmarks.site.PagesCreator")
-        classpath = sourceSets["main"].runtimeClasspath
-        args = listOfNotNull(
-            file("build/site/_data").absolutePath,
-            file("build/site").absolutePath
-        )
-    }
-
     register("site") {
-        mustRunAfter("zipBenchmarks")
-
         dependsOn(
-            "copyResourcesToSite",
+            "createSiteData",
             "generatePages",
-            "createSiteData"
+            "copyResourcesToSite"
         )
     }
 
     // Site Preview Tasks
 
-    register("zipBenchmarks", Zip::class) {
-        mustRunAfter("createBenchmarks", "graphBenchmarks")
-
+    register("preview", Copy::class) {
         from("benchmarks/output")
 
-        archiveFileName.set("benchmarks-${DefaultNativePlatform.getCurrentOperatingSystem().toFamilyName()}.zip")
-        destinationDirectory.set(file("build/benchmarks"))
-    }
-
-    register("preview") {
-        dependsOn("zipBenchmarks", "site")
+        destinationDir = file("build/site/_data/results/$os")
     }
 
 }
