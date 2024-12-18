@@ -332,6 +332,7 @@ suspend fun rankBenchmarks(results: Map<String, List<BenchmarkResult>>, out: Fil
 
 private suspend fun String.runCommand(folder: File): String? = coroutineScope {
     val str = this@runCommand
+    var exitCode = -1
 
     try {
         val parts = split("\\s".toRegex())
@@ -354,8 +355,7 @@ private suspend fun String.runCommand(folder: File): String? = coroutineScope {
         waiting.cancel("Process finished")
         logger.debug { "Process '$str' finished in ${folder.absolutePath}" }
 
-        val exitCode = process.exitValue()
-
+        exitCode = process.exitValue()
         if (exitCode != 0) {
             logger.error { "Failed to run command: '$str' in ${folder.absolutePath} with exit code $exitCode" }
             error(process.errorStream.bufferedReader().use { it.readText() })
@@ -363,8 +363,8 @@ private suspend fun String.runCommand(folder: File): String? = coroutineScope {
 
         return@coroutineScope process.inputStream.bufferedReader().use { it.readText() }
     } catch (e: Exception) {
-        logger.error(e) { "Failed to run command: '$str' in ${folder.absolutePath}" }
-        error("Failed to run command: '$str' in ${folder.absolutePath}")
+        logger.error(e) { "Failed to run command: '$str' in ${folder.absolutePath}; exit code $exitCode" }
+        throw IllegalStateException("Failed to run command: '$str' in ${folder.absolutePath}; exit code $exitCode", e)
     }
 }
 
