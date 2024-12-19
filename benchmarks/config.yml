@@ -80,6 +80,8 @@
   id: c-llvm
   color: "888888"
   compile: clang main.c ../../lib/nanotime/nanotime.c -o main.c.llvm.o -w
+  compile-extra:
+    linux: "-lm"
   run: main.c.llvm.o
   cleanup:
     - main.c.llvm.o
