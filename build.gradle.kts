@@ -35,7 +35,7 @@ java {
 val debug = project.findProperty("debug")?.toString()?.toBoolean() == true
 val os = when (val name = DefaultNativePlatform.getCurrentOperatingSystem().name.lowercase()) {
     "osx", "mac os x", "darwin" -> "mac"
-    else -> name
+    else -> name.substringBefore(' ').trim()
 }
 
 tasks {
