@@ -1,0 +1,9 @@
+title: benchmarks
+description: >
+  Programming Benchmarks by gmitch215
+
+baseurl: ""
+url: "https://benchmarks.gmitch215.xyz"
+github_username: gmitch215
+
+markdown: kramdown

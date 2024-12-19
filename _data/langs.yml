@@ -1,0 +1,75 @@
+- language: Python
+  id: python
+  color: "3572a5"
+  run: python main.py
+- language: JavaScript (Node)
+  id: js-node
+  color: "f1e05a"
+  run: node main.cjs
+- language: JavaScript (Deno)
+  id: js-deno
+  color: "70ffaf"
+  run: deno run -A main.cjs
+- language: JavaScript (Bun)
+  id: js-bun
+  color: "5d5986"
+  run: bun run main.cjs
+- language: Java
+  id: java
+  color: "b07219"
+  run: java Main.java
+- language: Kotlin (JVM)
+  id: kotlin-jvm
+  color: "5f3bbe"
+  location: KOTLIN_HOME
+  compile: kotlinc main.kt -include-runtime -d main.kt.jar
+  run: java -jar main.kt.jar
+  cleanup:
+    - main.kt.jar
+- language: Kotlin (Native)
+  file: true
+  id: kotlin-native
+  color: "92316e"
+  location: KOTLIN_NATIVE_HOME
+  compile: kotlinc-native main.kt -o main.kt -opt
+  run: main.kt
+  cleanup:
+    - main.kt.exe
+    - main.kt.kexe
+- language: C++
+  file: true
+  id: cpp
+  color: "004283"
+  compile: g++ main.cpp -o main.cpp.o
+  compile-extra:
+    windows: "-lws2_32"
+  run: main.cpp.o
+  cleanup:
+    - main.cpp.o
+- language: C
+  file: true
+  id: c
+  color: "555555"
+  compile: gcc main.c ../../lib/nanotime/nanotime.c -o main.c.o
+  compile-extra:
+    windows: "-lws2_32"
+    linux: "-lm"
+  run: main.c.o
+  cleanup:
+    - main.c.o
+- language: Ruby
+  id: ruby
+  color: "701516"
+  run: ruby main.rb
+- language: Go
+  file: true
+  id: go
+  color: "375eab"
+  compile: go build -o main.go.o main.go
+  run: main.go.o
+  cleanup:
+    - main.go.o
+- language: PHP
+  id: php
+  color: "777bb3"
+  run: php main.php
