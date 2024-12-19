@@ -159,5 +159,11 @@ jobs:
         run: ./gradlew site
       - name: Print File Tree
         run: tree
-      - name: Upload Site
-        run: bash pages.sh
+      - name: Deploy Site
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: build/site
+          enable_jekyll: true
+          cname: benchmarks.gmitch215.xyz
+          commit_message: ${{ github.event.head_commit.message }}
