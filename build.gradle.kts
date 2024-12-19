@@ -22,7 +22,7 @@ dependencies {
     implementation("com.charleskorn.kaml:kaml:0.66.0")
     implementation("org.jetbrains.kotlinx:kandy-lets-plot:0.7.1")
 
-    runtimeOnly("ch.qos.logback:logback-classic:1.5.12")
+    runtimeOnly("ch.qos.logback:logback-classic:1.5.13")
     implementation("io.github.oshai:kotlin-logging:7.0.3")
 }
 
