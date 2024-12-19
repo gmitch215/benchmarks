@@ -71,6 +71,16 @@ p img {
     box-shadow: var(--shadow);
 }
 
+pre {
+    background-color: #212121;
+    border-radius: 0.5em;
+    border: 2px solid black;
+    box-shadow: var(--shadow);
+
+    text-align: left;
+    padding: 3vh 3vw;
+}
+
 .box {
     display: flex;
     justify-content: center;

@@ -2,15 +2,8 @@
 
 package xyz.gmitch215.benchmarks.site
 
-import com.charleskorn.kaml.Yaml
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import kotlinx.serialization.decodeFromString
-import xyz.gmitch215.benchmarks.logger
 import xyz.gmitch215.benchmarks.measurement.BenchmarkConfiguration
 import xyz.gmitch215.benchmarks.measurement.BenchmarkRun
-import java.io.File
 
 val INDEX_FILE_TEMPLATE: (String) -> String = { platform ->
     """
@@ -32,6 +25,18 @@ val VERSUS_INDEX_TEMPLATE: (String) -> String = { platform ->
     title: Versus - ${platform.replaceFirstChar { it.uppercase() }}
     type: Versus
     suburl: /versus/
+    ---
+    """.trimIndent()
+}
+
+val ABOUT_PLATFORM_TEMPLATE: (String) -> String = { platform ->
+    """
+    ---
+    layout: platform-page
+    platform: $platform
+    title: About | ${platform.replaceFirstChar { it.uppercase() }}
+    type: About
+    suburl: /about/
     ---
     """.trimIndent()
 }

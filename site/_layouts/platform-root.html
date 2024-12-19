@@ -1,0 +1,17 @@
+---
+layout: default
+---
+
+<div class="benchmark-root">
+    <img src="/assets/platform/{{ page.platform }}.png" alt="{{ page.platform | capitalize }}" title="{{ page.platform | capitalize }} Platform" class="platform-logo" />
+    <h1>{{ page.platform | capitalize }} Platform - {{ page.type }}</h1>
+    <div class="box horizontal">
+        {% for link in site.data.platform.header %}
+        <a href="/{{ page.platform }}{{ link.url }}">
+            <h2>{{ link.name }}</h2>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+
+{{ content }}

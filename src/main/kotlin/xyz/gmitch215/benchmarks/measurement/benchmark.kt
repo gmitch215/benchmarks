@@ -3,25 +3,15 @@
 package xyz.gmitch215.benchmarks.measurement
 
 import com.charleskorn.kaml.Yaml
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.async
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
-import kotlinx.coroutines.withContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.*
-import xyz.gmitch215.benchmarks.BenchmarkResult
-import xyz.gmitch215.benchmarks.Measurement
-import xyz.gmitch215.benchmarks.logger
+import xyz.gmitch215.benchmarks.*
 import java.io.File
 import java.util.concurrent.atomic.AtomicInteger
 
@@ -29,16 +19,6 @@ const val RUN_COUNT = 25
 val json = Json {
     prettyPrint = true
 }
-
-private val os = System.getProperty("os.name").substringBefore(" ").lowercase()
-private val arch = when(System.getProperty("os.arch").lowercase()) {
-    "amd64", "x86_64" -> "x64"
-    "aarch64", "arm", "arm64" -> "arm64"
-    "x86" -> "x86"
-    else -> error("Unsupported architecture")
-}
-
-private val kotlinNativeSuffix = if (os == "windows") ".exe" else ".kexe"
 
 private fun countChildren(count: AtomicInteger, job: Job) {
     count.incrementAndGet()
@@ -170,8 +150,6 @@ fun CoroutineScope.runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: F
     val results = mutableListOf<Double>()
 
     coroutineScope {
-        val s = File.separator
-
         var compile = benchmarkRun.compile
         if (compile != null) {
             if (benchmarkRun.location != null) {
@@ -330,44 +308,6 @@ suspend fun rankBenchmarks(results: Map<String, List<BenchmarkResult>>, out: Fil
     }
 }
 
-private suspend fun String.runCommand(folder: File): String? = coroutineScope {
-    val str = this@runCommand
-    var exitCode = -1
-
-    try {
-        val parts = split("\\s".toRegex())
-        val process = ProcessBuilder(*parts.toTypedArray())
-            .directory(folder)
-            .redirectOutput(ProcessBuilder.Redirect.PIPE)
-            .redirectError(ProcessBuilder.Redirect.PIPE)
-            .start()
-
-        val waiting = launch {
-            if (!logger.isDebugEnabled()) return@launch
-
-            while (process.isAlive) {
-                logger.debug { "Process '$str' is still running in ${folder.absolutePath}" }
-                delay(5000)
-            }
-        }
-
-        process.waitFor()
-        waiting.cancel("Process finished")
-        logger.debug { "Process '$str' finished in ${folder.absolutePath}" }
-
-        exitCode = process.exitValue()
-        if (exitCode != 0) {
-            logger.error { "Failed to run command: '$str' in ${folder.absolutePath} with exit code $exitCode" }
-            error(process.errorStream.bufferedReader().use { it.readText() })
-        }
-
-        return@coroutineScope process.inputStream.bufferedReader().use { it.readText() }
-    } catch (e: Exception) {
-        logger.error(e) { "Failed to run command: '$str' in ${folder.absolutePath}; exit code $exitCode" }
-        throw IllegalStateException("Failed to run command: '$str' in ${folder.absolutePath}; exit code $exitCode", e)
-    }
-}
-
 // Classes
 
 @Serializable
@@ -389,6 +329,7 @@ data class BenchmarkRun(
     val file: Boolean = false,
     val location: String? = null,
     val run: String,
+    val version: String,
     val compile: String? = null,
     @SerialName("compile-extra")
     val compileExtra: Map<String, String> = emptyMap(),

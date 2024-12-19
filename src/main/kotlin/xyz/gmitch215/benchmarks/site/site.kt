@@ -12,7 +12,11 @@ import kotlinx.serialization.encodeToString
 import xyz.gmitch215.benchmarks.logger
 import xyz.gmitch215.benchmarks.measurement.BenchmarkConfiguration
 import xyz.gmitch215.benchmarks.measurement.BenchmarkRun
+import xyz.gmitch215.benchmarks.os
+import xyz.gmitch215.benchmarks.runCommand
+import xyz.gmitch215.benchmarks.s
 import java.io.File
+import java.nio.file.Files
 
 suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
     val input = File(args[0])
@@ -48,6 +52,10 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
     val folders = input.listFiles { file -> file.isDirectory && file.name != "output" } ?: emptyArray()
     logger.debug { "Found ${folders.size} Benchmarks"}
 
+    val runs = Yaml.default.decodeFromString<List<BenchmarkRun>>(File(input, "config.yml").readText())
+    if (runs.isEmpty())
+        error("No runs found. Run benchmarks (or preview task) first")
+
     // benchmarks.yml
     val benchmarks = mutableListOf<BenchmarkConfiguration>()
     val benchmarksData = File(data, "benchmarks.yml")
@@ -72,8 +80,6 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
     }
 
     coroutineScope {
-        val runs = Yaml.default.decodeFromString<List<BenchmarkRun>>(File(input, "config.yml").readText())
-
         // stats.yml
         launch {
             val statsData = File(data, "stats.yml")
@@ -232,15 +238,56 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
                         }
 
                 }
+
+                // About Pages
+                launch {
+                    logger.debug { "Creating about file for ${folder.absolutePath}" }
+
+                    val aboutFile = File(rootFolder, "about.md")
+                    if (!aboutFile.exists())
+                        aboutFile.createNewFile()
+
+                    var text = "${ABOUT_PLATFORM_TEMPLATE(platform)}\n\n"
+                    val versions = mutableMapOf<BenchmarkRun, String>()
+
+                    val temp = Files.createTempDirectory(null).toFile()
+                    withContext(Dispatchers.Default) {
+                        for (run in runs)
+                            launch {
+                                var version = run.version
+                                if (run.location != null) {
+                                    val home = System.getenv(run.location)
+                                    if (home != null)
+                                        version = "${home}${s}bin${s}$version"
+
+                                    if (os == "windows") {
+                                        val executableSuffix = if (run.id.contains("kotlin")) ".bat" else ".exe"
+                                        version = version.replaceFirst(" ", "$executableSuffix ")
+                                    }
+                                }
+
+                                logger.debug { "Running Version Command for '${run.id}': '$version'" }
+
+                                val res = version.runCommand(folder).run {
+                                    if (this == null) return@run "Could not determine version"
+
+                                    return@run trim()
+                                }
+                                versions[run] = res
+                            }
+                    }
+                    temp.delete()
+
+                    text += versions.toList().sortedBy { it.first.id }.joinToString("\n\n") {
+                        "## ${it.first.language}\n\n```\n> ${it.first.version}\n\n${it.second}\n\n```"
+                    }
+
+                    aboutFile.writeText(text)
+                    logger.info { "Created ${aboutFile.absolutePath}" }
+                }
             }
     }
 
     logger.info { "Finished Site Page Creation" }
-
-    if (logger.isDebugEnabled()) {
-        logger.debug { "--- Output Tree ---" }
-        output.walkTopDown().forEach {
-            logger.debug { "-- ${it.absolutePath}" }
-        }
-    }
+    logger.debug { "Site Size: ${output.walkTopDown().toList().size} Files" }
 }

@@ -2,22 +2,27 @@
   id: python
   color: "3572a5"
   run: python main.py
+  version: python --version
 - language: JavaScript (Node)
   id: js-node
   color: "f1e05a"
   run: node main.cjs
+  version: node --version
 - language: JavaScript (Deno)
   id: js-deno
   color: "70ffaf"
   run: deno run -A main.cjs
+  version: deno --version
 - language: JavaScript (Bun)
   id: js-bun
   color: "5d5986"
   run: bun run main.cjs
+  version: bun --version
 - language: Java
   id: java
   color: "b07219"
   run: java Main.java
+  version: java --version
 - language: Kotlin (JVM)
   id: kotlin-jvm
   color: "5f3bbe"
@@ -26,6 +31,7 @@
   run: java -jar main.kt.jar
   cleanup:
     - main.kt.jar
+  version: kotlinc -version
 - language: Kotlin (Native)
   file: true
   id: kotlin-native
@@ -36,31 +42,53 @@
   cleanup:
     - main.kt.exe
     - main.kt.kexe
-- language: C++
+  version: kotlinc-native -version
+- language: C++ (G++)
   file: true
-  id: cpp
+  id: cpp-gnu
   color: "004283"
-  compile: g++ main.cpp -o main.cpp.o
+  compile: g++ main.cpp -o main.cpp.gnu.o
   compile-extra:
     windows: "-lws2_32"
-  run: main.cpp.o
+  run: main.cpp.gnu.o
   cleanup:
-    - main.cpp.o
-- language: C
+    - main.cpp.gnu.o
+  version: g++ --version
+- language: C++ (Clang++)
   file: true
-  id: c
+  id: cpp-llvm
+  color: "006183"
+  compile: clang++ main.cpp -o main.cpp.llvm.o -w
+  run: main.cpp.llvm.o
+  cleanup:
+    - main.cpp.llvm.o
+  version: clang++ --version
+- language: C (GCC)
+  file: true
+  id: c-gnu
   color: "555555"
-  compile: gcc main.c ../../lib/nanotime/nanotime.c -o main.c.o
+  compile: gcc main.c ../../lib/nanotime/nanotime.c -o main.c.gnu.o
   compile-extra:
     windows: "-lws2_32"
     linux: "-lm"
-  run: main.c.o
+  run: main.c.gnu.o
   cleanup:
-    - main.c.o
+    - main.c.gnu.o
+  version: gcc --version
+- language: C (Clang)
+  file: true
+  id: c-llvm
+  color: "888888"
+  compile: clang main.c ../../lib/nanotime/nanotime.c -o main.c.llvm.o -w
+  run: main.c.llvm.o
+  cleanup:
+    - main.c.llvm.o
+  version: clang --version
 - language: Ruby
   id: ruby
   color: "701516"
   run: ruby main.rb
+  version: ruby --version
 - language: Go
   file: true
   id: go
@@ -69,7 +97,9 @@
   run: main.go.o
   cleanup:
     - main.go.o
+  version: go version
 - language: PHP
   id: php
   color: "777bb3"
   run: php main.php
+  version: php --version

@@ -3,3 +3,5 @@ header:
     url: /
   - name: Versus
     url: /versus/
+  - name: About
+    url: /about/
