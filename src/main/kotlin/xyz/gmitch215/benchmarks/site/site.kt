@@ -26,10 +26,18 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
         output.mkdirs()
 
     val data = File(output, "_data")
+
+    logger.debug { "Data: ${data.absolutePath}" }
+    logger.debug { "Exists: ${data.exists()}" }
+
     if (!data.exists())
         data.mkdirs()
 
     val results = File(data, "results")
+
+    logger.debug { "Results: ${results.absolutePath}" }
+    logger.debug { "Exists: ${results.exists()}" }
+
     if (!results.exists() || results.list() == null)
         error("No results found. Run benchmarks (or preview task) first")
 
@@ -47,6 +55,7 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
         logger.info { "benchmarks.yml already exists" }
         benchmarks.addAll(Yaml.default.decodeFromString(benchmarksData.readText()))
     } else {
+        logger.debug { "Creating benchmarks.yml..." }
         benchmarksData.createNewFile()
 
         benchmarks.addAll(folders.map { folder ->
@@ -73,6 +82,7 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
                 return@launch
             }
 
+            logger.debug { "Creating stats.yml..." }
             statsData.createNewFile()
 
             val languagesCount = runs.map { it.id }.distinct().count()
@@ -96,6 +106,7 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
                 return@launch
             }
 
+            logger.debug { "Creating versus.yml..." }
             versusData.createNewFile()
 
             val pairs0 = mutableListOf<Pair<BenchmarkRun, BenchmarkRun>>()
@@ -222,5 +233,14 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
 
                 }
             }
+    }
+
+    logger.info { "Finished Site Page Creation" }
+
+    if (logger.isDebugEnabled()) {
+        logger.debug { "--- Output Tree ---" }
+        output.walkTopDown().forEach {
+            logger.debug { "-- ${it.absolutePath}" }
+        }
     }
 }
