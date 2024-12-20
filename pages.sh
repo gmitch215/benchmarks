@@ -15,7 +15,7 @@ do
 done
 
 cp -Rfv ./site/* ./
-rm -rfv ./site
+rm -rf ./site
 
 echo "benchmarks.gmitch215.xyz" > CNAME
 
