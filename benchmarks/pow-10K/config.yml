@@ -1,0 +1,8 @@
+name: pow(x, y) (10K)
+description: Benchmark the performance of the `pow` function, using decimal numbers.
+measure: NANOSECONDS
+output: MICROSECONDS
+tags:
+  - "number"
+  - "math"
+  - "10K"
