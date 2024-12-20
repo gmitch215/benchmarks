@@ -13,7 +13,9 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.*
 import xyz.gmitch215.benchmarks.*
 import java.io.File
+import java.nio.file.Files
 import java.util.concurrent.atomic.AtomicInteger
+import kotlin.collections.set
 
 const val RUN_COUNT = 25
 val json = Json {
@@ -34,7 +36,7 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
         logger.info { "Filtering benchmarks with '$filter'" }
 
     val file = File(input, "config.yml").readText(Charsets.UTF_8)
-    val benchmarkRuns = Yaml.default.decodeFromString<List<BenchmarkRun>>(file)
+    val languages = Yaml.default.decodeFromString<List<BenchmarkRun>>(file)
 
     logger.info { "Starting Benchmarks on $os" }
 
@@ -51,12 +53,12 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
     val mutex = Mutex()
 
     val job = launch(Dispatchers.Default) {
-        for (benchmark in benchmarkRuns) {
-            val out = File(output, benchmark.id)
+        for (lang in languages) {
+            val out = File(output, lang.id)
             if (!out.exists())
                 out.mkdirs()
 
-            logger.debug { "Starting language '${benchmark.id}'" }
+            logger.debug { "Starting language '${lang.id}'" }
 
             val langJob = launch {
                 for (f in folders) {
@@ -64,14 +66,14 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
                     if (filter != null && !filter.matches(name))
                         continue
 
-                    logger.debug { "Starting benchmark '$name' for '${benchmark.id}'" }
+                    logger.debug { "Starting benchmark '$name' for '${lang.id}'" }
                     val benchmarkJob = launch {
-                        val result = runBenchmark(benchmark, f, out).await()
-                        logger.debug { "Received result for '$name' under '${benchmark.id}'" }
+                        val result = runBenchmark(lang, f, out).await()
+                        logger.debug { "Received result for '$name' under '${lang.id}'" }
 
                         if (result == null) {
                             mutex.withLock {
-                                disabledForRanking.add(benchmark.id)
+                                disabledForRanking.add(lang.id)
                             }
 
                             return@launch // Disabled Language
@@ -82,7 +84,7 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
                         else
                             results[f.name] = listOf(result)
 
-                        logger.debug { "Finished benchmark '$name' for '${benchmark.id}'" }
+                        logger.debug { "Finished benchmark '$name' for '${lang.id}'" }
                     }
 
                     if (logger.isDebugEnabled())
@@ -91,11 +93,11 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
                                 val count = AtomicInteger()
                                 countChildren(count, benchmarkJob)
 
-                                logger.debug { "Benchmark '$name' for language '${benchmark.id}' task running with $count children" }
+                                logger.debug { "Benchmark '$name' for language '${lang.id}' task running with $count children" }
                                 delay(5000)
                             }
 
-                            logger.debug { "Benchmark '$name' for language '${benchmark.id}' task finished" }
+                            logger.debug { "Benchmark '$name' for language '${lang.id}' task finished" }
                         }
                 }
             }
@@ -106,11 +108,11 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
                         val count = AtomicInteger()
                         countChildren(count, langJob)
 
-                        logger.debug { "--- Language '${benchmark.id}' parent task running with $count children" }
+                        logger.debug { "--- Language '${lang.id}' parent task running with $count children" }
                         delay(5000)
                     }
 
-                    logger.debug { "Language '${benchmark.id}' parent task finished" }
+                    logger.debug { "Language '${lang.id}' parent task finished" }
                 }
         }
     }
@@ -133,6 +135,50 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
             }
 
             logger.debug { "Benchmarking task finished" }
+        }
+
+    // Get Version Information
+
+    val versionsFolder = File(output, "versions")
+    if (!versionsFolder.exists())
+        versionsFolder.mkdirs()
+
+    for (lang in languages)
+        launch {
+            logger.info { "Retrieving verison information for '${lang.id}'" }
+
+            var version = lang.version
+            if (lang.location != null) {
+                val home = System.getenv(lang.location)
+                if (home != null)
+                    version = "${home}${s}bin${s}$version"
+
+                if (os == "windows") {
+                    val executableSuffix = if (lang.id.contains("kotlin")) ".bat" else ".exe"
+                    version = version.replaceFirst(" ", "$executableSuffix ")
+                }
+            }
+
+            logger.debug { "Running Version Command for '${lang.id}': '$version'" }
+
+            val temp = Files.createTempDirectory(null).toFile()
+            val res = version.runCommand(temp).run {
+                if (this == null) return@run "Could not determine version"
+
+                return@run trim()
+            }
+            temp.delete()
+
+            val versionFile = File(versionsFolder, "${lang.id}.txt")
+            if (versionFile.exists())
+                versionFile.delete()
+
+            logger.debug { "Writing version information for '${lang.id}' at ${versionFile.absolutePath}" }
+
+            versionFile.createNewFile()
+            versionFile.writeText(res)
+
+            logger.debug { "Retrieved version information for '${lang.id}'" }
         }
 }
 

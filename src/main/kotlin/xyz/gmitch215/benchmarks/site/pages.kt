@@ -41,6 +41,18 @@ val ABOUT_PLATFORM_TEMPLATE: (String) -> String = { platform ->
     """.trimIndent()
 }
 
+val RANKINGS_PLATFORM_TEMPLATE: (String) -> String = { platform ->
+    """
+    ---
+    layout: platform-page
+    platform: $platform
+    title: Rankings | ${platform.replaceFirstChar { it.uppercase() }}
+    type: Rankings
+    suburl: /rankings/
+    ---
+    """.trimIndent()
+}
+
 val INFO_FILE_TEMPLATE: (String, BenchmarkConfiguration) -> String = { platform, config ->
     """
     ---

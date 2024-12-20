@@ -239,6 +239,20 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
 
                 }
 
+                // Rankings Pages
+                launch {
+                    logger.debug { "Creating rankings file for ${folder.absolutePath}" }
+
+                    val rankingsFile = File(rootFolder, "rankings.md")
+                    if (!rankingsFile.exists())
+                        rankingsFile.createNewFile()
+
+                    val text = "${RANKINGS_PLATFORM_TEMPLATE(platform)}\n\n<img class=\"dynamic rounded primary-graph\" alt=\"Rankings\" title=\"Rankings\" src=\"/assets/graphs/$platform/rank.png\" />"
+                    rankingsFile.writeText(text)
+
+                    logger.info { "Created ${rankingsFile.absolutePath}" }
+                }
+
                 // About Pages
                 launch {
                     logger.debug { "Creating about file for ${folder.absolutePath}" }
@@ -250,33 +264,14 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
                     var text = "${ABOUT_PLATFORM_TEMPLATE(platform)}\n\n"
                     val versions = mutableMapOf<BenchmarkRun, String>()
 
-                    val temp = Files.createTempDirectory(null).toFile()
-                    withContext(Dispatchers.Default) {
-                        for (run in runs)
-                            launch {
-                                var version = run.version
-                                if (run.location != null) {
-                                    val home = System.getenv(run.location)
-                                    if (home != null)
-                                        version = "${home}${s}bin${s}$version"
+                    for (run in runs)
+                        launch {
+                            val versionFile = File(results, "$platform/versions/${run.id}.txt")
+                            if (!versionFile.exists())
+                                error("Version file does not exist for ${run.id}: ${versionFile.absolutePath}")
 
-                                    if (os == "windows") {
-                                        val executableSuffix = if (run.id.contains("kotlin")) ".bat" else ".exe"
-                                        version = version.replaceFirst(" ", "$executableSuffix ")
-                                    }
-                                }
-
-                                logger.debug { "Running Version Command for '${run.id}': '$version'" }
-
-                                val res = version.runCommand(folder).run {
-                                    if (this == null) return@run "Could not determine version"
-
-                                    return@run trim()
-                                }
-                                versions[run] = res
-                            }
-                    }
-                    temp.delete()
+                            versions[run] = versionFile.readText()
+                        }
 
                     text += versions.toList().sortedBy { it.first.id }.joinToString("\n\n") {
                         "## ${it.first.language}\n\n```\n> ${it.first.version}\n\n${it.second}\n\n```"
