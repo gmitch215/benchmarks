@@ -10,7 +10,7 @@ on:
 
 jobs:
   setup:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     timeout-minutes: 20
 
     name: Gradle Setup
@@ -48,7 +48,7 @@ jobs:
       matrix:
         include:
           - name: linux
-            os: ubuntu-latest
+            os: ubuntu-22.04
           - name: macos
             os: macos-13
           - name: windows
@@ -112,6 +112,7 @@ jobs:
         uses: actions/setup-go@v5
         with:
           go-version: '1.23.3'
+          cache: 'false'
       - name: Install Python Dependencies
         run: pip install -r benchmarks/requirements.txt
       - name: Install PHP
@@ -131,7 +132,7 @@ jobs:
         run: ./gradlew --stop
 
   site:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs: benchmark
     timeout-minutes: 20
 
@@ -159,7 +160,5 @@ jobs:
           mv -fv build/site/_data/results/benchmarks-windows build/site/_data/results/windows
       - name: Generate Site
         run: ./gradlew site
-      - name: Print File Tree
-        run: tree
       - name: Upload Site
         run: bash pages.sh
