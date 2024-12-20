@@ -114,4 +114,4 @@
   cleanup:
     - main.rs.o
     - main.rs.pdb
-  version: rustc --version
+  version: rustc --version --verbose
