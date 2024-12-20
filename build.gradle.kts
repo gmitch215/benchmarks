@@ -51,6 +51,7 @@ tasks {
                 include("**/*.o")
                 include("**/*.class")
                 include("**/*.jar")
+                include("**/*.pdb")
                 include("main.kt.kexe.*/**")
             }
         )
@@ -155,6 +156,7 @@ tasks {
     register("site") {
         dependsOn(
             "createSite",
+            "moveGraphs",
             "copyResourcesToSite"
         )
     }

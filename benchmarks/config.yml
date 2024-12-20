@@ -37,7 +37,7 @@
   id: kotlin-native
   color: "92316e"
   location: KOTLIN_NATIVE_HOME
-  compile: kotlinc-native main.kt -o main.kt -opt
+  compile: kotlinc-native main.kt -o main.kt
   run: main.kt
   cleanup:
     - main.kt.exe
@@ -105,3 +105,13 @@
   color: "777bb3"
   run: php main.php
   version: php --version
+- language: Rust
+  file: true
+  id: rust
+  color: "dea584"
+  compile: rustc main.rs -o main.rs.o
+  run: main.rs.o
+  cleanup:
+    - main.rs.o
+    - main.rs.pdb
+  version: rustc --version
