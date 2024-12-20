@@ -264,14 +264,16 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
                     var text = "${ABOUT_PLATFORM_TEMPLATE(platform)}\n\n"
                     val versions = mutableMapOf<BenchmarkRun, String>()
 
-                    for (run in runs)
-                        launch {
-                            val versionFile = File(results, "$platform/versions/${run.id}.txt")
-                            if (!versionFile.exists())
-                                error("Version file does not exist for ${run.id}: ${versionFile.absolutePath}")
+                    coroutineScope {
+                        for (run in runs)
+                            launch {
+                                val versionFile = File(results, "$platform/versions/${run.id}.txt")
+                                if (!versionFile.exists())
+                                    error("Version file does not exist for ${run.id}: ${versionFile.absolutePath}")
 
-                            versions[run] = versionFile.readText()
-                        }
+                                versions[run] = versionFile.readText()
+                            }
+                    }
 
                     text += versions.toList().sortedBy { it.first.id }.joinToString("\n\n") {
                         "## ${it.first.language}\n\n```\n> ${it.first.version}\n\n${it.second}\n\n```"
