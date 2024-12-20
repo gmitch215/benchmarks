@@ -265,6 +265,12 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
                     val versions = mutableMapOf<BenchmarkRun, String>()
 
                     coroutineScope {
+                        val osFile = File(results, "$platform/versions/os.txt")
+                        if (!osFile.exists())
+                            error("OS version information does not exist: ${osFile.absolutePath}")
+
+                        text += "```\n${osFile.readText()}\n```\n\n"
+
                         for (run in runs)
                             launch {
                                 val versionFile = File(results, "$platform/versions/${run.id}.txt")

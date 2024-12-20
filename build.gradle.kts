@@ -21,6 +21,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
     implementation("com.charleskorn.kaml:kaml:0.66.0")
     implementation("org.jetbrains.kotlinx:kandy-lets-plot:0.7.1")
+    implementation("com.github.oshi:oshi-core:6.6.5")
 
     runtimeOnly("ch.qos.logback:logback-classic:1.5.12")
     implementation("io.github.oshai:kotlin-logging:7.0.3")
@@ -72,7 +73,7 @@ tasks {
             file("benchmarks").absolutePath,
             project.findProperty("benchmarkFilter")?.toString()
         )
-        jvmArgs = listOf("-Xms2G", "-XX:+HeapDumpOnOutOfMemoryError")
+        jvmArgs = listOf("-Xms512M", "-XX:+HeapDumpOnOutOfMemoryError")
     }
 
     register("graphBenchmarks", JavaExec::class) {

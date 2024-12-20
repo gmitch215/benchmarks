@@ -11,9 +11,12 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.*
+import oshi.SystemInfo
 import xyz.gmitch215.benchmarks.*
 import java.io.File
 import java.nio.file.Files
+import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.collections.set
 
@@ -180,6 +183,78 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
 
             logger.debug { "Retrieved version information for '${lang.id}'" }
         }
+    
+    // OS File
+    
+    launch {
+        val osFile = File(versionsFolder, "os.txt")
+        if (osFile.exists())
+            osFile.delete()
+
+        logger.debug { "Writing Platform information at ${osFile.absolutePath}" }
+
+        osFile.createNewFile()
+
+        val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss zzzz").format(Date())
+        val si = SystemInfo()
+
+        // Hardware Information
+
+        val maxMemory = si.hardware.memory.total.run {
+            val mb = this / 1_000_000
+            val gb = mb / 1_000
+            if (gb > 0) "${gb}GB" else "${mb}MB"
+        }
+
+        val maxFrequency = si.hardware.processor.maxFreq.run {
+            val ghz = this / 1_000_000_000.0
+            val mhz = this / 1_000_000.0
+            if (ghz > 0) "${String.format("%,.3f", ghz)}GHz" else "${String.format("%,.3f", mhz)}MHz"
+        }
+
+        val disks = si.hardware.diskStores.joinToString("\n") {
+            fun Long.toGB(): String {
+                val gb = this / 1_000_000_000.0
+                val tb = gb / 1_000.0
+                return if (tb > 0) "${String.format("%,.2f", tb)}TB" else "${String.format("%,.2f", gb)}GB"
+            }
+
+            "- ${it.name} (${it.model}) - ${it.size.toGB()}"
+        }
+
+        // JVM Information
+
+        val jvmMaxMemory = Runtime.getRuntime().maxMemory().run {
+            val mb = this / 1024 / 1024
+            val gb = mb / 1024
+            if (gb > 0) "${gb}GB" else "${mb}MB"
+        }
+
+        val text = """
+            $date
+            $os-$arch ${System.getProperty("os.version")}
+            ${si.operatingSystem.family} - ${si.operatingSystem.manufacturer}
+            ${si.hardware.computerSystem.model} - ${si.hardware.computerSystem.manufacturer}
+            ${si.operatingSystem.bitness} Bit
+            ---
+            CPU: 
+            ${si.hardware.processor}
+            ---
+            Max Memory: $maxMemory
+            Max CPU Frequency: $maxFrequency
+            Processors: ${si.hardware.processor.logicalProcessorCount}
+            ---
+            Disks:
+            $disks
+            ---
+            JVM Max Memory: $jvmMaxMemory
+            Available CPU Cores: ${Runtime.getRuntime().availableProcessors()}
+            """.lines().joinToString("\n") { it.trim() }
+
+        osFile.writeText(text)
+
+        logger.debug { "Wrote Platform information to ${osFile.absolutePath}" }
+    }
 }
 
 fun CoroutineScope.runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: File) = async(Dispatchers.IO) {
