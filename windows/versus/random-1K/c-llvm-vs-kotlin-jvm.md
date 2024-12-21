@@ -11,6 +11,7 @@ l2-display: Kotlin (JVM)
 l2-file-name: main.kt
 title: 1,000 Random Numbers | C (Clang) vs Kotlin (JVM) | Windows
 tags: [random, 1K]
+disabled: []
 comments: true
 ---
 

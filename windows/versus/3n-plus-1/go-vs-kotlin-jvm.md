@@ -11,6 +11,7 @@ l2-display: Kotlin (JVM)
 l2-file-name: main.kt
 title: 3n + 1 Problem | Go vs Kotlin (JVM) | Windows
 tags: [number, math, algorithm]
+disabled: []
 comments: true
 ---
 

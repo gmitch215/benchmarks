@@ -11,6 +11,7 @@ l2-display: Rust
 l2-file-name: main.rs
 title: pow(x, y) (1K) | C (GCC) vs Rust | Linux
 tags: [number, math, 1K]
+disabled: []
 comments: true
 ---
 

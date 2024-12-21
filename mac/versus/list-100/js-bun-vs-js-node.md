@@ -11,6 +11,7 @@ l2-display: JavaScript (Node)
 l2-file-name: main.cjs
 title: List Creation (100) | JavaScript (Bun) vs JavaScript (Node) | Mac
 tags: [list, array, 100]
+disabled: []
 comments: true
 ---
 

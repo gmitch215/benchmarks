@@ -11,6 +11,7 @@ l2-display: Kotlin (JVM)
 l2-file-name: main.kt
 title: 1,000 Random Numbers | JavaScript (Deno) vs Kotlin (JVM) | Mac
 tags: [random, 1K]
+disabled: []
 comments: true
 ---
 

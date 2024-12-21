@@ -11,6 +11,7 @@ l2-display: Go
 l2-file-name: main.go
 title: 1,000 Random Numbers | C (Clang) vs Go | Linux
 tags: [random, 1K]
+disabled: []
 comments: true
 ---
 

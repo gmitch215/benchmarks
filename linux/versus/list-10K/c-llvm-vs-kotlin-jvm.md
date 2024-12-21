@@ -11,6 +11,7 @@ l2-display: Kotlin (JVM)
 l2-file-name: main.kt
 title: List Creation (10K) | C (Clang) vs Kotlin (JVM) | Linux
 tags: [list, array, 10K]
+disabled: []
 comments: true
 ---
 

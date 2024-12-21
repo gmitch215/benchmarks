@@ -11,6 +11,7 @@ l2-display: JavaScript (Bun)
 l2-file-name: main.cjs
 title: List Creation (10K) | Java vs JavaScript (Bun) | Linux
 tags: [list, array, 10K]
+disabled: []
 comments: true
 ---
 

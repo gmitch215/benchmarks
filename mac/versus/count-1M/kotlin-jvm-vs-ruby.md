@@ -11,6 +11,7 @@ l2-display: Ruby
 l2-file-name: main.rb
 title: Count to 1 Million | Kotlin (JVM) vs Ruby | Mac
 tags: [number, count, 1M]
+disabled: []
 comments: true
 ---
 

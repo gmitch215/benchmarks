@@ -11,6 +11,7 @@ l2-display: C (Clang)
 l2-file-name: main.c
 title: HTTP GET Request | C (GCC) vs C (Clang) | Linux
 tags: [web, request]
+disabled: [kotlin-native]
 comments: true
 ---
 

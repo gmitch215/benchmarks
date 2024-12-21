@@ -11,6 +11,7 @@ l2-display: Rust
 l2-file-name: main.rs
 title: 1,000,000 Random Numbers | Kotlin (Native) vs Rust | Windows
 tags: [random, 1M]
+disabled: []
 comments: true
 ---
 

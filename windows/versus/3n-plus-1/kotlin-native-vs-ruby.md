@@ -11,6 +11,7 @@ l2-display: Ruby
 l2-file-name: main.rb
 title: 3n + 1 Problem | Kotlin (Native) vs Ruby | Windows
 tags: [number, math, algorithm]
+disabled: []
 comments: true
 ---
 

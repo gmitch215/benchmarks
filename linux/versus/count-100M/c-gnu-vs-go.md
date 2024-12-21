@@ -11,6 +11,7 @@ l2-display: Go
 l2-file-name: main.go
 title: Count to 100 Million | C (GCC) vs Go | Linux
 tags: [number, count, 100M]
+disabled: []
 comments: true
 ---
 

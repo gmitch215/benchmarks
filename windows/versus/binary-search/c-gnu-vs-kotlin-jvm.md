@@ -11,6 +11,7 @@ l2-display: Kotlin (JVM)
 l2-file-name: main.kt
 title: Binary Search (x5) | C (GCC) vs Kotlin (JVM) | Windows
 tags: [number, search]
+disabled: []
 comments: true
 ---
 

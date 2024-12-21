@@ -5,6 +5,7 @@ id: http-post
 platform: windows
 title: HTTP POST Request | Select Language | Windows
 tags: [web, request]
+disabled: [kotlin-native]
 ---
 
 Performs an HTTP POST Request to a specified URL with "Hello World" as the request body.

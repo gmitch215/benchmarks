@@ -11,6 +11,7 @@ l2-display: Kotlin (JVM)
 l2-file-name: main.kt
 title: pow(x, y) (1K) | Java vs Kotlin (JVM) | Linux
 tags: [number, math, 1K]
+disabled: []
 comments: true
 ---
 

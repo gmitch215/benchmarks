@@ -5,6 +5,7 @@ id: pow-1K
 platform: linux
 title: pow(x, y) (1K) | Select Language | Linux
 tags: [number, math, 1K]
+disabled: []
 ---
 
 Benchmark the performance of the `pow` function, using decimal numbers.

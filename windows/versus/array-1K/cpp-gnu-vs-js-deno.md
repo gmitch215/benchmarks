@@ -11,6 +11,7 @@ l2-display: JavaScript (Deno)
 l2-file-name: main.cjs
 title: Array Assignment (1K) | C++ (G++) vs JavaScript (Deno) | Windows
 tags: [array, 1K]
+disabled: []
 comments: true
 ---
 

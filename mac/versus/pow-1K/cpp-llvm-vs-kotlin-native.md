@@ -11,6 +11,7 @@ l2-display: Kotlin (Native)
 l2-file-name: main.kt
 title: pow(x, y) (1K) | C++ (Clang++) vs Kotlin (Native) | Mac
 tags: [number, math, 1K]
+disabled: []
 comments: true
 ---
 

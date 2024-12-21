@@ -11,6 +11,7 @@ l2-display: Ruby
 l2-file-name: main.rb
 title: Binary Search (x5) | JavaScript (Deno) vs Ruby | Windows
 tags: [number, search]
+disabled: []
 comments: true
 ---
 

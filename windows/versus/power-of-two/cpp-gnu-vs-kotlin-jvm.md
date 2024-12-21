@@ -11,6 +11,7 @@ l2-display: Kotlin (JVM)
 l2-file-name: main.kt
 title: Powers of Two | C++ (G++) vs Kotlin (JVM) | Windows
 tags: [number, math, exponentiation]
+disabled: []
 comments: true
 ---
 

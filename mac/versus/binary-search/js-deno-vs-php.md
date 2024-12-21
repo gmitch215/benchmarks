@@ -11,6 +11,7 @@ l2-display: PHP
 l2-file-name: main.php
 title: Binary Search (x5) | JavaScript (Deno) vs PHP | Mac
 tags: [number, search]
+disabled: []
 comments: true
 ---
 

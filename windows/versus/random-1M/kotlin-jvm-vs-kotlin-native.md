@@ -11,6 +11,7 @@ l2-display: Kotlin (Native)
 l2-file-name: main.kt
 title: 1,000,000 Random Numbers | Kotlin (JVM) vs Kotlin (Native) | Windows
 tags: [random, 1M]
+disabled: []
 comments: true
 ---
 

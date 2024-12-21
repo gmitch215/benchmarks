@@ -11,6 +11,7 @@ l2-display: Ruby
 l2-file-name: main.rb
 title: List Creation (100) | C (GCC) vs Ruby | Windows
 tags: [list, array, 100]
+disabled: []
 comments: true
 ---
 

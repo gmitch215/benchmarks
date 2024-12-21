@@ -11,6 +11,7 @@ l2-display: Rust
 l2-file-name: main.rs
 title: Powers of Two | JavaScript (Deno) vs Rust | Windows
 tags: [number, math, exponentiation]
+disabled: []
 comments: true
 ---
 

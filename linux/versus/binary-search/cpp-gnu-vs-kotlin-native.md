@@ -11,6 +11,7 @@ l2-display: Kotlin (Native)
 l2-file-name: main.kt
 title: Binary Search (x5) | C++ (G++) vs Kotlin (Native) | Linux
 tags: [number, search]
+disabled: []
 comments: true
 ---
 

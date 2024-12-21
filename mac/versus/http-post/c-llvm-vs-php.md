@@ -11,6 +11,7 @@ l2-display: PHP
 l2-file-name: main.php
 title: HTTP POST Request | C (Clang) vs PHP | Mac
 tags: [web, request]
+disabled: [kotlin-native]
 comments: true
 ---
 

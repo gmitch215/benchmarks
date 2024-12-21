@@ -11,6 +11,7 @@ l2-display: Kotlin (Native)
 l2-file-name: main.kt
 title: Array Assignment (1K) | Kotlin (JVM) vs Kotlin (Native) | Linux
 tags: [array, 1K]
+disabled: []
 comments: true
 ---
 

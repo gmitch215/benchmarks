@@ -11,6 +11,7 @@ l2-display: PHP
 l2-file-name: main.php
 title: Count to 1 Million | C++ (Clang++) vs PHP | Windows
 tags: [number, count, 1M]
+disabled: []
 comments: true
 ---
 

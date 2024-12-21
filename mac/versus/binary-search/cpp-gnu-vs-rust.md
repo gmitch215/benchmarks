@@ -11,6 +11,7 @@ l2-display: Rust
 l2-file-name: main.rs
 title: Binary Search (x5) | C++ (G++) vs Rust | Mac
 tags: [number, search]
+disabled: []
 comments: true
 ---
 

@@ -11,6 +11,7 @@ l2-display: Kotlin (JVM)
 l2-file-name: main.kt
 title: Count to 1 Million | C++ (G++) vs Kotlin (JVM) | Linux
 tags: [number, count, 1M]
+disabled: []
 comments: true
 ---
 

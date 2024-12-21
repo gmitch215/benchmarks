@@ -11,6 +11,7 @@ l2-display: Python
 l2-file-name: main.py
 title: pow(x, y) (10K) | C++ (Clang++) vs Python | Windows
 tags: [number, math, 10K]
+disabled: []
 comments: true
 ---
 

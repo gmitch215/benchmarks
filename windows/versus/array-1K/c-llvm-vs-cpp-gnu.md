@@ -11,6 +11,7 @@ l2-display: C++ (G++)
 l2-file-name: main.cpp
 title: Array Assignment (1K) | C (Clang) vs C++ (G++) | Windows
 tags: [array, 1K]
+disabled: []
 comments: true
 ---
 

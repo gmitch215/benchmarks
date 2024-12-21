@@ -11,6 +11,7 @@ l2-display: JavaScript (Bun)
 l2-file-name: main.cjs
 title: Powers of Two | Go vs JavaScript (Bun) | Windows
 tags: [number, math, exponentiation]
+disabled: []
 comments: true
 ---
 

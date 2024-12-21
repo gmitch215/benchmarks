@@ -11,6 +11,7 @@ l2-display: PHP
 l2-file-name: main.php
 title: 3n + 1 Problem | C++ (G++) vs PHP | Windows
 tags: [number, math, algorithm]
+disabled: []
 comments: true
 ---
 

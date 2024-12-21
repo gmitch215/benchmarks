@@ -11,6 +11,7 @@ l2-display: Kotlin (Native)
 l2-file-name: main.kt
 title: List Creation (10K) | C++ (Clang++) vs Kotlin (Native) | Mac
 tags: [list, array, 10K]
+disabled: []
 comments: true
 ---
 

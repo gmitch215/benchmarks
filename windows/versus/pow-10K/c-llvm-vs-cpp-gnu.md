@@ -11,6 +11,7 @@ l2-display: C++ (G++)
 l2-file-name: main.cpp
 title: pow(x, y) (10K) | C (Clang) vs C++ (G++) | Windows
 tags: [number, math, 10K]
+disabled: []
 comments: true
 ---
 

@@ -11,6 +11,7 @@ l2-display: Rust
 l2-file-name: main.rs
 title: List Creation (10K) | Go vs Rust | Linux
 tags: [list, array, 10K]
+disabled: []
 comments: true
 ---
 

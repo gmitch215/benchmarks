@@ -11,6 +11,7 @@ l2-display: Ruby
 l2-file-name: main.rb
 title: pow(x, y) (10K) | JavaScript (Bun) vs Ruby | Linux
 tags: [number, math, 10K]
+disabled: []
 comments: true
 ---
 

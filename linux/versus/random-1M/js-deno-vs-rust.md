@@ -11,6 +11,7 @@ l2-display: Rust
 l2-file-name: main.rs
 title: 1,000,000 Random Numbers | JavaScript (Deno) vs Rust | Linux
 tags: [random, 1M]
+disabled: []
 comments: true
 ---
 

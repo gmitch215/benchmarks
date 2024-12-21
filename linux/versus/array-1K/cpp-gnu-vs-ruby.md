@@ -11,6 +11,7 @@ l2-display: Ruby
 l2-file-name: main.rb
 title: Array Assignment (1K) | C++ (G++) vs Ruby | Linux
 tags: [array, 1K]
+disabled: []
 comments: true
 ---
 

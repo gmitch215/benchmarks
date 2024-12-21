@@ -11,6 +11,7 @@ l2-display: JavaScript (Deno)
 l2-file-name: main.cjs
 title: Binary Search (x5) | JavaScript (Bun) vs JavaScript (Deno) | Mac
 tags: [number, search]
+disabled: []
 comments: true
 ---
 

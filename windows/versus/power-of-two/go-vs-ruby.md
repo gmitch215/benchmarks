@@ -11,6 +11,7 @@ l2-display: Ruby
 l2-file-name: main.rb
 title: Powers of Two | Go vs Ruby | Windows
 tags: [number, math, exponentiation]
+disabled: []
 comments: true
 ---
 

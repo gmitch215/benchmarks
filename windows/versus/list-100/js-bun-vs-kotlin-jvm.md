@@ -11,6 +11,7 @@ l2-display: Kotlin (JVM)
 l2-file-name: main.kt
 title: List Creation (100) | JavaScript (Bun) vs Kotlin (JVM) | Windows
 tags: [list, array, 100]
+disabled: []
 comments: true
 ---
 

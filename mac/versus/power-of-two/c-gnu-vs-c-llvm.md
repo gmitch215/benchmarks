@@ -11,6 +11,7 @@ l2-display: C (Clang)
 l2-file-name: main.c
 title: Powers of Two | C (GCC) vs C (Clang) | Mac
 tags: [number, math, exponentiation]
+disabled: []
 comments: true
 ---
 

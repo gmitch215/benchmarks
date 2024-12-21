@@ -11,6 +11,7 @@ l2-display: Rust
 l2-file-name: main.rs
 title: HTTP POST Request | JavaScript (Node) vs Rust | Mac
 tags: [web, request]
+disabled: [kotlin-native]
 comments: true
 ---
 

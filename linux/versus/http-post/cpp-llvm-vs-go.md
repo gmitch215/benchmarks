@@ -11,6 +11,7 @@ l2-display: Go
 l2-file-name: main.go
 title: HTTP POST Request | C++ (Clang++) vs Go | Linux
 tags: [web, request]
+disabled: [kotlin-native]
 comments: true
 ---
 

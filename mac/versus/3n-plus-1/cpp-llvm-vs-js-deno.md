@@ -11,6 +11,7 @@ l2-display: JavaScript (Deno)
 l2-file-name: main.cjs
 title: 3n + 1 Problem | C++ (Clang++) vs JavaScript (Deno) | Mac
 tags: [number, math, algorithm]
+disabled: []
 comments: true
 ---
 

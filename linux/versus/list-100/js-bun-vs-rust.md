@@ -11,6 +11,7 @@ l2-display: Rust
 l2-file-name: main.rs
 title: List Creation (100) | JavaScript (Bun) vs Rust | Linux
 tags: [list, array, 100]
+disabled: []
 comments: true
 ---
 

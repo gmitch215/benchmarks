@@ -11,6 +11,7 @@ l2-display: Kotlin (JVM)
 l2-file-name: main.kt
 title: Binary Search (x5) | Go vs Kotlin (JVM) | Linux
 tags: [number, search]
+disabled: []
 comments: true
 ---
 

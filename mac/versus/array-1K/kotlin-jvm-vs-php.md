@@ -11,6 +11,7 @@ l2-display: PHP
 l2-file-name: main.php
 title: Array Assignment (1K) | Kotlin (JVM) vs PHP | Mac
 tags: [array, 1K]
+disabled: []
 comments: true
 ---
 

@@ -11,6 +11,7 @@ l2-display: Java
 l2-file-name: Main.java
 title: pow(x, y) (10K) | C++ (G++) vs Java | Mac
 tags: [number, math, 10K]
+disabled: []
 comments: true
 ---
 

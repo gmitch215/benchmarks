@@ -11,6 +11,7 @@ l2-display: JavaScript (Node)
 l2-file-name: main.cjs
 title: List Creation (10K) | Java vs JavaScript (Node) | Mac
 tags: [list, array, 10K]
+disabled: []
 comments: true
 ---
 

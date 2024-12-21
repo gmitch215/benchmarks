@@ -11,6 +11,7 @@ l2-display: Ruby
 l2-file-name: main.rb
 title: List Creation (10K) | JavaScript (Node) vs Ruby | Windows
 tags: [list, array, 10K]
+disabled: []
 comments: true
 ---
 

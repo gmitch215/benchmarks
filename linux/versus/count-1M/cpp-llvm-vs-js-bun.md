@@ -11,6 +11,7 @@ l2-display: JavaScript (Bun)
 l2-file-name: main.cjs
 title: Count to 1 Million | C++ (Clang++) vs JavaScript (Bun) | Linux
 tags: [number, count, 1M]
+disabled: []
 comments: true
 ---
 

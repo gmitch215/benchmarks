@@ -11,6 +11,7 @@ l2-display: Java
 l2-file-name: Main.java
 title: 3n + 1 Problem | C++ (Clang++) vs Java | Mac
 tags: [number, math, algorithm]
+disabled: []
 comments: true
 ---
 

@@ -11,6 +11,7 @@ l2-display: JavaScript (Deno)
 l2-file-name: main.cjs
 title: Count to 100 Million | Java vs JavaScript (Deno) | Windows
 tags: [number, count, 100M]
+disabled: []
 comments: true
 ---
 

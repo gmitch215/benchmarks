@@ -11,6 +11,7 @@ l2-display: Java
 l2-file-name: Main.java
 title: Array Assignment (1K) | C (GCC) vs Java | Linux
 tags: [array, 1K]
+disabled: []
 comments: true
 ---
 

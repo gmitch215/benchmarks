@@ -11,6 +11,7 @@ l2-display: C++ (G++)
 l2-file-name: main.cpp
 title: 1,000 Random Numbers | C (Clang) vs C++ (G++) | Mac
 tags: [random, 1K]
+disabled: []
 comments: true
 ---
 

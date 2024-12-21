@@ -11,6 +11,7 @@ l2-display: C++ (Clang++)
 l2-file-name: main.cpp
 title: Powers of Two | C (GCC) vs C++ (Clang++) | Windows
 tags: [number, math, exponentiation]
+disabled: []
 comments: true
 ---
 

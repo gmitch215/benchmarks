@@ -11,6 +11,7 @@ l2-display: JavaScript (Deno)
 l2-file-name: main.cjs
 title: List Creation (10K) | C (GCC) vs JavaScript (Deno) | Mac
 tags: [list, array, 10K]
+disabled: []
 comments: true
 ---
 

@@ -11,6 +11,7 @@ l2-display: PHP
 l2-file-name: main.php
 title: pow(x, y) (10K) | Kotlin (Native) vs PHP | Linux
 tags: [number, math, 10K]
+disabled: []
 comments: true
 ---
 

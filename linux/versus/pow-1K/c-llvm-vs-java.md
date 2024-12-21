@@ -11,6 +11,7 @@ l2-display: Java
 l2-file-name: Main.java
 title: pow(x, y) (1K) | C (Clang) vs Java | Linux
 tags: [number, math, 1K]
+disabled: []
 comments: true
 ---
 

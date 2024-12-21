@@ -11,6 +11,7 @@ l2-display: C++ (G++)
 l2-file-name: main.cpp
 title: HTTP POST Request | C (GCC) vs C++ (G++) | Linux
 tags: [web, request]
+disabled: [kotlin-native]
 comments: true
 ---
 

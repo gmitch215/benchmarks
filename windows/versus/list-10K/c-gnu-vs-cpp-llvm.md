@@ -11,6 +11,7 @@ l2-display: C++ (Clang++)
 l2-file-name: main.cpp
 title: List Creation (10K) | C (GCC) vs C++ (Clang++) | Windows
 tags: [list, array, 10K]
+disabled: []
 comments: true
 ---
 

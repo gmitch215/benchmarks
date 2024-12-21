@@ -11,6 +11,7 @@ l2-display: JavaScript (Deno)
 l2-file-name: main.cjs
 title: 1,000 Random Numbers | C (GCC) vs JavaScript (Deno) | Linux
 tags: [random, 1K]
+disabled: []
 comments: true
 ---
 

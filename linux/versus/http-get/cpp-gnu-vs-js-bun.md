@@ -11,6 +11,7 @@ l2-display: JavaScript (Bun)
 l2-file-name: main.cjs
 title: HTTP GET Request | C++ (G++) vs JavaScript (Bun) | Linux
 tags: [web, request]
+disabled: [kotlin-native]
 comments: true
 ---
 

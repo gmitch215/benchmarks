@@ -11,6 +11,7 @@ l2-display: C++ (G++)
 l2-file-name: main.cpp
 title: Count to 1 Million | C (Clang) vs C++ (G++) | Windows
 tags: [number, count, 1M]
+disabled: []
 comments: true
 ---
 

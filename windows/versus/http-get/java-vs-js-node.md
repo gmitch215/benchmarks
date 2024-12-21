@@ -11,6 +11,7 @@ l2-display: JavaScript (Node)
 l2-file-name: main.cjs
 title: HTTP GET Request | Java vs JavaScript (Node) | Windows
 tags: [web, request]
+disabled: [kotlin-native]
 comments: true
 ---
 

@@ -11,6 +11,7 @@ l2-display: Go
 l2-file-name: main.go
 title: List Creation (10K) | C (GCC) vs Go | Mac
 tags: [list, array, 10K]
+disabled: []
 comments: true
 ---
 

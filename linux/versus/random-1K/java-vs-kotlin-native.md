@@ -11,6 +11,7 @@ l2-display: Kotlin (Native)
 l2-file-name: main.kt
 title: 1,000 Random Numbers | Java vs Kotlin (Native) | Linux
 tags: [random, 1K]
+disabled: []
 comments: true
 ---
 

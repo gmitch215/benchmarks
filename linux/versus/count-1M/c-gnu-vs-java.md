@@ -11,6 +11,7 @@ l2-display: Java
 l2-file-name: Main.java
 title: Count to 1 Million | C (GCC) vs Java | Linux
 tags: [number, count, 1M]
+disabled: []
 comments: true
 ---
 

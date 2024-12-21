@@ -11,6 +11,7 @@ l2-display: JavaScript (Deno)
 l2-file-name: main.cjs
 title: Array Assignment (100K) | C (GCC) vs JavaScript (Deno) | Linux
 tags: [array, 100K]
+disabled: []
 comments: true
 ---
 

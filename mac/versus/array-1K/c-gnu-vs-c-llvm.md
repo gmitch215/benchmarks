@@ -11,6 +11,7 @@ l2-display: C (Clang)
 l2-file-name: main.c
 title: Array Assignment (1K) | C (GCC) vs C (Clang) | Mac
 tags: [array, 1K]
+disabled: []
 comments: true
 ---
 

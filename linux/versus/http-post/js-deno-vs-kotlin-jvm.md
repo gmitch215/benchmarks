@@ -11,6 +11,7 @@ l2-display: Kotlin (JVM)
 l2-file-name: main.kt
 title: HTTP POST Request | JavaScript (Deno) vs Kotlin (JVM) | Linux
 tags: [web, request]
+disabled: [kotlin-native]
 comments: true
 ---
 

@@ -11,6 +11,7 @@ l2-display: Java
 l2-file-name: Main.java
 title: Array Assignment (1K) | Go vs Java | Windows
 tags: [array, 1K]
+disabled: []
 comments: true
 ---
 

@@ -11,6 +11,7 @@ l2-display: C++ (G++)
 l2-file-name: main.cpp
 title: 3n + 1 Problem | C (Clang) vs C++ (G++) | Linux
 tags: [number, math, algorithm]
+disabled: []
 comments: true
 ---
 

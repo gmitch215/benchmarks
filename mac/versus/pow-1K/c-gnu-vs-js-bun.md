@@ -11,6 +11,7 @@ l2-display: JavaScript (Bun)
 l2-file-name: main.cjs
 title: pow(x, y) (1K) | C (GCC) vs JavaScript (Bun) | Mac
 tags: [number, math, 1K]
+disabled: []
 comments: true
 ---
 

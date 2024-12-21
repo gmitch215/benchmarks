@@ -11,6 +11,7 @@ l2-display: JavaScript (Bun)
 l2-file-name: main.cjs
 title: 1,000,000 Random Numbers | C (GCC) vs JavaScript (Bun) | Windows
 tags: [random, 1M]
+disabled: []
 comments: true
 ---
 

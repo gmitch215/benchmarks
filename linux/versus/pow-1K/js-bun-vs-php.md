@@ -11,6 +11,7 @@ l2-display: PHP
 l2-file-name: main.php
 title: pow(x, y) (1K) | JavaScript (Bun) vs PHP | Linux
 tags: [number, math, 1K]
+disabled: []
 comments: true
 ---
 

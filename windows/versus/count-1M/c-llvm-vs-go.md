@@ -11,6 +11,7 @@ l2-display: Go
 l2-file-name: main.go
 title: Count to 1 Million | C (Clang) vs Go | Windows
 tags: [number, count, 1M]
+disabled: []
 comments: true
 ---
 

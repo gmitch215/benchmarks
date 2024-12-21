@@ -11,6 +11,7 @@ l2-display: Rust
 l2-file-name: main.rs
 title: pow(x, y) (10K) | C (Clang) vs Rust | Mac
 tags: [number, math, 10K]
+disabled: []
 comments: true
 ---
 

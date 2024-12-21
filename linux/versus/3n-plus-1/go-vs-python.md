@@ -11,6 +11,7 @@ l2-display: Python
 l2-file-name: main.py
 title: 3n + 1 Problem | Go vs Python | Linux
 tags: [number, math, algorithm]
+disabled: []
 comments: true
 ---
 

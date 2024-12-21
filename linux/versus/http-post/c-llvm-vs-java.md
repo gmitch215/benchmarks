@@ -11,6 +11,7 @@ l2-display: Java
 l2-file-name: Main.java
 title: HTTP POST Request | C (Clang) vs Java | Linux
 tags: [web, request]
+disabled: [kotlin-native]
 comments: true
 ---
 

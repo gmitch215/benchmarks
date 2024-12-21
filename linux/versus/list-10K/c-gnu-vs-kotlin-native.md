@@ -11,6 +11,7 @@ l2-display: Kotlin (Native)
 l2-file-name: main.kt
 title: List Creation (10K) | C (GCC) vs Kotlin (Native) | Linux
 tags: [list, array, 10K]
+disabled: []
 comments: true
 ---
 

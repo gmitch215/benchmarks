@@ -11,6 +11,7 @@ l2-display: Kotlin (JVM)
 l2-file-name: main.kt
 title: Binary Search (x5) | JavaScript (Bun) vs Kotlin (JVM) | Mac
 tags: [number, search]
+disabled: []
 comments: true
 ---
 

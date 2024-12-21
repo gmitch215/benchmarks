@@ -11,6 +11,7 @@ l2-display: C++ (G++)
 l2-file-name: main.cpp
 title: List Creation (10K) | C (Clang) vs C++ (G++) | Mac
 tags: [list, array, 10K]
+disabled: []
 comments: true
 ---
 

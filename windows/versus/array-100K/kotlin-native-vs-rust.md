@@ -11,6 +11,7 @@ l2-display: Rust
 l2-file-name: main.rs
 title: Array Assignment (100K) | Kotlin (Native) vs Rust | Windows
 tags: [array, 100K]
+disabled: []
 comments: true
 ---
 

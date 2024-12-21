@@ -11,6 +11,7 @@ l2-display: Go
 l2-file-name: main.go
 title: 3n + 1 Problem | C++ (Clang++) vs Go | Windows
 tags: [number, math, algorithm]
+disabled: []
 comments: true
 ---
 

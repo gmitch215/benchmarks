@@ -11,6 +11,7 @@ l2-display: Kotlin (JVM)
 l2-file-name: main.kt
 title: HTTP POST Request | C (GCC) vs Kotlin (JVM) | Windows
 tags: [web, request]
+disabled: [kotlin-native]
 comments: true
 ---
 

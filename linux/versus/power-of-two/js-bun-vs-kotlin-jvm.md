@@ -11,6 +11,7 @@ l2-display: Kotlin (JVM)
 l2-file-name: main.kt
 title: Powers of Two | JavaScript (Bun) vs Kotlin (JVM) | Linux
 tags: [number, math, exponentiation]
+disabled: []
 comments: true
 ---
 

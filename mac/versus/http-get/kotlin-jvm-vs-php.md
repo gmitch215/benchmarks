@@ -11,6 +11,7 @@ l2-display: PHP
 l2-file-name: main.php
 title: HTTP GET Request | Kotlin (JVM) vs PHP | Mac
 tags: [web, request]
+disabled: [kotlin-native]
 comments: true
 ---
 

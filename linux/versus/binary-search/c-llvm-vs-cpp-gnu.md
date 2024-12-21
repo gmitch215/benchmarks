@@ -11,6 +11,7 @@ l2-display: C++ (G++)
 l2-file-name: main.cpp
 title: Binary Search (x5) | C (Clang) vs C++ (G++) | Linux
 tags: [number, search]
+disabled: []
 comments: true
 ---
 

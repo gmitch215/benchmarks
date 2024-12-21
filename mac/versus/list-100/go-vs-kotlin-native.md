@@ -11,6 +11,7 @@ l2-display: Kotlin (Native)
 l2-file-name: main.kt
 title: List Creation (100) | Go vs Kotlin (Native) | Mac
 tags: [list, array, 100]
+disabled: []
 comments: true
 ---
 

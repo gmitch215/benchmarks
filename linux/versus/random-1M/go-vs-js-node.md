@@ -11,6 +11,7 @@ l2-display: JavaScript (Node)
 l2-file-name: main.cjs
 title: 1,000,000 Random Numbers | Go vs JavaScript (Node) | Linux
 tags: [random, 1M]
+disabled: []
 comments: true
 ---
 

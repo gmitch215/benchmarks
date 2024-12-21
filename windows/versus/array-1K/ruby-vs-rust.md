@@ -11,6 +11,7 @@ l2-display: Rust
 l2-file-name: main.rs
 title: Array Assignment (1K) | Ruby vs Rust | Windows
 tags: [array, 1K]
+disabled: []
 comments: true
 ---
 

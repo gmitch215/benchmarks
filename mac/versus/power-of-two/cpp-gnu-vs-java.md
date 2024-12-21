@@ -11,6 +11,7 @@ l2-display: Java
 l2-file-name: Main.java
 title: Powers of Two | C++ (G++) vs Java | Mac
 tags: [number, math, exponentiation]
+disabled: []
 comments: true
 ---
 

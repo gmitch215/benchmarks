@@ -11,6 +11,7 @@ l2-display: Kotlin (Native)
 l2-file-name: main.kt
 title: 3n + 1 Problem | C (Clang) vs Kotlin (Native) | Linux
 tags: [number, math, algorithm]
+disabled: []
 comments: true
 ---
 

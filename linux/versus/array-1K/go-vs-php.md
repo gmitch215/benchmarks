@@ -11,6 +11,7 @@ l2-display: PHP
 l2-file-name: main.php
 title: Array Assignment (1K) | Go vs PHP | Linux
 tags: [array, 1K]
+disabled: []
 comments: true
 ---
 

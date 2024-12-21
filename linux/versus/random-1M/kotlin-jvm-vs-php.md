@@ -11,6 +11,7 @@ l2-display: PHP
 l2-file-name: main.php
 title: 1,000,000 Random Numbers | Kotlin (JVM) vs PHP | Linux
 tags: [random, 1M]
+disabled: []
 comments: true
 ---
 

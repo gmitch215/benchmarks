@@ -5,6 +5,7 @@ id: binary-search
 platform: windows
 title: Binary Search (x5) | Select Language | Windows
 tags: [number, search]
+disabled: []
 ---
 
 Performs a binary search through 25 sorted integers for the third, ninth, 13th, 16th, and 21st elements.

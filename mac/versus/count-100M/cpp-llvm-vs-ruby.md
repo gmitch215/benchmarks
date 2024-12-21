@@ -11,6 +11,7 @@ l2-display: Ruby
 l2-file-name: main.rb
 title: Count to 100 Million | C++ (Clang++) vs Ruby | Mac
 tags: [number, count, 100M]
+disabled: []
 comments: true
 ---
 

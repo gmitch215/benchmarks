@@ -11,6 +11,7 @@ l2-display: JavaScript (Bun)
 l2-file-name: main.cjs
 title: Array Assignment (100K) | Java vs JavaScript (Bun) | Mac
 tags: [array, 100K]
+disabled: []
 comments: true
 ---
 

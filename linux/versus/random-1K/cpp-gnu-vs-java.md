@@ -11,6 +11,7 @@ l2-display: Java
 l2-file-name: Main.java
 title: 1,000 Random Numbers | C++ (G++) vs Java | Linux
 tags: [random, 1K]
+disabled: []
 comments: true
 ---
 

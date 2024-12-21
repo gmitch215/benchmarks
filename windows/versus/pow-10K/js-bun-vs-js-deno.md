@@ -11,6 +11,7 @@ l2-display: JavaScript (Deno)
 l2-file-name: main.cjs
 title: pow(x, y) (10K) | JavaScript (Bun) vs JavaScript (Deno) | Windows
 tags: [number, math, 10K]
+disabled: []
 comments: true
 ---
 

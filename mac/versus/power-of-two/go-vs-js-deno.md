@@ -11,6 +11,7 @@ l2-display: JavaScript (Deno)
 l2-file-name: main.cjs
 title: Powers of Two | Go vs JavaScript (Deno) | Mac
 tags: [number, math, exponentiation]
+disabled: []
 comments: true
 ---
 

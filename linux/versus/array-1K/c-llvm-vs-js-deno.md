@@ -11,6 +11,7 @@ l2-display: JavaScript (Deno)
 l2-file-name: main.cjs
 title: Array Assignment (1K) | C (Clang) vs JavaScript (Deno) | Linux
 tags: [array, 1K]
+disabled: []
 comments: true
 ---
 

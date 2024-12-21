@@ -11,6 +11,7 @@ l2-display: JavaScript (Deno)
 l2-file-name: main.cjs
 title: Count to 100 Million | Go vs JavaScript (Deno) | Linux
 tags: [number, count, 100M]
+disabled: []
 comments: true
 ---
 

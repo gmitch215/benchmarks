@@ -11,6 +11,7 @@ l2-display: Kotlin (Native)
 l2-file-name: main.kt
 title: Binary Search (x5) | C (GCC) vs Kotlin (Native) | Mac
 tags: [number, search]
+disabled: []
 comments: true
 ---
 

@@ -11,6 +11,7 @@ l2-display: JavaScript (Bun)
 l2-file-name: main.cjs
 title: Array Assignment (1K) | C (GCC) vs JavaScript (Bun) | Mac
 tags: [array, 1K]
+disabled: []
 comments: true
 ---
 

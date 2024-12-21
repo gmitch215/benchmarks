@@ -11,6 +11,7 @@ l2-display: Kotlin (Native)
 l2-file-name: main.kt
 title: List Creation (100) | JavaScript (Deno) vs Kotlin (Native) | Linux
 tags: [list, array, 100]
+disabled: []
 comments: true
 ---
 

@@ -11,6 +11,7 @@ l2-display: Ruby
 l2-file-name: main.rb
 title: HTTP GET Request | Kotlin (JVM) vs Ruby | Linux
 tags: [web, request]
+disabled: [kotlin-native]
 comments: true
 ---
 

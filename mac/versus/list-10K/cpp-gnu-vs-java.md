@@ -11,6 +11,7 @@ l2-display: Java
 l2-file-name: Main.java
 title: List Creation (10K) | C++ (G++) vs Java | Mac
 tags: [list, array, 10K]
+disabled: []
 comments: true
 ---
 

@@ -11,6 +11,7 @@ l2-display: Kotlin (Native)
 l2-file-name: main.kt
 title: Count to 100 Million | Java vs Kotlin (Native) | Mac
 tags: [number, count, 100M]
+disabled: []
 comments: true
 ---
 

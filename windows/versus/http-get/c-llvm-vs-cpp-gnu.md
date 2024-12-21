@@ -11,6 +11,7 @@ l2-display: C++ (G++)
 l2-file-name: main.cpp
 title: HTTP GET Request | C (Clang) vs C++ (G++) | Windows
 tags: [web, request]
+disabled: [kotlin-native]
 comments: true
 ---
 

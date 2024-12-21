@@ -11,6 +11,7 @@ l2-display: PHP
 l2-file-name: main.php
 title: HTTP GET Request | JavaScript (Deno) vs PHP | Linux
 tags: [web, request]
+disabled: [kotlin-native]
 comments: true
 ---
 

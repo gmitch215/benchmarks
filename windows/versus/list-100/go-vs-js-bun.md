@@ -11,6 +11,7 @@ l2-display: JavaScript (Bun)
 l2-file-name: main.cjs
 title: List Creation (100) | Go vs JavaScript (Bun) | Windows
 tags: [list, array, 100]
+disabled: []
 comments: true
 ---
 

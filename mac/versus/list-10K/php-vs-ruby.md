@@ -11,6 +11,7 @@ l2-display: Ruby
 l2-file-name: main.rb
 title: List Creation (10K) | PHP vs Ruby | Mac
 tags: [list, array, 10K]
+disabled: []
 comments: true
 ---
 

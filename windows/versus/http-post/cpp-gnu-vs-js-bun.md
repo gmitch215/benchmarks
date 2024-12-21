@@ -11,6 +11,7 @@ l2-display: JavaScript (Bun)
 l2-file-name: main.cjs
 title: HTTP POST Request | C++ (G++) vs JavaScript (Bun) | Windows
 tags: [web, request]
+disabled: [kotlin-native]
 comments: true
 ---
 

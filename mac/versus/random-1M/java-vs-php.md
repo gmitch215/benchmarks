@@ -11,6 +11,7 @@ l2-display: PHP
 l2-file-name: main.php
 title: 1,000,000 Random Numbers | Java vs PHP | Mac
 tags: [random, 1M]
+disabled: []
 comments: true
 ---
 

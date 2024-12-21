@@ -11,6 +11,7 @@ l2-display: C++ (G++)
 l2-file-name: main.cpp
 title: 1,000,000 Random Numbers | C (GCC) vs C++ (G++) | Windows
 tags: [random, 1M]
+disabled: []
 comments: true
 ---
 

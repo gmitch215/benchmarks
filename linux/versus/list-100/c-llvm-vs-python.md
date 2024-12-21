@@ -11,6 +11,7 @@ l2-display: Python
 l2-file-name: main.py
 title: List Creation (100) | C (Clang) vs Python | Linux
 tags: [list, array, 100]
+disabled: []
 comments: true
 ---
 

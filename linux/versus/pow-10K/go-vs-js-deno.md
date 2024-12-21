@@ -11,6 +11,7 @@ l2-display: JavaScript (Deno)
 l2-file-name: main.cjs
 title: pow(x, y) (10K) | Go vs JavaScript (Deno) | Linux
 tags: [number, math, 10K]
+disabled: []
 comments: true
 ---
 

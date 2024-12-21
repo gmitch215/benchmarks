@@ -11,6 +11,7 @@ l2-display: JavaScript (Node)
 l2-file-name: main.cjs
 title: Count to 1 Million | Java vs JavaScript (Node) | Windows
 tags: [number, count, 1M]
+disabled: []
 comments: true
 ---
 

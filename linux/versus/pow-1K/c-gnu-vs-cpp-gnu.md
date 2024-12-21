@@ -11,6 +11,7 @@ l2-display: C++ (G++)
 l2-file-name: main.cpp
 title: pow(x, y) (1K) | C (GCC) vs C++ (G++) | Linux
 tags: [number, math, 1K]
+disabled: []
 comments: true
 ---
 

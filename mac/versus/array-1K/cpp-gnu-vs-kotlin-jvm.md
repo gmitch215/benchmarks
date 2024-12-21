@@ -11,6 +11,7 @@ l2-display: Kotlin (JVM)
 l2-file-name: main.kt
 title: Array Assignment (1K) | C++ (G++) vs Kotlin (JVM) | Mac
 tags: [array, 1K]
+disabled: []
 comments: true
 ---
 

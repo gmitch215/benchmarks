@@ -11,6 +11,7 @@ l2-display: Go
 l2-file-name: main.go
 title: Binary Search (x5) | C++ (Clang++) vs Go | Windows
 tags: [number, search]
+disabled: []
 comments: true
 ---
 

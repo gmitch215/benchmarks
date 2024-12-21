@@ -11,6 +11,7 @@ l2-display: Go
 l2-file-name: main.go
 title: pow(x, y) (10K) | C (Clang) vs Go | Mac
 tags: [number, math, 10K]
+disabled: []
 comments: true
 ---
 

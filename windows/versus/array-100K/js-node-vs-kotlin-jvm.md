@@ -11,6 +11,7 @@ l2-display: Kotlin (JVM)
 l2-file-name: main.kt
 title: Array Assignment (100K) | JavaScript (Node) vs Kotlin (JVM) | Windows
 tags: [array, 100K]
+disabled: []
 comments: true
 ---
 

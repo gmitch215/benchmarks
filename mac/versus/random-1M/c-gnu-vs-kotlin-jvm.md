@@ -11,6 +11,7 @@ l2-display: Kotlin (JVM)
 l2-file-name: main.kt
 title: 1,000,000 Random Numbers | C (GCC) vs Kotlin (JVM) | Mac
 tags: [random, 1M]
+disabled: []
 comments: true
 ---
 

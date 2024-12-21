@@ -11,6 +11,7 @@ l2-display: PHP
 l2-file-name: main.php
 title: Powers of Two | C (GCC) vs PHP | Linux
 tags: [number, math, exponentiation]
+disabled: []
 comments: true
 ---
 

@@ -11,6 +11,7 @@ l2-display: Python
 l2-file-name: main.py
 title: Count to 100 Million | JavaScript (Bun) vs Python | Linux
 tags: [number, count, 100M]
+disabled: []
 comments: true
 ---
 

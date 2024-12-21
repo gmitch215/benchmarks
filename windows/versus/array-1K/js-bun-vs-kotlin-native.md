@@ -11,6 +11,7 @@ l2-display: Kotlin (Native)
 l2-file-name: main.kt
 title: Array Assignment (1K) | JavaScript (Bun) vs Kotlin (Native) | Windows
 tags: [array, 1K]
+disabled: []
 comments: true
 ---
 

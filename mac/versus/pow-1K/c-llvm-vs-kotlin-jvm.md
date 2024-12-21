@@ -11,6 +11,7 @@ l2-display: Kotlin (JVM)
 l2-file-name: main.kt
 title: pow(x, y) (1K) | C (Clang) vs Kotlin (JVM) | Mac
 tags: [number, math, 1K]
+disabled: []
 comments: true
 ---
 

@@ -11,6 +11,7 @@ l2-display: Rust
 l2-file-name: main.rs
 title: Binary Search (x5) | JavaScript (Bun) vs Rust | Linux
 tags: [number, search]
+disabled: []
 comments: true
 ---
 

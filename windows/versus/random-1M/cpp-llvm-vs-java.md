@@ -11,6 +11,7 @@ l2-display: Java
 l2-file-name: Main.java
 title: 1,000,000 Random Numbers | C++ (Clang++) vs Java | Windows
 tags: [random, 1M]
+disabled: []
 comments: true
 ---
 

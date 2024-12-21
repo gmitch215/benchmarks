@@ -11,6 +11,7 @@ l2-display: JavaScript (Node)
 l2-file-name: main.cjs
 title: pow(x, y) (1K) | C++ (G++) vs JavaScript (Node) | Mac
 tags: [number, math, 1K]
+disabled: []
 comments: true
 ---
 

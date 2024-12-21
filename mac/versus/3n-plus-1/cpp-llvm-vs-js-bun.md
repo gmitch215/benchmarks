@@ -11,6 +11,7 @@ l2-display: JavaScript (Bun)
 l2-file-name: main.cjs
 title: 3n + 1 Problem | C++ (Clang++) vs JavaScript (Bun) | Mac
 tags: [number, math, algorithm]
+disabled: []
 comments: true
 ---
 

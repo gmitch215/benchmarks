@@ -11,6 +11,7 @@ l2-display: Ruby
 l2-file-name: main.rb
 title: Count to 100 Million | JavaScript (Bun) vs Ruby | Linux
 tags: [number, count, 100M]
+disabled: []
 comments: true
 ---
 

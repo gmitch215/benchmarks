@@ -11,6 +11,7 @@ l2-display: JavaScript (Deno)
 l2-file-name: main.cjs
 title: Array Assignment (1K) | Java vs JavaScript (Deno) | Mac
 tags: [array, 1K]
+disabled: []
 comments: true
 ---
 

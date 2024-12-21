@@ -11,6 +11,7 @@ l2-display: Kotlin (Native)
 l2-file-name: main.kt
 title: Powers of Two | C (GCC) vs Kotlin (Native) | Linux
 tags: [number, math, exponentiation]
+disabled: []
 comments: true
 ---
 

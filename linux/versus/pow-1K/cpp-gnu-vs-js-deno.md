@@ -11,6 +11,7 @@ l2-display: JavaScript (Deno)
 l2-file-name: main.cjs
 title: pow(x, y) (1K) | C++ (G++) vs JavaScript (Deno) | Linux
 tags: [number, math, 1K]
+disabled: []
 comments: true
 ---
 

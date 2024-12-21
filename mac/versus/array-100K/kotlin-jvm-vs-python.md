@@ -11,6 +11,7 @@ l2-display: Python
 l2-file-name: main.py
 title: Array Assignment (100K) | Kotlin (JVM) vs Python | Mac
 tags: [array, 100K]
+disabled: []
 comments: true
 ---
 

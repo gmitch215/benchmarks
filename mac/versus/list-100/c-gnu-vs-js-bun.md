@@ -11,6 +11,7 @@ l2-display: JavaScript (Bun)
 l2-file-name: main.cjs
 title: List Creation (100) | C (GCC) vs JavaScript (Bun) | Mac
 tags: [list, array, 100]
+disabled: []
 comments: true
 ---
 

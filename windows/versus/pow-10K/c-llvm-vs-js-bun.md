@@ -11,6 +11,7 @@ l2-display: JavaScript (Bun)
 l2-file-name: main.cjs
 title: pow(x, y) (10K) | C (Clang) vs JavaScript (Bun) | Windows
 tags: [number, math, 10K]
+disabled: []
 comments: true
 ---
 

@@ -11,6 +11,7 @@ l2-display: PHP
 l2-file-name: main.php
 title: List Creation (10K) | JavaScript (Deno) vs PHP | Mac
 tags: [list, array, 10K]
+disabled: []
 comments: true
 ---
 

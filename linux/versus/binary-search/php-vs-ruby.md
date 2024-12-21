@@ -11,6 +11,7 @@ l2-display: Ruby
 l2-file-name: main.rb
 title: Binary Search (x5) | PHP vs Ruby | Linux
 tags: [number, search]
+disabled: []
 comments: true
 ---
 

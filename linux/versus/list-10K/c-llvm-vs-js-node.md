@@ -11,6 +11,7 @@ l2-display: JavaScript (Node)
 l2-file-name: main.cjs
 title: List Creation (10K) | C (Clang) vs JavaScript (Node) | Linux
 tags: [list, array, 10K]
+disabled: []
 comments: true
 ---
 

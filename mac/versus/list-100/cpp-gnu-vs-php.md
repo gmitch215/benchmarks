@@ -11,6 +11,7 @@ l2-display: PHP
 l2-file-name: main.php
 title: List Creation (100) | C++ (G++) vs PHP | Mac
 tags: [list, array, 100]
+disabled: []
 comments: true
 ---
 

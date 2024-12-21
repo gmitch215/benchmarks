@@ -11,6 +11,7 @@ l2-display: Rust
 l2-file-name: main.rs
 title: Count to 1 Million | Go vs Rust | Windows
 tags: [number, count, 1M]
+disabled: []
 comments: true
 ---
 

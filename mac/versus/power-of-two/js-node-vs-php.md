@@ -11,6 +11,7 @@ l2-display: PHP
 l2-file-name: main.php
 title: Powers of Two | JavaScript (Node) vs PHP | Mac
 tags: [number, math, exponentiation]
+disabled: []
 comments: true
 ---
 

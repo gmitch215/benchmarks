@@ -11,6 +11,7 @@ l2-display: C (Clang)
 l2-file-name: main.c
 title: Count to 1 Million | C (GCC) vs C (Clang) | Windows
 tags: [number, count, 1M]
+disabled: []
 comments: true
 ---
 

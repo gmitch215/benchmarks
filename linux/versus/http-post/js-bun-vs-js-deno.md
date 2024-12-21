@@ -11,6 +11,7 @@ l2-display: JavaScript (Deno)
 l2-file-name: main.cjs
 title: HTTP POST Request | JavaScript (Bun) vs JavaScript (Deno) | Linux
 tags: [web, request]
+disabled: [kotlin-native]
 comments: true
 ---
 

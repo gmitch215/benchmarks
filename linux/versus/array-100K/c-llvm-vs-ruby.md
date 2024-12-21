@@ -11,6 +11,7 @@ l2-display: Ruby
 l2-file-name: main.rb
 title: Array Assignment (100K) | C (Clang) vs Ruby | Linux
 tags: [array, 100K]
+disabled: []
 comments: true
 ---
 

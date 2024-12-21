@@ -11,6 +11,7 @@ l2-display: JavaScript (Deno)
 l2-file-name: main.cjs
 title: 1,000 Random Numbers | JavaScript (Bun) vs JavaScript (Deno) | Mac
 tags: [random, 1K]
+disabled: []
 comments: true
 ---
 

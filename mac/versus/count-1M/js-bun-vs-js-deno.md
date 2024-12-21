@@ -11,6 +11,7 @@ l2-display: JavaScript (Deno)
 l2-file-name: main.cjs
 title: Count to 1 Million | JavaScript (Bun) vs JavaScript (Deno) | Mac
 tags: [number, count, 1M]
+disabled: []
 comments: true
 ---
 

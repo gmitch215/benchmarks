@@ -11,6 +11,7 @@ l2-display: C++ (G++)
 l2-file-name: main.cpp
 title: Array Assignment (100K) | C (GCC) vs C++ (G++) | Linux
 tags: [array, 100K]
+disabled: []
 comments: true
 ---
 

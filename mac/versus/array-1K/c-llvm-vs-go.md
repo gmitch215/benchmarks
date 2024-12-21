@@ -11,6 +11,7 @@ l2-display: Go
 l2-file-name: main.go
 title: Array Assignment (1K) | C (Clang) vs Go | Mac
 tags: [array, 1K]
+disabled: []
 comments: true
 ---
 

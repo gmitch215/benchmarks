@@ -11,6 +11,7 @@ l2-display: Python
 l2-file-name: main.py
 title: Powers of Two | Kotlin (Native) vs Python | Linux
 tags: [number, math, exponentiation]
+disabled: []
 comments: true
 ---
 

@@ -11,6 +11,7 @@ l2-display: Ruby
 l2-file-name: main.rb
 title: List Creation (100) | Kotlin (JVM) vs Ruby | Linux
 tags: [list, array, 100]
+disabled: []
 comments: true
 ---
 

@@ -11,6 +11,7 @@ l2-display: Rust
 l2-file-name: main.rs
 title: 3n + 1 Problem | PHP vs Rust | Linux
 tags: [number, math, algorithm]
+disabled: []
 comments: true
 ---
 

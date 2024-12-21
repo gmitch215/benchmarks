@@ -11,6 +11,7 @@ l2-display: Java
 l2-file-name: Main.java
 title: List Creation (100) | Go vs Java | Mac
 tags: [list, array, 100]
+disabled: []
 comments: true
 ---
 

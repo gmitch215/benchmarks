@@ -11,6 +11,7 @@ l2-display: Kotlin (JVM)
 l2-file-name: main.kt
 title: List Creation (100) | Java vs Kotlin (JVM) | Mac
 tags: [list, array, 100]
+disabled: []
 comments: true
 ---
 

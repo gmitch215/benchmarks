@@ -11,6 +11,7 @@ l2-display: Kotlin (Native)
 l2-file-name: main.kt
 title: 3n + 1 Problem | Kotlin (JVM) vs Kotlin (Native) | Windows
 tags: [number, math, algorithm]
+disabled: []
 comments: true
 ---
 

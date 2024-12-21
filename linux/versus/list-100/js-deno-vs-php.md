@@ -11,6 +11,7 @@ l2-display: PHP
 l2-file-name: main.php
 title: List Creation (100) | JavaScript (Deno) vs PHP | Linux
 tags: [list, array, 100]
+disabled: []
 comments: true
 ---
 

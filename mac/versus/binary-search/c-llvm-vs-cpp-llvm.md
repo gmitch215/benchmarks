@@ -11,6 +11,7 @@ l2-display: C++ (Clang++)
 l2-file-name: main.cpp
 title: Binary Search (x5) | C (Clang) vs C++ (Clang++) | Mac
 tags: [number, search]
+disabled: []
 comments: true
 ---
 

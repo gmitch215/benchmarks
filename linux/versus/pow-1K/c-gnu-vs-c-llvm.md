@@ -11,6 +11,7 @@ l2-display: C (Clang)
 l2-file-name: main.c
 title: pow(x, y) (1K) | C (GCC) vs C (Clang) | Linux
 tags: [number, math, 1K]
+disabled: []
 comments: true
 ---
 

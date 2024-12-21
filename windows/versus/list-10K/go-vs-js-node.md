@@ -11,6 +11,7 @@ l2-display: JavaScript (Node)
 l2-file-name: main.cjs
 title: List Creation (10K) | Go vs JavaScript (Node) | Windows
 tags: [list, array, 10K]
+disabled: []
 comments: true
 ---
 

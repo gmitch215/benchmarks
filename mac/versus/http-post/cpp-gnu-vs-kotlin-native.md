@@ -11,6 +11,7 @@ l2-display: Kotlin (Native)
 l2-file-name: main.kt
 title: HTTP POST Request | C++ (G++) vs Kotlin (Native) | Mac
 tags: [web, request]
+disabled: [kotlin-native]
 comments: true
 ---
 

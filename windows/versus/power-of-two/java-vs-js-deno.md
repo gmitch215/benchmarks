@@ -11,6 +11,7 @@ l2-display: JavaScript (Deno)
 l2-file-name: main.cjs
 title: Powers of Two | Java vs JavaScript (Deno) | Windows
 tags: [number, math, exponentiation]
+disabled: []
 comments: true
 ---
 

@@ -11,6 +11,7 @@ l2-display: Kotlin (JVM)
 l2-file-name: main.kt
 title: HTTP GET Request | Java vs Kotlin (JVM) | Mac
 tags: [web, request]
+disabled: [kotlin-native]
 comments: true
 ---
 

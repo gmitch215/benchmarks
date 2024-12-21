@@ -11,6 +11,7 @@ l2-display: JavaScript (Node)
 l2-file-name: main.cjs
 title: 3n + 1 Problem | Go vs JavaScript (Node) | Linux
 tags: [number, math, algorithm]
+disabled: []
 comments: true
 ---
 

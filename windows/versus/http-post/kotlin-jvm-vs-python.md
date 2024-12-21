@@ -11,6 +11,7 @@ l2-display: Python
 l2-file-name: main.py
 title: HTTP POST Request | Kotlin (JVM) vs Python | Windows
 tags: [web, request]
+disabled: [kotlin-native]
 comments: true
 ---
 

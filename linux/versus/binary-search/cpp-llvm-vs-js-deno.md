@@ -11,6 +11,7 @@ l2-display: JavaScript (Deno)
 l2-file-name: main.cjs
 title: Binary Search (x5) | C++ (Clang++) vs JavaScript (Deno) | Linux
 tags: [number, search]
+disabled: []
 comments: true
 ---
 

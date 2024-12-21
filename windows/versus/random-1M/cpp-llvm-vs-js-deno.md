@@ -11,6 +11,7 @@ l2-display: JavaScript (Deno)
 l2-file-name: main.cjs
 title: 1,000,000 Random Numbers | C++ (Clang++) vs JavaScript (Deno) | Windows
 tags: [random, 1M]
+disabled: []
 comments: true
 ---
 

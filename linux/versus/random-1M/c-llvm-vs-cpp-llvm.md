@@ -11,6 +11,7 @@ l2-display: C++ (Clang++)
 l2-file-name: main.cpp
 title: 1,000,000 Random Numbers | C (Clang) vs C++ (Clang++) | Linux
 tags: [random, 1M]
+disabled: []
 comments: true
 ---
 

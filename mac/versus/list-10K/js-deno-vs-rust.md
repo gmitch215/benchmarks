@@ -11,6 +11,7 @@ l2-display: Rust
 l2-file-name: main.rs
 title: List Creation (10K) | JavaScript (Deno) vs Rust | Mac
 tags: [list, array, 10K]
+disabled: []
 comments: true
 ---
 

@@ -11,6 +11,7 @@ l2-display: JavaScript (Deno)
 l2-file-name: main.cjs
 title: pow(x, y) (10K) | Java vs JavaScript (Deno) | Mac
 tags: [number, math, 10K]
+disabled: []
 comments: true
 ---
 

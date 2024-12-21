@@ -11,6 +11,7 @@ l2-display: Python
 l2-file-name: main.py
 title: pow(x, y) (1K) | C (Clang) vs Python | Mac
 tags: [number, math, 1K]
+disabled: []
 comments: true
 ---
 

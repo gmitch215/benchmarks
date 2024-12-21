@@ -11,6 +11,7 @@ l2-display: JavaScript (Node)
 l2-file-name: main.cjs
 title: Array Assignment (1K) | JavaScript (Bun) vs JavaScript (Node) | Linux
 tags: [array, 1K]
+disabled: []
 comments: true
 ---
 

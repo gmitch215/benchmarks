@@ -11,6 +11,7 @@ l2-display: Kotlin (JVM)
 l2-file-name: main.kt
 title: pow(x, y) (10K) | JavaScript (Bun) vs Kotlin (JVM) | Linux
 tags: [number, math, 10K]
+disabled: []
 comments: true
 ---
 

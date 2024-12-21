@@ -5,6 +5,7 @@ id: pow-1K
 platform: mac
 title: pow(x, y) (1K) | Select Language | Mac
 tags: [number, math, 1K]
+disabled: []
 ---
 
 Benchmark the performance of the `pow` function, using decimal numbers.

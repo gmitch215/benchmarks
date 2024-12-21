@@ -11,6 +11,7 @@ l2-display: Python
 l2-file-name: main.py
 title: List Creation (10K) | Kotlin (Native) vs Python | Windows
 tags: [list, array, 10K]
+disabled: []
 comments: true
 ---
 

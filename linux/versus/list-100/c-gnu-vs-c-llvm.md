@@ -11,6 +11,7 @@ l2-display: C (Clang)
 l2-file-name: main.c
 title: List Creation (100) | C (GCC) vs C (Clang) | Linux
 tags: [list, array, 100]
+disabled: []
 comments: true
 ---
 

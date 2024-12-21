@@ -11,6 +11,7 @@ l2-display: Kotlin (Native)
 l2-file-name: main.kt
 title: Array Assignment (100K) | Java vs Kotlin (Native) | Mac
 tags: [array, 100K]
+disabled: []
 comments: true
 ---
 

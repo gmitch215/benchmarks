@@ -11,6 +11,7 @@ l2-display: Kotlin (Native)
 l2-file-name: main.kt
 title: Powers of Two | JavaScript (Deno) vs Kotlin (Native) | Mac
 tags: [number, math, exponentiation]
+disabled: []
 comments: true
 ---
 

@@ -11,6 +11,7 @@ l2-display: Python
 l2-file-name: main.py
 title: 1,000 Random Numbers | Java vs Python | Mac
 tags: [random, 1K]
+disabled: []
 comments: true
 ---
 

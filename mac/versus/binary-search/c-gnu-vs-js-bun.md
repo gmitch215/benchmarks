@@ -11,6 +11,7 @@ l2-display: JavaScript (Bun)
 l2-file-name: main.cjs
 title: Binary Search (x5) | C (GCC) vs JavaScript (Bun) | Mac
 tags: [number, search]
+disabled: []
 comments: true
 ---
 

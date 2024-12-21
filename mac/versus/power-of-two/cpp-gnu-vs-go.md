@@ -11,6 +11,7 @@ l2-display: Go
 l2-file-name: main.go
 title: Powers of Two | C++ (G++) vs Go | Mac
 tags: [number, math, exponentiation]
+disabled: []
 comments: true
 ---
 

@@ -11,6 +11,7 @@ l2-display: Go
 l2-file-name: main.go
 title: pow(x, y) (1K) | C (GCC) vs Go | Linux
 tags: [number, math, 1K]
+disabled: []
 comments: true
 ---
 

@@ -11,6 +11,7 @@ l2-display: JavaScript (Node)
 l2-file-name: main.cjs
 title: Binary Search (x5) | C (Clang) vs JavaScript (Node) | Linux
 tags: [number, search]
+disabled: []
 comments: true
 ---
 

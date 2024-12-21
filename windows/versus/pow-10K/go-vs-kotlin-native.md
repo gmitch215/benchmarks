@@ -11,6 +11,7 @@ l2-display: Kotlin (Native)
 l2-file-name: main.kt
 title: pow(x, y) (10K) | Go vs Kotlin (Native) | Windows
 tags: [number, math, 10K]
+disabled: []
 comments: true
 ---
 

@@ -11,6 +11,7 @@ l2-display: JavaScript (Node)
 l2-file-name: main.cjs
 title: Powers of Two | Go vs JavaScript (Node) | Linux
 tags: [number, math, exponentiation]
+disabled: []
 comments: true
 ---
 

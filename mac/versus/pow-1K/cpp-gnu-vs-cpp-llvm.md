@@ -11,6 +11,7 @@ l2-display: C++ (Clang++)
 l2-file-name: main.cpp
 title: pow(x, y) (1K) | C++ (G++) vs C++ (Clang++) | Mac
 tags: [number, math, 1K]
+disabled: []
 comments: true
 ---
 

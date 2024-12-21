@@ -11,6 +11,7 @@ l2-display: Kotlin (Native)
 l2-file-name: main.kt
 title: HTTP GET Request | Java vs Kotlin (Native) | Windows
 tags: [web, request]
+disabled: [kotlin-native]
 comments: true
 ---
 

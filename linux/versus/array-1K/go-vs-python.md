@@ -11,6 +11,7 @@ l2-display: Python
 l2-file-name: main.py
 title: Array Assignment (1K) | Go vs Python | Linux
 tags: [array, 1K]
+disabled: []
 comments: true
 ---
 

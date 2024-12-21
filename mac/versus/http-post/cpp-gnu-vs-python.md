@@ -11,6 +11,7 @@ l2-display: Python
 l2-file-name: main.py
 title: HTTP POST Request | C++ (G++) vs Python | Mac
 tags: [web, request]
+disabled: [kotlin-native]
 comments: true
 ---
 

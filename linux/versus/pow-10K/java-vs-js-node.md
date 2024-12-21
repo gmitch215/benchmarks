@@ -11,6 +11,7 @@ l2-display: JavaScript (Node)
 l2-file-name: main.cjs
 title: pow(x, y) (10K) | Java vs JavaScript (Node) | Linux
 tags: [number, math, 10K]
+disabled: []
 comments: true
 ---
 

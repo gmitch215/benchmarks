@@ -11,6 +11,7 @@ l2-display: C++ (Clang++)
 l2-file-name: main.cpp
 title: HTTP POST Request | C++ (G++) vs C++ (Clang++) | Mac
 tags: [web, request]
+disabled: [kotlin-native]
 comments: true
 ---
 

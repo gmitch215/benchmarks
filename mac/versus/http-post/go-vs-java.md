@@ -11,6 +11,7 @@ l2-display: Java
 l2-file-name: Main.java
 title: HTTP POST Request | Go vs Java | Mac
 tags: [web, request]
+disabled: [kotlin-native]
 comments: true
 ---
 

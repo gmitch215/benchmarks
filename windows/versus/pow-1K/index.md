@@ -5,6 +5,7 @@ id: pow-1K
 platform: windows
 title: pow(x, y) (1K) | Select Language | Windows
 tags: [number, math, 1K]
+disabled: []
 ---
 
 Benchmark the performance of the `pow` function, using decimal numbers.

@@ -11,6 +11,7 @@ l2-display: Python
 l2-file-name: main.py
 title: Binary Search (x5) | C++ (G++) vs Python | Windows
 tags: [number, search]
+disabled: []
 comments: true
 ---
 
