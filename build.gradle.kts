@@ -99,7 +99,7 @@ tasks {
     // Site Tasks
 
     register("createSite", JavaExec::class) {
-        mustRunAfter("preview")
+        mustRunAfter("moveGraphs", "preview")
 
         mainClass.set("xyz.gmitch215.benchmarks.site.SiteCreator")
         classpath = sourceSets["main"].runtimeClasspath
@@ -110,11 +110,7 @@ tasks {
     }
 
     register("moveGraphs", Copy::class) {
-        mustRunAfter(
-            "graphBenchmarks",
-            "createSite",
-            "preview"
-        )
+        mustRunAfter("graphBenchmarks", "preview")
 
         from("build/site/_data/results/windows/graphs/") {
             into("assets/graphs/windows/")
@@ -156,8 +152,8 @@ tasks {
 
     register("site") {
         dependsOn(
-            "createSite",
             "moveGraphs",
+            "createSite",
             "copyResourcesToSite"
         )
     }
