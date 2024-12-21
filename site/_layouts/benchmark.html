@@ -6,7 +6,7 @@ layout: default
 
 <div class="box" id="top">
     <h1>Benchmark: {{ page.display }}</h1>
-    <p>{{ page.summary }}</p>
+    {{ content }}
     <div class="box horizontal" id="tags">
         {% for tag in page.tags %}
         <span>{{ tag }}</span>

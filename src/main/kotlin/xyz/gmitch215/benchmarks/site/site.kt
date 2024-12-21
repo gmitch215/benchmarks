@@ -12,13 +12,12 @@ import kotlinx.serialization.encodeToString
 import xyz.gmitch215.benchmarks.logger
 import xyz.gmitch215.benchmarks.measurement.BenchmarkConfiguration
 import xyz.gmitch215.benchmarks.measurement.BenchmarkRun
-import xyz.gmitch215.benchmarks.os
-import xyz.gmitch215.benchmarks.runCommand
-import xyz.gmitch215.benchmarks.s
 import java.io.File
-import java.nio.file.Files
 
 suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
+    logger.info { "Starting Site Creation" }
+    logger.debug { "Arguments: ${args.joinToString()}" }
+
     val input = File(args[0])
     val output = File(args[1])
 

@@ -20,7 +20,7 @@ layout: platform-root
                 </div>
 
                 <h2 title="{{ benchmark.name }} | {{ benchmark.description }}">{{ benchmark.name }}</h2>
-                <p>{{ benchmark.description }}</p>
+                <p>{{ benchmark.description | truncate: 200 }}</p>
             </a>
         </div>
     {% endfor %}

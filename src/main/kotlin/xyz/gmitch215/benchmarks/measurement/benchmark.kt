@@ -31,6 +31,9 @@ private fun countChildren(count: AtomicInteger, job: Job) {
 }
 
 suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
+    logger.info { "Starting Benchmarks" }
+    logger.debug { "Arguments: ${args.joinToString()}" }
+
     val input = File(args[0])
     val output = File(input, "output")
 

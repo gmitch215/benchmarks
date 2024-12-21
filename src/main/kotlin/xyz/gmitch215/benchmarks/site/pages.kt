@@ -61,10 +61,11 @@ val INFO_FILE_TEMPLATE: (String, BenchmarkConfiguration) -> String = { platform,
     id: ${config.id}
     display: ${config.name}
     title: ${config.name} | ${platform.replaceFirstChar { it.uppercase() }}
-    summary: ${config.description}
     tags: [${config.tags.joinToString()}]
     comments: true
     ---
+    
+    ${config.description.replace("\n", "<br>")}
     """.trimIndent()
 }
 
@@ -76,7 +77,6 @@ val VERSUS_FILE_INDEX_TEMPLATE: (String, BenchmarkConfiguration) -> String = { p
     id: ${config.id}
     platform: $platform
     title: ${config.name} | Select Language | ${platform.replaceFirstChar { it.uppercase() }}
-    summary: ${config.description}
     tags: [${config.tags.joinToString()}]
     ---
     """.trimIndent()
@@ -94,7 +94,6 @@ val VERSUS_FILE_TEMPLATE: (String, BenchmarkConfiguration, BenchmarkRun, Benchma
     l2: ${l2.id}
     l2-display: ${l2.language}
     title: ${config.name} | ${l1.language} vs ${l2.language} | ${platform.replaceFirstChar { it.uppercase() }}
-    summary: ${config.description}
     tags: [${config.tags.joinToString()}]
     comments: true
     ---
