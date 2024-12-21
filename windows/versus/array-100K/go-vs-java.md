@@ -1,0 +1,17 @@
+---
+layout: versus
+benchmark: Array Assignment (100K)
+id: array-100K
+platform: windows
+l1: go
+l1-display: Go
+l1-file-name: main.go
+l2: java
+l2-display: Java
+l2-file-name: Main.java
+title: Array Assignment (100K) | Go vs Java | Windows
+tags: [array, 100K]
+comments: true
+---
+
+Assigns 100,000 elements to an array.

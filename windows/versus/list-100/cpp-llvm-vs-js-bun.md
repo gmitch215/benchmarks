@@ -1,0 +1,17 @@
+---
+layout: versus
+benchmark: List Creation (100)
+id: list-100
+platform: windows
+l1: cpp-llvm
+l1-display: C++ (Clang++)
+l1-file-name: main.cpp
+l2: js-bun
+l2-display: JavaScript (Bun)
+l2-file-name: main.cjs
+title: List Creation (100) | C++ (Clang++) vs JavaScript (Bun) | Windows
+tags: [list, array, 100]
+comments: true
+---
+
+Creats a list with 100 elements. List implementations are initialized to their default capacity.

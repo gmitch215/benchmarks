@@ -1,0 +1,17 @@
+---
+layout: versus
+benchmark: Count to 1 Million
+id: count-1M
+platform: windows
+l1: php
+l1-display: PHP
+l1-file-name: main.php
+l2: python
+l2-display: Python
+l2-file-name: main.py
+title: Count to 1 Million | PHP vs Python | Windows
+tags: [number, count, 1M]
+comments: true
+---
+
+Programs that count to 1 million

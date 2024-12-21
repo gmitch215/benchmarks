@@ -1,0 +1,2716 @@
+- "l1":
+    language: "C (GCC)"
+    id: "c-gnu"
+    file-name: "main.c"
+    color: "555555"
+    file: true
+    location: null
+    run: "main.c.gnu.o"
+    version: "gcc --version"
+    compile: "gcc main.c ../../lib/nanotime/nanotime.c -o main.c.gnu.o"
+    compile-extra:
+      "windows": "-lws2_32"
+      "linux": "-lm"
+    cleanup:
+    - "main.c.gnu.o"
+  "l2":
+    language: "C (Clang)"
+    id: "c-llvm"
+    file-name: "main.c"
+    color: "888888"
+    file: true
+    location: null
+    run: "main.c.llvm.o"
+    version: "clang --version"
+    compile: "clang main.c ../../lib/nanotime/nanotime.c -o main.c.llvm.o -w"
+    compile-extra:
+      "linux": "-lm"
+    cleanup:
+    - "main.c.llvm.o"
+- "l1":
+    language: "C (GCC)"
+    id: "c-gnu"
+    file-name: "main.c"
+    color: "555555"
+    file: true
+    location: null
+    run: "main.c.gnu.o"
+    version: "gcc --version"
+    compile: "gcc main.c ../../lib/nanotime/nanotime.c -o main.c.gnu.o"
+    compile-extra:
+      "windows": "-lws2_32"
+      "linux": "-lm"
+    cleanup:
+    - "main.c.gnu.o"
+  "l2":
+    language: "C++ (G++)"
+    id: "cpp-gnu"
+    file-name: "main.cpp"
+    color: "004283"
+    file: true
+    location: null
+    run: "main.cpp.gnu.o"
+    version: "g++ --version"
+    compile: "g++ main.cpp -o main.cpp.gnu.o"
+    compile-extra:
+      "windows": "-lws2_32"
+    cleanup:
+    - "main.cpp.gnu.o"
+- "l1":
+    language: "C (GCC)"
+    id: "c-gnu"
+    file-name: "main.c"
+    color: "555555"
+    file: true
+    location: null
+    run: "main.c.gnu.o"
+    version: "gcc --version"
+    compile: "gcc main.c ../../lib/nanotime/nanotime.c -o main.c.gnu.o"
+    compile-extra:
+      "windows": "-lws2_32"
+      "linux": "-lm"
+    cleanup:
+    - "main.c.gnu.o"
+  "l2":
+    language: "C++ (Clang++)"
+    id: "cpp-llvm"
+    file-name: "main.cpp"
+    color: "006183"
+    file: true
+    location: null
+    run: "main.cpp.llvm.o"
+    version: "clang++ --version"
+    compile: "clang++ main.cpp -o main.cpp.llvm.o -w"
+    compile-extra: {}
+    cleanup:
+    - "main.cpp.llvm.o"
+- "l1":
+    language: "C (GCC)"
+    id: "c-gnu"
+    file-name: "main.c"
+    color: "555555"
+    file: true
+    location: null
+    run: "main.c.gnu.o"
+    version: "gcc --version"
+    compile: "gcc main.c ../../lib/nanotime/nanotime.c -o main.c.gnu.o"
+    compile-extra:
+      "windows": "-lws2_32"
+      "linux": "-lm"
+    cleanup:
+    - "main.c.gnu.o"
+  "l2":
+    language: "Go"
+    id: "go"
+    file-name: "main.go"
+    color: "375eab"
+    file: true
+    location: null
+    run: "main.go.o"
+    version: "go version"
+    compile: "go build -o main.go.o main.go"
+    compile-extra: {}
+    cleanup:
+    - "main.go.o"
+- "l1":
+    language: "C (GCC)"
+    id: "c-gnu"
+    file-name: "main.c"
+    color: "555555"
+    file: true
+    location: null
+    run: "main.c.gnu.o"
+    version: "gcc --version"
+    compile: "gcc main.c ../../lib/nanotime/nanotime.c -o main.c.gnu.o"
+    compile-extra:
+      "windows": "-lws2_32"
+      "linux": "-lm"
+    cleanup:
+    - "main.c.gnu.o"
+  "l2":
+    language: "Java"
+    id: "java"
+    file-name: "Main.java"
+    color: "b07219"
+    file: false
+    location: null
+    run: "java Main.java"
+    version: "java --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "C (GCC)"
+    id: "c-gnu"
+    file-name: "main.c"
+    color: "555555"
+    file: true
+    location: null
+    run: "main.c.gnu.o"
+    version: "gcc --version"
+    compile: "gcc main.c ../../lib/nanotime/nanotime.c -o main.c.gnu.o"
+    compile-extra:
+      "windows": "-lws2_32"
+      "linux": "-lm"
+    cleanup:
+    - "main.c.gnu.o"
+  "l2":
+    language: "JavaScript (Bun)"
+    id: "js-bun"
+    file-name: "main.cjs"
+    color: "5d5986"
+    file: false
+    location: null
+    run: "bun run main.cjs"
+    version: "bun --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "C (GCC)"
+    id: "c-gnu"
+    file-name: "main.c"
+    color: "555555"
+    file: true
+    location: null
+    run: "main.c.gnu.o"
+    version: "gcc --version"
+    compile: "gcc main.c ../../lib/nanotime/nanotime.c -o main.c.gnu.o"
+    compile-extra:
+      "windows": "-lws2_32"
+      "linux": "-lm"
+    cleanup:
+    - "main.c.gnu.o"
+  "l2":
+    language: "JavaScript (Deno)"
+    id: "js-deno"
+    file-name: "main.cjs"
+    color: "70ffaf"
+    file: false
+    location: null
+    run: "deno run -A main.cjs"
+    version: "deno --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "C (GCC)"
+    id: "c-gnu"
+    file-name: "main.c"
+    color: "555555"
+    file: true
+    location: null
+    run: "main.c.gnu.o"
+    version: "gcc --version"
+    compile: "gcc main.c ../../lib/nanotime/nanotime.c -o main.c.gnu.o"
+    compile-extra:
+      "windows": "-lws2_32"
+      "linux": "-lm"
+    cleanup:
+    - "main.c.gnu.o"
+  "l2":
+    language: "JavaScript (Node)"
+    id: "js-node"
+    file-name: "main.cjs"
+    color: "f1e05a"
+    file: false
+    location: null
+    run: "node main.cjs"
+    version: "node --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "C (GCC)"
+    id: "c-gnu"
+    file-name: "main.c"
+    color: "555555"
+    file: true
+    location: null
+    run: "main.c.gnu.o"
+    version: "gcc --version"
+    compile: "gcc main.c ../../lib/nanotime/nanotime.c -o main.c.gnu.o"
+    compile-extra:
+      "windows": "-lws2_32"
+      "linux": "-lm"
+    cleanup:
+    - "main.c.gnu.o"
+  "l2":
+    language: "Kotlin (JVM)"
+    id: "kotlin-jvm"
+    file-name: "main.kt"
+    color: "5f3bbe"
+    file: false
+    location: "KOTLIN_HOME"
+    run: "java -jar main.kt.jar"
+    version: "kotlinc -version"
+    compile: "kotlinc main.kt -include-runtime -d main.kt.jar"
+    compile-extra: {}
+    cleanup:
+    - "main.kt.jar"
+- "l1":
+    language: "C (GCC)"
+    id: "c-gnu"
+    file-name: "main.c"
+    color: "555555"
+    file: true
+    location: null
+    run: "main.c.gnu.o"
+    version: "gcc --version"
+    compile: "gcc main.c ../../lib/nanotime/nanotime.c -o main.c.gnu.o"
+    compile-extra:
+      "windows": "-lws2_32"
+      "linux": "-lm"
+    cleanup:
+    - "main.c.gnu.o"
+  "l2":
+    language: "Kotlin (Native)"
+    id: "kotlin-native"
+    file-name: "main.kt"
+    color: "92316e"
+    file: true
+    location: "KOTLIN_NATIVE_HOME"
+    run: "main.kt"
+    version: "kotlinc-native -version"
+    compile: "kotlinc-native main.kt -o main.kt"
+    compile-extra: {}
+    cleanup:
+    - "main.kt.exe"
+    - "main.kt.kexe"
+- "l1":
+    language: "C (GCC)"
+    id: "c-gnu"
+    file-name: "main.c"
+    color: "555555"
+    file: true
+    location: null
+    run: "main.c.gnu.o"
+    version: "gcc --version"
+    compile: "gcc main.c ../../lib/nanotime/nanotime.c -o main.c.gnu.o"
+    compile-extra:
+      "windows": "-lws2_32"
+      "linux": "-lm"
+    cleanup:
+    - "main.c.gnu.o"
+  "l2":
+    language: "PHP"
+    id: "php"
+    file-name: "main.php"
+    color: "777bb3"
+    file: false
+    location: null
+    run: "php main.php"
+    version: "php --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "C (GCC)"
+    id: "c-gnu"
+    file-name: "main.c"
+    color: "555555"
+    file: true
+    location: null
+    run: "main.c.gnu.o"
+    version: "gcc --version"
+    compile: "gcc main.c ../../lib/nanotime/nanotime.c -o main.c.gnu.o"
+    compile-extra:
+      "windows": "-lws2_32"
+      "linux": "-lm"
+    cleanup:
+    - "main.c.gnu.o"
+  "l2":
+    language: "Python"
+    id: "python"
+    file-name: "main.py"
+    color: "3572a5"
+    file: false
+    location: null
+    run: "python main.py"
+    version: "python --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "C (GCC)"
+    id: "c-gnu"
+    file-name: "main.c"
+    color: "555555"
+    file: true
+    location: null
+    run: "main.c.gnu.o"
+    version: "gcc --version"
+    compile: "gcc main.c ../../lib/nanotime/nanotime.c -o main.c.gnu.o"
+    compile-extra:
+      "windows": "-lws2_32"
+      "linux": "-lm"
+    cleanup:
+    - "main.c.gnu.o"
+  "l2":
+    language: "Ruby"
+    id: "ruby"
+    file-name: "main.rb"
+    color: "701516"
+    file: false
+    location: null
+    run: "ruby main.rb"
+    version: "ruby --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "C (GCC)"
+    id: "c-gnu"
+    file-name: "main.c"
+    color: "555555"
+    file: true
+    location: null
+    run: "main.c.gnu.o"
+    version: "gcc --version"
+    compile: "gcc main.c ../../lib/nanotime/nanotime.c -o main.c.gnu.o"
+    compile-extra:
+      "windows": "-lws2_32"
+      "linux": "-lm"
+    cleanup:
+    - "main.c.gnu.o"
+  "l2":
+    language: "Rust"
+    id: "rust"
+    file-name: "main.rs"
+    color: "dea584"
+    file: true
+    location: null
+    run: "main.rs.o"
+    version: "rustc --version --verbose"
+    compile: "rustc main.rs -o main.rs.o"
+    compile-extra: {}
+    cleanup:
+    - "main.rs.o"
+    - "main.rs.pdb"
+- "l1":
+    language: "C (Clang)"
+    id: "c-llvm"
+    file-name: "main.c"
+    color: "888888"
+    file: true
+    location: null
+    run: "main.c.llvm.o"
+    version: "clang --version"
+    compile: "clang main.c ../../lib/nanotime/nanotime.c -o main.c.llvm.o -w"
+    compile-extra:
+      "linux": "-lm"
+    cleanup:
+    - "main.c.llvm.o"
+  "l2":
+    language: "C++ (G++)"
+    id: "cpp-gnu"
+    file-name: "main.cpp"
+    color: "004283"
+    file: true
+    location: null
+    run: "main.cpp.gnu.o"
+    version: "g++ --version"
+    compile: "g++ main.cpp -o main.cpp.gnu.o"
+    compile-extra:
+      "windows": "-lws2_32"
+    cleanup:
+    - "main.cpp.gnu.o"
+- "l1":
+    language: "C (Clang)"
+    id: "c-llvm"
+    file-name: "main.c"
+    color: "888888"
+    file: true
+    location: null
+    run: "main.c.llvm.o"
+    version: "clang --version"
+    compile: "clang main.c ../../lib/nanotime/nanotime.c -o main.c.llvm.o -w"
+    compile-extra:
+      "linux": "-lm"
+    cleanup:
+    - "main.c.llvm.o"
+  "l2":
+    language: "C++ (Clang++)"
+    id: "cpp-llvm"
+    file-name: "main.cpp"
+    color: "006183"
+    file: true
+    location: null
+    run: "main.cpp.llvm.o"
+    version: "clang++ --version"
+    compile: "clang++ main.cpp -o main.cpp.llvm.o -w"
+    compile-extra: {}
+    cleanup:
+    - "main.cpp.llvm.o"
+- "l1":
+    language: "C (Clang)"
+    id: "c-llvm"
+    file-name: "main.c"
+    color: "888888"
+    file: true
+    location: null
+    run: "main.c.llvm.o"
+    version: "clang --version"
+    compile: "clang main.c ../../lib/nanotime/nanotime.c -o main.c.llvm.o -w"
+    compile-extra:
+      "linux": "-lm"
+    cleanup:
+    - "main.c.llvm.o"
+  "l2":
+    language: "Go"
+    id: "go"
+    file-name: "main.go"
+    color: "375eab"
+    file: true
+    location: null
+    run: "main.go.o"
+    version: "go version"
+    compile: "go build -o main.go.o main.go"
+    compile-extra: {}
+    cleanup:
+    - "main.go.o"
+- "l1":
+    language: "C (Clang)"
+    id: "c-llvm"
+    file-name: "main.c"
+    color: "888888"
+    file: true
+    location: null
+    run: "main.c.llvm.o"
+    version: "clang --version"
+    compile: "clang main.c ../../lib/nanotime/nanotime.c -o main.c.llvm.o -w"
+    compile-extra:
+      "linux": "-lm"
+    cleanup:
+    - "main.c.llvm.o"
+  "l2":
+    language: "Java"
+    id: "java"
+    file-name: "Main.java"
+    color: "b07219"
+    file: false
+    location: null
+    run: "java Main.java"
+    version: "java --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "C (Clang)"
+    id: "c-llvm"
+    file-name: "main.c"
+    color: "888888"
+    file: true
+    location: null
+    run: "main.c.llvm.o"
+    version: "clang --version"
+    compile: "clang main.c ../../lib/nanotime/nanotime.c -o main.c.llvm.o -w"
+    compile-extra:
+      "linux": "-lm"
+    cleanup:
+    - "main.c.llvm.o"
+  "l2":
+    language: "JavaScript (Bun)"
+    id: "js-bun"
+    file-name: "main.cjs"
+    color: "5d5986"
+    file: false
+    location: null
+    run: "bun run main.cjs"
+    version: "bun --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "C (Clang)"
+    id: "c-llvm"
+    file-name: "main.c"
+    color: "888888"
+    file: true
+    location: null
+    run: "main.c.llvm.o"
+    version: "clang --version"
+    compile: "clang main.c ../../lib/nanotime/nanotime.c -o main.c.llvm.o -w"
+    compile-extra:
+      "linux": "-lm"
+    cleanup:
+    - "main.c.llvm.o"
+  "l2":
+    language: "JavaScript (Deno)"
+    id: "js-deno"
+    file-name: "main.cjs"
+    color: "70ffaf"
+    file: false
+    location: null
+    run: "deno run -A main.cjs"
+    version: "deno --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "C (Clang)"
+    id: "c-llvm"
+    file-name: "main.c"
+    color: "888888"
+    file: true
+    location: null
+    run: "main.c.llvm.o"
+    version: "clang --version"
+    compile: "clang main.c ../../lib/nanotime/nanotime.c -o main.c.llvm.o -w"
+    compile-extra:
+      "linux": "-lm"
+    cleanup:
+    - "main.c.llvm.o"
+  "l2":
+    language: "JavaScript (Node)"
+    id: "js-node"
+    file-name: "main.cjs"
+    color: "f1e05a"
+    file: false
+    location: null
+    run: "node main.cjs"
+    version: "node --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "C (Clang)"
+    id: "c-llvm"
+    file-name: "main.c"
+    color: "888888"
+    file: true
+    location: null
+    run: "main.c.llvm.o"
+    version: "clang --version"
+    compile: "clang main.c ../../lib/nanotime/nanotime.c -o main.c.llvm.o -w"
+    compile-extra:
+      "linux": "-lm"
+    cleanup:
+    - "main.c.llvm.o"
+  "l2":
+    language: "Kotlin (JVM)"
+    id: "kotlin-jvm"
+    file-name: "main.kt"
+    color: "5f3bbe"
+    file: false
+    location: "KOTLIN_HOME"
+    run: "java -jar main.kt.jar"
+    version: "kotlinc -version"
+    compile: "kotlinc main.kt -include-runtime -d main.kt.jar"
+    compile-extra: {}
+    cleanup:
+    - "main.kt.jar"
+- "l1":
+    language: "C (Clang)"
+    id: "c-llvm"
+    file-name: "main.c"
+    color: "888888"
+    file: true
+    location: null
+    run: "main.c.llvm.o"
+    version: "clang --version"
+    compile: "clang main.c ../../lib/nanotime/nanotime.c -o main.c.llvm.o -w"
+    compile-extra:
+      "linux": "-lm"
+    cleanup:
+    - "main.c.llvm.o"
+  "l2":
+    language: "Kotlin (Native)"
+    id: "kotlin-native"
+    file-name: "main.kt"
+    color: "92316e"
+    file: true
+    location: "KOTLIN_NATIVE_HOME"
+    run: "main.kt"
+    version: "kotlinc-native -version"
+    compile: "kotlinc-native main.kt -o main.kt"
+    compile-extra: {}
+    cleanup:
+    - "main.kt.exe"
+    - "main.kt.kexe"
+- "l1":
+    language: "C (Clang)"
+    id: "c-llvm"
+    file-name: "main.c"
+    color: "888888"
+    file: true
+    location: null
+    run: "main.c.llvm.o"
+    version: "clang --version"
+    compile: "clang main.c ../../lib/nanotime/nanotime.c -o main.c.llvm.o -w"
+    compile-extra:
+      "linux": "-lm"
+    cleanup:
+    - "main.c.llvm.o"
+  "l2":
+    language: "PHP"
+    id: "php"
+    file-name: "main.php"
+    color: "777bb3"
+    file: false
+    location: null
+    run: "php main.php"
+    version: "php --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "C (Clang)"
+    id: "c-llvm"
+    file-name: "main.c"
+    color: "888888"
+    file: true
+    location: null
+    run: "main.c.llvm.o"
+    version: "clang --version"
+    compile: "clang main.c ../../lib/nanotime/nanotime.c -o main.c.llvm.o -w"
+    compile-extra:
+      "linux": "-lm"
+    cleanup:
+    - "main.c.llvm.o"
+  "l2":
+    language: "Python"
+    id: "python"
+    file-name: "main.py"
+    color: "3572a5"
+    file: false
+    location: null
+    run: "python main.py"
+    version: "python --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "C (Clang)"
+    id: "c-llvm"
+    file-name: "main.c"
+    color: "888888"
+    file: true
+    location: null
+    run: "main.c.llvm.o"
+    version: "clang --version"
+    compile: "clang main.c ../../lib/nanotime/nanotime.c -o main.c.llvm.o -w"
+    compile-extra:
+      "linux": "-lm"
+    cleanup:
+    - "main.c.llvm.o"
+  "l2":
+    language: "Ruby"
+    id: "ruby"
+    file-name: "main.rb"
+    color: "701516"
+    file: false
+    location: null
+    run: "ruby main.rb"
+    version: "ruby --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "C (Clang)"
+    id: "c-llvm"
+    file-name: "main.c"
+    color: "888888"
+    file: true
+    location: null
+    run: "main.c.llvm.o"
+    version: "clang --version"
+    compile: "clang main.c ../../lib/nanotime/nanotime.c -o main.c.llvm.o -w"
+    compile-extra:
+      "linux": "-lm"
+    cleanup:
+    - "main.c.llvm.o"
+  "l2":
+    language: "Rust"
+    id: "rust"
+    file-name: "main.rs"
+    color: "dea584"
+    file: true
+    location: null
+    run: "main.rs.o"
+    version: "rustc --version --verbose"
+    compile: "rustc main.rs -o main.rs.o"
+    compile-extra: {}
+    cleanup:
+    - "main.rs.o"
+    - "main.rs.pdb"
+- "l1":
+    language: "C++ (G++)"
+    id: "cpp-gnu"
+    file-name: "main.cpp"
+    color: "004283"
+    file: true
+    location: null
+    run: "main.cpp.gnu.o"
+    version: "g++ --version"
+    compile: "g++ main.cpp -o main.cpp.gnu.o"
+    compile-extra:
+      "windows": "-lws2_32"
+    cleanup:
+    - "main.cpp.gnu.o"
+  "l2":
+    language: "C++ (Clang++)"
+    id: "cpp-llvm"
+    file-name: "main.cpp"
+    color: "006183"
+    file: true
+    location: null
+    run: "main.cpp.llvm.o"
+    version: "clang++ --version"
+    compile: "clang++ main.cpp -o main.cpp.llvm.o -w"
+    compile-extra: {}
+    cleanup:
+    - "main.cpp.llvm.o"
+- "l1":
+    language: "C++ (G++)"
+    id: "cpp-gnu"
+    file-name: "main.cpp"
+    color: "004283"
+    file: true
+    location: null
+    run: "main.cpp.gnu.o"
+    version: "g++ --version"
+    compile: "g++ main.cpp -o main.cpp.gnu.o"
+    compile-extra:
+      "windows": "-lws2_32"
+    cleanup:
+    - "main.cpp.gnu.o"
+  "l2":
+    language: "Go"
+    id: "go"
+    file-name: "main.go"
+    color: "375eab"
+    file: true
+    location: null
+    run: "main.go.o"
+    version: "go version"
+    compile: "go build -o main.go.o main.go"
+    compile-extra: {}
+    cleanup:
+    - "main.go.o"
+- "l1":
+    language: "C++ (G++)"
+    id: "cpp-gnu"
+    file-name: "main.cpp"
+    color: "004283"
+    file: true
+    location: null
+    run: "main.cpp.gnu.o"
+    version: "g++ --version"
+    compile: "g++ main.cpp -o main.cpp.gnu.o"
+    compile-extra:
+      "windows": "-lws2_32"
+    cleanup:
+    - "main.cpp.gnu.o"
+  "l2":
+    language: "Java"
+    id: "java"
+    file-name: "Main.java"
+    color: "b07219"
+    file: false
+    location: null
+    run: "java Main.java"
+    version: "java --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "C++ (G++)"
+    id: "cpp-gnu"
+    file-name: "main.cpp"
+    color: "004283"
+    file: true
+    location: null
+    run: "main.cpp.gnu.o"
+    version: "g++ --version"
+    compile: "g++ main.cpp -o main.cpp.gnu.o"
+    compile-extra:
+      "windows": "-lws2_32"
+    cleanup:
+    - "main.cpp.gnu.o"
+  "l2":
+    language: "JavaScript (Bun)"
+    id: "js-bun"
+    file-name: "main.cjs"
+    color: "5d5986"
+    file: false
+    location: null
+    run: "bun run main.cjs"
+    version: "bun --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "C++ (G++)"
+    id: "cpp-gnu"
+    file-name: "main.cpp"
+    color: "004283"
+    file: true
+    location: null
+    run: "main.cpp.gnu.o"
+    version: "g++ --version"
+    compile: "g++ main.cpp -o main.cpp.gnu.o"
+    compile-extra:
+      "windows": "-lws2_32"
+    cleanup:
+    - "main.cpp.gnu.o"
+  "l2":
+    language: "JavaScript (Deno)"
+    id: "js-deno"
+    file-name: "main.cjs"
+    color: "70ffaf"
+    file: false
+    location: null
+    run: "deno run -A main.cjs"
+    version: "deno --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "C++ (G++)"
+    id: "cpp-gnu"
+    file-name: "main.cpp"
+    color: "004283"
+    file: true
+    location: null
+    run: "main.cpp.gnu.o"
+    version: "g++ --version"
+    compile: "g++ main.cpp -o main.cpp.gnu.o"
+    compile-extra:
+      "windows": "-lws2_32"
+    cleanup:
+    - "main.cpp.gnu.o"
+  "l2":
+    language: "JavaScript (Node)"
+    id: "js-node"
+    file-name: "main.cjs"
+    color: "f1e05a"
+    file: false
+    location: null
+    run: "node main.cjs"
+    version: "node --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "C++ (G++)"
+    id: "cpp-gnu"
+    file-name: "main.cpp"
+    color: "004283"
+    file: true
+    location: null
+    run: "main.cpp.gnu.o"
+    version: "g++ --version"
+    compile: "g++ main.cpp -o main.cpp.gnu.o"
+    compile-extra:
+      "windows": "-lws2_32"
+    cleanup:
+    - "main.cpp.gnu.o"
+  "l2":
+    language: "Kotlin (JVM)"
+    id: "kotlin-jvm"
+    file-name: "main.kt"
+    color: "5f3bbe"
+    file: false
+    location: "KOTLIN_HOME"
+    run: "java -jar main.kt.jar"
+    version: "kotlinc -version"
+    compile: "kotlinc main.kt -include-runtime -d main.kt.jar"
+    compile-extra: {}
+    cleanup:
+    - "main.kt.jar"
+- "l1":
+    language: "C++ (G++)"
+    id: "cpp-gnu"
+    file-name: "main.cpp"
+    color: "004283"
+    file: true
+    location: null
+    run: "main.cpp.gnu.o"
+    version: "g++ --version"
+    compile: "g++ main.cpp -o main.cpp.gnu.o"
+    compile-extra:
+      "windows": "-lws2_32"
+    cleanup:
+    - "main.cpp.gnu.o"
+  "l2":
+    language: "Kotlin (Native)"
+    id: "kotlin-native"
+    file-name: "main.kt"
+    color: "92316e"
+    file: true
+    location: "KOTLIN_NATIVE_HOME"
+    run: "main.kt"
+    version: "kotlinc-native -version"
+    compile: "kotlinc-native main.kt -o main.kt"
+    compile-extra: {}
+    cleanup:
+    - "main.kt.exe"
+    - "main.kt.kexe"
+- "l1":
+    language: "C++ (G++)"
+    id: "cpp-gnu"
+    file-name: "main.cpp"
+    color: "004283"
+    file: true
+    location: null
+    run: "main.cpp.gnu.o"
+    version: "g++ --version"
+    compile: "g++ main.cpp -o main.cpp.gnu.o"
+    compile-extra:
+      "windows": "-lws2_32"
+    cleanup:
+    - "main.cpp.gnu.o"
+  "l2":
+    language: "PHP"
+    id: "php"
+    file-name: "main.php"
+    color: "777bb3"
+    file: false
+    location: null
+    run: "php main.php"
+    version: "php --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "C++ (G++)"
+    id: "cpp-gnu"
+    file-name: "main.cpp"
+    color: "004283"
+    file: true
+    location: null
+    run: "main.cpp.gnu.o"
+    version: "g++ --version"
+    compile: "g++ main.cpp -o main.cpp.gnu.o"
+    compile-extra:
+      "windows": "-lws2_32"
+    cleanup:
+    - "main.cpp.gnu.o"
+  "l2":
+    language: "Python"
+    id: "python"
+    file-name: "main.py"
+    color: "3572a5"
+    file: false
+    location: null
+    run: "python main.py"
+    version: "python --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "C++ (G++)"
+    id: "cpp-gnu"
+    file-name: "main.cpp"
+    color: "004283"
+    file: true
+    location: null
+    run: "main.cpp.gnu.o"
+    version: "g++ --version"
+    compile: "g++ main.cpp -o main.cpp.gnu.o"
+    compile-extra:
+      "windows": "-lws2_32"
+    cleanup:
+    - "main.cpp.gnu.o"
+  "l2":
+    language: "Ruby"
+    id: "ruby"
+    file-name: "main.rb"
+    color: "701516"
+    file: false
+    location: null
+    run: "ruby main.rb"
+    version: "ruby --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "C++ (G++)"
+    id: "cpp-gnu"
+    file-name: "main.cpp"
+    color: "004283"
+    file: true
+    location: null
+    run: "main.cpp.gnu.o"
+    version: "g++ --version"
+    compile: "g++ main.cpp -o main.cpp.gnu.o"
+    compile-extra:
+      "windows": "-lws2_32"
+    cleanup:
+    - "main.cpp.gnu.o"
+  "l2":
+    language: "Rust"
+    id: "rust"
+    file-name: "main.rs"
+    color: "dea584"
+    file: true
+    location: null
+    run: "main.rs.o"
+    version: "rustc --version --verbose"
+    compile: "rustc main.rs -o main.rs.o"
+    compile-extra: {}
+    cleanup:
+    - "main.rs.o"
+    - "main.rs.pdb"
+- "l1":
+    language: "C++ (Clang++)"
+    id: "cpp-llvm"
+    file-name: "main.cpp"
+    color: "006183"
+    file: true
+    location: null
+    run: "main.cpp.llvm.o"
+    version: "clang++ --version"
+    compile: "clang++ main.cpp -o main.cpp.llvm.o -w"
+    compile-extra: {}
+    cleanup:
+    - "main.cpp.llvm.o"
+  "l2":
+    language: "Go"
+    id: "go"
+    file-name: "main.go"
+    color: "375eab"
+    file: true
+    location: null
+    run: "main.go.o"
+    version: "go version"
+    compile: "go build -o main.go.o main.go"
+    compile-extra: {}
+    cleanup:
+    - "main.go.o"
+- "l1":
+    language: "C++ (Clang++)"
+    id: "cpp-llvm"
+    file-name: "main.cpp"
+    color: "006183"
+    file: true
+    location: null
+    run: "main.cpp.llvm.o"
+    version: "clang++ --version"
+    compile: "clang++ main.cpp -o main.cpp.llvm.o -w"
+    compile-extra: {}
+    cleanup:
+    - "main.cpp.llvm.o"
+  "l2":
+    language: "Java"
+    id: "java"
+    file-name: "Main.java"
+    color: "b07219"
+    file: false
+    location: null
+    run: "java Main.java"
+    version: "java --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "C++ (Clang++)"
+    id: "cpp-llvm"
+    file-name: "main.cpp"
+    color: "006183"
+    file: true
+    location: null
+    run: "main.cpp.llvm.o"
+    version: "clang++ --version"
+    compile: "clang++ main.cpp -o main.cpp.llvm.o -w"
+    compile-extra: {}
+    cleanup:
+    - "main.cpp.llvm.o"
+  "l2":
+    language: "JavaScript (Bun)"
+    id: "js-bun"
+    file-name: "main.cjs"
+    color: "5d5986"
+    file: false
+    location: null
+    run: "bun run main.cjs"
+    version: "bun --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "C++ (Clang++)"
+    id: "cpp-llvm"
+    file-name: "main.cpp"
+    color: "006183"
+    file: true
+    location: null
+    run: "main.cpp.llvm.o"
+    version: "clang++ --version"
+    compile: "clang++ main.cpp -o main.cpp.llvm.o -w"
+    compile-extra: {}
+    cleanup:
+    - "main.cpp.llvm.o"
+  "l2":
+    language: "JavaScript (Deno)"
+    id: "js-deno"
+    file-name: "main.cjs"
+    color: "70ffaf"
+    file: false
+    location: null
+    run: "deno run -A main.cjs"
+    version: "deno --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "C++ (Clang++)"
+    id: "cpp-llvm"
+    file-name: "main.cpp"
+    color: "006183"
+    file: true
+    location: null
+    run: "main.cpp.llvm.o"
+    version: "clang++ --version"
+    compile: "clang++ main.cpp -o main.cpp.llvm.o -w"
+    compile-extra: {}
+    cleanup:
+    - "main.cpp.llvm.o"
+  "l2":
+    language: "JavaScript (Node)"
+    id: "js-node"
+    file-name: "main.cjs"
+    color: "f1e05a"
+    file: false
+    location: null
+    run: "node main.cjs"
+    version: "node --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "C++ (Clang++)"
+    id: "cpp-llvm"
+    file-name: "main.cpp"
+    color: "006183"
+    file: true
+    location: null
+    run: "main.cpp.llvm.o"
+    version: "clang++ --version"
+    compile: "clang++ main.cpp -o main.cpp.llvm.o -w"
+    compile-extra: {}
+    cleanup:
+    - "main.cpp.llvm.o"
+  "l2":
+    language: "Kotlin (JVM)"
+    id: "kotlin-jvm"
+    file-name: "main.kt"
+    color: "5f3bbe"
+    file: false
+    location: "KOTLIN_HOME"
+    run: "java -jar main.kt.jar"
+    version: "kotlinc -version"
+    compile: "kotlinc main.kt -include-runtime -d main.kt.jar"
+    compile-extra: {}
+    cleanup:
+    - "main.kt.jar"
+- "l1":
+    language: "C++ (Clang++)"
+    id: "cpp-llvm"
+    file-name: "main.cpp"
+    color: "006183"
+    file: true
+    location: null
+    run: "main.cpp.llvm.o"
+    version: "clang++ --version"
+    compile: "clang++ main.cpp -o main.cpp.llvm.o -w"
+    compile-extra: {}
+    cleanup:
+    - "main.cpp.llvm.o"
+  "l2":
+    language: "Kotlin (Native)"
+    id: "kotlin-native"
+    file-name: "main.kt"
+    color: "92316e"
+    file: true
+    location: "KOTLIN_NATIVE_HOME"
+    run: "main.kt"
+    version: "kotlinc-native -version"
+    compile: "kotlinc-native main.kt -o main.kt"
+    compile-extra: {}
+    cleanup:
+    - "main.kt.exe"
+    - "main.kt.kexe"
+- "l1":
+    language: "C++ (Clang++)"
+    id: "cpp-llvm"
+    file-name: "main.cpp"
+    color: "006183"
+    file: true
+    location: null
+    run: "main.cpp.llvm.o"
+    version: "clang++ --version"
+    compile: "clang++ main.cpp -o main.cpp.llvm.o -w"
+    compile-extra: {}
+    cleanup:
+    - "main.cpp.llvm.o"
+  "l2":
+    language: "PHP"
+    id: "php"
+    file-name: "main.php"
+    color: "777bb3"
+    file: false
+    location: null
+    run: "php main.php"
+    version: "php --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "C++ (Clang++)"
+    id: "cpp-llvm"
+    file-name: "main.cpp"
+    color: "006183"
+    file: true
+    location: null
+    run: "main.cpp.llvm.o"
+    version: "clang++ --version"
+    compile: "clang++ main.cpp -o main.cpp.llvm.o -w"
+    compile-extra: {}
+    cleanup:
+    - "main.cpp.llvm.o"
+  "l2":
+    language: "Python"
+    id: "python"
+    file-name: "main.py"
+    color: "3572a5"
+    file: false
+    location: null
+    run: "python main.py"
+    version: "python --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "C++ (Clang++)"
+    id: "cpp-llvm"
+    file-name: "main.cpp"
+    color: "006183"
+    file: true
+    location: null
+    run: "main.cpp.llvm.o"
+    version: "clang++ --version"
+    compile: "clang++ main.cpp -o main.cpp.llvm.o -w"
+    compile-extra: {}
+    cleanup:
+    - "main.cpp.llvm.o"
+  "l2":
+    language: "Ruby"
+    id: "ruby"
+    file-name: "main.rb"
+    color: "701516"
+    file: false
+    location: null
+    run: "ruby main.rb"
+    version: "ruby --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "C++ (Clang++)"
+    id: "cpp-llvm"
+    file-name: "main.cpp"
+    color: "006183"
+    file: true
+    location: null
+    run: "main.cpp.llvm.o"
+    version: "clang++ --version"
+    compile: "clang++ main.cpp -o main.cpp.llvm.o -w"
+    compile-extra: {}
+    cleanup:
+    - "main.cpp.llvm.o"
+  "l2":
+    language: "Rust"
+    id: "rust"
+    file-name: "main.rs"
+    color: "dea584"
+    file: true
+    location: null
+    run: "main.rs.o"
+    version: "rustc --version --verbose"
+    compile: "rustc main.rs -o main.rs.o"
+    compile-extra: {}
+    cleanup:
+    - "main.rs.o"
+    - "main.rs.pdb"
+- "l1":
+    language: "Go"
+    id: "go"
+    file-name: "main.go"
+    color: "375eab"
+    file: true
+    location: null
+    run: "main.go.o"
+    version: "go version"
+    compile: "go build -o main.go.o main.go"
+    compile-extra: {}
+    cleanup:
+    - "main.go.o"
+  "l2":
+    language: "Java"
+    id: "java"
+    file-name: "Main.java"
+    color: "b07219"
+    file: false
+    location: null
+    run: "java Main.java"
+    version: "java --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "Go"
+    id: "go"
+    file-name: "main.go"
+    color: "375eab"
+    file: true
+    location: null
+    run: "main.go.o"
+    version: "go version"
+    compile: "go build -o main.go.o main.go"
+    compile-extra: {}
+    cleanup:
+    - "main.go.o"
+  "l2":
+    language: "JavaScript (Bun)"
+    id: "js-bun"
+    file-name: "main.cjs"
+    color: "5d5986"
+    file: false
+    location: null
+    run: "bun run main.cjs"
+    version: "bun --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "Go"
+    id: "go"
+    file-name: "main.go"
+    color: "375eab"
+    file: true
+    location: null
+    run: "main.go.o"
+    version: "go version"
+    compile: "go build -o main.go.o main.go"
+    compile-extra: {}
+    cleanup:
+    - "main.go.o"
+  "l2":
+    language: "JavaScript (Deno)"
+    id: "js-deno"
+    file-name: "main.cjs"
+    color: "70ffaf"
+    file: false
+    location: null
+    run: "deno run -A main.cjs"
+    version: "deno --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "Go"
+    id: "go"
+    file-name: "main.go"
+    color: "375eab"
+    file: true
+    location: null
+    run: "main.go.o"
+    version: "go version"
+    compile: "go build -o main.go.o main.go"
+    compile-extra: {}
+    cleanup:
+    - "main.go.o"
+  "l2":
+    language: "JavaScript (Node)"
+    id: "js-node"
+    file-name: "main.cjs"
+    color: "f1e05a"
+    file: false
+    location: null
+    run: "node main.cjs"
+    version: "node --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "Go"
+    id: "go"
+    file-name: "main.go"
+    color: "375eab"
+    file: true
+    location: null
+    run: "main.go.o"
+    version: "go version"
+    compile: "go build -o main.go.o main.go"
+    compile-extra: {}
+    cleanup:
+    - "main.go.o"
+  "l2":
+    language: "Kotlin (JVM)"
+    id: "kotlin-jvm"
+    file-name: "main.kt"
+    color: "5f3bbe"
+    file: false
+    location: "KOTLIN_HOME"
+    run: "java -jar main.kt.jar"
+    version: "kotlinc -version"
+    compile: "kotlinc main.kt -include-runtime -d main.kt.jar"
+    compile-extra: {}
+    cleanup:
+    - "main.kt.jar"
+- "l1":
+    language: "Go"
+    id: "go"
+    file-name: "main.go"
+    color: "375eab"
+    file: true
+    location: null
+    run: "main.go.o"
+    version: "go version"
+    compile: "go build -o main.go.o main.go"
+    compile-extra: {}
+    cleanup:
+    - "main.go.o"
+  "l2":
+    language: "Kotlin (Native)"
+    id: "kotlin-native"
+    file-name: "main.kt"
+    color: "92316e"
+    file: true
+    location: "KOTLIN_NATIVE_HOME"
+    run: "main.kt"
+    version: "kotlinc-native -version"
+    compile: "kotlinc-native main.kt -o main.kt"
+    compile-extra: {}
+    cleanup:
+    - "main.kt.exe"
+    - "main.kt.kexe"
+- "l1":
+    language: "Go"
+    id: "go"
+    file-name: "main.go"
+    color: "375eab"
+    file: true
+    location: null
+    run: "main.go.o"
+    version: "go version"
+    compile: "go build -o main.go.o main.go"
+    compile-extra: {}
+    cleanup:
+    - "main.go.o"
+  "l2":
+    language: "PHP"
+    id: "php"
+    file-name: "main.php"
+    color: "777bb3"
+    file: false
+    location: null
+    run: "php main.php"
+    version: "php --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "Go"
+    id: "go"
+    file-name: "main.go"
+    color: "375eab"
+    file: true
+    location: null
+    run: "main.go.o"
+    version: "go version"
+    compile: "go build -o main.go.o main.go"
+    compile-extra: {}
+    cleanup:
+    - "main.go.o"
+  "l2":
+    language: "Python"
+    id: "python"
+    file-name: "main.py"
+    color: "3572a5"
+    file: false
+    location: null
+    run: "python main.py"
+    version: "python --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "Go"
+    id: "go"
+    file-name: "main.go"
+    color: "375eab"
+    file: true
+    location: null
+    run: "main.go.o"
+    version: "go version"
+    compile: "go build -o main.go.o main.go"
+    compile-extra: {}
+    cleanup:
+    - "main.go.o"
+  "l2":
+    language: "Ruby"
+    id: "ruby"
+    file-name: "main.rb"
+    color: "701516"
+    file: false
+    location: null
+    run: "ruby main.rb"
+    version: "ruby --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "Go"
+    id: "go"
+    file-name: "main.go"
+    color: "375eab"
+    file: true
+    location: null
+    run: "main.go.o"
+    version: "go version"
+    compile: "go build -o main.go.o main.go"
+    compile-extra: {}
+    cleanup:
+    - "main.go.o"
+  "l2":
+    language: "Rust"
+    id: "rust"
+    file-name: "main.rs"
+    color: "dea584"
+    file: true
+    location: null
+    run: "main.rs.o"
+    version: "rustc --version --verbose"
+    compile: "rustc main.rs -o main.rs.o"
+    compile-extra: {}
+    cleanup:
+    - "main.rs.o"
+    - "main.rs.pdb"
+- "l1":
+    language: "Java"
+    id: "java"
+    file-name: "Main.java"
+    color: "b07219"
+    file: false
+    location: null
+    run: "java Main.java"
+    version: "java --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+  "l2":
+    language: "JavaScript (Bun)"
+    id: "js-bun"
+    file-name: "main.cjs"
+    color: "5d5986"
+    file: false
+    location: null
+    run: "bun run main.cjs"
+    version: "bun --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "Java"
+    id: "java"
+    file-name: "Main.java"
+    color: "b07219"
+    file: false
+    location: null
+    run: "java Main.java"
+    version: "java --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+  "l2":
+    language: "JavaScript (Deno)"
+    id: "js-deno"
+    file-name: "main.cjs"
+    color: "70ffaf"
+    file: false
+    location: null
+    run: "deno run -A main.cjs"
+    version: "deno --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "Java"
+    id: "java"
+    file-name: "Main.java"
+    color: "b07219"
+    file: false
+    location: null
+    run: "java Main.java"
+    version: "java --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+  "l2":
+    language: "JavaScript (Node)"
+    id: "js-node"
+    file-name: "main.cjs"
+    color: "f1e05a"
+    file: false
+    location: null
+    run: "node main.cjs"
+    version: "node --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "Java"
+    id: "java"
+    file-name: "Main.java"
+    color: "b07219"
+    file: false
+    location: null
+    run: "java Main.java"
+    version: "java --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+  "l2":
+    language: "Kotlin (JVM)"
+    id: "kotlin-jvm"
+    file-name: "main.kt"
+    color: "5f3bbe"
+    file: false
+    location: "KOTLIN_HOME"
+    run: "java -jar main.kt.jar"
+    version: "kotlinc -version"
+    compile: "kotlinc main.kt -include-runtime -d main.kt.jar"
+    compile-extra: {}
+    cleanup:
+    - "main.kt.jar"
+- "l1":
+    language: "Java"
+    id: "java"
+    file-name: "Main.java"
+    color: "b07219"
+    file: false
+    location: null
+    run: "java Main.java"
+    version: "java --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+  "l2":
+    language: "Kotlin (Native)"
+    id: "kotlin-native"
+    file-name: "main.kt"
+    color: "92316e"
+    file: true
+    location: "KOTLIN_NATIVE_HOME"
+    run: "main.kt"
+    version: "kotlinc-native -version"
+    compile: "kotlinc-native main.kt -o main.kt"
+    compile-extra: {}
+    cleanup:
+    - "main.kt.exe"
+    - "main.kt.kexe"
+- "l1":
+    language: "Java"
+    id: "java"
+    file-name: "Main.java"
+    color: "b07219"
+    file: false
+    location: null
+    run: "java Main.java"
+    version: "java --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+  "l2":
+    language: "PHP"
+    id: "php"
+    file-name: "main.php"
+    color: "777bb3"
+    file: false
+    location: null
+    run: "php main.php"
+    version: "php --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "Java"
+    id: "java"
+    file-name: "Main.java"
+    color: "b07219"
+    file: false
+    location: null
+    run: "java Main.java"
+    version: "java --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+  "l2":
+    language: "Python"
+    id: "python"
+    file-name: "main.py"
+    color: "3572a5"
+    file: false
+    location: null
+    run: "python main.py"
+    version: "python --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "Java"
+    id: "java"
+    file-name: "Main.java"
+    color: "b07219"
+    file: false
+    location: null
+    run: "java Main.java"
+    version: "java --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+  "l2":
+    language: "Ruby"
+    id: "ruby"
+    file-name: "main.rb"
+    color: "701516"
+    file: false
+    location: null
+    run: "ruby main.rb"
+    version: "ruby --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "Java"
+    id: "java"
+    file-name: "Main.java"
+    color: "b07219"
+    file: false
+    location: null
+    run: "java Main.java"
+    version: "java --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+  "l2":
+    language: "Rust"
+    id: "rust"
+    file-name: "main.rs"
+    color: "dea584"
+    file: true
+    location: null
+    run: "main.rs.o"
+    version: "rustc --version --verbose"
+    compile: "rustc main.rs -o main.rs.o"
+    compile-extra: {}
+    cleanup:
+    - "main.rs.o"
+    - "main.rs.pdb"
+- "l1":
+    language: "JavaScript (Bun)"
+    id: "js-bun"
+    file-name: "main.cjs"
+    color: "5d5986"
+    file: false
+    location: null
+    run: "bun run main.cjs"
+    version: "bun --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+  "l2":
+    language: "JavaScript (Deno)"
+    id: "js-deno"
+    file-name: "main.cjs"
+    color: "70ffaf"
+    file: false
+    location: null
+    run: "deno run -A main.cjs"
+    version: "deno --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "JavaScript (Bun)"
+    id: "js-bun"
+    file-name: "main.cjs"
+    color: "5d5986"
+    file: false
+    location: null
+    run: "bun run main.cjs"
+    version: "bun --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+  "l2":
+    language: "JavaScript (Node)"
+    id: "js-node"
+    file-name: "main.cjs"
+    color: "f1e05a"
+    file: false
+    location: null
+    run: "node main.cjs"
+    version: "node --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "JavaScript (Bun)"
+    id: "js-bun"
+    file-name: "main.cjs"
+    color: "5d5986"
+    file: false
+    location: null
+    run: "bun run main.cjs"
+    version: "bun --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+  "l2":
+    language: "Kotlin (JVM)"
+    id: "kotlin-jvm"
+    file-name: "main.kt"
+    color: "5f3bbe"
+    file: false
+    location: "KOTLIN_HOME"
+    run: "java -jar main.kt.jar"
+    version: "kotlinc -version"
+    compile: "kotlinc main.kt -include-runtime -d main.kt.jar"
+    compile-extra: {}
+    cleanup:
+    - "main.kt.jar"
+- "l1":
+    language: "JavaScript (Bun)"
+    id: "js-bun"
+    file-name: "main.cjs"
+    color: "5d5986"
+    file: false
+    location: null
+    run: "bun run main.cjs"
+    version: "bun --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+  "l2":
+    language: "Kotlin (Native)"
+    id: "kotlin-native"
+    file-name: "main.kt"
+    color: "92316e"
+    file: true
+    location: "KOTLIN_NATIVE_HOME"
+    run: "main.kt"
+    version: "kotlinc-native -version"
+    compile: "kotlinc-native main.kt -o main.kt"
+    compile-extra: {}
+    cleanup:
+    - "main.kt.exe"
+    - "main.kt.kexe"
+- "l1":
+    language: "JavaScript (Bun)"
+    id: "js-bun"
+    file-name: "main.cjs"
+    color: "5d5986"
+    file: false
+    location: null
+    run: "bun run main.cjs"
+    version: "bun --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+  "l2":
+    language: "PHP"
+    id: "php"
+    file-name: "main.php"
+    color: "777bb3"
+    file: false
+    location: null
+    run: "php main.php"
+    version: "php --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "JavaScript (Bun)"
+    id: "js-bun"
+    file-name: "main.cjs"
+    color: "5d5986"
+    file: false
+    location: null
+    run: "bun run main.cjs"
+    version: "bun --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+  "l2":
+    language: "Python"
+    id: "python"
+    file-name: "main.py"
+    color: "3572a5"
+    file: false
+    location: null
+    run: "python main.py"
+    version: "python --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "JavaScript (Bun)"
+    id: "js-bun"
+    file-name: "main.cjs"
+    color: "5d5986"
+    file: false
+    location: null
+    run: "bun run main.cjs"
+    version: "bun --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+  "l2":
+    language: "Ruby"
+    id: "ruby"
+    file-name: "main.rb"
+    color: "701516"
+    file: false
+    location: null
+    run: "ruby main.rb"
+    version: "ruby --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "JavaScript (Bun)"
+    id: "js-bun"
+    file-name: "main.cjs"
+    color: "5d5986"
+    file: false
+    location: null
+    run: "bun run main.cjs"
+    version: "bun --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+  "l2":
+    language: "Rust"
+    id: "rust"
+    file-name: "main.rs"
+    color: "dea584"
+    file: true
+    location: null
+    run: "main.rs.o"
+    version: "rustc --version --verbose"
+    compile: "rustc main.rs -o main.rs.o"
+    compile-extra: {}
+    cleanup:
+    - "main.rs.o"
+    - "main.rs.pdb"
+- "l1":
+    language: "JavaScript (Deno)"
+    id: "js-deno"
+    file-name: "main.cjs"
+    color: "70ffaf"
+    file: false
+    location: null
+    run: "deno run -A main.cjs"
+    version: "deno --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+  "l2":
+    language: "JavaScript (Node)"
+    id: "js-node"
+    file-name: "main.cjs"
+    color: "f1e05a"
+    file: false
+    location: null
+    run: "node main.cjs"
+    version: "node --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "JavaScript (Deno)"
+    id: "js-deno"
+    file-name: "main.cjs"
+    color: "70ffaf"
+    file: false
+    location: null
+    run: "deno run -A main.cjs"
+    version: "deno --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+  "l2":
+    language: "Kotlin (JVM)"
+    id: "kotlin-jvm"
+    file-name: "main.kt"
+    color: "5f3bbe"
+    file: false
+    location: "KOTLIN_HOME"
+    run: "java -jar main.kt.jar"
+    version: "kotlinc -version"
+    compile: "kotlinc main.kt -include-runtime -d main.kt.jar"
+    compile-extra: {}
+    cleanup:
+    - "main.kt.jar"
+- "l1":
+    language: "JavaScript (Deno)"
+    id: "js-deno"
+    file-name: "main.cjs"
+    color: "70ffaf"
+    file: false
+    location: null
+    run: "deno run -A main.cjs"
+    version: "deno --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+  "l2":
+    language: "Kotlin (Native)"
+    id: "kotlin-native"
+    file-name: "main.kt"
+    color: "92316e"
+    file: true
+    location: "KOTLIN_NATIVE_HOME"
+    run: "main.kt"
+    version: "kotlinc-native -version"
+    compile: "kotlinc-native main.kt -o main.kt"
+    compile-extra: {}
+    cleanup:
+    - "main.kt.exe"
+    - "main.kt.kexe"
+- "l1":
+    language: "JavaScript (Deno)"
+    id: "js-deno"
+    file-name: "main.cjs"
+    color: "70ffaf"
+    file: false
+    location: null
+    run: "deno run -A main.cjs"
+    version: "deno --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+  "l2":
+    language: "PHP"
+    id: "php"
+    file-name: "main.php"
+    color: "777bb3"
+    file: false
+    location: null
+    run: "php main.php"
+    version: "php --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "JavaScript (Deno)"
+    id: "js-deno"
+    file-name: "main.cjs"
+    color: "70ffaf"
+    file: false
+    location: null
+    run: "deno run -A main.cjs"
+    version: "deno --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+  "l2":
+    language: "Python"
+    id: "python"
+    file-name: "main.py"
+    color: "3572a5"
+    file: false
+    location: null
+    run: "python main.py"
+    version: "python --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "JavaScript (Deno)"
+    id: "js-deno"
+    file-name: "main.cjs"
+    color: "70ffaf"
+    file: false
+    location: null
+    run: "deno run -A main.cjs"
+    version: "deno --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+  "l2":
+    language: "Ruby"
+    id: "ruby"
+    file-name: "main.rb"
+    color: "701516"
+    file: false
+    location: null
+    run: "ruby main.rb"
+    version: "ruby --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "JavaScript (Deno)"
+    id: "js-deno"
+    file-name: "main.cjs"
+    color: "70ffaf"
+    file: false
+    location: null
+    run: "deno run -A main.cjs"
+    version: "deno --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+  "l2":
+    language: "Rust"
+    id: "rust"
+    file-name: "main.rs"
+    color: "dea584"
+    file: true
+    location: null
+    run: "main.rs.o"
+    version: "rustc --version --verbose"
+    compile: "rustc main.rs -o main.rs.o"
+    compile-extra: {}
+    cleanup:
+    - "main.rs.o"
+    - "main.rs.pdb"
+- "l1":
+    language: "JavaScript (Node)"
+    id: "js-node"
+    file-name: "main.cjs"
+    color: "f1e05a"
+    file: false
+    location: null
+    run: "node main.cjs"
+    version: "node --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+  "l2":
+    language: "Kotlin (JVM)"
+    id: "kotlin-jvm"
+    file-name: "main.kt"
+    color: "5f3bbe"
+    file: false
+    location: "KOTLIN_HOME"
+    run: "java -jar main.kt.jar"
+    version: "kotlinc -version"
+    compile: "kotlinc main.kt -include-runtime -d main.kt.jar"
+    compile-extra: {}
+    cleanup:
+    - "main.kt.jar"
+- "l1":
+    language: "JavaScript (Node)"
+    id: "js-node"
+    file-name: "main.cjs"
+    color: "f1e05a"
+    file: false
+    location: null
+    run: "node main.cjs"
+    version: "node --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+  "l2":
+    language: "Kotlin (Native)"
+    id: "kotlin-native"
+    file-name: "main.kt"
+    color: "92316e"
+    file: true
+    location: "KOTLIN_NATIVE_HOME"
+    run: "main.kt"
+    version: "kotlinc-native -version"
+    compile: "kotlinc-native main.kt -o main.kt"
+    compile-extra: {}
+    cleanup:
+    - "main.kt.exe"
+    - "main.kt.kexe"
+- "l1":
+    language: "JavaScript (Node)"
+    id: "js-node"
+    file-name: "main.cjs"
+    color: "f1e05a"
+    file: false
+    location: null
+    run: "node main.cjs"
+    version: "node --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+  "l2":
+    language: "PHP"
+    id: "php"
+    file-name: "main.php"
+    color: "777bb3"
+    file: false
+    location: null
+    run: "php main.php"
+    version: "php --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "JavaScript (Node)"
+    id: "js-node"
+    file-name: "main.cjs"
+    color: "f1e05a"
+    file: false
+    location: null
+    run: "node main.cjs"
+    version: "node --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+  "l2":
+    language: "Python"
+    id: "python"
+    file-name: "main.py"
+    color: "3572a5"
+    file: false
+    location: null
+    run: "python main.py"
+    version: "python --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "JavaScript (Node)"
+    id: "js-node"
+    file-name: "main.cjs"
+    color: "f1e05a"
+    file: false
+    location: null
+    run: "node main.cjs"
+    version: "node --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+  "l2":
+    language: "Ruby"
+    id: "ruby"
+    file-name: "main.rb"
+    color: "701516"
+    file: false
+    location: null
+    run: "ruby main.rb"
+    version: "ruby --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "JavaScript (Node)"
+    id: "js-node"
+    file-name: "main.cjs"
+    color: "f1e05a"
+    file: false
+    location: null
+    run: "node main.cjs"
+    version: "node --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+  "l2":
+    language: "Rust"
+    id: "rust"
+    file-name: "main.rs"
+    color: "dea584"
+    file: true
+    location: null
+    run: "main.rs.o"
+    version: "rustc --version --verbose"
+    compile: "rustc main.rs -o main.rs.o"
+    compile-extra: {}
+    cleanup:
+    - "main.rs.o"
+    - "main.rs.pdb"
+- "l1":
+    language: "Kotlin (JVM)"
+    id: "kotlin-jvm"
+    file-name: "main.kt"
+    color: "5f3bbe"
+    file: false
+    location: "KOTLIN_HOME"
+    run: "java -jar main.kt.jar"
+    version: "kotlinc -version"
+    compile: "kotlinc main.kt -include-runtime -d main.kt.jar"
+    compile-extra: {}
+    cleanup:
+    - "main.kt.jar"
+  "l2":
+    language: "Kotlin (Native)"
+    id: "kotlin-native"
+    file-name: "main.kt"
+    color: "92316e"
+    file: true
+    location: "KOTLIN_NATIVE_HOME"
+    run: "main.kt"
+    version: "kotlinc-native -version"
+    compile: "kotlinc-native main.kt -o main.kt"
+    compile-extra: {}
+    cleanup:
+    - "main.kt.exe"
+    - "main.kt.kexe"
+- "l1":
+    language: "Kotlin (JVM)"
+    id: "kotlin-jvm"
+    file-name: "main.kt"
+    color: "5f3bbe"
+    file: false
+    location: "KOTLIN_HOME"
+    run: "java -jar main.kt.jar"
+    version: "kotlinc -version"
+    compile: "kotlinc main.kt -include-runtime -d main.kt.jar"
+    compile-extra: {}
+    cleanup:
+    - "main.kt.jar"
+  "l2":
+    language: "PHP"
+    id: "php"
+    file-name: "main.php"
+    color: "777bb3"
+    file: false
+    location: null
+    run: "php main.php"
+    version: "php --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "Kotlin (JVM)"
+    id: "kotlin-jvm"
+    file-name: "main.kt"
+    color: "5f3bbe"
+    file: false
+    location: "KOTLIN_HOME"
+    run: "java -jar main.kt.jar"
+    version: "kotlinc -version"
+    compile: "kotlinc main.kt -include-runtime -d main.kt.jar"
+    compile-extra: {}
+    cleanup:
+    - "main.kt.jar"
+  "l2":
+    language: "Python"
+    id: "python"
+    file-name: "main.py"
+    color: "3572a5"
+    file: false
+    location: null
+    run: "python main.py"
+    version: "python --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "Kotlin (JVM)"
+    id: "kotlin-jvm"
+    file-name: "main.kt"
+    color: "5f3bbe"
+    file: false
+    location: "KOTLIN_HOME"
+    run: "java -jar main.kt.jar"
+    version: "kotlinc -version"
+    compile: "kotlinc main.kt -include-runtime -d main.kt.jar"
+    compile-extra: {}
+    cleanup:
+    - "main.kt.jar"
+  "l2":
+    language: "Ruby"
+    id: "ruby"
+    file-name: "main.rb"
+    color: "701516"
+    file: false
+    location: null
+    run: "ruby main.rb"
+    version: "ruby --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "Kotlin (JVM)"
+    id: "kotlin-jvm"
+    file-name: "main.kt"
+    color: "5f3bbe"
+    file: false
+    location: "KOTLIN_HOME"
+    run: "java -jar main.kt.jar"
+    version: "kotlinc -version"
+    compile: "kotlinc main.kt -include-runtime -d main.kt.jar"
+    compile-extra: {}
+    cleanup:
+    - "main.kt.jar"
+  "l2":
+    language: "Rust"
+    id: "rust"
+    file-name: "main.rs"
+    color: "dea584"
+    file: true
+    location: null
+    run: "main.rs.o"
+    version: "rustc --version --verbose"
+    compile: "rustc main.rs -o main.rs.o"
+    compile-extra: {}
+    cleanup:
+    - "main.rs.o"
+    - "main.rs.pdb"
+- "l1":
+    language: "Kotlin (Native)"
+    id: "kotlin-native"
+    file-name: "main.kt"
+    color: "92316e"
+    file: true
+    location: "KOTLIN_NATIVE_HOME"
+    run: "main.kt"
+    version: "kotlinc-native -version"
+    compile: "kotlinc-native main.kt -o main.kt"
+    compile-extra: {}
+    cleanup:
+    - "main.kt.exe"
+    - "main.kt.kexe"
+  "l2":
+    language: "PHP"
+    id: "php"
+    file-name: "main.php"
+    color: "777bb3"
+    file: false
+    location: null
+    run: "php main.php"
+    version: "php --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "Kotlin (Native)"
+    id: "kotlin-native"
+    file-name: "main.kt"
+    color: "92316e"
+    file: true
+    location: "KOTLIN_NATIVE_HOME"
+    run: "main.kt"
+    version: "kotlinc-native -version"
+    compile: "kotlinc-native main.kt -o main.kt"
+    compile-extra: {}
+    cleanup:
+    - "main.kt.exe"
+    - "main.kt.kexe"
+  "l2":
+    language: "Python"
+    id: "python"
+    file-name: "main.py"
+    color: "3572a5"
+    file: false
+    location: null
+    run: "python main.py"
+    version: "python --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "Kotlin (Native)"
+    id: "kotlin-native"
+    file-name: "main.kt"
+    color: "92316e"
+    file: true
+    location: "KOTLIN_NATIVE_HOME"
+    run: "main.kt"
+    version: "kotlinc-native -version"
+    compile: "kotlinc-native main.kt -o main.kt"
+    compile-extra: {}
+    cleanup:
+    - "main.kt.exe"
+    - "main.kt.kexe"
+  "l2":
+    language: "Ruby"
+    id: "ruby"
+    file-name: "main.rb"
+    color: "701516"
+    file: false
+    location: null
+    run: "ruby main.rb"
+    version: "ruby --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "Kotlin (Native)"
+    id: "kotlin-native"
+    file-name: "main.kt"
+    color: "92316e"
+    file: true
+    location: "KOTLIN_NATIVE_HOME"
+    run: "main.kt"
+    version: "kotlinc-native -version"
+    compile: "kotlinc-native main.kt -o main.kt"
+    compile-extra: {}
+    cleanup:
+    - "main.kt.exe"
+    - "main.kt.kexe"
+  "l2":
+    language: "Rust"
+    id: "rust"
+    file-name: "main.rs"
+    color: "dea584"
+    file: true
+    location: null
+    run: "main.rs.o"
+    version: "rustc --version --verbose"
+    compile: "rustc main.rs -o main.rs.o"
+    compile-extra: {}
+    cleanup:
+    - "main.rs.o"
+    - "main.rs.pdb"
+- "l1":
+    language: "PHP"
+    id: "php"
+    file-name: "main.php"
+    color: "777bb3"
+    file: false
+    location: null
+    run: "php main.php"
+    version: "php --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+  "l2":
+    language: "Python"
+    id: "python"
+    file-name: "main.py"
+    color: "3572a5"
+    file: false
+    location: null
+    run: "python main.py"
+    version: "python --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "PHP"
+    id: "php"
+    file-name: "main.php"
+    color: "777bb3"
+    file: false
+    location: null
+    run: "php main.php"
+    version: "php --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+  "l2":
+    language: "Ruby"
+    id: "ruby"
+    file-name: "main.rb"
+    color: "701516"
+    file: false
+    location: null
+    run: "ruby main.rb"
+    version: "ruby --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "PHP"
+    id: "php"
+    file-name: "main.php"
+    color: "777bb3"
+    file: false
+    location: null
+    run: "php main.php"
+    version: "php --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+  "l2":
+    language: "Rust"
+    id: "rust"
+    file-name: "main.rs"
+    color: "dea584"
+    file: true
+    location: null
+    run: "main.rs.o"
+    version: "rustc --version --verbose"
+    compile: "rustc main.rs -o main.rs.o"
+    compile-extra: {}
+    cleanup:
+    - "main.rs.o"
+    - "main.rs.pdb"
+- "l1":
+    language: "Python"
+    id: "python"
+    file-name: "main.py"
+    color: "3572a5"
+    file: false
+    location: null
+    run: "python main.py"
+    version: "python --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+  "l2":
+    language: "Ruby"
+    id: "ruby"
+    file-name: "main.rb"
+    color: "701516"
+    file: false
+    location: null
+    run: "ruby main.rb"
+    version: "ruby --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+- "l1":
+    language: "Python"
+    id: "python"
+    file-name: "main.py"
+    color: "3572a5"
+    file: false
+    location: null
+    run: "python main.py"
+    version: "python --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+  "l2":
+    language: "Rust"
+    id: "rust"
+    file-name: "main.rs"
+    color: "dea584"
+    file: true
+    location: null
+    run: "main.rs.o"
+    version: "rustc --version --verbose"
+    compile: "rustc main.rs -o main.rs.o"
+    compile-extra: {}
+    cleanup:
+    - "main.rs.o"
+    - "main.rs.pdb"
+- "l1":
+    language: "Ruby"
+    id: "ruby"
+    file-name: "main.rb"
+    color: "701516"
+    file: false
+    location: null
+    run: "ruby main.rb"
+    version: "ruby --version"
+    compile: null
+    compile-extra: {}
+    cleanup: null
+  "l2":
+    language: "Rust"
+    id: "rust"
+    file-name: "main.rs"
+    color: "dea584"
+    file: true
+    location: null
+    run: "main.rs.o"
+    version: "rustc --version --verbose"
+    compile: "rustc main.rs -o main.rs.o"
+    compile-extra: {}
+    cleanup:
+    - "main.rs.o"
+    - "main.rs.pdb"

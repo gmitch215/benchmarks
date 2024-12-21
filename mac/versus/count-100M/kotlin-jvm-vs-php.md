@@ -1,0 +1,17 @@
+---
+layout: versus
+benchmark: Count to 100 Million
+id: count-100M
+platform: mac
+l1: kotlin-jvm
+l1-display: Kotlin (JVM)
+l1-file-name: main.kt
+l2: php
+l2-display: PHP
+l2-file-name: main.php
+title: Count to 100 Million | Kotlin (JVM) vs PHP | Mac
+tags: [number, count, 100M]
+comments: true
+---
+
+Programs that count to 100 million

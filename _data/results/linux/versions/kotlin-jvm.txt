@@ -1,0 +1,1 @@
+info: kotlinc-jvm 2.1.0 (JRE 21.0.5+11-LTS)

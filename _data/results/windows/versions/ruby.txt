@@ -1,0 +1,1 @@
+ruby 3.3.6 (2024-11-05 revision 75015d4c1f) [x64-mingw-ucrt]

@@ -1,0 +1,26 @@
+
+2024-12-21 09:30:24 Coordinated Universal Time
+linux-x64 6.5.0-1025-azure
+Ubuntu - GNU/Linux
+Virtual Machine (version: 7.0) - Microsoft Corporation
+64 Bit
+---
+CPU:
+AMD EPYC 7763 64-Core Processor
+1 physical CPU package(s)
+2 physical CPU core(s)
+4 logical CPU(s)
+Identifier: AuthenticAMD Family 25 Model 1 Stepping 1
+ProcessorID: 178BFBFF00100911
+Microarchitecture: Zen 3
+---
+Max Memory: 16GB
+Max CPU Frequency: 3.244GHz
+Processors: 4
+---
+Disks:
+- /dev/sdb (Virtual_Disk) - 0.08TB
+- /dev/sda (Virtual_Disk) - 0.08TB
+---
+JVM Max Memory: 3GB
+Available CPU Cores: 4

@@ -1,0 +1,17 @@
+---
+layout: versus
+benchmark: List Creation (100)
+id: list-100
+platform: windows
+l1: js-deno
+l1-display: JavaScript (Deno)
+l1-file-name: main.cjs
+l2: kotlin-jvm
+l2-display: Kotlin (JVM)
+l2-file-name: main.kt
+title: List Creation (100) | JavaScript (Deno) vs Kotlin (JVM) | Windows
+tags: [list, array, 100]
+comments: true
+---
+
+Creats a list with 100 elements. List implementations are initialized to their default capacity.

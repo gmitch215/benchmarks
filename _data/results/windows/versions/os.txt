@@ -1,0 +1,26 @@
+
+2024-12-21 09:36:52 Coordinated Universal Time
+windows-x64 10.0
+Windows - Microsoft
+Virtual Machine - Microsoft Corporation
+64 Bit
+---
+CPU:
+AMD EPYC 7763 64-Core Processor
+1 physical CPU package(s)
+2 physical CPU core(s)
+4 logical CPU(s)
+Identifier: AuthenticAMD Family 25 Model 1 Stepping 1
+ProcessorID: 178BFBFF00A00F11
+Microarchitecture: Zen 3
+---
+Max Memory: 17GB
+Max CPU Frequency: 2.445GHz
+Processors: 4
+---
+Disks:
+- \\.\PHYSICALDRIVE1 (Virtual HD ATA Device Microsoft) - 0.16TB
+- \\.\PHYSICALDRIVE0 (Virtual HD ATA Device Microsoft) - 0.27TB
+---
+JVM Max Memory: 4GB
+Available CPU Cores: 4

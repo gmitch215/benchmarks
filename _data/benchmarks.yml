@@ -1,0 +1,155 @@
+- name: "3n + 1 Problem"
+  id: "3n-plus-1"
+  description: "The Collatz Conjecture, also known as 3n + 1, is a mathematical problem\
+    \ that has puzzled mathematicians for years.  The conjecture states that if you\
+    \ take any positive integer n, and if n is even, divide it by 2, and if n is odd,\
+    \ multiply it by 3 and add 1, and repeat this process, you will eventually reach\
+    \ the number 1.  This benchmark tests the performance of the 3n + 1 problem on\
+    \ the number \"837,799\" which takes 524 steps to reach 1.\n"
+  measure: "NANOSECONDS"
+  output: "MICROSECONDS"
+  tags:
+  - "number"
+  - "math"
+  - "algorithm"
+  disabled: []
+- name: "Array Assignment (100K)"
+  id: "array-100K"
+  description: "Assigns 100,000 elements to an array."
+  measure: "NANOSECONDS"
+  output: "MILLISECONDS"
+  tags:
+  - "array"
+  - "100K"
+  disabled: []
+- name: "Array Assignment (1K)"
+  id: "array-1K"
+  description: "Assigns 1,000 elements to an array."
+  measure: "NANOSECONDS"
+  output: "MICROSECONDS"
+  tags:
+  - "array"
+  - "1K"
+  disabled: []
+- name: "Binary Search (x5)"
+  id: "binary-search"
+  description: "Performs a binary search through 25 sorted integers for the third,\
+    \ ninth, 13th, 16th, and 21st elements."
+  measure: "NANOSECONDS"
+  output: "MICROSECONDS"
+  tags:
+  - "number"
+  - "search"
+  disabled: []
+- name: "Count to 100 Million"
+  id: "count-100M"
+  description: "Programs that count to 100 million"
+  measure: "NANOSECONDS"
+  output: "SECONDS"
+  tags:
+  - "number"
+  - "count"
+  - "100M"
+  disabled: []
+- name: "Count to 1 Million"
+  id: "count-1M"
+  description: "Programs that count to 1 million"
+  measure: "NANOSECONDS"
+  output: "MILLISECONDS"
+  tags:
+  - "number"
+  - "count"
+  - "1M"
+  disabled: []
+- name: "HTTP GET Request"
+  id: "http-get"
+  description: "Performs an HTTP GET Request to a specified URL."
+  measure: "MILLISECONDS"
+  output: "MILLISECONDS"
+  tags:
+  - "web"
+  - "request"
+  disabled:
+  - "kotlin-native"
+- name: "HTTP POST Request"
+  id: "http-post"
+  description: "Performs an HTTP POST Request to a specified URL with \"Hello World\"\
+    \ as the request body."
+  measure: "MILLISECONDS"
+  output: "MILLISECONDS"
+  tags:
+  - "web"
+  - "request"
+  disabled:
+  - "kotlin-native"
+- name: "List Creation (100)"
+  id: "list-100"
+  description: "Creats a list with 100 elements. List implementations are initialized\
+    \ to their default capacity."
+  measure: "NANOSECONDS"
+  output: "MICROSECONDS"
+  tags:
+  - "list"
+  - "array"
+  - "100"
+  disabled: []
+- name: "List Creation (10K)"
+  id: "list-10K"
+  description: "Creats a list with 10,000 elements. List implementations are initialized\
+    \ to their default capacity."
+  measure: "NANOSECONDS"
+  output: "MICROSECONDS"
+  tags:
+  - "list"
+  - "array"
+  - "10K"
+  disabled: []
+- name: "pow(x, y) (10K)"
+  id: "pow-10K"
+  description: "Benchmark the performance of the `pow` function, using decimal numbers."
+  measure: "NANOSECONDS"
+  output: "MICROSECONDS"
+  tags:
+  - "number"
+  - "math"
+  - "10K"
+  disabled: []
+- name: "pow(x, y) (1K)"
+  id: "pow-1K"
+  description: "Benchmark the performance of the `pow` function, using decimal numbers."
+  measure: "NANOSECONDS"
+  output: "MICROSECONDS"
+  tags:
+  - "number"
+  - "math"
+  - "1K"
+  disabled: []
+- name: "Powers of Two"
+  id: "power-of-two"
+  description: "Programs that iterate through powers of two up to 2^30, through repeated\
+    \ multiplication."
+  measure: "NANOSECONDS"
+  output: "NANOSECONDS"
+  tags:
+  - "number"
+  - "math"
+  - "exponentiation"
+  disabled: []
+- name: "1,000 Random Numbers"
+  id: "random-1K"
+  description: "Programs that generate 1,000 random numbers."
+  measure: "NANOSECONDS"
+  output: "MICROSECONDS"
+  tags:
+  - "random"
+  - "1K"
+  disabled: []
+- name: "1,000,000 Random Numbers"
+  id: "random-1M"
+  description: "Programs that generate 1,000,000 random numbers."
+  measure: "NANOSECONDS"
+  output: "MILLISECONDS"
+  tags:
+  - "random"
+  - "1M"
+  disabled: []

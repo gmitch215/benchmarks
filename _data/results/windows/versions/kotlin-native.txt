@@ -1,0 +1,3 @@
+Kotlin/Native: 2.1.0
+
+info: kotlinc-native 2.1.0 (JRE 21.0.5+11-LTS)
