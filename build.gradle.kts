@@ -107,39 +107,33 @@ tasks {
             file("benchmarks").absolutePath,
             file("build/site").absolutePath
         )
+
+        outputs.upToDateWhen { false }
+        outputs.dir("build/site")
     }
 
-    register("moveGraphs") {
-        mustRunAfter("createSite", "preview")
+    register("moveGraphs", Copy::class) {
+        mustRunAfter("graphBenchmarks", "createSite", "preview")
 
-        doFirst {
-            val windows = file("build/site/_data/results/windows/graphs/")
-            if (windows.exists()) {
-                val dir = file("build/site/assets/graphs/windows/")
-                dir.mkdirs()
-
-                windows.copyRecursively(dir, true)
-                windows.deleteRecursively()
-            }
-
-            val mac = file("build/site/_data/results/mac/graphs/")
-            if (mac.exists()) {
-                val dir = file("build/site/assets/graphs/mac/")
-                dir.mkdirs()
-
-                mac.copyRecursively(dir, true)
-                mac.deleteRecursively()
-            }
-
-            val linux = file("build/site/_data/results/linux/graphs/")
-            if (linux.exists()) {
-                val dir = file("build/site/assets/graphs/linux/")
-                dir.mkdirs()
-
-                linux.copyRecursively(dir, true)
-                linux.deleteRecursively()
-            }
+        from("build/site/_data/results/windows/graphs/") {
+            into("assets/graphs/windows/")
         }
+
+        from("build/site/_data/results/mac/graphs/") {
+            into("assets/graphs/mac/")
+        }
+
+        from("build/site/_data/results/linux/graphs/") {
+            into("assets/graphs/linux/")
+        }
+
+        doLast {
+            delete("build/site/_data/results/windows/graphs/")
+            delete("build/site/_data/results/mac/graphs/")
+            delete("build/site/_data/results/linux/graphs/")
+        }
+
+        destinationDir = file("build/site")
     }
 
     register("copyResourcesToSite", Copy::class) {
