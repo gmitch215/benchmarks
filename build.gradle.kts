@@ -99,7 +99,7 @@ tasks {
     // Site Tasks
 
     register("createSite", JavaExec::class) {
-        mustRunAfter("moveGraphs", "preview")
+        mustRunAfter("copyGraphs", "preview")
 
         mainClass.set("xyz.gmitch215.benchmarks.site.SiteCreator")
         classpath = sourceSets["main"].runtimeClasspath
@@ -109,7 +109,7 @@ tasks {
         )
     }
 
-    register("moveGraphs", Copy::class) {
+    register("copyGraphs", Copy::class) {
         mustRunAfter("graphBenchmarks", "preview")
 
         from("build/site/_data/results/windows/graphs/") {
@@ -124,17 +124,11 @@ tasks {
             into("assets/graphs/linux/")
         }
 
-        doLast {
-            delete("build/site/_data/results/windows/graphs/")
-            delete("build/site/_data/results/mac/graphs/")
-            delete("build/site/_data/results/linux/graphs/")
-        }
-
         destinationDir = file("build/site")
     }
 
     register("copyResourcesToSite", Copy::class) {
-        mustRunAfter("moveGraphs", "createSite", "preview")
+        mustRunAfter("copyGraphs", "createSite", "preview")
         from("site")
 
         from("benchmarks/config.yml") {
@@ -152,7 +146,7 @@ tasks {
 
     register("site") {
         dependsOn(
-            "moveGraphs",
+            "copyGraphs",
             "createSite",
             "copyResourcesToSite"
         )
