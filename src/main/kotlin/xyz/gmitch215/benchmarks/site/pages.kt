@@ -79,6 +79,8 @@ val VERSUS_FILE_INDEX_TEMPLATE: (String, BenchmarkConfiguration) -> String = { p
     title: ${config.name} | Select Language | ${platform.replaceFirstChar { it.uppercase() }}
     tags: [${config.tags.joinToString()}]
     ---
+    
+    ${config.description.replace("\n", "<br>")}
     """.trimIndent()
 }
 
@@ -91,11 +93,15 @@ val VERSUS_FILE_TEMPLATE: (String, BenchmarkConfiguration, BenchmarkRun, Benchma
     platform: $platform
     l1: ${l1.id}
     l1-display: ${l1.language}
+    l1-file-name: ${l1.fileName}
     l2: ${l2.id}
     l2-display: ${l2.language}
+    l2-file-name: ${l2.fileName}
     title: ${config.name} | ${l1.language} vs ${l2.language} | ${platform.replaceFirstChar { it.uppercase() }}
     tags: [${config.tags.joinToString()}]
     comments: true
     ---
+    
+    ${config.description.replace("\n", "<br>")}
     """.trimIndent()
 }

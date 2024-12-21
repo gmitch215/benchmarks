@@ -159,6 +159,20 @@ pre {
     transition: transform 0.5s ease-in-out;
 }
 
+.nav-link {
+    font-weight: bold;
+    font-size: 1.25em;
+    color: var(--color-text-2);
+}
+
+.source-link {
+    color: dodgerblue;
+}
+
+.source-link:hover {
+    color: deepskyblue;
+}
+
 /* Header */
 
 header {

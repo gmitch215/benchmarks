@@ -449,6 +449,8 @@ data class BenchmarkConfiguration(
 data class BenchmarkRun(
     val language: String,
     val id: String,
+    @SerialName("file-name")
+    val fileName: String,
     val color: String,
     val file: Boolean = false,
     val location: String? = null,

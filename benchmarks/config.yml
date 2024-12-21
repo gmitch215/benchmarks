@@ -1,30 +1,36 @@
 - language: Python
   id: python
+  file-name: main.py
   color: "3572a5"
   run: python main.py
   version: python --version
 - language: JavaScript (Node)
   id: js-node
+  file-name: main.cjs
   color: "f1e05a"
   run: node main.cjs
   version: node --version
 - language: JavaScript (Deno)
   id: js-deno
+  file-name: main.cjs
   color: "70ffaf"
   run: deno run -A main.cjs
   version: deno --version
 - language: JavaScript (Bun)
   id: js-bun
+  file-name: main.cjs
   color: "5d5986"
   run: bun run main.cjs
   version: bun --version
 - language: Java
   id: java
+  file-name: Main.java
   color: "b07219"
   run: java Main.java
   version: java --version
 - language: Kotlin (JVM)
   id: kotlin-jvm
+  file-name: main.kt
   color: "5f3bbe"
   location: KOTLIN_HOME
   compile: kotlinc main.kt -include-runtime -d main.kt.jar
@@ -35,6 +41,7 @@
 - language: Kotlin (Native)
   file: true
   id: kotlin-native
+  file-name: main.kt
   color: "92316e"
   location: KOTLIN_NATIVE_HOME
   compile: kotlinc-native main.kt -o main.kt
@@ -46,6 +53,7 @@
 - language: C++ (G++)
   file: true
   id: cpp-gnu
+  file-name: main.cpp
   color: "004283"
   compile: g++ main.cpp -o main.cpp.gnu.o
   compile-extra:
@@ -57,6 +65,7 @@
 - language: C++ (Clang++)
   file: true
   id: cpp-llvm
+  file-name: main.cpp
   color: "006183"
   compile: clang++ main.cpp -o main.cpp.llvm.o -w
   run: main.cpp.llvm.o
@@ -66,6 +75,7 @@
 - language: C (GCC)
   file: true
   id: c-gnu
+  file-name: main.c
   color: "555555"
   compile: gcc main.c ../../lib/nanotime/nanotime.c -o main.c.gnu.o
   compile-extra:
@@ -78,6 +88,7 @@
 - language: C (Clang)
   file: true
   id: c-llvm
+  file-name: main.c
   color: "888888"
   compile: clang main.c ../../lib/nanotime/nanotime.c -o main.c.llvm.o -w
   compile-extra:
@@ -88,12 +99,14 @@
   version: clang --version
 - language: Ruby
   id: ruby
+  file-name: main.rb
   color: "701516"
   run: ruby main.rb
   version: ruby --version
 - language: Go
   file: true
   id: go
+  file-name: main.go
   color: "375eab"
   compile: go build -o main.go.o main.go
   run: main.go.o
@@ -102,12 +115,14 @@
   version: go version
 - language: PHP
   id: php
+  file-name: main.php
   color: "777bb3"
   run: php main.php
   version: php --version
 - language: Rust
   file: true
   id: rust
+  file-name: main.rs
   color: "dea584"
   compile: rustc main.rs -o main.rs.o
   run: main.rs.o

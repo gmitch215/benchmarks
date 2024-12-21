@@ -10,7 +10,7 @@ layout: default
 <div class="box">
     <img src="/favicon.png" id="logo" class="dynamic" alt="Logo" title="Benchmarks" />
     <h1>Versus - {{ page.benchmark }}</h1>
-    <p>{{ page.summary }}</p>
+    {{ content }}
 </div>
 
 <div class="box horizontal">
@@ -26,6 +26,9 @@ layout: default
                 <option value="{{ lang.id }}" {% if page.l1 == lang.id %}selected{% endif %}>{{ lang.language }}</option>
             {% endfor %}
         </select>
+        {% if page.l1 %}
+            <a class="source-link" href="https://github.com/gmitch215/benchmarks/blob/master/benchmarks/{{ page.id }}/{{ page.l1-file-name }}" title="View on GitHub" target="_blank">{{ page.id }}/{{ page.l1-file-name }}</a>
+        {% endif %}
     </div>
     <h2>VS</h2>
     <div class="box">
@@ -40,11 +43,15 @@ layout: default
                 <option value="{{ lang.id }}" {% if page.l2 == lang.id %}selected{% endif %}>{{ lang.language }}</option>
             {% endfor %}
         </select>
+        {% if page.l2 %}
+        <a class="source-link" href="https://github.com/gmitch215/benchmarks/blob/master/benchmarks/{{ page.id }}/{{ page.l2-file-name }}" title="View on GitHub" target="_blank">{{ page.id }}/{{ page.l2-file-name }}</a>
+        {% endif %}
     </div>
 </div>
 
 <div class="box">
     <p>Compare two languages above and see how they do against eachother.</p>
+    <a class="nav-link" href="/{{ page.platform }}/versus/">Back</a>
 </div>
 
 {% if page.l1 %}
