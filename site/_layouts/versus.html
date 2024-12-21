@@ -23,7 +23,9 @@ layout: default
         <select class="language-select" id="l1-select" onchange="checkVersus()">
             <option value="" disabled {% unless page.l1 %}selected{% endunless %}>Select...</option>
             {% for lang in langs %}
+                {% unless page.disabled contains lang.id %}
                 <option value="{{ lang.id }}" {% if page.l1 == lang.id %}selected{% endif %}>{{ lang.language }}</option>
+                {% endunless %}
             {% endfor %}
         </select>
         {% if page.l1 %}
@@ -40,7 +42,9 @@ layout: default
         <select class="language-select" id="l2-select" onchange="checkVersus()">
             <option value="" disabled {% unless page.l2 %}selected{% endunless %}>Select...</option>
             {% for lang in langs %}
+                {% unless page.disabled contains lang.id %}
                 <option value="{{ lang.id }}" {% if page.l2 == lang.id %}selected{% endif %}>{{ lang.language }}</option>
+                {% endunless %}
             {% endfor %}
         </select>
         {% if page.l2 %}

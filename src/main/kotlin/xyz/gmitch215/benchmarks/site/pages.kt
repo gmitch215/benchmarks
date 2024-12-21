@@ -78,6 +78,7 @@ val VERSUS_FILE_INDEX_TEMPLATE: (String, BenchmarkConfiguration) -> String = { p
     platform: $platform
     title: ${config.name} | Select Language | ${platform.replaceFirstChar { it.uppercase() }}
     tags: [${config.tags.joinToString()}]
+    disabled: [${config.disabled.joinToString()}]
     ---
     
     ${config.description.replace("\n", "<br>")}
@@ -99,6 +100,7 @@ val VERSUS_FILE_TEMPLATE: (String, BenchmarkConfiguration, BenchmarkRun, Benchma
     l2-file-name: ${l2.fileName}
     title: ${config.name} | ${l1.language} vs ${l2.language} | ${platform.replaceFirstChar { it.uppercase() }}
     tags: [${config.tags.joinToString()}]
+    disabled: [${config.disabled.joinToString()}]
     comments: true
     ---
     
