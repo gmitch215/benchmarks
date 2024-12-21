@@ -18,7 +18,7 @@ layout: default
     <h2>All-Time Rankings</h2>
     <div>
         <div>
-            <img src="/assets/graphs/{{ page.platform }}/{{ page.id }}/all-time.png" class="dynamic rounded" title="All-Time Graph" alt="All-Time Graph" />
+            <iframe src="/assets/graphs/{{ page.platform }}/{{ page.id }}/all-time.html" class="rounded primary-graph" title="All-Time Graph"></iframe>
         </div>
         <div>
             <table class="benchmark-table ranked">
@@ -52,20 +52,20 @@ layout: default
 
 <div class="box" id="average">
     <h2>Average Times</h2>
-    <img src="/assets/graphs/{{ page.platform }}/{{ page.id }}/average.png" class="dynamic rounded" title="Average Graph" alt="Average Graph" />
+    <iframe src="/assets/graphs/{{ page.platform }}/{{ page.id }}/average.html" class="rounded secondary-graph" title="Average Graph"></iframe>
 </div>
 
 <div class="box" id="median">
     <h2>Median Times</h2>
-    <img src="/assets/graphs/{{ page.platform }}/{{ page.id }}/median.png" class="dynamic rounded" title="Median Graph" alt="Median Graph" />
+    <iframe src="/assets/graphs/{{ page.platform }}/{{ page.id }}/median.html" class="rounded secondary-graph" title="Median Graph"></iframe>
 </div>
 
 <div class="box" id="low">
     <h2>Best-Case Scenario Times</h2>
-    <img src="/assets/graphs/{{ page.platform }}/{{ page.id }}/low.png" class="dynamic rounded" title="Best-Case Graph" alt="Best-Case Graph" />
+    <iframe src="/assets/graphs/{{ page.platform }}/{{ page.id }}/low.html" class="rounded secondary-graph" title="Best-Case Graph"></iframe>
 </div>
 
 <div class="box" id="high">
     <h2>Worst-Case Scenario Times</h2>
-    <img src="/assets/graphs/{{ page.platform }}/{{ page.id }}/high.png" class="dynamic rounded" title="Worst-Case Graph" alt="Worst-Case Graph" />
+    <iframe src="/assets/graphs/{{ page.platform }}/{{ page.id }}/high.html" class="rounded secondary-graph" title="Worst-Case Graph"></iframe>
 </div>

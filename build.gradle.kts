@@ -86,7 +86,7 @@ tasks {
             project.findProperty("benchmarkFilter")?.toString()
         )
 
-        jvmArgs = listOf("-Xms6G", "-XX:+HeapDumpOnOutOfMemoryError")
+        jvmArgs = listOf("-Xms512M", "-XX:+HeapDumpOnOutOfMemoryError")
     }
 
     register("benchmark") {

@@ -211,6 +211,8 @@ header a {
     height: auto;
     max-height: 600px;
     min-height: 150px;
+
+    background-color: black;
 }
 
 .secondary-graph {
@@ -223,6 +225,8 @@ header a {
     height: auto;
     max-height: 600px;
     min-height: 180px;
+
+    background-color: black;
 }
 
 /* Index */

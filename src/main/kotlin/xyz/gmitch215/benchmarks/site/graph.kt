@@ -19,7 +19,8 @@ import org.jetbrains.kotlinx.dataframe.api.groupBy
 import org.jetbrains.kotlinx.kandy.dsl.categorical
 import org.jetbrains.kotlinx.kandy.dsl.internal.LayerCreatorScope
 import org.jetbrains.kotlinx.kandy.dsl.plot
-import org.jetbrains.kotlinx.kandy.letsplot.export.toPNG
+import org.jetbrains.kotlinx.kandy.letsplot.export.toHTML
+import org.jetbrains.kotlinx.kandy.letsplot.export.toHTML
 import org.jetbrains.kotlinx.kandy.letsplot.feature.layout
 import org.jetbrains.kotlinx.kandy.letsplot.layers.bars
 import org.jetbrains.kotlinx.kandy.letsplot.layers.builders.BarsBuilder
@@ -43,6 +44,16 @@ import kotlin.collections.first
 
 val PRIMARY_GRAPH_SIZE = 1200 to 600
 val SECONDARY_GRAPH_SIZE = 1000 to 600
+val STYLE = """
+    |<style>
+    |html, body, div {
+    |    margin: 0;
+    |    padding: 0;
+    |    width: 100%;
+    |    height: 100%;
+    |}
+    |</style>
+""".trimMargin()
 
 const val BAR_LABEL_OFFSET = 35
 const val BAR_LABEL_SIZE = 6.5
@@ -204,10 +215,10 @@ suspend fun createBenchmarkGraphs(benchmarks: List<Pair<String, String>>, out: F
             }
         }
 
-        val allTimeF = File(out, "all-time.png")
+        val allTimeF = File(out, "all-time.html")
 
         logger.info { "Writing graph to ${allTimeF.absolutePath}" }
-        allTimeF.writeBytes(allTime.toPNG())
+        allTimeF.writeText("${allTime.toHTML(false)}$STYLE")
     }
 
     val labels = data.map { it.first }
@@ -266,10 +277,10 @@ suspend fun createBenchmarkGraphs(benchmarks: List<Pair<String, String>>, out: F
             labels(labels, values)
         }
 
-        val averageF = File(out, "average.png")
+        val averageF = File(out, "average.html")
 
         logger.info { "Writing graph to ${averageF.absolutePath}" }
-        averageF.writeBytes(average.toPNG())
+        averageF.writeText("${average.toHTML(false)}$STYLE")
     }
 
     // Create Median Graph
@@ -309,10 +320,10 @@ suspend fun createBenchmarkGraphs(benchmarks: List<Pair<String, String>>, out: F
             labels(labels, values)
         }
 
-        val medianF = File(out, "median.png")
+        val medianF = File(out, "median.html")
 
         logger.info { "Writing graph to ${medianF.absolutePath}" }
-        medianF.writeBytes(median.toPNG())
+        medianF.writeText("${median.toHTML(false)}$STYLE")
     }
 
     // Create Low Graph
@@ -347,10 +358,10 @@ suspend fun createBenchmarkGraphs(benchmarks: List<Pair<String, String>>, out: F
             labels(labels, values)
         }
 
-        val lowF = File(out, "low.png")
+        val lowF = File(out, "low.html")
 
         logger.info { "Writing graph to ${lowF.absolutePath}" }
-        lowF.writeBytes(low.toPNG())
+        lowF.writeText("${low.toHTML(false)}$STYLE")
     }
 
     // Create High Graph
@@ -385,10 +396,10 @@ suspend fun createBenchmarkGraphs(benchmarks: List<Pair<String, String>>, out: F
             labels(labels, values)
         }
 
-        val highF = File(out, "high.png")
+        val highF = File(out, "high.html")
 
         logger.info { "Writing graph to ${highF.absolutePath}" }
-        highF.writeBytes(high.toPNG())
+        highF.writeText("${high.toHTML(false)}$STYLE")
     }
 }
 
@@ -503,10 +514,10 @@ suspend fun createVersusGraphs(benchmarks: List<Pair<String, String>>, runs: Lis
                     }
                 }
 
-                val file = File(out, "${l1.id}-vs-${l2.id}.png")
+                val file = File(out, "${l1.id}-vs-${l2.id}.html")
 
                 logger.info { "Writing versus graph [${l1.language}, ${l2.language}] to ${file.absolutePath}" }
-                file.writeBytes(versus.toPNG())
+                file.writeText("${versus.toHTML(false)}$STYLE")
             }
     }.join()
 
@@ -579,8 +590,8 @@ suspend fun createRanksGraph(rankings: JsonObject, out: File) = withContext(Disp
         }
     }
 
-    val rankF = File(out, "rank.png")
+    val rankF = File(out, "rank.html")
 
     logger.info { "Writing graph to ${rankF.absolutePath}" }
-    rankF.writeBytes(rank.toPNG())
+    rankF.writeText("${rank.toHTML(false)}$STYLE")
 }

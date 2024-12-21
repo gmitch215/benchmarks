@@ -61,7 +61,7 @@ layout: default
 {% if page.l1 %}
     <hr class="benchmark-separator">
     <div class="box">
-        <img src="/assets/graphs/{{ page.platform }}/{{ page.id }}/{{ page.l1 }}-vs-{{ page.l2 }}.png" class="rounded primary-graph" alt="{{ page.l1-display }} vs {{ page.l2-display }}" title="{{ page.l1-display }} vs {{ page.l2-display }}" />
+        <iframe src="/assets/graphs/{{ page.platform }}/{{ page.id }}/{{ page.l1 }}-vs-{{ page.l2 }}.html" class="rounded primary-graph" title="{{ page.l1-display }} vs {{ page.l2-display }}"></iframe>
         <div>
             <table class="benchmark-table">
                 {% assign rankings = site.data.results[page.platform].rankings[page.id].verbose %}

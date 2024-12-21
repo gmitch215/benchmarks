@@ -246,7 +246,7 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
                     if (!rankingsFile.exists())
                         rankingsFile.createNewFile()
 
-                    val text = "${RANKINGS_PLATFORM_TEMPLATE(platform)}\n\n<img class=\"dynamic rounded primary-graph\" alt=\"Rankings\" title=\"Rankings\" src=\"/assets/graphs/$platform/rank.png\" />"
+                    val text = "${RANKINGS_PLATFORM_TEMPLATE(platform)}\n\n<iframe src=\"/assets/graphs/$platform/rank.html\" class=\"rounded primary-graph\" alt=\"Rankings\" title=\"Rankings\"></iframe>"
                     rankingsFile.writeText(text)
 
                     logger.info { "Created ${rankingsFile.absolutePath}" }
