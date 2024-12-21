@@ -1,127 +1,253 @@
 {
-    "count-100M": {
+    "list-100": {
         "summary": [
-            "Kotlin (JVM)",
-            "Kotlin (Native)",
-            "Java",
             "Go",
-            "JavaScript (Deno)",
-            "C (GCC)",
-            "C++ (G++)",
-            "JavaScript (Node)",
-            "JavaScript (Bun)",
-            "C++ (Clang++)",
-            "C (Clang)",
             "Rust",
-            "Ruby",
+            "C++ (G++)",
+            "C++ (Clang++)",
             "Python",
-            "PHP"
+            "Ruby",
+            "JavaScript (Node)",
+            "C (GCC)",
+            "C (Clang)",
+            "PHP",
+            "JavaScript (Deno)",
+            "JavaScript (Bun)",
+            "Java",
+            "Kotlin (Native)",
+            "Kotlin (JVM)"
         ],
         "verbose": {
-            "Kotlin (JVM)": {
-                "rank": 1,
-                "id": "kotlin-jvm",
-                "avg": "0.111s",
-                "low": "0.004s",
-                "high": "0.297s"
-            },
-            "Kotlin (Native)": {
-                "rank": 2,
-                "id": "kotlin-native",
-                "avg": "0.161s",
-                "low": "0.064s",
-                "high": "0.350s"
-            },
-            "Java": {
-                "rank": 3,
-                "id": "java",
-                "avg": "0.169s",
-                "low": "0.003s",
-                "high": "0.665s"
-            },
             "Go": {
-                "rank": 4,
+                "rank": 1,
                 "id": "go",
-                "avg": "1.840s",
-                "low": "1.342s",
-                "high": "2.508s"
-            },
-            "JavaScript (Deno)": {
-                "rank": 5,
-                "id": "js-deno",
-                "avg": "2.046s",
-                "low": "0.738s",
-                "high": "3.586s"
-            },
-            "C (GCC)": {
-                "rank": 6,
-                "id": "c-gnu",
-                "avg": "2.324s",
-                "low": "1.396s",
-                "high": "3.588s"
-            },
-            "C++ (G++)": {
-                "rank": 7,
-                "id": "cpp-gnu",
-                "avg": "2.428s",
-                "low": "1.856s",
-                "high": "3.576s"
-            },
-            "JavaScript (Node)": {
-                "rank": 8,
-                "id": "js-node",
-                "avg": "2.759s",
-                "low": "1.583s",
-                "high": "3.985s"
-            },
-            "JavaScript (Bun)": {
-                "rank": 9,
-                "id": "js-bun",
-                "avg": "3.096s",
-                "low": "1.980s",
-                "high": "4.750s"
-            },
-            "C++ (Clang++)": {
-                "rank": 10,
-                "id": "cpp-llvm",
-                "avg": "3.977s",
-                "low": "2.775s",
-                "high": "6.304s"
-            },
-            "C (Clang)": {
-                "rank": 11,
-                "id": "c-llvm",
-                "avg": "4.076s",
-                "low": "3.157s",
-                "high": "6.436s"
+                "avg": "4.471µs",
+                "low": "3.206µs",
+                "high": "19.707µs"
             },
             "Rust": {
-                "rank": 12,
+                "rank": 2,
                 "id": "rust",
-                "avg": "14.808s",
-                "low": "4.615s",
-                "high": "38.029s"
+                "avg": "4.776µs",
+                "low": "2.655µs",
+                "high": "7.714µs"
             },
-            "Ruby": {
-                "rank": 13,
-                "id": "ruby",
-                "avg": "23.851s",
-                "low": "4.936s",
-                "high": "202.958s"
+            "C++ (G++)": {
+                "rank": 3,
+                "id": "cpp-gnu",
+                "avg": "12.961µs",
+                "low": "11.091µs",
+                "high": "17.232µs"
+            },
+            "C++ (Clang++)": {
+                "rank": 4,
+                "id": "cpp-llvm",
+                "avg": "13.651µs",
+                "low": "12.403µs",
+                "high": "15.239µs"
             },
             "Python": {
-                "rank": 14,
+                "rank": 5,
                 "id": "python",
-                "avg": "27.626s",
-                "low": "5.314s",
-                "high": "295.210s"
+                "avg": "18.244µs",
+                "low": "13.104µs",
+                "high": "57.447µs"
+            },
+            "Ruby": {
+                "rank": 6,
+                "id": "ruby",
+                "avg": "19.197µs",
+                "low": "16.280µs",
+                "high": "23.524µs"
+            },
+            "JavaScript (Node)": {
+                "rank": 7,
+                "id": "js-node",
+                "avg": "22.835µs",
+                "low": "18.294µs",
+                "high": "33.402µs"
+            },
+            "C (GCC)": {
+                "rank": 8,
+                "id": "c-gnu",
+                "avg": "28.889µs",
+                "low": "25.748µs",
+                "high": "31.038µs"
+            },
+            "C (Clang)": {
+                "rank": 9,
+                "id": "c-llvm",
+                "avg": "31.183µs",
+                "low": "27.391µs",
+                "high": "51.275µs"
             },
             "PHP": {
-                "rank": 15,
+                "rank": 10,
                 "id": "php",
-                "avg": "33.198s",
-                "low": "12.353s",
-                "high": "429.689s"
+                "avg": "39.984µs",
+                "low": "33.443µs",
+                "high": "46.547µs"
+            },
+            "JavaScript (Deno)": {
+                "rank": 11,
+                "id": "js-deno",
+                "avg": "42.072µs",
+                "low": "31.228µs",
+                "high": "70.652µs"
+            },
+            "JavaScript (Bun)": {
+                "rank": 12,
+                "id": "js-bun",
+                "avg": "112.662µs",
+                "low": "25.377µs",
+                "high": "2,079.373µs"
+            },
+            "Java": {
+                "rank": 13,
+                "id": "java",
+                "avg": "123.458µs",
+                "low": "31.199µs",
+                "high": "2,145.588µs"
+            },
+            "Kotlin (Native)": {
+                "rank": 14,
+                "id": "kotlin-native",
+                "avg": "1,824.890µs",
+                "low": "867.817µs",
+                "high": "8,517.620µs"
+            },
+            "Kotlin (JVM)": {
+                "rank": 15,
+                "id": "kotlin-jvm",
+                "avg": "35,397.721µs",
+                "low": "603.505µs",
+                "high": "110,064.093µs"
+            }
+        }
+    },
+    "list-10K": {
+        "summary": [
+            "C (GCC)",
+            "C (Clang)",
+            "Go",
+            "Rust",
+            "Kotlin (Native)",
+            "C++ (Clang++)",
+            "JavaScript (Deno)",
+            "Java",
+            "C++ (G++)",
+            "Python",
+            "Ruby",
+            "JavaScript (Bun)",
+            "JavaScript (Node)",
+            "PHP",
+            "Kotlin (JVM)"
+        ],
+        "verbose": {
+            "C (GCC)": {
+                "rank": 1,
+                "id": "c-gnu",
+                "avg": "29.093µs",
+                "low": "26.710µs",
+                "high": "31.129µs"
+            },
+            "C (Clang)": {
+                "rank": 2,
+                "id": "c-llvm",
+                "avg": "33.756µs",
+                "low": "26.800µs",
+                "high": "59.601µs"
+            },
+            "Go": {
+                "rank": 3,
+                "id": "go",
+                "avg": "52.983µs",
+                "low": "42.840µs",
+                "high": "202.086µs"
+            },
+            "Rust": {
+                "rank": 4,
+                "id": "rust",
+                "avg": "187.863µs",
+                "low": "149.058µs",
+                "high": "314.817µs"
+            },
+            "Kotlin (Native)": {
+                "rank": 5,
+                "id": "kotlin-native",
+                "avg": "2,420.849µs",
+                "low": "1,511.316µs",
+                "high": "10,181.478µs"
+            },
+            "C++ (Clang++)": {
+                "rank": 6,
+                "id": "cpp-llvm",
+                "avg": "10,713.676µs",
+                "low": "241.490µs",
+                "high": "123,000.699µs"
+            },
+            "JavaScript (Deno)": {
+                "rank": 7,
+                "id": "js-deno",
+                "avg": "13,399.254µs",
+                "low": "997.950µs",
+                "high": "107,585.920µs"
+            },
+            "Java": {
+                "rank": 8,
+                "id": "java",
+                "avg": "18,568.216µs",
+                "low": "909.345µs",
+                "high": "174,450.053µs"
+            },
+            "C++ (G++)": {
+                "rank": 9,
+                "id": "cpp-gnu",
+                "avg": "24,706.790µs",
+                "low": "259.964µs",
+                "high": "168,309.211µs"
+            },
+            "Python": {
+                "rank": 10,
+                "id": "python",
+                "avg": "34,379.797µs",
+                "low": "1,185.338µs",
+                "high": "192,381.901µs"
+            },
+            "Ruby": {
+                "rank": 11,
+                "id": "ruby",
+                "avg": "46,457.283µs",
+                "low": "1,072.017µs",
+                "high": "240,601.240µs"
+            },
+            "JavaScript (Bun)": {
+                "rank": 12,
+                "id": "js-bun",
+                "avg": "50,328.255µs",
+                "low": "2,347.322µs",
+                "high": "167,192.612µs"
+            },
+            "JavaScript (Node)": {
+                "rank": 13,
+                "id": "js-node",
+                "avg": "52,439.191µs",
+                "low": "929.111µs",
+                "high": "232,431.972µs"
+            },
+            "PHP": {
+                "rank": 14,
+                "id": "php",
+                "avg": "71,117.131µs",
+                "low": "2,521.527µs",
+                "high": "173,640.428µs"
+            },
+            "Kotlin (JVM)": {
+                "rank": 15,
+                "id": "kotlin-jvm",
+                "avg": "99,624.351µs",
+                "low": "36,585.777µs",
+                "high": "189,657.738µs"
             }
         }
     },
@@ -129,9 +255,9 @@
         "summary": [
             "C (GCC)",
             "Go",
-            "C (Clang)",
             "C++ (Clang++)",
             "C++ (G++)",
+            "C (Clang)",
             "Rust",
             "Java",
             "JavaScript (Node)",
@@ -147,603 +273,225 @@
             "C (GCC)": {
                 "rank": 1,
                 "id": "c-gnu",
-                "avg": "1.361µs",
+                "avg": "1.400µs",
                 "low": "1.242µs",
-                "high": "1.573µs"
+                "high": "2.074µs"
             },
             "Go": {
                 "rank": 2,
                 "id": "go",
-                "avg": "1.474µs",
-                "low": "1.252µs",
-                "high": "1.713µs"
-            },
-            "C (Clang)": {
-                "rank": 3,
-                "id": "c-llvm",
-                "avg": "1.660µs",
-                "low": "1.523µs",
-                "high": "1.784µs"
+                "avg": "1.490µs",
+                "low": "1.302µs",
+                "high": "1.703µs"
             },
             "C++ (Clang++)": {
-                "rank": 4,
+                "rank": 3,
                 "id": "cpp-llvm",
-                "avg": "1.704µs",
-                "low": "1.453µs",
-                "high": "2.114µs"
-            },
-            "C++ (G++)": {
-                "rank": 5,
-                "id": "cpp-gnu",
-                "avg": "1.727µs",
+                "avg": "1.686µs",
                 "low": "1.513µs",
-                "high": "2.064µs"
-            },
-            "Rust": {
-                "rank": 6,
-                "id": "rust",
-                "avg": "14.112µs",
-                "low": "11.091µs",
-                "high": "37.640µs"
-            },
-            "Java": {
-                "rank": 7,
-                "id": "java",
-                "avg": "17.842µs",
-                "low": "15.249µs",
-                "high": "19.596µs"
-            },
-            "JavaScript (Node)": {
-                "rank": 8,
-                "id": "js-node",
-                "avg": "68.585µs",
-                "low": "61.495µs",
-                "high": "80.521µs"
-            },
-            "JavaScript (Deno)": {
-                "rank": 9,
-                "id": "js-deno",
-                "avg": "83.197µs",
-                "low": "68.418µs",
-                "high": "121.417µs"
-            },
-            "Kotlin (Native)": {
-                "rank": 10,
-                "id": "kotlin-native",
-                "avg": "128.003µs",
-                "low": "111.318µs",
-                "high": "146.273µs"
-            },
-            "Ruby": {
-                "rank": 11,
-                "id": "ruby",
-                "avg": "194.666µs",
-                "low": "171.621µs",
-                "high": "251.149µs"
-            },
-            "JavaScript (Bun)": {
-                "rank": 12,
-                "id": "js-bun",
-                "avg": "384.630µs",
-                "low": "351.106µs",
-                "high": "475.298µs"
-            },
-            "PHP": {
-                "rank": 13,
-                "id": "php",
-                "avg": "9,842.209µs",
-                "low": "249.476µs",
-                "high": "144,586.313µs"
-            },
-            "Python": {
-                "rank": 14,
-                "id": "python",
-                "avg": "17,921.070µs",
-                "low": "801.207µs",
-                "high": "130,216.069µs"
-            },
-            "Kotlin (JVM)": {
-                "rank": 15,
-                "id": "kotlin-jvm",
-                "avg": "32,065.129µs",
-                "low": "747.647µs",
-                "high": "85,044.114µs"
-            }
-        }
-    },
-    "list-100": {
-        "summary": [
-            "Go",
-            "Rust",
-            "C++ (Clang++)",
-            "C++ (G++)",
-            "Ruby",
-            "JavaScript (Node)",
-            "C (GCC)",
-            "C (Clang)",
-            "JavaScript (Deno)",
-            "PHP",
-            "Java",
-            "JavaScript (Bun)",
-            "Kotlin (Native)",
-            "Python",
-            "Kotlin (JVM)"
-        ],
-        "verbose": {
-            "Go": {
-                "rank": 1,
-                "id": "go",
-                "avg": "4.213µs",
-                "low": "3.306µs",
-                "high": "14.558µs"
-            },
-            "Rust": {
-                "rank": 2,
-                "id": "rust",
-                "avg": "5.664µs",
-                "low": "2.554µs",
-                "high": "8.666µs"
-            },
-            "C++ (Clang++)": {
-                "rank": 3,
-                "id": "cpp-llvm",
-                "avg": "14.564µs",
-                "low": "11.923µs",
-                "high": "23.064µs"
+                "high": "1.943µs"
             },
             "C++ (G++)": {
                 "rank": 4,
                 "id": "cpp-gnu",
-                "avg": "16.593µs",
-                "low": "11.421µs",
-                "high": "73.918µs"
-            },
-            "Ruby": {
-                "rank": 5,
-                "id": "ruby",
-                "avg": "19.442µs",
-                "low": "17.102µs",
-                "high": "23.264µs"
-            },
-            "JavaScript (Node)": {
-                "rank": 6,
-                "id": "js-node",
-                "avg": "23.662µs",
-                "low": "20.368µs",
-                "high": "28.172µs"
-            },
-            "C (GCC)": {
-                "rank": 7,
-                "id": "c-gnu",
-                "avg": "30.333µs",
-                "low": "26.520µs",
-                "high": "51.175µs"
+                "avg": "1.687µs",
+                "low": "1.453µs",
+                "high": "1.924µs"
             },
             "C (Clang)": {
-                "rank": 8,
+                "rank": 5,
                 "id": "c-llvm",
-                "avg": "30.926µs",
-                "low": "26.690µs",
-                "high": "48.230µs"
-            },
-            "JavaScript (Deno)": {
-                "rank": 9,
-                "id": "js-deno",
-                "avg": "40.136µs",
-                "low": "31.559µs",
-                "high": "55.895µs"
-            },
-            "PHP": {
-                "rank": 10,
-                "id": "php",
-                "avg": "41.608µs",
-                "low": "34.274µs",
-                "high": "76.413µs"
-            },
-            "Java": {
-                "rank": 11,
-                "id": "java",
-                "avg": "45.123µs",
-                "low": "33.974µs",
-                "high": "59.110µs"
-            },
-            "JavaScript (Bun)": {
-                "rank": 12,
-                "id": "js-bun",
-                "avg": "75.621µs",
-                "low": "25.968µs",
-                "high": "1,170.528µs"
-            },
-            "Kotlin (Native)": {
-                "rank": 13,
-                "id": "kotlin-native",
-                "avg": "2,231.330µs",
-                "low": "809.404µs",
-                "high": "9,591.202µs"
-            },
-            "Python": {
-                "rank": 14,
-                "id": "python",
-                "avg": "5,777.546µs",
-                "low": "13.104µs",
-                "high": "144,048.821µs"
-            },
-            "Kotlin (JVM)": {
-                "rank": 15,
-                "id": "kotlin-jvm",
-                "avg": "28,421.674µs",
-                "low": "655.465µs",
-                "high": "114,681.585µs"
-            }
-        }
-    },
-    "list-10K": {
-        "summary": [
-            "C (GCC)",
-            "Go",
-            "Rust",
-            "C++ (G++)",
-            "C (Clang)",
-            "Kotlin (Native)",
-            "C++ (Clang++)",
-            "Java",
-            "JavaScript (Deno)",
-            "JavaScript (Bun)",
-            "Python",
-            "Ruby",
-            "JavaScript (Node)",
-            "PHP",
-            "Kotlin (JVM)"
-        ],
-        "verbose": {
-            "C (GCC)": {
-                "rank": 1,
-                "id": "c-gnu",
-                "avg": "29.516µs",
-                "low": "26.199µs",
-                "high": "42.680µs"
-            },
-            "Go": {
-                "rank": 2,
-                "id": "go",
-                "avg": "53.023µs",
-                "low": "42.729µs",
-                "high": "215.092µs"
+                "avg": "1.711µs",
+                "low": "1.513µs",
+                "high": "1.994µs"
             },
             "Rust": {
-                "rank": 3,
-                "id": "rust",
-                "avg": "1,946.297µs",
-                "low": "160.670µs",
-                "high": "44,364.347µs"
-            },
-            "C++ (G++)": {
-                "rank": 4,
-                "id": "cpp-gnu",
-                "avg": "2,234.588µs",
-                "low": "241.662µs",
-                "high": "49,105.005µs"
-            },
-            "C (Clang)": {
-                "rank": 5,
-                "id": "c-llvm",
-                "avg": "2,487.280µs",
-                "low": "28.473µs",
-                "high": "61,442.055µs"
-            },
-            "Kotlin (Native)": {
                 "rank": 6,
-                "id": "kotlin-native",
-                "avg": "3,616.127µs",
-                "low": "1,577.290µs",
-                "high": "11,901.363µs"
-            },
-            "C++ (Clang++)": {
-                "rank": 7,
-                "id": "cpp-llvm",
-                "avg": "5,477.652µs",
-                "low": "231.713µs",
-                "high": "127,706.115µs"
+                "id": "rust",
+                "avg": "12.251µs",
+                "low": "11.140µs",
+                "high": "13.806µs"
             },
             "Java": {
-                "rank": 8,
+                "rank": 7,
                 "id": "java",
-                "avg": "14,898.640µs",
-                "low": "857.032µs",
-                "high": "122,932.831µs"
+                "avg": "18.232µs",
+                "low": "17.292µs",
+                "high": "19.546µs"
+            },
+            "JavaScript (Node)": {
+                "rank": 8,
+                "id": "js-node",
+                "avg": "69.714µs",
+                "low": "61.133µs",
+                "high": "78.657µs"
             },
             "JavaScript (Deno)": {
                 "rank": 9,
                 "id": "js-deno",
-                "avg": "15,829.468µs",
-                "low": "878.682µs",
-                "high": "102,852.710µs"
+                "avg": "89.426µs",
+                "low": "71.333µs",
+                "high": "193.750µs"
             },
-            "JavaScript (Bun)": {
-                "rank": 10,
-                "id": "js-bun",
-                "avg": "25,329.872µs",
-                "low": "2,394.034µs",
-                "high": "128,634.187µs"
-            },
-            "Python": {
-                "rank": 11,
-                "id": "python",
-                "avg": "32,332.586µs",
-                "low": "1,134.430µs",
-                "high": "117,624.831µs"
-            },
-            "Ruby": {
-                "rank": 12,
-                "id": "ruby",
-                "avg": "37,191.747µs",
-                "low": "1,142.767µs",
-                "high": "172,435.350µs"
-            },
-            "JavaScript (Node)": {
-                "rank": 13,
-                "id": "js-node",
-                "avg": "54,312.205µs",
-                "low": "896.035µs",
-                "high": "228,988.687µs"
-            },
-            "PHP": {
-                "rank": 14,
-                "id": "php",
-                "avg": "61,122.949µs",
-                "low": "2,442.365µs",
-                "high": "180,306.405µs"
-            },
-            "Kotlin (JVM)": {
-                "rank": 15,
-                "id": "kotlin-jvm",
-                "avg": "67,571.177µs",
-                "low": "3,140.139µs",
-                "high": "123,093.731µs"
-            }
-        }
-    },
-    "power-of-two": {
-        "summary": [
-            "Kotlin (Native)",
-            "Go",
-            "C++ (Clang++)",
-            "C (Clang)",
-            "C++ (G++)",
-            "C (GCC)",
-            "Rust",
-            "Java",
-            "JavaScript (Node)",
-            "JavaScript (Bun)",
-            "Python",
-            "Ruby",
-            "PHP",
-            "JavaScript (Deno)",
-            "Kotlin (JVM)"
-        ],
-        "verbose": {
             "Kotlin (Native)": {
-                "rank": 1,
-                "id": "kotlin-native",
-                "avg": "134.960ns",
-                "low": "100.000ns",
-                "high": "210.000ns"
-            },
-            "Go": {
-                "rank": 2,
-                "id": "go",
-                "avg": "177.560ns",
-                "low": "160.000ns",
-                "high": "281.000ns"
-            },
-            "C++ (Clang++)": {
-                "rank": 3,
-                "id": "cpp-llvm",
-                "avg": "193.480ns",
-                "low": "170.000ns",
-                "high": "220.000ns"
-            },
-            "C (Clang)": {
-                "rank": 4,
-                "id": "c-llvm",
-                "avg": "195.240ns",
-                "low": "170.000ns",
-                "high": "290.000ns"
-            },
-            "C++ (G++)": {
-                "rank": 5,
-                "id": "cpp-gnu",
-                "avg": "210.280ns",
-                "low": "190.000ns",
-                "high": "250.000ns"
-            },
-            "C (GCC)": {
-                "rank": 6,
-                "id": "c-gnu",
-                "avg": "226.840ns",
-                "low": "210.000ns",
-                "high": "261.000ns"
-            },
-            "Rust": {
-                "rank": 7,
-                "id": "rust",
-                "avg": "744.520ns",
-                "low": "652.000ns",
-                "high": "1,022.000ns"
-            },
-            "Java": {
-                "rank": 8,
-                "id": "java",
-                "avg": "1,436.560ns",
-                "low": "1,112.000ns",
-                "high": "1,863.000ns"
-            },
-            "JavaScript (Node)": {
-                "rank": 9,
-                "id": "js-node",
-                "avg": "3,732.600ns",
-                "low": "3,026.000ns",
-                "high": "5,110.000ns"
-            },
-            "JavaScript (Bun)": {
                 "rank": 10,
-                "id": "js-bun",
-                "avg": "4,542.800ns",
-                "low": "2,425.000ns",
-                "high": "5,450.000ns"
-            },
-            "Python": {
-                "rank": 11,
-                "id": "python",
-                "avg": "7,765.720ns",
-                "low": "6,643.000ns",
-                "high": "11,281.000ns"
+                "id": "kotlin-native",
+                "avg": "123.723µs",
+                "low": "107.110µs",
+                "high": "144.860µs"
             },
             "Ruby": {
-                "rank": 12,
+                "rank": 11,
                 "id": "ruby",
-                "avg": "8,438.400ns",
-                "low": "6,662.000ns",
-                "high": "23,864.000ns"
+                "avg": "196.020µs",
+                "low": "169.216µs",
+                "high": "243.714µs"
+            },
+            "JavaScript (Bun)": {
+                "rank": 12,
+                "id": "js-bun",
+                "avg": "382.958µs",
+                "low": "337.047µs",
+                "high": "480.705µs"
             },
             "PHP": {
                 "rank": 13,
                 "id": "php",
-                "avg": "17,983.280ns",
-                "low": "12,073.000ns",
-                "high": "22,302.000ns"
+                "avg": "3,422.953µs",
+                "low": "262.799µs",
+                "high": "78,956.322µs"
             },
-            "JavaScript (Deno)": {
+            "Python": {
                 "rank": 14,
-                "id": "js-deno",
-                "avg": "25,301.960ns",
-                "low": "16,641.000ns",
-                "high": "62,928.000ns"
+                "id": "python",
+                "avg": "18,652.580µs",
+                "low": "775.917µs",
+                "high": "165,142.823µs"
             },
             "Kotlin (JVM)": {
                 "rank": 15,
                 "id": "kotlin-jvm",
-                "avg": "29,218,047.520ns",
-                "low": "477,633.000ns",
-                "high": "124,963,357.000ns"
+                "avg": "24,473.669µs",
+                "low": "673.525µs",
+                "high": "71,467.994µs"
             }
         }
     },
     "http-post": {
         "summary": [
-            "C (GCC)",
             "C (Clang)",
+            "C (GCC)",
             "JavaScript (Bun)",
-            "Ruby",
-            "JavaScript (Deno)",
             "Rust",
             "PHP",
+            "Ruby",
+            "JavaScript (Deno)",
             "Go",
-            "Python",
-            "JavaScript (Node)",
-            "C++ (G++)",
             "C++ (Clang++)",
+            "Python",
+            "C++ (G++)",
+            "JavaScript (Node)",
             "Java",
             "Kotlin (JVM)"
         ],
         "verbose": {
-            "C (GCC)": {
-                "rank": 1,
-                "id": "c-gnu",
-                "avg": "18.400ms",
-                "low": "7.000ms",
-                "high": "57.000ms"
-            },
             "C (Clang)": {
-                "rank": 2,
+                "rank": 1,
                 "id": "c-llvm",
-                "avg": "20.240ms",
-                "low": "10.000ms",
-                "high": "53.000ms"
+                "avg": "8.640ms",
+                "low": "1.000ms",
+                "high": "50.000ms"
+            },
+            "C (GCC)": {
+                "rank": 2,
+                "id": "c-gnu",
+                "avg": "11.800ms",
+                "low": "3.000ms",
+                "high": "55.000ms"
             },
             "JavaScript (Bun)": {
                 "rank": 3,
                 "id": "js-bun",
-                "avg": "43.240ms",
+                "avg": "56.200ms",
                 "low": "2.000ms",
-                "high": "199.000ms"
-            },
-            "Ruby": {
-                "rank": 4,
-                "id": "ruby",
-                "avg": "84.040ms",
-                "low": "32.000ms",
-                "high": "189.000ms"
-            },
-            "JavaScript (Deno)": {
-                "rank": 5,
-                "id": "js-deno",
-                "avg": "118.240ms",
-                "low": "5.000ms",
-                "high": "237.000ms"
+                "high": "159.000ms"
             },
             "Rust": {
-                "rank": 6,
+                "rank": 4,
                 "id": "rust",
-                "avg": "137.400ms",
-                "low": "76.000ms",
-                "high": "206.000ms"
+                "avg": "70.040ms",
+                "low": "8.000ms",
+                "high": "119.000ms"
             },
             "PHP": {
-                "rank": 7,
+                "rank": 5,
                 "id": "php",
-                "avg": "262.040ms",
-                "low": "145.000ms",
-                "high": "707.000ms"
+                "avg": "115.480ms",
+                "low": "10.000ms",
+                "high": "585.000ms"
+            },
+            "Ruby": {
+                "rank": 6,
+                "id": "ruby",
+                "avg": "117.680ms",
+                "low": "46.000ms",
+                "high": "271.000ms"
+            },
+            "JavaScript (Deno)": {
+                "rank": 7,
+                "id": "js-deno",
+                "avg": "129.800ms",
+                "low": "5.000ms",
+                "high": "270.000ms"
             },
             "Go": {
                 "rank": 8,
                 "id": "go",
-                "avg": "339.800ms",
-                "low": "137.000ms",
-                "high": "1,367.000ms"
+                "avg": "149.960ms",
+                "low": "7.000ms",
+                "high": "1,153.000ms"
+            },
+            "C++ (Clang++)": {
+                "rank": 9,
+                "id": "cpp-llvm",
+                "avg": "189.960ms",
+                "low": "83.000ms",
+                "high": "535.000ms"
             },
             "Python": {
-                "rank": 9,
-                "id": "python",
-                "avg": "358.880ms",
-                "low": "177.000ms",
-                "high": "1,211.000ms"
-            },
-            "JavaScript (Node)": {
                 "rank": 10,
-                "id": "js-node",
-                "avg": "431.680ms",
-                "low": "246.000ms",
-                "high": "626.000ms"
+                "id": "python",
+                "avg": "223.120ms",
+                "low": "68.000ms",
+                "high": "1,128.000ms"
             },
             "C++ (G++)": {
                 "rank": 11,
                 "id": "cpp-gnu",
-                "avg": "438.760ms",
-                "low": "311.000ms",
-                "high": "751.000ms"
+                "avg": "258.960ms",
+                "low": "24.000ms",
+                "high": "680.000ms"
             },
-            "C++ (Clang++)": {
+            "JavaScript (Node)": {
                 "rank": 12,
-                "id": "cpp-llvm",
-                "avg": "540.000ms",
-                "low": "293.000ms",
-                "high": "1,340.000ms"
+                "id": "js-node",
+                "avg": "411.200ms",
+                "low": "280.000ms",
+                "high": "631.000ms"
             },
             "Java": {
                 "rank": 13,
                 "id": "java",
-                "avg": "566.880ms",
-                "low": "238.000ms",
-                "high": "1,109.000ms"
+                "avg": "608.720ms",
+                "low": "137.000ms",
+                "high": "1,380.000ms"
             },
             "Kotlin (JVM)": {
                 "rank": 14,
                 "id": "kotlin-jvm",
-                "avg": "1,203.240ms",
-                "low": "793.000ms",
-                "high": "1,496.000ms"
+                "avg": "1,105.200ms",
+                "low": "780.000ms",
+                "high": "1,475.000ms"
             }
         }
     },
@@ -751,386 +499,268 @@
         "summary": [
             "Kotlin (Native)",
             "C++ (G++)",
-            "C++ (Clang++)",
-            "C (Clang)",
-            "C (GCC)",
-            "Rust",
-            "Java",
-            "Go",
-            "JavaScript (Deno)",
-            "JavaScript (Bun)",
-            "JavaScript (Node)",
-            "Ruby",
-            "Python",
-            "Kotlin (JVM)",
-            "PHP"
-        ],
-        "verbose": {
-            "Kotlin (Native)": {
-                "rank": 1,
-                "id": "kotlin-native",
-                "avg": "2.357µs",
-                "low": "2.063µs",
-                "high": "2.765µs"
-            },
-            "C++ (G++)": {
-                "rank": 2,
-                "id": "cpp-gnu",
-                "avg": "35.451µs",
-                "low": "30.627µs",
-                "high": "53.641µs"
-            },
-            "C++ (Clang++)": {
-                "rank": 3,
-                "id": "cpp-llvm",
-                "avg": "35.668µs",
-                "low": "32.361µs",
-                "high": "62.237µs"
-            },
-            "C (Clang)": {
-                "rank": 4,
-                "id": "c-llvm",
-                "avg": "36.701µs",
-                "low": "32.100µs",
-                "high": "54.141µs"
-            },
-            "C (GCC)": {
-                "rank": 5,
-                "id": "c-gnu",
-                "avg": "38.055µs",
-                "low": "32.140µs",
-                "high": "61.856µs"
-            },
-            "Rust": {
-                "rank": 6,
-                "id": "rust",
-                "avg": "48.131µs",
-                "low": "41.548µs",
-                "high": "70.131µs"
-            },
-            "Java": {
-                "rank": 7,
-                "id": "java",
-                "avg": "70.624µs",
-                "low": "66.033µs",
-                "high": "74.499µs"
-            },
-            "Go": {
-                "rank": 8,
-                "id": "go",
-                "avg": "117.754µs",
-                "low": "88.105µs",
-                "high": "504.513µs"
-            },
-            "JavaScript (Deno)": {
-                "rank": 9,
-                "id": "js-deno",
-                "avg": "232.471µs",
-                "low": "211.095µs",
-                "high": "263.002µs"
-            },
-            "JavaScript (Bun)": {
-                "rank": 10,
-                "id": "js-bun",
-                "avg": "4,121.085µs",
-                "low": "444.030µs",
-                "high": "67,277.843µs"
-            },
-            "JavaScript (Node)": {
-                "rank": 11,
-                "id": "js-node",
-                "avg": "6,121.906µs",
-                "low": "258.303µs",
-                "high": "81,410.837µs"
-            },
-            "Ruby": {
-                "rank": 12,
-                "id": "ruby",
-                "avg": "7,290.984µs",
-                "low": "197.259µs",
-                "high": "141,028.232µs"
-            },
-            "Python": {
-                "rank": 13,
-                "id": "python",
-                "avg": "9,803.627µs",
-                "low": "270.064µs",
-                "high": "138,210.143µs"
-            },
-            "Kotlin (JVM)": {
-                "rank": 14,
-                "id": "kotlin-jvm",
-                "avg": "22,218.379µs",
-                "low": "583.540µs",
-                "high": "104,856.150µs"
-            },
-            "PHP": {
-                "rank": 15,
-                "id": "php",
-                "avg": "26,073.389µs",
-                "low": "630.288µs",
-                "high": "179,147.183µs"
-            }
-        }
-    },
-    "pow-10K": {
-        "summary": [
-            "Kotlin (Native)",
-            "Go",
-            "Java",
-            "C (GCC)",
-            "Rust",
             "C (Clang)",
             "C++ (Clang++)",
-            "C++ (G++)",
-            "JavaScript (Deno)",
-            "Kotlin (JVM)",
-            "JavaScript (Bun)",
-            "Ruby",
-            "JavaScript (Node)",
-            "Python",
-            "PHP"
-        ],
-        "verbose": {
-            "Kotlin (Native)": {
-                "rank": 1,
-                "id": "kotlin-native",
-                "avg": "23.028µs",
-                "low": "20.718µs",
-                "high": "24.886µs"
-            },
-            "Go": {
-                "rank": 2,
-                "id": "go",
-                "avg": "1,877.200µs",
-                "low": "893.921µs",
-                "high": "24,698.549µs"
-            },
-            "Java": {
-                "rank": 3,
-                "id": "java",
-                "avg": "2,074.365µs",
-                "low": "594.651µs",
-                "high": "23,399.775µs"
-            },
-            "C (GCC)": {
-                "rank": 4,
-                "id": "c-gnu",
-                "avg": "4,642.609µs",
-                "low": "222.296µs",
-                "high": "110,178.455µs"
-            },
-            "Rust": {
-                "rank": 5,
-                "id": "rust",
-                "avg": "5,444.787µs",
-                "low": "337.731µs",
-                "high": "127,665.424µs"
-            },
-            "C (Clang)": {
-                "rank": 6,
-                "id": "c-llvm",
-                "avg": "8,090.436µs",
-                "low": "219.790µs",
-                "high": "79,258.620µs"
-            },
-            "C++ (Clang++)": {
-                "rank": 7,
-                "id": "cpp-llvm",
-                "avg": "8,368.915µs",
-                "low": "218.568µs",
-                "high": "107,336.497µs"
-            },
-            "C++ (G++)": {
-                "rank": 8,
-                "id": "cpp-gnu",
-                "avg": "10,245.578µs",
-                "low": "222.095µs",
-                "high": "166,009.441µs"
-            },
-            "JavaScript (Deno)": {
-                "rank": 9,
-                "id": "js-deno",
-                "avg": "21,844.380µs",
-                "low": "2,209.570µs",
-                "high": "113,969.038µs"
-            },
-            "Kotlin (JVM)": {
-                "rank": 10,
-                "id": "kotlin-jvm",
-                "avg": "42,717.784µs",
-                "low": "1,205.984µs",
-                "high": "125,134.140µs"
-            },
-            "JavaScript (Bun)": {
-                "rank": 11,
-                "id": "js-bun",
-                "avg": "51,076.816µs",
-                "low": "3,226.911µs",
-                "high": "193,388.093µs"
-            },
-            "Ruby": {
-                "rank": 12,
-                "id": "ruby",
-                "avg": "54,063.109µs",
-                "low": "1,864.865µs",
-                "high": "187,559.509µs"
-            },
-            "JavaScript (Node)": {
-                "rank": 13,
-                "id": "js-node",
-                "avg": "76,186.658µs",
-                "low": "2,016.188µs",
-                "high": "230,472.872µs"
-            },
-            "Python": {
-                "rank": 14,
-                "id": "python",
-                "avg": "89,607.729µs",
-                "low": "3,089.895µs",
-                "high": "254,943.682µs"
-            },
-            "PHP": {
-                "rank": 15,
-                "id": "php",
-                "avg": "169,838.526µs",
-                "low": "42,915.078µs",
-                "high": "298,330.523µs"
-            }
-        }
-    },
-    "http-get": {
-        "summary": [
-            "C (Clang)",
             "C (GCC)",
+            "Go",
             "JavaScript (Deno)",
+            "Java",
             "JavaScript (Bun)",
             "Rust",
-            "Go",
+            "Ruby",
+            "JavaScript (Node)",
             "Python",
             "PHP",
-            "Ruby",
-            "C++ (G++)",
-            "JavaScript (Node)",
-            "C++ (Clang++)",
-            "Java",
             "Kotlin (JVM)"
         ],
         "verbose": {
-            "C (Clang)": {
+            "Kotlin (Native)": {
                 "rank": 1,
+                "id": "kotlin-native",
+                "avg": "2.448µs",
+                "low": "2.214µs",
+                "high": "2.745µs"
+            },
+            "C++ (G++)": {
+                "rank": 2,
+                "id": "cpp-gnu",
+                "avg": "34.814µs",
+                "low": "31.529µs",
+                "high": "40.215µs"
+            },
+            "C (Clang)": {
+                "rank": 3,
                 "id": "c-llvm",
-                "avg": "12.320ms",
-                "low": "7.000ms",
-                "high": "32.000ms"
+                "avg": "35.219µs",
+                "low": "31.659µs",
+                "high": "39.704µs"
+            },
+            "C++ (Clang++)": {
+                "rank": 4,
+                "id": "cpp-llvm",
+                "avg": "35.671µs",
+                "low": "31.398µs",
+                "high": "51.857µs"
             },
             "C (GCC)": {
-                "rank": 2,
-                "id": "c-gnu",
-                "avg": "15.640ms",
-                "low": "6.000ms",
-                "high": "57.000ms"
-            },
-            "JavaScript (Deno)": {
-                "rank": 3,
-                "id": "js-deno",
-                "avg": "64.240ms",
-                "low": "3.000ms",
-                "high": "185.000ms"
-            },
-            "JavaScript (Bun)": {
-                "rank": 4,
-                "id": "js-bun",
-                "avg": "85.480ms",
-                "low": "2.000ms",
-                "high": "157.000ms"
-            },
-            "Rust": {
                 "rank": 5,
-                "id": "rust",
-                "avg": "137.240ms",
-                "low": "72.000ms",
-                "high": "230.000ms"
+                "id": "c-gnu",
+                "avg": "52.409µs",
+                "low": "31.338µs",
+                "high": "434.339µs"
             },
             "Go": {
                 "rank": 6,
                 "id": "go",
-                "avg": "280.880ms",
-                "low": "137.000ms",
-                "high": "794.000ms"
+                "avg": "154.347µs",
+                "low": "88.084µs",
+                "high": "1,307.706µs"
             },
-            "Python": {
+            "JavaScript (Deno)": {
                 "rank": 7,
-                "id": "python",
-                "avg": "359.440ms",
-                "low": "197.000ms",
-                "high": "818.000ms"
-            },
-            "PHP": {
-                "rank": 8,
-                "id": "php",
-                "avg": "373.120ms",
-                "low": "141.000ms",
-                "high": "1,260.000ms"
-            },
-            "Ruby": {
-                "rank": 9,
-                "id": "ruby",
-                "avg": "409.360ms",
-                "low": "183.000ms",
-                "high": "947.000ms"
-            },
-            "C++ (G++)": {
-                "rank": 10,
-                "id": "cpp-gnu",
-                "avg": "421.680ms",
-                "low": "196.000ms",
-                "high": "1,394.000ms"
-            },
-            "JavaScript (Node)": {
-                "rank": 11,
-                "id": "js-node",
-                "avg": "444.000ms",
-                "low": "319.000ms",
-                "high": "673.000ms"
-            },
-            "C++ (Clang++)": {
-                "rank": 12,
-                "id": "cpp-llvm",
-                "avg": "451.480ms",
-                "low": "187.000ms",
-                "high": "888.000ms"
+                "id": "js-deno",
+                "avg": "241.566µs",
+                "low": "215.601µs",
+                "high": "338.570µs"
             },
             "Java": {
-                "rank": 13,
+                "rank": 8,
                 "id": "java",
-                "avg": "636.200ms",
-                "low": "294.000ms",
-                "high": "1,581.000ms"
+                "avg": "1,453.293µs",
+                "low": "65.412µs",
+                "high": "34,557.574µs"
+            },
+            "JavaScript (Bun)": {
+                "rank": 9,
+                "id": "js-bun",
+                "avg": "2,411.707µs",
+                "low": "444.027µs",
+                "high": "47,196.260µs"
+            },
+            "Rust": {
+                "rank": 10,
+                "id": "rust",
+                "avg": "3,993.957µs",
+                "low": "42.529µs",
+                "high": "98,700.444µs"
+            },
+            "Ruby": {
+                "rank": 11,
+                "id": "ruby",
+                "avg": "8,366.513µs",
+                "low": "199.912µs",
+                "high": "151,057.584µs"
+            },
+            "JavaScript (Node)": {
+                "rank": 12,
+                "id": "js-node",
+                "avg": "14,406.384µs",
+                "low": "266.507µs",
+                "high": "189,932.016µs"
+            },
+            "Python": {
+                "rank": 13,
+                "id": "python",
+                "avg": "14,954.886µs",
+                "low": "296.482µs",
+                "high": "161,332.892µs"
+            },
+            "PHP": {
+                "rank": 14,
+                "id": "php",
+                "avg": "15,708.965µs",
+                "low": "642.236µs",
+                "high": "88,729.396µs"
             },
             "Kotlin (JVM)": {
-                "rank": 14,
+                "rank": 15,
                 "id": "kotlin-jvm",
-                "avg": "669.080ms",
-                "low": "519.000ms",
-                "high": "886.000ms"
+                "avg": "23,317.318µs",
+                "low": "579.880µs",
+                "high": "117,137.621µs"
             }
         }
     },
-    "random-1M": {
+    "count-100M": {
         "summary": [
+            "Kotlin (JVM)",
             "Kotlin (Native)",
-            "JavaScript (Bun)",
+            "Java",
             "Go",
+            "JavaScript (Deno)",
+            "C++ (G++)",
+            "C (GCC)",
+            "JavaScript (Node)",
+            "JavaScript (Bun)",
+            "C++ (Clang++)",
             "C (Clang)",
             "Rust",
+            "Ruby",
+            "Python",
+            "PHP"
+        ],
+        "verbose": {
+            "Kotlin (JVM)": {
+                "rank": 1,
+                "id": "kotlin-jvm",
+                "avg": "0.082s",
+                "low": "0.003s",
+                "high": "0.196s"
+            },
+            "Kotlin (Native)": {
+                "rank": 2,
+                "id": "kotlin-native",
+                "avg": "0.131s",
+                "low": "0.063s",
+                "high": "0.280s"
+            },
+            "Java": {
+                "rank": 3,
+                "id": "java",
+                "avg": "0.186s",
+                "low": "0.002s",
+                "high": "0.921s"
+            },
+            "Go": {
+                "rank": 4,
+                "id": "go",
+                "avg": "1.829s",
+                "low": "1.440s",
+                "high": "2.474s"
+            },
+            "JavaScript (Deno)": {
+                "rank": 5,
+                "id": "js-deno",
+                "avg": "2.088s",
+                "low": "1.628s",
+                "high": "2.699s"
+            },
+            "C++ (G++)": {
+                "rank": 6,
+                "id": "cpp-gnu",
+                "avg": "2.395s",
+                "low": "1.919s",
+                "high": "3.351s"
+            },
+            "C (GCC)": {
+                "rank": 7,
+                "id": "c-gnu",
+                "avg": "2.398s",
+                "low": "1.970s",
+                "high": "3.293s"
+            },
+            "JavaScript (Node)": {
+                "rank": 8,
+                "id": "js-node",
+                "avg": "2.896s",
+                "low": "2.490s",
+                "high": "4.051s"
+            },
+            "JavaScript (Bun)": {
+                "rank": 9,
+                "id": "js-bun",
+                "avg": "3.139s",
+                "low": "1.669s",
+                "high": "4.755s"
+            },
+            "C++ (Clang++)": {
+                "rank": 10,
+                "id": "cpp-llvm",
+                "avg": "4.053s",
+                "low": "3.214s",
+                "high": "7.974s"
+            },
+            "C (Clang)": {
+                "rank": 11,
+                "id": "c-llvm",
+                "avg": "4.068s",
+                "low": "3.350s",
+                "high": "5.702s"
+            },
+            "Rust": {
+                "rank": 12,
+                "id": "rust",
+                "avg": "15.091s",
+                "low": "4.697s",
+                "high": "38.235s"
+            },
+            "Ruby": {
+                "rank": 13,
+                "id": "ruby",
+                "avg": "24.062s",
+                "low": "6.273s",
+                "high": "202.561s"
+            },
+            "Python": {
+                "rank": 14,
+                "id": "python",
+                "avg": "26.146s",
+                "low": "5.334s",
+                "high": "274.772s"
+            },
+            "PHP": {
+                "rank": 15,
+                "id": "php",
+                "avg": "33.430s",
+                "low": "12.378s",
+                "high": "435.505s"
+            }
+        }
+    },
+    "count-1M": {
+        "summary": [
+            "Kotlin (Native)",
+            "Go",
+            "JavaScript (Deno)",
             "C (GCC)",
-            "Java",
-            "Kotlin (JVM)",
             "C++ (Clang++)",
             "C++ (G++)",
-            "JavaScript (Deno)",
+            "C (Clang)",
             "JavaScript (Node)",
+            "Java",
+            "Kotlin (JVM)",
+            "JavaScript (Bun)",
+            "Rust",
             "Ruby",
             "Python",
             "PHP"
@@ -1139,359 +769,107 @@
             "Kotlin (Native)": {
                 "rank": 1,
                 "id": "kotlin-native",
-                "avg": "65.380ms",
-                "low": "32.575ms",
-                "high": "102.883ms"
-            },
-            "JavaScript (Bun)": {
-                "rank": 2,
-                "id": "js-bun",
-                "avg": "200.616ms",
-                "low": "98.556ms",
-                "high": "325.690ms"
-            },
-            "Go": {
-                "rank": 3,
-                "id": "go",
-                "avg": "258.759ms",
-                "low": "136.195ms",
-                "high": "570.721ms"
-            },
-            "C (Clang)": {
-                "rank": 4,
-                "id": "c-llvm",
-                "avg": "294.686ms",
-                "low": "210.466ms",
-                "high": "440.617ms"
-            },
-            "Rust": {
-                "rank": 5,
-                "id": "rust",
-                "avg": "299.002ms",
-                "low": "195.269ms",
-                "high": "539.395ms"
-            },
-            "C (GCC)": {
-                "rank": 6,
-                "id": "c-gnu",
-                "avg": "303.871ms",
-                "low": "132.680ms",
-                "high": "589.799ms"
-            },
-            "Java": {
-                "rank": 7,
-                "id": "java",
-                "avg": "328.847ms",
-                "low": "120.212ms",
-                "high": "685.963ms"
-            },
-            "Kotlin (JVM)": {
-                "rank": 8,
-                "id": "kotlin-jvm",
-                "avg": "331.913ms",
-                "low": "216.302ms",
-                "high": "463.435ms"
-            },
-            "C++ (Clang++)": {
-                "rank": 9,
-                "id": "cpp-llvm",
-                "avg": "360.136ms",
-                "low": "221.590ms",
-                "high": "624.538ms"
-            },
-            "C++ (G++)": {
-                "rank": 10,
-                "id": "cpp-gnu",
-                "avg": "363.568ms",
-                "low": "226.398ms",
-                "high": "509.496ms"
-            },
-            "JavaScript (Deno)": {
-                "rank": 11,
-                "id": "js-deno",
-                "avg": "405.372ms",
-                "low": "234.361ms",
-                "high": "748.567ms"
-            },
-            "JavaScript (Node)": {
-                "rank": 12,
-                "id": "js-node",
-                "avg": "429.169ms",
-                "low": "269.534ms",
-                "high": "651.943ms"
-            },
-            "Ruby": {
-                "rank": 13,
-                "id": "ruby",
-                "avg": "2,533.385ms",
-                "low": "1,371.650ms",
-                "high": "4,240.507ms"
-            },
-            "Python": {
-                "rank": 14,
-                "id": "python",
-                "avg": "3,507.411ms",
-                "low": "2,174.319ms",
-                "high": "6,165.027ms"
-            },
-            "PHP": {
-                "rank": 15,
-                "id": "php",
-                "avg": "9,440.838ms",
-                "low": "5,460.651ms",
-                "high": "23,076.370ms"
-            }
-        }
-    },
-    "random-1K": {
-        "summary": [
-            "Rust",
-            "C++ (Clang++)",
-            "C++ (G++)",
-            "C (Clang)",
-            "JavaScript (Deno)",
-            "Python",
-            "JavaScript (Node)",
-            "Go",
-            "Kotlin (Native)",
-            "C (GCC)",
-            "Ruby",
-            "JavaScript (Bun)",
-            "PHP",
-            "Java",
-            "Kotlin (JVM)"
-        ],
-        "verbose": {
-            "Rust": {
-                "rank": 1,
-                "id": "rust",
-                "avg": "13.029µs",
-                "low": "10.320µs",
-                "high": "47.388µs"
-            },
-            "C++ (Clang++)": {
-                "rank": 2,
-                "id": "cpp-llvm",
-                "avg": "14.150µs",
-                "low": "13.254µs",
-                "high": "15.449µs"
-            },
-            "C++ (G++)": {
-                "rank": 3,
-                "id": "cpp-gnu",
-                "avg": "14.195µs",
-                "low": "12.143µs",
-                "high": "30.507µs"
-            },
-            "C (Clang)": {
-                "rank": 4,
-                "id": "c-llvm",
-                "avg": "16.252µs",
-                "low": "14.227µs",
-                "high": "35.236µs"
-            },
-            "JavaScript (Deno)": {
-                "rank": 5,
-                "id": "js-deno",
-                "avg": "107.219µs",
-                "low": "92.042µs",
-                "high": "149.109µs"
-            },
-            "Python": {
-                "rank": 6,
-                "id": "python",
-                "avg": "145.124µs",
-                "low": "121.476µs",
-                "high": "166.842µs"
-            },
-            "JavaScript (Node)": {
-                "rank": 7,
-                "id": "js-node",
-                "avg": "211.643µs",
-                "low": "82.374µs",
-                "high": "3,096.177µs"
-            },
-            "Go": {
-                "rank": 8,
-                "id": "go",
-                "avg": "826.478µs",
-                "low": "22.121µs",
-                "high": "20,076.563µs"
-            },
-            "Kotlin (Native)": {
-                "rank": 9,
-                "id": "kotlin-native",
-                "avg": "1,050.745µs",
-                "low": "139.781µs",
-                "high": "22,602.902µs"
-            },
-            "C (GCC)": {
-                "rank": 10,
-                "id": "c-gnu",
-                "avg": "2,370.277µs",
-                "low": "14.117µs",
-                "high": "58,898.169µs"
-            },
-            "Ruby": {
-                "rank": 11,
-                "id": "ruby",
-                "avg": "5,548.634µs",
-                "low": "121.447µs",
-                "high": "72,210.543µs"
-            },
-            "JavaScript (Bun)": {
-                "rank": 12,
-                "id": "js-bun",
-                "avg": "7,428.823µs",
-                "low": "364.461µs",
-                "high": "176,116.337µs"
-            },
-            "PHP": {
-                "rank": 13,
-                "id": "php",
-                "avg": "14,814.650µs",
-                "low": "411.198µs",
-                "high": "170,045.303µs"
-            },
-            "Java": {
-                "rank": 14,
-                "id": "java",
-                "avg": "26,774.615µs",
-                "low": "819.231µs",
-                "high": "118,212.804µs"
-            },
-            "Kotlin (JVM)": {
-                "rank": 15,
-                "id": "kotlin-jvm",
-                "avg": "203,100.621µs",
-                "low": "142,089.318µs",
-                "high": "303,928.793µs"
-            }
-        }
-    },
-    "3n-plus-1": {
-        "summary": [
-            "Kotlin (Native)",
-            "Go",
-            "C++ (G++)",
-            "C++ (Clang++)",
-            "C (Clang)",
-            "C (GCC)",
-            "Rust",
-            "Ruby",
-            "JavaScript (Deno)",
-            "Java",
-            "Python",
-            "JavaScript (Bun)",
-            "JavaScript (Node)",
-            "PHP",
-            "Kotlin (JVM)"
-        ],
-        "verbose": {
-            "Kotlin (Native)": {
-                "rank": 1,
-                "id": "kotlin-native",
-                "avg": "1.533µs",
-                "low": "1.403µs",
-                "high": "1.643µs"
+                "avg": "2.415ms",
+                "low": "0.612ms",
+                "high": "20.720ms"
             },
             "Go": {
                 "rank": 2,
                 "id": "go",
-                "avg": "1.608µs",
-                "low": "1.343µs",
-                "high": "1.844µs"
-            },
-            "C++ (G++)": {
-                "rank": 3,
-                "id": "cpp-gnu",
-                "avg": "3.406µs",
-                "low": "3.116µs",
-                "high": "3.677µs"
-            },
-            "C++ (Clang++)": {
-                "rank": 4,
-                "id": "cpp-llvm",
-                "avg": "3.419µs",
-                "low": "3.186µs",
-                "high": "3.678µs"
-            },
-            "C (Clang)": {
-                "rank": 5,
-                "id": "c-llvm",
-                "avg": "3.816µs",
-                "low": "3.346µs",
-                "high": "4.368µs"
-            },
-            "C (GCC)": {
-                "rank": 6,
-                "id": "c-gnu",
-                "avg": "3.886µs",
-                "low": "2.965µs",
-                "high": "20.688µs"
-            },
-            "Rust": {
-                "rank": 7,
-                "id": "rust",
-                "avg": "4.024µs",
-                "low": "3.597µs",
-                "high": "4.829µs"
-            },
-            "Ruby": {
-                "rank": 8,
-                "id": "ruby",
-                "avg": "49.218µs",
-                "low": "46.176µs",
-                "high": "57.247µs"
+                "avg": "6.903ms",
+                "low": "1.248ms",
+                "high": "69.138ms"
             },
             "JavaScript (Deno)": {
-                "rank": 9,
+                "rank": 3,
                 "id": "js-deno",
-                "avg": "456.196µs",
-                "low": "175.799µs",
-                "high": "635.307µs"
+                "avg": "20.517ms",
+                "low": "2.443ms",
+                "high": "99.059ms"
             },
-            "Java": {
-                "rank": 10,
-                "id": "java",
-                "avg": "476.426µs",
-                "low": "46.317µs",
-                "high": "7,480.750µs"
+            "C (GCC)": {
+                "rank": 4,
+                "id": "c-gnu",
+                "avg": "22.003ms",
+                "low": "0.871ms",
+                "high": "125.813ms"
             },
-            "Python": {
-                "rank": 11,
-                "id": "python",
-                "avg": "484.349µs",
-                "low": "115.345µs",
-                "high": "8,957.923µs"
+            "C++ (Clang++)": {
+                "rank": 5,
+                "id": "cpp-llvm",
+                "avg": "30.824ms",
+                "low": "1.422ms",
+                "high": "125.355ms"
             },
-            "JavaScript (Bun)": {
-                "rank": 12,
-                "id": "js-bun",
-                "avg": "3,454.984µs",
-                "low": "662.929µs",
-                "high": "66,172.677µs"
+            "C++ (G++)": {
+                "rank": 6,
+                "id": "cpp-gnu",
+                "avg": "36.003ms",
+                "low": "0.839ms",
+                "high": "177.694ms"
+            },
+            "C (Clang)": {
+                "rank": 7,
+                "id": "c-llvm",
+                "avg": "37.359ms",
+                "low": "1.438ms",
+                "high": "130.199ms"
             },
             "JavaScript (Node)": {
-                "rank": 13,
+                "rank": 8,
                 "id": "js-node",
-                "avg": "5,981.700µs",
-                "low": "132.257µs",
-                "high": "145,638.817µs"
+                "avg": "57.599ms",
+                "low": "2.579ms",
+                "high": "260.582ms"
             },
-            "PHP": {
-                "rank": 14,
-                "id": "php",
-                "avg": "8,977.345µs",
-                "low": "375.682µs",
-                "high": "214,514.317µs"
+            "Java": {
+                "rank": 9,
+                "id": "java",
+                "avg": "62.654ms",
+                "low": "2.494ms",
+                "high": "236.551ms"
             },
             "Kotlin (JVM)": {
-                "rank": 15,
+                "rank": 10,
                 "id": "kotlin-jvm",
-                "avg": "32,363.798µs",
-                "low": "546.000µs",
-                "high": "115,862.177µs"
+                "avg": "88.487ms",
+                "low": "28.625ms",
+                "high": "191.844ms"
+            },
+            "JavaScript (Bun)": {
+                "rank": 11,
+                "id": "js-bun",
+                "avg": "177.046ms",
+                "low": "26.431ms",
+                "high": "347.000ms"
+            },
+            "Rust": {
+                "rank": 12,
+                "id": "rust",
+                "avg": "301.622ms",
+                "low": "133.552ms",
+                "high": "623.209ms"
+            },
+            "Ruby": {
+                "rank": 13,
+                "id": "ruby",
+                "avg": "1,730.384ms",
+                "low": "1,177.450ms",
+                "high": "3,059.123ms"
+            },
+            "Python": {
+                "rank": 14,
+                "id": "python",
+                "avg": "2,688.490ms",
+                "low": "2,326.119ms",
+                "high": "3,458.141ms"
+            },
+            "PHP": {
+                "rank": 15,
+                "id": "php",
+                "avg": "5,457.252ms",
+                "low": "3,344.615ms",
+                "high": "7,637.535ms"
             }
         }
     },
@@ -1502,264 +880,264 @@
             "Go",
             "Rust",
             "C (Clang)",
-            "Java",
             "C++ (Clang++)",
+            "Java",
             "Python",
             "Ruby",
+            "JavaScript (Deno)",
+            "JavaScript (Bun)",
+            "Kotlin (Native)",
             "PHP",
             "JavaScript (Node)",
-            "JavaScript (Deno)",
-            "Kotlin (Native)",
-            "JavaScript (Bun)",
             "Kotlin (JVM)"
         ],
         "verbose": {
             "C++ (G++)": {
                 "rank": 1,
                 "id": "cpp-gnu",
-                "avg": "0.252µs",
-                "low": "0.220µs",
-                "high": "0.281µs"
+                "avg": "0.261µs",
+                "low": "0.231µs",
+                "high": "0.301µs"
             },
             "C (GCC)": {
                 "rank": 2,
                 "id": "c-gnu",
-                "avg": "0.311µs",
-                "low": "0.271µs",
-                "high": "0.411µs"
+                "avg": "0.319µs",
+                "low": "0.270µs",
+                "high": "0.561µs"
             },
             "Go": {
                 "rank": 3,
                 "id": "go",
-                "avg": "0.372µs",
-                "low": "0.260µs",
-                "high": "0.711µs"
+                "avg": "0.353µs",
+                "low": "0.300µs",
+                "high": "0.531µs"
             },
             "Rust": {
                 "rank": 4,
                 "id": "rust",
-                "avg": "0.709µs",
-                "low": "0.572µs",
-                "high": "0.962µs"
+                "avg": "0.696µs",
+                "low": "0.611µs",
+                "high": "0.902µs"
             },
             "C (Clang)": {
                 "rank": 5,
                 "id": "c-llvm",
-                "avg": "4.877µs",
-                "low": "4.198µs",
-                "high": "5.560µs"
-            },
-            "Java": {
-                "rank": 6,
-                "id": "java",
-                "avg": "5.342µs",
-                "low": "4.339µs",
-                "high": "6.782µs"
+                "avg": "5.004µs",
+                "low": "3.968µs",
+                "high": "5.680µs"
             },
             "C++ (Clang++)": {
-                "rank": 7,
+                "rank": 6,
                 "id": "cpp-llvm",
-                "avg": "5.599µs",
-                "low": "4.759µs",
-                "high": "7.113µs"
+                "avg": "5.527µs",
+                "low": "4.698µs",
+                "high": "7.955µs"
+            },
+            "Java": {
+                "rank": 7,
+                "id": "java",
+                "avg": "6.436µs",
+                "low": "4.338µs",
+                "high": "32.911µs"
             },
             "Python": {
                 "rank": 8,
                 "id": "python",
-                "avg": "8.392µs",
-                "low": "7.364µs",
-                "high": "11.071µs"
+                "avg": "8.104µs",
+                "low": "7.094µs",
+                "high": "9.228µs"
             },
             "Ruby": {
                 "rank": 9,
                 "id": "ruby",
-                "avg": "9.083µs",
-                "low": "6.993µs",
-                "high": "16.942µs"
-            },
-            "PHP": {
-                "rank": 10,
-                "id": "php",
-                "avg": "35.616µs",
-                "low": "28.023µs",
-                "high": "50.414µs"
-            },
-            "JavaScript (Node)": {
-                "rank": 11,
-                "id": "js-node",
-                "avg": "67.582µs",
-                "low": "47.328µs",
-                "high": "133.430µs"
+                "avg": "8.890µs",
+                "low": "6.933µs",
+                "high": "14.427µs"
             },
             "JavaScript (Deno)": {
-                "rank": 12,
+                "rank": 10,
                 "id": "js-deno",
-                "avg": "101.591µs",
-                "low": "69.690µs",
-                "high": "169.217µs"
-            },
-            "Kotlin (Native)": {
-                "rank": 13,
-                "id": "kotlin-native",
-                "avg": "118.101µs",
-                "low": "109.364µs",
-                "high": "144.560µs"
+                "avg": "89.477µs",
+                "low": "66.895µs",
+                "high": "133.479µs"
             },
             "JavaScript (Bun)": {
-                "rank": 14,
+                "rank": 11,
                 "id": "js-bun",
-                "avg": "166.156µs",
-                "low": "144.811µs",
-                "high": "185.777µs"
+                "avg": "164.735µs",
+                "low": "136.655µs",
+                "high": "200.444µs"
+            },
+            "Kotlin (Native)": {
+                "rank": 12,
+                "id": "kotlin-native",
+                "avg": "290.208µs",
+                "low": "97.000µs",
+                "high": "4,440.724µs"
+            },
+            "PHP": {
+                "rank": 13,
+                "id": "php",
+                "avg": "3,121.207µs",
+                "low": "29.125µs",
+                "high": "77,165.821µs"
+            },
+            "JavaScript (Node)": {
+                "rank": 14,
+                "id": "js-node",
+                "avg": "3,633.059µs",
+                "low": "47.479µs",
+                "high": "89,281.117µs"
             },
             "Kotlin (JVM)": {
                 "rank": 15,
                 "id": "kotlin-jvm",
-                "avg": "69,553.283µs",
-                "low": "1,731.696µs",
-                "high": "190,840.740µs"
+                "avg": "69,811.880µs",
+                "low": "1,937.069µs",
+                "high": "184,983.311µs"
             }
         }
     },
-    "count-1M": {
+    "random-1K": {
         "summary": [
-            "Kotlin (Native)",
-            "Go",
-            "JavaScript (Deno)",
-            "C (GCC)",
+            "Rust",
             "C++ (G++)",
+            "C (GCC)",
+            "Go",
+            "JavaScript (Node)",
+            "JavaScript (Deno)",
+            "Kotlin (Native)",
+            "Python",
+            "JavaScript (Bun)",
             "C (Clang)",
             "C++ (Clang++)",
-            "JavaScript (Node)",
             "Java",
-            "Kotlin (JVM)",
-            "JavaScript (Bun)",
-            "Rust",
             "Ruby",
-            "Python",
-            "PHP"
+            "PHP",
+            "Kotlin (JVM)"
         ],
         "verbose": {
-            "Kotlin (Native)": {
+            "Rust": {
                 "rank": 1,
-                "id": "kotlin-native",
-                "avg": "1.347ms",
-                "low": "0.603ms",
-                "high": "8.468ms"
-            },
-            "Go": {
-                "rank": 2,
-                "id": "go",
-                "avg": "2.597ms",
-                "low": "1.097ms",
-                "high": "30.679ms"
-            },
-            "JavaScript (Deno)": {
-                "rank": 3,
-                "id": "js-deno",
-                "avg": "13.368ms",
-                "low": "2.251ms",
-                "high": "87.581ms"
-            },
-            "C (GCC)": {
-                "rank": 4,
-                "id": "c-gnu",
-                "avg": "16.425ms",
-                "low": "0.839ms",
-                "high": "119.749ms"
+                "id": "rust",
+                "avg": "12.638µs",
+                "low": "10.400µs",
+                "high": "32.871µs"
             },
             "C++ (G++)": {
-                "rank": 5,
+                "rank": 2,
                 "id": "cpp-gnu",
-                "avg": "23.124ms",
-                "low": "0.841ms",
-                "high": "193.107ms"
+                "avg": "15.166µs",
+                "low": "12.493µs",
+                "high": "54.722µs"
             },
-            "C (Clang)": {
-                "rank": 6,
-                "id": "c-llvm",
-                "avg": "35.960ms",
-                "low": "1.478ms",
-                "high": "161.366ms"
+            "C (GCC)": {
+                "rank": 3,
+                "id": "c-gnu",
+                "avg": "15.408µs",
+                "low": "13.806µs",
+                "high": "25.928µs"
             },
-            "C++ (Clang++)": {
-                "rank": 7,
-                "id": "cpp-llvm",
-                "avg": "43.617ms",
-                "low": "1.427ms",
-                "high": "137.481ms"
+            "Go": {
+                "rank": 4,
+                "id": "go",
+                "avg": "24.371µs",
+                "low": "20.979µs",
+                "high": "42.038µs"
             },
             "JavaScript (Node)": {
-                "rank": 8,
+                "rank": 5,
                 "id": "js-node",
-                "avg": "67.017ms",
-                "low": "2.699ms",
-                "high": "188.080ms"
+                "avg": "101.396µs",
+                "low": "80.871µs",
+                "high": "335.345µs"
             },
-            "Java": {
-                "rank": 9,
-                "id": "java",
-                "avg": "76.140ms",
-                "low": "2.496ms",
-                "high": "282.437ms"
+            "JavaScript (Deno)": {
+                "rank": 6,
+                "id": "js-deno",
+                "avg": "118.735µs",
+                "low": "96.951µs",
+                "high": "284.561µs"
             },
-            "Kotlin (JVM)": {
-                "rank": 10,
-                "id": "kotlin-jvm",
-                "avg": "82.769ms",
-                "low": "3.345ms",
-                "high": "171.071ms"
+            "Kotlin (Native)": {
+                "rank": 7,
+                "id": "kotlin-native",
+                "avg": "268.707µs",
+                "low": "139.480µs",
+                "high": "3,071.382µs"
+            },
+            "Python": {
+                "rank": 8,
+                "id": "python",
+                "avg": "2,384.860µs",
+                "low": "129.431µs",
+                "high": "56,190.641µs"
             },
             "JavaScript (Bun)": {
-                "rank": 11,
+                "rank": 9,
                 "id": "js-bun",
-                "avg": "163.999ms",
-                "low": "67.221ms",
-                "high": "322.324ms"
+                "avg": "2,435.142µs",
+                "low": "348.639µs",
+                "high": "46,360.924µs"
             },
-            "Rust": {
+            "C (Clang)": {
+                "rank": 10,
+                "id": "c-llvm",
+                "avg": "3,233.867µs",
+                "low": "13.956µs",
+                "high": "80,412.230µs"
+            },
+            "C++ (Clang++)": {
+                "rank": 11,
+                "id": "cpp-llvm",
+                "avg": "3,683.521µs",
+                "low": "12.964µs",
+                "high": "91,743.773µs"
+            },
+            "Java": {
                 "rank": 12,
-                "id": "rust",
-                "avg": "271.165ms",
-                "low": "139.174ms",
-                "high": "403.056ms"
+                "id": "java",
+                "avg": "15,281.457µs",
+                "low": "750.468µs",
+                "high": "128,399.989µs"
             },
             "Ruby": {
                 "rank": 13,
                 "id": "ruby",
-                "avg": "1,648.503ms",
-                "low": "1,046.884ms",
-                "high": "2,872.321ms"
-            },
-            "Python": {
-                "rank": 14,
-                "id": "python",
-                "avg": "2,559.233ms",
-                "low": "1,524.911ms",
-                "high": "4,018.697ms"
+                "avg": "15,475.742µs",
+                "low": "127.978µs",
+                "high": "196,318.853µs"
             },
             "PHP": {
-                "rank": 15,
+                "rank": 14,
                 "id": "php",
-                "avg": "5,474.839ms",
-                "low": "3,215.756ms",
-                "high": "11,458.634ms"
+                "avg": "21,711.750µs",
+                "low": "420.483µs",
+                "high": "213,975.910µs"
+            },
+            "Kotlin (JVM)": {
+                "rank": 15,
+                "id": "kotlin-jvm",
+                "avg": "201,231.457µs",
+                "low": "34,085.581µs",
+                "high": "337,881.327µs"
             }
         }
     },
     "array-100K": {
         "summary": [
             "Go",
+            "C (Clang)",
+            "C++ (G++)",
             "C (GCC)",
             "Kotlin (Native)",
-            "C++ (G++)",
-            "PHP",
-            "C (Clang)",
             "C++ (Clang++)",
-            "JavaScript (Deno)",
+            "PHP",
             "Rust",
-            "JavaScript (Node)",
+            "JavaScript (Deno)",
             "Java",
+            "JavaScript (Node)",
             "JavaScript (Bun)",
             "Kotlin (JVM)",
             "Ruby",
@@ -1769,188 +1147,811 @@
             "Go": {
                 "rank": 1,
                 "id": "go",
-                "avg": "0.100ms",
-                "low": "0.070ms",
-                "high": "0.528ms"
-            },
-            "C (GCC)": {
-                "rank": 2,
-                "id": "c-gnu",
-                "avg": "5.162ms",
-                "low": "0.143ms",
-                "high": "92.653ms"
-            },
-            "Kotlin (Native)": {
-                "rank": 3,
-                "id": "kotlin-native",
-                "avg": "6.641ms",
-                "low": "2.284ms",
-                "high": "12.789ms"
-            },
-            "C++ (G++)": {
-                "rank": 4,
-                "id": "cpp-gnu",
-                "avg": "9.172ms",
-                "low": "0.137ms",
-                "high": "110.942ms"
-            },
-            "PHP": {
-                "rank": 5,
-                "id": "php",
-                "avg": "14.296ms",
-                "low": "0.634ms",
-                "high": "116.755ms"
+                "avg": "0.116ms",
+                "low": "0.071ms",
+                "high": "0.520ms"
             },
             "C (Clang)": {
-                "rank": 6,
+                "rank": 2,
                 "id": "c-llvm",
-                "avg": "15.968ms",
-                "low": "0.322ms",
-                "high": "115.614ms"
+                "avg": "3.251ms",
+                "low": "0.319ms",
+                "high": "72.231ms"
+            },
+            "C++ (G++)": {
+                "rank": 3,
+                "id": "cpp-gnu",
+                "avg": "3.491ms",
+                "low": "0.132ms",
+                "high": "83.692ms"
+            },
+            "C (GCC)": {
+                "rank": 4,
+                "id": "c-gnu",
+                "avg": "5.799ms",
+                "low": "0.137ms",
+                "high": "74.276ms"
+            },
+            "Kotlin (Native)": {
+                "rank": 5,
+                "id": "kotlin-native",
+                "avg": "8.887ms",
+                "low": "2.277ms",
+                "high": "21.455ms"
             },
             "C++ (Clang++)": {
-                "rank": 7,
+                "rank": 6,
                 "id": "cpp-llvm",
-                "avg": "18.299ms",
-                "low": "0.323ms",
-                "high": "169.184ms"
+                "avg": "16.442ms",
+                "low": "0.327ms",
+                "high": "112.292ms"
             },
-            "JavaScript (Deno)": {
-                "rank": 8,
-                "id": "js-deno",
-                "avg": "21.470ms",
-                "low": "2.611ms",
-                "high": "128.606ms"
+            "PHP": {
+                "rank": 7,
+                "id": "php",
+                "avg": "17.035ms",
+                "low": "0.616ms",
+                "high": "92.752ms"
             },
             "Rust": {
-                "rank": 9,
+                "rank": 8,
                 "id": "rust",
-                "avg": "25.996ms",
-                "low": "1.140ms",
-                "high": "132.485ms"
+                "avg": "22.941ms",
+                "low": "1.145ms",
+                "high": "124.569ms"
             },
-            "JavaScript (Node)": {
-                "rank": 10,
-                "id": "js-node",
-                "avg": "49.714ms",
-                "low": "2.518ms",
-                "high": "174.432ms"
+            "JavaScript (Deno)": {
+                "rank": 9,
+                "id": "js-deno",
+                "avg": "24.106ms",
+                "low": "1.669ms",
+                "high": "205.242ms"
             },
             "Java": {
-                "rank": 11,
+                "rank": 10,
                 "id": "java",
-                "avg": "54.658ms",
-                "low": "1.673ms",
-                "high": "199.563ms"
+                "avg": "49.603ms",
+                "low": "1.842ms",
+                "high": "178.602ms"
+            },
+            "JavaScript (Node)": {
+                "rank": 11,
+                "id": "js-node",
+                "avg": "66.576ms",
+                "low": "2.611ms",
+                "high": "283.753ms"
             },
             "JavaScript (Bun)": {
                 "rank": 12,
                 "id": "js-bun",
-                "avg": "117.422ms",
-                "low": "58.256ms",
-                "high": "265.853ms"
+                "avg": "118.203ms",
+                "low": "62.078ms",
+                "high": "163.428ms"
             },
             "Kotlin (JVM)": {
                 "rank": 13,
                 "id": "kotlin-jvm",
-                "avg": "136.480ms",
-                "low": "81.626ms",
-                "high": "232.867ms"
+                "avg": "146.266ms",
+                "low": "47.140ms",
+                "high": "231.081ms"
             },
             "Ruby": {
                 "rank": 14,
                 "id": "ruby",
-                "avg": "648.746ms",
-                "low": "283.700ms",
-                "high": "1,202.086ms"
+                "avg": "676.319ms",
+                "low": "467.235ms",
+                "high": "1,227.053ms"
             },
             "Python": {
                 "rank": 15,
                 "id": "python",
-                "avg": "25,229.913ms",
-                "low": "6,319.223ms",
-                "high": "220,000.595ms"
+                "avg": "24,659.131ms",
+                "low": "6,261.826ms",
+                "high": "212,191.930ms"
+            }
+        }
+    },
+    "http-get": {
+        "summary": [
+            "C (GCC)",
+            "C (Clang)",
+            "Rust",
+            "JavaScript (Deno)",
+            "JavaScript (Bun)",
+            "C++ (G++)",
+            "PHP",
+            "Go",
+            "Python",
+            "C++ (Clang++)",
+            "Ruby",
+            "JavaScript (Node)",
+            "Java",
+            "Kotlin (JVM)"
+        ],
+        "verbose": {
+            "C (GCC)": {
+                "rank": 1,
+                "id": "c-gnu",
+                "avg": "6.840ms",
+                "low": "2.000ms",
+                "high": "22.000ms"
+            },
+            "C (Clang)": {
+                "rank": 2,
+                "id": "c-llvm",
+                "avg": "8.840ms",
+                "low": "4.000ms",
+                "high": "38.000ms"
+            },
+            "Rust": {
+                "rank": 3,
+                "id": "rust",
+                "avg": "68.240ms",
+                "low": "14.000ms",
+                "high": "126.000ms"
+            },
+            "JavaScript (Deno)": {
+                "rank": 4,
+                "id": "js-deno",
+                "avg": "72.680ms",
+                "low": "3.000ms",
+                "high": "179.000ms"
+            },
+            "JavaScript (Bun)": {
+                "rank": 5,
+                "id": "js-bun",
+                "avg": "78.280ms",
+                "low": "2.000ms",
+                "high": "225.000ms"
+            },
+            "C++ (G++)": {
+                "rank": 6,
+                "id": "cpp-gnu",
+                "avg": "179.000ms",
+                "low": "38.000ms",
+                "high": "472.000ms"
+            },
+            "PHP": {
+                "rank": 7,
+                "id": "php",
+                "avg": "199.840ms",
+                "low": "12.000ms",
+                "high": "1,206.000ms"
+            },
+            "Go": {
+                "rank": 8,
+                "id": "go",
+                "avg": "200.880ms",
+                "low": "8.000ms",
+                "high": "998.000ms"
+            },
+            "Python": {
+                "rank": 9,
+                "id": "python",
+                "avg": "218.520ms",
+                "low": "57.000ms",
+                "high": "664.000ms"
+            },
+            "C++ (Clang++)": {
+                "rank": 10,
+                "id": "cpp-llvm",
+                "avg": "246.560ms",
+                "low": "6.000ms",
+                "high": "781.000ms"
+            },
+            "Ruby": {
+                "rank": 11,
+                "id": "ruby",
+                "avg": "277.280ms",
+                "low": "59.000ms",
+                "high": "709.000ms"
+            },
+            "JavaScript (Node)": {
+                "rank": 12,
+                "id": "js-node",
+                "avg": "418.920ms",
+                "low": "312.000ms",
+                "high": "590.000ms"
+            },
+            "Java": {
+                "rank": 13,
+                "id": "java",
+                "avg": "549.400ms",
+                "low": "118.000ms",
+                "high": "1,200.000ms"
+            },
+            "Kotlin (JVM)": {
+                "rank": 14,
+                "id": "kotlin-jvm",
+                "avg": "657.800ms",
+                "low": "478.000ms",
+                "high": "907.000ms"
+            }
+        }
+    },
+    "power-of-two": {
+        "summary": [
+            "Kotlin (Native)",
+            "Go",
+            "C (Clang)",
+            "C++ (Clang++)",
+            "C++ (G++)",
+            "C (GCC)",
+            "Rust",
+            "Java",
+            "JavaScript (Node)",
+            "JavaScript (Bun)",
+            "Python",
+            "Ruby",
+            "PHP",
+            "JavaScript (Deno)",
+            "Kotlin (JVM)"
+        ],
+        "verbose": {
+            "Kotlin (Native)": {
+                "rank": 1,
+                "id": "kotlin-native",
+                "avg": "126.200ns",
+                "low": "90.000ns",
+                "high": "240.000ns"
+            },
+            "Go": {
+                "rank": 2,
+                "id": "go",
+                "avg": "171.040ns",
+                "low": "150.000ns",
+                "high": "201.000ns"
+            },
+            "C (Clang)": {
+                "rank": 3,
+                "id": "c-llvm",
+                "avg": "194.040ns",
+                "low": "170.000ns",
+                "high": "231.000ns"
+            },
+            "C++ (Clang++)": {
+                "rank": 4,
+                "id": "cpp-llvm",
+                "avg": "195.120ns",
+                "low": "161.000ns",
+                "high": "230.000ns"
+            },
+            "C++ (G++)": {
+                "rank": 5,
+                "id": "cpp-gnu",
+                "avg": "211.240ns",
+                "low": "190.000ns",
+                "high": "291.000ns"
+            },
+            "C (GCC)": {
+                "rank": 6,
+                "id": "c-gnu",
+                "avg": "230.240ns",
+                "low": "210.000ns",
+                "high": "320.000ns"
+            },
+            "Rust": {
+                "rank": 7,
+                "id": "rust",
+                "avg": "759.000ns",
+                "low": "671.000ns",
+                "high": "1,072.000ns"
+            },
+            "Java": {
+                "rank": 8,
+                "id": "java",
+                "avg": "1,324.840ns",
+                "low": "1,112.000ns",
+                "high": "1,824.000ns"
+            },
+            "JavaScript (Node)": {
+                "rank": 9,
+                "id": "js-node",
+                "avg": "3,541.360ns",
+                "low": "3,005.000ns",
+                "high": "4,839.000ns"
+            },
+            "JavaScript (Bun)": {
+                "rank": 10,
+                "id": "js-bun",
+                "avg": "4,992.520ns",
+                "low": "4,299.000ns",
+                "high": "6,943.000ns"
+            },
+            "Python": {
+                "rank": 11,
+                "id": "python",
+                "avg": "7,806.960ns",
+                "low": "6,272.000ns",
+                "high": "13,806.000ns"
+            },
+            "Ruby": {
+                "rank": 12,
+                "id": "ruby",
+                "avg": "7,958.880ns",
+                "low": "6,703.000ns",
+                "high": "13,064.000ns"
+            },
+            "PHP": {
+                "rank": 13,
+                "id": "php",
+                "avg": "18,047.160ns",
+                "low": "14,898.000ns",
+                "high": "22,121.000ns"
+            },
+            "JavaScript (Deno)": {
+                "rank": 14,
+                "id": "js-deno",
+                "avg": "27,314.400ns",
+                "low": "16,591.000ns",
+                "high": "64,110.000ns"
+            },
+            "Kotlin (JVM)": {
+                "rank": 15,
+                "id": "kotlin-jvm",
+                "avg": "20,094,292.640ns",
+                "low": "475,446.000ns",
+                "high": "121,954,617.000ns"
+            }
+        }
+    },
+    "pow-10K": {
+        "summary": [
+            "Kotlin (Native)",
+            "C++ (G++)",
+            "Go",
+            "Rust",
+            "C (GCC)",
+            "Java",
+            "C (Clang)",
+            "C++ (Clang++)",
+            "JavaScript (Deno)",
+            "Kotlin (JVM)",
+            "JavaScript (Bun)",
+            "Ruby",
+            "JavaScript (Node)",
+            "Python",
+            "PHP"
+        ],
+        "verbose": {
+            "Kotlin (Native)": {
+                "rank": 1,
+                "id": "kotlin-native",
+                "avg": "22.958µs",
+                "low": "20.358µs",
+                "high": "24.826µs"
+            },
+            "C++ (G++)": {
+                "rank": 2,
+                "id": "cpp-gnu",
+                "avg": "238.241µs",
+                "low": "220.250µs",
+                "high": "308.735µs"
+            },
+            "Go": {
+                "rank": 3,
+                "id": "go",
+                "avg": "2,492.472µs",
+                "low": "890.599µs",
+                "high": "26,779.155µs"
+            },
+            "Rust": {
+                "rank": 4,
+                "id": "rust",
+                "avg": "2,788.014µs",
+                "low": "336.296µs",
+                "high": "60,415.682µs"
+            },
+            "C (GCC)": {
+                "rank": 5,
+                "id": "c-gnu",
+                "avg": "2,835.714µs",
+                "low": "223.266µs",
+                "high": "61,579.449µs"
+            },
+            "Java": {
+                "rank": 6,
+                "id": "java",
+                "avg": "3,162.061µs",
+                "low": "545.226µs",
+                "high": "62,842.702µs"
+            },
+            "C (Clang)": {
+                "rank": 7,
+                "id": "c-llvm",
+                "avg": "5,553.851µs",
+                "low": "218.477µs",
+                "high": "84,636.737µs"
+            },
+            "C++ (Clang++)": {
+                "rank": 8,
+                "id": "cpp-llvm",
+                "avg": "6,017.242µs",
+                "low": "219.890µs",
+                "high": "83,005.128µs"
+            },
+            "JavaScript (Deno)": {
+                "rank": 9,
+                "id": "js-deno",
+                "avg": "14,933.484µs",
+                "low": "2,180.342µs",
+                "high": "119,813.599µs"
+            },
+            "Kotlin (JVM)": {
+                "rank": 10,
+                "id": "kotlin-jvm",
+                "avg": "36,040.279µs",
+                "low": "1,138.492µs",
+                "high": "98,140.096µs"
+            },
+            "JavaScript (Bun)": {
+                "rank": 11,
+                "id": "js-bun",
+                "avg": "52,358.777µs",
+                "low": "2,976.786µs",
+                "high": "131,960.819µs"
+            },
+            "Ruby": {
+                "rank": 12,
+                "id": "ruby",
+                "avg": "56,991.386µs",
+                "low": "1,933.613µs",
+                "high": "196,052.743µs"
+            },
+            "JavaScript (Node)": {
+                "rank": 13,
+                "id": "js-node",
+                "avg": "68,751.544µs",
+                "low": "2,034.961µs",
+                "high": "278,621.475µs"
+            },
+            "Python": {
+                "rank": 14,
+                "id": "python",
+                "avg": "71,120.781µs",
+                "low": "3,088.353µs",
+                "high": "300,562.039µs"
+            },
+            "PHP": {
+                "rank": 15,
+                "id": "php",
+                "avg": "157,242.183µs",
+                "low": "6,345.180µs",
+                "high": "305,019.133µs"
+            }
+        }
+    },
+    "random-1M": {
+        "summary": [
+            "Kotlin (Native)",
+            "Go",
+            "JavaScript (Bun)",
+            "C (Clang)",
+            "Rust",
+            "Kotlin (JVM)",
+            "C (GCC)",
+            "Java",
+            "C++ (G++)",
+            "C++ (Clang++)",
+            "JavaScript (Deno)",
+            "JavaScript (Node)",
+            "Ruby",
+            "Python",
+            "PHP"
+        ],
+        "verbose": {
+            "Kotlin (Native)": {
+                "rank": 1,
+                "id": "kotlin-native",
+                "avg": "55.130ms",
+                "low": "32.741ms",
+                "high": "82.510ms"
+            },
+            "Go": {
+                "rank": 2,
+                "id": "go",
+                "avg": "212.968ms",
+                "low": "160.956ms",
+                "high": "315.819ms"
+            },
+            "JavaScript (Bun)": {
+                "rank": 3,
+                "id": "js-bun",
+                "avg": "213.615ms",
+                "low": "89.298ms",
+                "high": "427.386ms"
+            },
+            "C (Clang)": {
+                "rank": 4,
+                "id": "c-llvm",
+                "avg": "288.766ms",
+                "low": "157.024ms",
+                "high": "501.321ms"
+            },
+            "Rust": {
+                "rank": 5,
+                "id": "rust",
+                "avg": "298.781ms",
+                "low": "136.893ms",
+                "high": "515.258ms"
+            },
+            "Kotlin (JVM)": {
+                "rank": 6,
+                "id": "kotlin-jvm",
+                "avg": "315.574ms",
+                "low": "218.500ms",
+                "high": "417.806ms"
+            },
+            "C (GCC)": {
+                "rank": 7,
+                "id": "c-gnu",
+                "avg": "324.680ms",
+                "low": "179.989ms",
+                "high": "495.084ms"
+            },
+            "Java": {
+                "rank": 8,
+                "id": "java",
+                "avg": "349.364ms",
+                "low": "122.781ms",
+                "high": "1,018.598ms"
+            },
+            "C++ (G++)": {
+                "rank": 9,
+                "id": "cpp-gnu",
+                "avg": "353.690ms",
+                "low": "207.315ms",
+                "high": "655.630ms"
+            },
+            "C++ (Clang++)": {
+                "rank": 10,
+                "id": "cpp-llvm",
+                "avg": "355.705ms",
+                "low": "228.865ms",
+                "high": "578.075ms"
+            },
+            "JavaScript (Deno)": {
+                "rank": 11,
+                "id": "js-deno",
+                "avg": "395.863ms",
+                "low": "290.415ms",
+                "high": "560.911ms"
+            },
+            "JavaScript (Node)": {
+                "rank": 12,
+                "id": "js-node",
+                "avg": "436.048ms",
+                "low": "264.547ms",
+                "high": "790.179ms"
+            },
+            "Ruby": {
+                "rank": 13,
+                "id": "ruby",
+                "avg": "2,675.906ms",
+                "low": "1,677.692ms",
+                "high": "4,533.141ms"
+            },
+            "Python": {
+                "rank": 14,
+                "id": "python",
+                "avg": "3,679.975ms",
+                "low": "2,824.711ms",
+                "high": "5,019.145ms"
+            },
+            "PHP": {
+                "rank": 15,
+                "id": "php",
+                "avg": "9,351.685ms",
+                "low": "5,152.845ms",
+                "high": "20,017.670ms"
+            }
+        }
+    },
+    "3n-plus-1": {
+        "summary": [
+            "Kotlin (Native)",
+            "Go",
+            "C (GCC)",
+            "C++ (G++)",
+            "C++ (Clang++)",
+            "C (Clang)",
+            "Rust",
+            "Ruby",
+            "JavaScript (Node)",
+            "JavaScript (Bun)",
+            "Java",
+            "Python",
+            "JavaScript (Deno)",
+            "PHP",
+            "Kotlin (JVM)"
+        ],
+        "verbose": {
+            "Kotlin (Native)": {
+                "rank": 1,
+                "id": "kotlin-native",
+                "avg": "1.535µs",
+                "low": "1.342µs",
+                "high": "1.623µs"
+            },
+            "Go": {
+                "rank": 2,
+                "id": "go",
+                "avg": "1.601µs",
+                "low": "1.482µs",
+                "high": "1.924µs"
+            },
+            "C (GCC)": {
+                "rank": 3,
+                "id": "c-gnu",
+                "avg": "3.183µs",
+                "low": "2.916µs",
+                "high": "3.496µs"
+            },
+            "C++ (G++)": {
+                "rank": 4,
+                "id": "cpp-gnu",
+                "avg": "3.377µs",
+                "low": "3.116µs",
+                "high": "3.827µs"
+            },
+            "C++ (Clang++)": {
+                "rank": 5,
+                "id": "cpp-llvm",
+                "avg": "3.410µs",
+                "low": "3.206µs",
+                "high": "3.587µs"
+            },
+            "C (Clang)": {
+                "rank": 6,
+                "id": "c-llvm",
+                "avg": "3.827µs",
+                "low": "3.406µs",
+                "high": "4.127µs"
+            },
+            "Rust": {
+                "rank": 7,
+                "id": "rust",
+                "avg": "4.035µs",
+                "low": "3.576µs",
+                "high": "4.429µs"
+            },
+            "Ruby": {
+                "rank": 8,
+                "id": "ruby",
+                "avg": "49.069µs",
+                "low": "44.583µs",
+                "high": "74.328µs"
+            },
+            "JavaScript (Node)": {
+                "rank": 9,
+                "id": "js-node",
+                "avg": "2,493.566µs",
+                "low": "135.022µs",
+                "high": "58,408.171µs"
+            },
+            "JavaScript (Bun)": {
+                "rank": 10,
+                "id": "js-bun",
+                "avg": "3,434.413µs",
+                "low": "661.853µs",
+                "high": "68,114.321µs"
+            },
+            "Java": {
+                "rank": 11,
+                "id": "java",
+                "avg": "6,458.098µs",
+                "low": "48.279µs",
+                "high": "135,121.789µs"
+            },
+            "Python": {
+                "rank": 12,
+                "id": "python",
+                "avg": "7,539.581µs",
+                "low": "111.418µs",
+                "high": "88,284.692µs"
+            },
+            "JavaScript (Deno)": {
+                "rank": 13,
+                "id": "js-deno",
+                "avg": "8,044.681µs",
+                "low": "235.058µs",
+                "high": "74,638.789µs"
+            },
+            "PHP": {
+                "rank": 14,
+                "id": "php",
+                "avg": "9,602.479µs",
+                "low": "370.220µs",
+                "high": "102,461.559µs"
+            },
+            "Kotlin (JVM)": {
+                "rank": 15,
+                "id": "kotlin-jvm",
+                "avg": "44,137.441µs",
+                "low": "559.812µs",
+                "high": "158,114.615µs"
             }
         }
     },
     "overall": {
         "summary": [
+            "C (GCC)",
             "Go",
             "C (GCC)",
             "Kotlin (Native)",
-            "C (Clang)",
             "C++ (G++)",
+            "C (Clang)",
             "Rust",
             "C++ (Clang++)",
             "JavaScript (Deno)",
             "Java",
-            "JavaScript (Node)",
             "JavaScript (Bun)",
+            "JavaScript (Node)",
             "Ruby",
-            "PHP",
             "Python",
+            "PHP",
             "Kotlin (JVM)"
         ],
         "verbose": {
-            "Go": {
-                "rank": 1,
-                "score": 39
-            },
             "C (GCC)": {
+                "rank": 3,
+                "score": 44
+            },
+            "Go": {
                 "rank": 2,
-                "score": 48
+                "score": 36
             },
             "Kotlin (Native)": {
-                "rank": 3,
-                "score": 49
-            },
-            "C (Clang)": {
                 "rank": 4,
-                "score": 59
+                "score": 48
             },
             "C++ (G++)": {
                 "rank": 5,
-                "score": 67
+                "score": 58
+            },
+            "C (Clang)": {
+                "rank": 6,
+                "score": 62
             },
             "Rust": {
-                "rank": 6,
-                "score": 75
+                "rank": 7,
+                "score": 74
             },
             "C++ (Clang++)": {
-                "rank": 7,
-                "score": 82
+                "rank": 8,
+                "score": 86
             },
             "JavaScript (Deno)": {
-                "rank": 8,
-                "score": 105
+                "rank": 9,
+                "score": 110
             },
             "Java": {
-                "rank": 9,
-                "score": 115
-            },
-            "JavaScript (Node)": {
                 "rank": 10,
-                "score": 125
+                "score": 121
             },
             "JavaScript (Bun)": {
                 "rank": 11,
-                "score": 126
+                "score": 124
+            },
+            "JavaScript (Node)": {
+                "rank": 12,
+                "score": 138
             },
             "Ruby": {
-                "rank": 12,
-                "score": 143
-            },
-            "PHP": {
                 "rank": 13,
-                "score": 155
+                "score": 143
             },
             "Python": {
                 "rank": 14,
-                "score": 160
+                "score": 156
+            },
+            "PHP": {
+                "rank": 15,
+                "score": 169
             },
             "Kotlin (JVM)": {
-                "rank": 15,
-                "score": 174
+                "rank": 16,
+                "score": 173
             }
         }
     }

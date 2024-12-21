@@ -8,7 +8,7 @@ suburl: /about/
 
 ```
 
-2024-12-21 10:27:31 Coordinated Universal Time
+2024-12-21 10:28:21 Coordinated Universal Time
 windows-x64 10.0
 Windows - Microsoft
 Virtual Machine - Microsoft Corporation
@@ -69,6 +69,18 @@ g++ (Rev2, Built by MSYS2 project) 14.2.0
 Copyright (C) 2024 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+```
+
+## C++ (Clang++)
+
+```
+> clang++ --version
+
+clang version 18.1.8
+Target: x86_64-pc-windows-msvc
+Thread model: posix
+InstalledDir: C:\Program Files\LLVM\bin
 
 ```
 
