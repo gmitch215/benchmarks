@@ -160,10 +160,15 @@ jobs:
           mv -fv build/site/_data/results/benchmarks-windows build/site/_data/results/windows
       - name: Generate Site
         run: ./gradlew site --info
+      - name: Build Site
+        run: |
+          cd build/site
+          bundle exec jekyll build
+          cd ../..
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages publish build/site --project-name=benchmarks
+          command: pages deploy build/site/_site --project-name=benchmarks --commit-dirty=true
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
