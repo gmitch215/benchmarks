@@ -107,24 +107,27 @@ tasks {
             file("benchmarks").absolutePath,
             file("build/site").absolutePath
         )
-
-        outputs.upToDateWhen { false }
-        outputs.dir("build/site")
     }
 
-    register("moveGraphs", Copy::class) {
-        mustRunAfter("graphBenchmarks", "createSite", "preview")
+    register("moveGraphs") {
+        mustRunAfter("createSite", "preview")
 
-        from("build/site/_data/results/windows/graphs/") {
-            into("assets/graphs/windows/")
-        }
+        doFirst {
+            copy {
+                into("build/site")
 
-        from("build/site/_data/results/mac/graphs/") {
-            into("assets/graphs/mac/")
-        }
+                from("build/site/_data/results/windows/graphs/") {
+                    into("assets/graphs/windows/")
+                }
 
-        from("build/site/_data/results/linux/graphs/") {
-            into("assets/graphs/linux/")
+                from("build/site/_data/results/mac/graphs/") {
+                    into("assets/graphs/mac/")
+                }
+
+                from("build/site/_data/results/linux/graphs/") {
+                    into("assets/graphs/linux/")
+                }
+            }
         }
 
         doLast {
@@ -132,25 +135,28 @@ tasks {
             delete("build/site/_data/results/mac/graphs/")
             delete("build/site/_data/results/linux/graphs/")
         }
-
-        destinationDir = file("build/site")
     }
 
-    register("copyResourcesToSite", Copy::class) {
+    register("copyResourcesToSite") {
         mustRunAfter("moveGraphs", "createSite", "preview")
-        from("site")
 
-        from("benchmarks/config.yml") {
-            into("_data")
-            rename { _ -> "langs.yml" }
+        doFirst {
+            copy {
+                into("build/site")
+
+                from("site")
+
+                from("benchmarks/config.yml") {
+                    into("_data")
+                    rename { _ -> "langs.yml" }
+                }
+
+                filesMatching("benchmarks/*.yml") {
+                    exclude("config.yml")
+                    into("_data")
+                }
+            }
         }
-
-        filesMatching("benchmarks/*.yml") {
-            exclude("config.yml")
-            into("_data")
-        }
-
-        destinationDir = file("build/site")
     }
 
     register("site") {
