@@ -99,7 +99,7 @@ tasks {
     // Site Tasks
 
     register("createSite", JavaExec::class) {
-        mustRunAfter("moveGraphs", "preview")
+        mustRunAfter("preview")
 
         mainClass.set("xyz.gmitch215.benchmarks.site.SiteCreator")
         classpath = sourceSets["main"].runtimeClasspath
@@ -109,28 +109,37 @@ tasks {
         )
     }
 
-    register("moveGraphs", Copy::class) {
-        mustRunAfter("graphBenchmarks", "preview")
+    register("moveGraphs") {
+        mustRunAfter("createSite", "preview")
 
-        from("build/site/_data/results/windows/graphs/") {
-            into("assets/graphs/windows/")
+        doFirst {
+            val windows = file("build/site/_data/results/windows/graphs/")
+            if (windows.exists()) {
+                val dir = file("build/site/assets/graphs/windows/")
+                dir.mkdirs()
+
+                windows.copyRecursively(dir, true)
+                windows.deleteRecursively()
+            }
+
+            val mac = file("build/site/_data/results/mac/graphs/")
+            if (mac.exists()) {
+                val dir = file("build/site/assets/graphs/mac/")
+                dir.mkdirs()
+
+                mac.copyRecursively(dir, true)
+                mac.deleteRecursively()
+            }
+
+            val linux = file("build/site/_data/results/linux/graphs/")
+            if (linux.exists()) {
+                val dir = file("build/site/assets/graphs/linux/")
+                dir.mkdirs()
+
+                linux.copyRecursively(dir, true)
+                linux.deleteRecursively()
+            }
         }
-
-        from("build/site/_data/results/mac/graphs/") {
-            into("assets/graphs/mac/")
-        }
-
-        from("build/site/_data/results/linux/graphs/") {
-            into("assets/graphs/linux/")
-        }
-
-        doLast {
-            delete("build/site/_data/results/windows/graphs/")
-            delete("build/site/_data/results/mac/graphs/")
-            delete("build/site/_data/results/linux/graphs/")
-        }
-
-        destinationDir = file("build/site")
     }
 
     register("copyResourcesToSite", Copy::class) {
@@ -152,8 +161,8 @@ tasks {
 
     register("site") {
         dependsOn(
-            "moveGraphs",
             "createSite",
+            "moveGraphs",
             "copyResourcesToSite"
         )
     }
