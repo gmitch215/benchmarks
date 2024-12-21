@@ -4,6 +4,7 @@ git fetch origin gh-pages
 
 mkdir -p site
 cp -Rfv build/site/* ./site/
+
 git switch -f gh-pages
 
 for dir in ./*
@@ -11,7 +12,8 @@ do
   if [ "$dir" == "./site" ]; then
     continue
   fi
-  rm -rfv "$dir"
+
+  rm -rf "$dir"
 done
 
 cp -Rfv ./site/* ./

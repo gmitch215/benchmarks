@@ -132,7 +132,7 @@ jobs:
         run: ./gradlew --stop
 
   site:
-    runs-on: ubuntu-22.04
+    runs-on: macos-latest
     needs: benchmark
     timeout-minutes: 20
 
