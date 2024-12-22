@@ -184,9 +184,21 @@ header {
     align-items: center;
     justify-content: flex-start;
 
-    padding-left: 6vw;
+    padding-left: 3vw;
 
     overflow-x: auto;
+}
+
+header img {
+    min-height: 24px;
+    max-height: 96px;
+    height: 5vh;
+
+    min-width: 24px;
+    max-width: 96px;
+    width: auto;
+
+    margin-right: 5vw;
 }
 
 header a {
@@ -200,6 +212,8 @@ header a {
     column-gap: 3vw;
     align-items: center;
 }
+
+/* General */
 
 .primary-graph {
     aspect-ratio: 2 / 1;
@@ -227,6 +241,26 @@ header a {
     min-height: 180px;
 
     background-color: black;
+}
+
+td {
+    text-align: center;
+}
+
+td img {
+    max-width: 32px;
+    max-height: 32px;
+
+    width: auto;
+    height: 1.5em;
+
+    margin-right: 4px;
+    transition: transform 0.25s ease-in-out;
+    transform: translateY(25%);
+}
+
+td img:hover {
+    transform: translateY(25%) scale(1.2);
 }
 
 /* Index */
@@ -359,9 +393,14 @@ img.platform-logo:hover {
     margin: 0;
 }
 
+#tags div {
+    text-align: center;
+}
+
 #tags span {
     color: var(--link-color);
     background-color: var(--bg-2);
+
     padding: 1vh 1vw;
     border: 1px solid white;
     border-radius: 1em;
@@ -377,11 +416,6 @@ img.platform-logo:hover {
     display: flex;
     align-items: center;
     width: 46%;
-}
-
-#all-time div div img {
-    width: 100%;
-    height: auto;
 }
 
 .benchmark-table td, th {
@@ -443,7 +477,7 @@ footer {
 
     display: flex;
     margin-top: 4vh;
-    padding-bottom: 3vh;
+    padding-bottom: 5vh;
 
     justify-content: center;
     flex-direction: column;
@@ -456,4 +490,15 @@ footer {
     color: var(--text);
     font-size: calc(6px + 1vh);
     padding-top: 3vh;
+}
+
+footer div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 1vw;
+}
+
+footer div a {
+    color: var(--color-text-2);
 }
