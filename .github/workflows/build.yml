@@ -48,11 +48,11 @@ jobs:
       matrix:
         include:
           - name: linux
-            os: ubuntu-22.04
+            os: ubuntu-24.04
           - name: macos
-            os: macos-latest
+            os: macos-15
           - name: windows
-            os: windows-latest
+            os: windows-2025
 
     name: Benchmark on ${{ matrix.name }}
     steps:
@@ -98,10 +98,10 @@ jobs:
           version: '2.1.0'
           install-native: true
       - name: Install Unix Kotlin/Native Dependencies
-        if: ${{ matrix.os != 'windows-latest' }}
+        if: ${{ matrix.name != 'windows' }}
         run: bash benchmarks/kotlinc-native-dependencies.sh
       - name: Install Windows Kotlin/Native Dependencies
-        if: ${{ matrix.os == 'windows-latest' }}
+        if: ${{ matrix.name == 'windows' }}
         run: benchmarks/kotlinc-native-dependencies.bat
       - name: Install Ruby
         uses: ruby/setup-ruby@v1
@@ -119,6 +119,9 @@ jobs:
         uses: shivammathur/setup-php@v2
       - name: Install Rust
         uses: actions-rust-lang/setup-rust-toolchain@v1
+      - name: Install MacOS Dependencies
+        if: ${{ matrix.name == 'macos' }}
+        run: brew reinstall gcc
       # Benchmarking
       - name: Create Benchmarks
         run: ./gradlew benchmark
