@@ -26,7 +26,7 @@
   id: java
   file-name: Main.java
   color: "b07219"
-  run: java Main.java
+  run: java Main.java -Xint
   version: java --version
 - language: Kotlin (JVM)
   id: kotlin-jvm
@@ -34,7 +34,7 @@
   color: "5f3bbe"
   location: KOTLIN_HOME
   compile: kotlinc main.kt -include-runtime -d main.kt.jar
-  run: java -jar main.kt.jar
+  run: java -jar main.kt.jar -Xint
   cleanup:
     - main.kt.jar
   version: kotlinc -version
@@ -44,7 +44,7 @@
   file-name: main.kt
   color: "92316e"
   location: KOTLIN_NATIVE_HOME
-  compile: kotlinc-native main.kt -o main.kt
+  compile: kotlinc-native main.kt -o main.kt -g
   run: main.kt
   cleanup:
     - main.kt.exe

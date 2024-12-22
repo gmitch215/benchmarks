@@ -2,7 +2,8 @@
 
 This directory contains the benchmarks used in the repository. The benchmarks are written to perform various operations and record the time taken between them.
 
-Compiler optimization should be disabled by default, if possible, to ensure that the benchmarks are not optimized out.
+Compiler optimization should be disabled by default, if possible, to ensure that the benchmarks are not optimized out. 
+If not possible, they should be lowered to the minimum level possible.
 
 The folders in this directory represent the benchmark name, and each folder contains a `main.*` file for the language's benchmarks.
 They are ran a number of times in parallel, will all the times collected.
