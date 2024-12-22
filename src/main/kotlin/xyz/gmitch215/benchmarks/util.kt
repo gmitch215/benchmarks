@@ -7,7 +7,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
 import xyz.gmitch215.benchmarks.measurement.BenchmarkConfiguration
-import xyz.gmitch215.benchmarks.measurement.BenchmarkRun
+import xyz.gmitch215.benchmarks.measurement.Language
 import java.io.File
 import java.util.*
 
@@ -108,7 +108,7 @@ data class BenchmarkResult(
     val highDouble: Double
         get() = output.fromString(high)
 
-    constructor(id: String, run: BenchmarkRun, config: BenchmarkConfiguration, results: List<Double>) : this(
+    constructor(id: String, run: Language, config: BenchmarkConfiguration, results: List<Double>) : this(
         id,
         config.name,
         run.id,

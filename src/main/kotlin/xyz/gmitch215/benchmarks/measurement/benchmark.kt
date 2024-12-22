@@ -42,7 +42,7 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
         logger.info { "Filtering benchmarks with '$filter'" }
 
     val file = File(input, "config.yml").readText(Charsets.UTF_8)
-    val languages = Yaml.default.decodeFromString<List<BenchmarkRun>>(file)
+    val languages = Yaml.default.decodeFromString<List<Language>>(file)
 
     logger.info { "Starting Benchmarks on $os" }
 
@@ -151,21 +151,9 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
 
     for (lang in languages)
         launch {
+            val version = lang.absoluteVersion
+
             logger.info { "Retrieving verison information for '${lang.id}'" }
-
-            var version = lang.version
-            if (lang.location != null) {
-                val home = System.getenv(lang.location)
-                if (home != null)
-                    version = "${home}${s}bin${s}$version"
-
-                if (os == "windows") {
-                    val executableSuffix = if (lang.id.contains("kotlin")) ".bat" else ".exe"
-                    version = version.replaceFirst(" ", "$executableSuffix ")
-                }
-            }
-
-            logger.debug { "Running Version Command for '${lang.id}': '$version'" }
 
             val temp = Files.createTempDirectory(null).toFile()
             val res = version.runCommand(temp).run {
@@ -184,7 +172,7 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
             versionFile.createNewFile()
             versionFile.writeText(res)
 
-            logger.debug { "Retrieved version information for '${lang.id}'" }
+            logger.info { "Retrieved version information for '${lang.id}'" }
         }
     
     // OS File
@@ -260,58 +248,40 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
     }
 }
 
-fun CoroutineScope.runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: File) = async(Dispatchers.IO) {
+fun CoroutineScope.runBenchmark(language: Language, folder: File, out: File) = async(Dispatchers.IO) {
     val configFile = File(folder, "config.yml").readText(Charsets.UTF_8)
     val config = Yaml.default.decodeFromString<BenchmarkConfiguration>(configFile)
 
-    logger.debug { "Starting benchmark '${config.name}' for '${benchmarkRun.id}'" }
+    logger.debug { "Starting benchmark '${config.name}' for '${language.id}'" }
 
-    if (config.disabled.contains(benchmarkRun.id)) {
-        logger.info { "Benchmark '${benchmarkRun.id}' is disabled for '${config.name}'" }
+    if (config.disabled.contains(language.id)) {
+        logger.info { "Language '${language.id}' is disabled for '${config.name}'" }
         return@async null
     }
 
     val results = mutableListOf<Double>()
 
     coroutineScope {
-        var compile = benchmarkRun.compile
+        val compile = language.absoluteCompile
         if (compile != null) {
-            if (benchmarkRun.location != null) {
-                val home = System.getenv(benchmarkRun.location)
-                if (home != null)
-                    compile = "${home}${s}bin${s}$compile"
-
-                if (os == "windows") {
-                    val executableSuffix = if (benchmarkRun.id.contains("kotlin")) ".bat" else ".exe"
-                    compile = compile.replaceFirst(" ", "$executableSuffix ")
-                }
-            }
-
-            if (benchmarkRun.compileExtra.isNotEmpty()) {
-                val extra = benchmarkRun.compileExtra["$os-$arch"] ?: benchmarkRun.compileExtra[os]
-
-                if (extra != null)
-                    compile += " $extra"
-            }
-
-            logger.debug { "Running Compile Command for '${benchmarkRun.id}': '$compile' in ${folder.absolutePath}" }
+            logger.debug { "Running Compile Command for '${language.id}': '$compile' in ${folder.absolutePath}" }
 
             val res = compile.runCommand(folder)
             if (res != null && res.isNotEmpty())
                 logger.debug { "Compile result: $res" }
 
-            logger.debug { "Compile command finished for '${benchmarkRun.id}' in ${folder.absolutePath}" }
+            logger.debug { "Compile command finished for '${language.id}' in ${folder.absolutePath}" }
         }
 
-        var run = benchmarkRun.run
+        var run = language.run
 
-        if (benchmarkRun.file)
+        if (language.file)
             run = "${folder.absolutePath}${s}$run"
 
-        if (benchmarkRun.id == "kotlin-native")
+        if (language.id == "kotlin-native")
             run += kotlinNativeSuffix
 
-        logger.debug { "Running Command for '${benchmarkRun.id}': '$run' in ${folder.absolutePath}" }
+        logger.debug { "Running Command for '${language.id}': '$run' in ${folder.absolutePath}" }
 
         val jobs = mutableListOf<Job>()
 
@@ -320,7 +290,7 @@ fun CoroutineScope.runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: F
                 val runTime0 = run.runCommand(folder)!!.trim().replace("[\\s\\n]+".toRegex(), "")
                 val runTime = runTime0.toDoubleOrNull() ?: error("Failed to parse output: '$runTime0'")
 
-                logger.debug { "${benchmarkRun.language} Run in '${folder.name}': $runTime${config.measure.unit} (#${i + 1})" }
+                logger.debug { "${language.language} Run in '${folder.name}': $runTime${config.measure.unit} (#${i + 1})" }
 
                 return@async runTime
             }
@@ -334,7 +304,7 @@ fun CoroutineScope.runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: F
                 while (jobs.any { it.isActive }) {
                     val active = jobs.count { it.isActive }
                     val completed = jobs.count { it.isCompleted }
-                    logger.debug { "Waiting for $active / ${jobs.size} jobs to finish for '${benchmarkRun.id}' on ${folder.name} ($completed completed)" }
+                    logger.debug { "Waiting for $active / ${jobs.size} jobs to finish for '${language.id}' on ${folder.name} ($completed completed)" }
                     delay(5000)
                 }
             }
@@ -344,15 +314,15 @@ fun CoroutineScope.runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: F
         """
         --
         ---
-        Finished running benchmark commands for '${benchmarkRun.id}' in ${folder.absolutePath}
+        Finished running benchmark commands for '${language.id}' in ${folder.absolutePath}
         Had ${config.disabled.size} disabled languages
         Collected ${results.size} results
         -----
         """.trimIndent()
     }
 
-    if (benchmarkRun.cleanup != null)
-        for (cleanup in benchmarkRun.cleanup) {
+    if (language.cleanup != null)
+        for (cleanup in language.cleanup) {
             val file = File(folder, cleanup)
             if (file.exists()) {
                 file.delete()
@@ -361,10 +331,10 @@ fun CoroutineScope.runBenchmark(benchmarkRun: BenchmarkRun, folder: File, out: F
         }
 
     if (results.isEmpty())
-        error("No results found for '${config.name}' on ${benchmarkRun.language}")
+        error("No results found for '${config.name}' on ${language.language}")
 
     val id = folder.name
-    val data = BenchmarkResult(id, benchmarkRun, config, results)
+    val data = BenchmarkResult(id, language, config, results)
 
     val file = File(out, "$id.json")
     logger.info { "Writing to ${file.absolutePath}" }
@@ -446,7 +416,7 @@ data class BenchmarkConfiguration(
 )
 
 @Serializable
-data class BenchmarkRun(
+data class Language(
     val language: String,
     val id: String,
     @SerialName("file-name")
@@ -460,4 +430,49 @@ data class BenchmarkRun(
     @SerialName("compile-extra")
     val compileExtra: Map<String, String> = emptyMap(),
     val cleanup: List<String>? = null,
-)
+) {
+
+    val absoluteVersion: String
+        get() {
+            var version0 = version
+            if (location != null) {
+                val home = System.getenv(location)
+                if (home != null)
+                    version0 = "${home}${s}bin${s}$version0"
+
+                if (os == "windows") {
+                    val executableSuffix = if (id.contains("kotlin")) ".bat" else ".exe"
+                    version0 = version0.replaceFirst(" ", "$executableSuffix ")
+                }
+            }
+
+            return version0
+        }
+
+    val absoluteCompile: String?
+        get() {
+            if (compile == null) return null
+
+            var compile0 = compile
+            if (location != null) {
+                val home = System.getenv(location)
+                if (home != null)
+                    compile0 = "${home}${s}bin${s}$compile0"
+
+                if (os == "windows") {
+                    val executableSuffix = if (id.contains("kotlin")) ".bat" else ".exe"
+                    compile0 = compile0.replaceFirst(" ", "$executableSuffix ")
+                }
+            }
+
+            if (compileExtra.isNotEmpty()) {
+                val extra = compileExtra["$os-$arch"] ?: compileExtra[os]
+
+                if (extra != null)
+                    compile0 += " $extra"
+            }
+
+            return compile0
+        }
+
+}

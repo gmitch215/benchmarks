@@ -20,7 +20,6 @@ import org.jetbrains.kotlinx.kandy.dsl.categorical
 import org.jetbrains.kotlinx.kandy.dsl.internal.LayerCreatorScope
 import org.jetbrains.kotlinx.kandy.dsl.plot
 import org.jetbrains.kotlinx.kandy.letsplot.export.toHTML
-import org.jetbrains.kotlinx.kandy.letsplot.export.toHTML
 import org.jetbrains.kotlinx.kandy.letsplot.feature.layout
 import org.jetbrains.kotlinx.kandy.letsplot.layers.bars
 import org.jetbrains.kotlinx.kandy.letsplot.layers.builders.BarsBuilder
@@ -34,7 +33,7 @@ import org.jetbrains.kotlinx.kandy.letsplot.y
 import org.jetbrains.kotlinx.kandy.util.color.Color
 import xyz.gmitch215.benchmarks.BenchmarkResult
 import xyz.gmitch215.benchmarks.logger
-import xyz.gmitch215.benchmarks.measurement.BenchmarkRun
+import xyz.gmitch215.benchmarks.measurement.Language
 import xyz.gmitch215.benchmarks.measurement.RUN_COUNT
 import xyz.gmitch215.benchmarks.measurement.json
 import xyz.gmitch215.benchmarks.repeat
@@ -74,7 +73,7 @@ suspend fun main(args: Array<String>): Unit = coroutineScope {
     val configFile = File(rootDir, "config.yml").readText(Charsets.UTF_8)
     logger.debug { "Configuration File: \n$configFile\n" }
 
-    val config = Yaml.default.decodeFromString<List<BenchmarkRun>>(configFile)
+    val config = Yaml.default.decodeFromString<List<Language>>(configFile)
 
     val graphsFolder = File(outputDir, "graphs")
     graphsFolder.mkdirs()
@@ -403,8 +402,8 @@ suspend fun createBenchmarkGraphs(benchmarks: List<Pair<String, String>>, out: F
     }
 }
 
-suspend fun createVersusGraphs(benchmarks: List<Pair<String, String>>, runs: List<BenchmarkRun>, out: File) = withContext(Dispatchers.IO) {
-    val pairs = mutableListOf<Pair<BenchmarkRun, BenchmarkRun>>()
+suspend fun createVersusGraphs(benchmarks: List<Pair<String, String>>, runs: List<Language>, out: File) = withContext(Dispatchers.IO) {
+    val pairs = mutableListOf<Pair<Language, Language>>()
     for (i in 0 until runs.size) {
         for (j in i + 1 until runs.size) {
             pairs.add(runs[i] to runs[j])
@@ -443,7 +442,7 @@ suspend fun createVersusGraphs(benchmarks: List<Pair<String, String>>, runs: Lis
     launch {
         for (match in pairs)
             launch {
-                val l1: BenchmarkRun; val l2: BenchmarkRun
+                val l1: Language; val l2: Language
                 if (match.first.id < match.second.id) {
                     l1 = match.first
                     l2 = match.second

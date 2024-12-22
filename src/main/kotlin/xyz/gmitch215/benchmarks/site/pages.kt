@@ -3,7 +3,7 @@
 package xyz.gmitch215.benchmarks.site
 
 import xyz.gmitch215.benchmarks.measurement.BenchmarkConfiguration
-import xyz.gmitch215.benchmarks.measurement.BenchmarkRun
+import xyz.gmitch215.benchmarks.measurement.Language
 
 val INDEX_FILE_TEMPLATE: (String) -> String = { platform ->
     """
@@ -85,7 +85,7 @@ val VERSUS_FILE_INDEX_TEMPLATE: (String, BenchmarkConfiguration) -> String = { p
     """.trimIndent()
 }
 
-val VERSUS_FILE_TEMPLATE: (String, BenchmarkConfiguration, BenchmarkRun, BenchmarkRun) -> String = { platform, config, l1, l2 ->
+val VERSUS_FILE_TEMPLATE: (String, BenchmarkConfiguration, Language, Language) -> String = { platform, config, l1, l2 ->
     """
     ---
     layout: versus

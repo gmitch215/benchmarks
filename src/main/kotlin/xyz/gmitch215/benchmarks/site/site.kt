@@ -12,7 +12,7 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import xyz.gmitch215.benchmarks.logger
 import xyz.gmitch215.benchmarks.measurement.BenchmarkConfiguration
-import xyz.gmitch215.benchmarks.measurement.BenchmarkRun
+import xyz.gmitch215.benchmarks.measurement.Language
 import java.io.File
 
 suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
@@ -52,7 +52,7 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
     val folders = input.listFiles { file -> file.isDirectory && file.name != "output" } ?: emptyArray()
     logger.debug { "Found ${folders.size} Benchmarks"}
 
-    val runs = Yaml.default.decodeFromString<List<BenchmarkRun>>(File(input, "config.yml").readText())
+    val runs = Yaml.default.decodeFromString<List<Language>>(File(input, "config.yml").readText())
     if (runs.isEmpty())
         error("No runs found. Run benchmarks (or preview task) first")
 
@@ -115,14 +115,14 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
             logger.debug { "Creating versus.yml..." }
             versusData.createNewFile()
 
-            val pairs0 = mutableListOf<Pair<BenchmarkRun, BenchmarkRun>>()
+            val pairs0 = mutableListOf<Pair<Language, Language>>()
             for (i in runs.indices)
                 for (j in i + 1 until runs.size) {
                     pairs0.add(runs[i] to runs[j])
                 }
 
             // Sort Pairs Alphabetically
-            val pairs = mutableListOf<Map<String, BenchmarkRun>>()
+            val pairs = mutableListOf<Map<String, Language>>()
             for (match in pairs0)
                 pairs.add(mapOf(
                     "l1" to if (match.first.id < match.second.id) match.first else match.second,
@@ -215,7 +215,7 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
                     if (!versusFile.exists())
                         error("Versus data file does not exist")
 
-                    val versus = Yaml.default.decodeFromString<List<Map<String, BenchmarkRun>>>(versusFile.readText())
+                    val versus = Yaml.default.decodeFromString<List<Map<String, Language>>>(versusFile.readText())
 
                     val versusFolder = File(rootFolder, "versus")
                     if (!versusFolder.exists())
@@ -284,7 +284,7 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
                         aboutFile.createNewFile()
 
                     var text = "${ABOUT_PLATFORM_TEMPLATE(platform)}\n\n"
-                    val versions = mutableMapOf<BenchmarkRun, String>()
+                    val versions = mutableMapOf<Language, String>()
 
                     coroutineScope {
                         val osFile = File(results, "$platform/versions/os.txt")

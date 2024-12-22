@@ -64,9 +64,27 @@ tasks {
         }
     }
 
+    register("validate", JavaExec::class) {
+        mainClass.set("xyz.gmitch215.benchmarks.measurement.Validator")
+        classpath = sourceSets["main"].runtimeClasspath
+        args = listOfNotNull(
+            file("benchmarks").absolutePath
+        )
+        jvmArgs = listOf("-XX:+HeapDumpOnOutOfMemoryError")
+
+        val output = File(layout.buildDirectory.asFile.get(), ".validated")
+
+        outputs.upToDateWhen { output.exists() }
+        outputs.file(output)
+
+        doLast { output.writeText("true") }
+    }
+
     // Benchmarking Tasks
 
     register("createBenchmarks", JavaExec::class) {
+        dependsOn("validate")
+
         mainClass.set("xyz.gmitch215.benchmarks.measurement.Benchmarker")
         classpath = sourceSets["main"].runtimeClasspath
         args = listOfNotNull(
@@ -91,6 +109,7 @@ tasks {
 
     register("benchmark") {
         dependsOn(
+            "validate",
             "createBenchmarks",
             "graphBenchmarks"
         )
@@ -99,7 +118,7 @@ tasks {
     // Site Tasks
 
     register("createSite", JavaExec::class) {
-        mustRunAfter("preview")
+        mustRunAfter("copyPreview")
 
         mainClass.set("xyz.gmitch215.benchmarks.site.SiteCreator")
         classpath = sourceSets["main"].runtimeClasspath
@@ -110,7 +129,7 @@ tasks {
     }
 
     register("moveGraphs") {
-        mustRunAfter("createSite", "preview")
+        mustRunAfter("createSite", "copyPreview")
 
         doFirst {
             copy {
@@ -138,7 +157,7 @@ tasks {
     }
 
     register("copyResourcesToSite") {
-        mustRunAfter("moveGraphs", "createSite", "preview")
+        mustRunAfter("moveGraphs", "createSite", "copyPreview")
 
         doFirst {
             copy {
@@ -169,10 +188,23 @@ tasks {
 
     // Site Preview Tasks
 
-    register("preview", Copy::class) {
+    register("copyPreview", Copy::class) {
         from("benchmarks/output")
 
         destinationDir = file("build/site/_data/results/$os")
+    }
+
+    register("serve", Exec::class) {
+        mustRunAfter("site")
+
+        workingDir = file("build/site")
+
+        val suffix = if (os == "windows") ".bat" else ""
+        commandLine("bundle${suffix}", "exec", "jekyll", "serve", "--livereload")
+    }
+
+    register("preview") {
+        dependsOn("site", "copyPreview", "serve")
     }
 
 }
