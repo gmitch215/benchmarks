@@ -21,7 +21,8 @@
     <link href="/css/print.css" rel="stylesheet">
 
     {% if page.title %}
-    {% assign page_title = page.title | escape | prepend: "Benchmarks | " %}
+    {% assign prefix = site.title | append: " | " %}
+    {% assign page_title = page.title | escape | prepend: prefix %}
     {% else %}
     {% assign page_title = site.title | escape %}
     {% endif %}
@@ -41,6 +42,7 @@
 
     <meta name="theme-color" content="#0e2100">
     <meta name="og:title" content="{{ page_title }}">
+    <meta name="og:url" content="{{ site.url }}{{ page.url }}">
     <meta name="og:description" content="{{ summary }}">
     <meta name="og:type" content="website">
     <meta name="og:site_name" content="gmitch215's Benchmarks">
