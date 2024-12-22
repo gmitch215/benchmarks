@@ -9,7 +9,7 @@ layout: default
     {{ content }}
     <div class="box horizontal" id="tags">
         {% for tag in page.tags %}
-        <span>{{ tag }}</span>
+            <span title="{{ site.data.tags[tag].name }} - {{ site.data.tags[tag].description }}">{{ tag }}</span>
         {% endfor %}
     </div>
 </div>
@@ -35,7 +35,7 @@ layout: default
                 {% assign value = obj[1] %}
                 <tr>
                     <td>{{ value.rank }}</td>
-                    <td>{{ key }}</td>
+                    <td><img src="/assets/lang/{{ value.id }}.png" alt="" title="{{ key }}" />{{ key }}</td>
                     <td>{{ value.avg }}</td>
                     <td>{{ value.low }}</td>
                     <td>{{ value.high }}</td>
