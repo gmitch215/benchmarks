@@ -146,6 +146,12 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
           cache: 'gradle'
+      - name: Install Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
+          working-directory: site
       - name: Change Permissions
         run: chmod +x ./gradlew
       - name: Download Artifacts
