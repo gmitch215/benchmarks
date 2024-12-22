@@ -55,7 +55,7 @@
   id: cpp-gnu
   file-name: main.cpp
   color: "004283"
-  compile: g++ main.cpp -o main.cpp.gnu.o
+  compile: g++ main.cpp -o main.cpp.gnu.o -O0
   compile-extra:
     windows: "-lws2_32"
   run: main.cpp.gnu.o
@@ -67,7 +67,7 @@
   id: cpp-llvm
   file-name: main.cpp
   color: "006183"
-  compile: clang++ main.cpp -o main.cpp.llvm.o -w
+  compile: clang++ main.cpp -o main.cpp.llvm.o -w -O0
   run: main.cpp.llvm.o
   cleanup:
     - main.cpp.llvm.o
@@ -77,7 +77,7 @@
   id: c-gnu
   file-name: main.c
   color: "555555"
-  compile: gcc main.c ../../lib/nanotime/nanotime.c -o main.c.gnu.o
+  compile: gcc main.c ../../lib/nanotime/nanotime.c -o main.c.gnu.o -O0
   compile-extra:
     windows: "-lws2_32"
     linux: "-lm"
@@ -90,7 +90,7 @@
   id: c-llvm
   file-name: main.c
   color: "888888"
-  compile: clang main.c ../../lib/nanotime/nanotime.c -o main.c.llvm.o -w
+  compile: clang main.c ../../lib/nanotime/nanotime.c -o main.c.llvm.o -w -O0
   compile-extra:
     linux: "-lm"
   run: main.c.llvm.o
@@ -108,7 +108,7 @@
   id: go
   file-name: main.go
   color: "375eab"
-  compile: go build -o main.go.o main.go
+  compile: go build -o main.go.o -gcflags -N main.go
   run: main.go.o
   cleanup:
     - main.go.o
