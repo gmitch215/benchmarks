@@ -7,6 +7,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import xyz.gmitch215.benchmarks.logger
@@ -137,6 +138,28 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
             versusData.writeText(versus)
             logger.info { "Created versus.yml" }
             logger.debug { "Wrote ${versusData.absolutePath}" }
+        }
+
+        // tags.yml
+        launch {
+            val tagsFile = File(data, "tags.yml")
+            val tagsData = File(input, "tags.yml")
+
+            if (!tagsData.exists())
+                error("tags.yml does not exist: ${tagsData.absolutePath}")
+
+            if (tagsFile.exists()) {
+                logger.info { "tags.yml already exists" }
+                return@launch
+            }
+
+            val tags = Yaml.default.decodeFromString<List<Tag>>(tagsData.readText())
+
+            logger.debug { "Creating tags.yml..." }
+            tagsFile.createNewFile()
+
+            tagsFile.writeText(Yaml.default.encodeToString(tags.associate { it.id to it }))
+            logger.info { "Created tags.yml" }
         }
     }
 
@@ -293,3 +316,12 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
     logger.info { "Finished Site Page Creation" }
     logger.debug { "Site Size: ${output.walkTopDown().toList().size} Files" }
 }
+
+// Classes
+
+@Serializable
+data class Tag(
+    val id: String,
+    val name: String,
+    val description: String
+)
