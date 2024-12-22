@@ -1,0 +1,11 @@
+name: Base64 Decode (x3)
+description: >
+  Base64 is an encoding scheme used to encode binary data in an ASCII format.
+  This benchmark measures the time taken to decode three strings from Base64:
+  "Hello, World!", "The quick brown fox jumps over the lazy dog", and "AaBbCcDdEeFf123456_!@#&*^()$=+-".
+measure: NANOSECONDS
+output: MICROSECONDS
+tags:
+  - "string"
+  - "compression"
+  - "algorithm"

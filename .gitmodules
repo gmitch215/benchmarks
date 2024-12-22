@@ -4,3 +4,9 @@
 [submodule "lib/clibs"]
 	path = lib/clibs
 	url = https://github.com/mattiasgustavsson/libs
+[submodule "lib/c-base64"]
+	path = lib/c-base64
+	url = https://github.com/ftaiolivista/Base64
+[submodule "lib/cpp-base64"]
+	path = lib/cpp-base64
+	url = https://github.com/tobiaslocker/base64

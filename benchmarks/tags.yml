@@ -36,6 +36,9 @@
 - id: "algorithm"
   name: "Algorithm"
   description: "Benchmarks involving common mathematical or programming algorithms."
+- id: "compression"
+  name: "Compression"
+  description: "Benchmarks involving data compression."
 
 # Volume Tags
 - id: "100"
