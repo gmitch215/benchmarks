@@ -1,0 +1,8 @@
+name: cbrt(x) (1K)
+description: Benchmark the performance of the `cbrt` function, between 1 and 1,000.
+measure: NANOSECONDS
+output: MICROSECONDS
+tags:
+  - "number"
+  - "math"
+  - "1K"

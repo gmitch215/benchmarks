@@ -1,0 +1,11 @@
+include Math
+
+before = Process.clock_gettime(Process::CLOCK_MONOTONIC, :nanosecond)
+
+for i in 0..99999 do
+  Math.sqrt(i)
+end
+
+after = Process.clock_gettime(Process::CLOCK_MONOTONIC, :nanosecond)
+
+puts after - before
