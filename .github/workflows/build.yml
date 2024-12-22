@@ -50,7 +50,7 @@ jobs:
           - name: linux
             os: ubuntu-24.04
           - name: macos
-            os: macos-15
+            os: macos-13
           - name: windows
             os: windows-2025
 
