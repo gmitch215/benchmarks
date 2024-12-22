@@ -123,9 +123,11 @@ jobs:
         uses: shivammathur/setup-php@v2
       - name: Install Rust
         uses: actions-rust-lang/setup-rust-toolchain@v1
-      - name: Install MacOS Dependencies
+      - name: Update MacOS Links
         if: ${{ matrix.name == 'macos' }}
-        run: brew reinstall gcc
+        run: |
+          ln -sf "$(brew --prefix gcc@14)/bin/gcc-14" /usr/local/bin/gcc
+          ln -sf "$(brew --prefix gcc@14)/bin/g++-14" /usr/local/bin/g++
       # Benchmarking
       - name: Create Benchmarks
         run: ./gradlew benchmark
