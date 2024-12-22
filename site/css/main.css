@@ -95,7 +95,7 @@ pre {
     color: var(--text);
 }
 
-.box p {
+.box p, span, code {
     text-align: center;
     margin: 0;
 }
@@ -111,6 +111,14 @@ pre {
 .horizontal {
     flex-direction: row;
     column-gap: 2vw;
+}
+
+.left {
+    text-align: left;
+}
+
+.left p, span, code {
+    text-align: left;
 }
 
 #logo {
