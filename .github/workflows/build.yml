@@ -146,7 +146,6 @@ jobs:
     timeout-minutes: 20
 
     name: Site Generation
-    if: ${{ github.event_name != 'pull_request' && github.ref_name == 'master' }}
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK 21
