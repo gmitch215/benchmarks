@@ -23,7 +23,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kandy-lets-plot:0.7.1")
     implementation("com.github.oshi:oshi-core:6.6.5")
 
-    runtimeOnly("ch.qos.logback:logback-classic:1.5.14")
+    runtimeOnly("ch.qos.logback:logback-classic:1.5.15")
     implementation("io.github.oshai:kotlin-logging:7.0.3")
 }
 
