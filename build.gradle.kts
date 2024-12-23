@@ -17,7 +17,7 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib"))
     implementation("org.jsoup:jsoup:1.18.3")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
     implementation("com.charleskorn.kaml:kaml:0.66.0")
     implementation("org.jetbrains.kotlinx:kandy-lets-plot:0.7.1")
