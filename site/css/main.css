@@ -412,16 +412,17 @@ img.platform-logo:hover {
     border-radius: 1em;
 }
 
-#all-time div {
+#all-time > div {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    column-gap: 5%;
 }
 
-#all-time div div {
+#all-time > div > div {
     display: flex;
     align-items: center;
-    width: 46%;
+    min-width: 40%;
 }
 
 .benchmark-table td, th {
