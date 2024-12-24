@@ -9,7 +9,7 @@ layout: default
 
 <div class="box">
     <img src="/favicon.png" id="logo" class="dynamic" alt="Logo" title="Benchmarks" />
-    <h1>Versus - {{ page.benchmark }}</h1>
+    <h1>{{ page.platform | capitalize }} Versus - {{ page.benchmark }}</h1>
     {{ content }}
 </div>
 
@@ -78,7 +78,10 @@ layout: default
                     {% if value.id == page.l1 or value.id == page.l2 %}
                         <tr>
                             <td>{{ value.rank }}</td>
-                            <td>{{ key }}</td>
+                            <td>
+                                <img src="/assets/lang/{{ value.id }}.png" alt="" title="{{ key }}" />
+                                <span>{{ key }}</span>
+                            </td>
                             <td>{{ value.avg }}</td>
                             <td>{{ value.low }}</td>
                             <td>{{ value.high }}</td>
