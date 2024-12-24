@@ -1,0 +1,10 @@
+name: Merge Sort
+description: >
+  Merge Sort is a sorting algorithm that divides-and-conquers by recursively dividing the array into two halves until each sub-array has only one element.
+  This benchmark measures the time it takes to sort an array of 50 unsorted numbers.
+  Implementation modified from GeeksForGeeks.
+measure: NANOSECONDS
+output: MICROSECONDS
+tags:
+  - "number"
+  - "algorithm"
