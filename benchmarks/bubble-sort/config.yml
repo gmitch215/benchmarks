@@ -1,0 +1,10 @@
+name: Bubble Sort
+description: >
+  Bubble Sort is one of the simplest sorting algorithms that repeatedly swaps adjacent elements if they are incorrect.
+  This benchmark measures the time it takes to sort an array of 50 unsorted numbers.
+  Implementation modified from GeeksForGeeks.
+measure: NANOSECONDS
+output: MICROSECONDS
+tags:
+  - "number"
+  - "algorithm"

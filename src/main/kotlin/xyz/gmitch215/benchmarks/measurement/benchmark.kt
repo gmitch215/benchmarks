@@ -21,6 +21,7 @@ import java.util.concurrent.atomic.AtomicInteger
 import kotlin.collections.set
 
 const val RUN_COUNT = 25
+const val EMPTY_RETRY_COUNT = 10
 val json = Json {
     prettyPrint = true
 }
@@ -285,9 +286,24 @@ fun CoroutineScope.runBenchmark(language: Language, folder: File, out: File) = a
 
         val jobs = mutableListOf<Job>()
 
+        // Initialize - Removes Outliers
+        run.runCommand(folder)
+        logger.debug { "Initialized benchmark for '${language.id}' in ${folder.name}" }
+
         repeat(RUN_COUNT) { i ->
             val job = async {
-                val runTime0 = run.runCommand(folder)!!.trim().replace("[\\s\\n]+".toRegex(), "")
+                var runTime0 = run.runCommand(folder)!!.trim().replace("[\\s\\n]+".toRegex(), "")
+                var tries = 0
+                while (runTime0.isEmpty()) {
+                    if (tries > EMPTY_RETRY_COUNT)
+                        error("Failed to run command '$run' for '${language.id}' in ${folder.name} (#${i + 1}): Found empty output $EMPTY_RETRY_COUNT times")
+
+                    // Try again
+                    logger.debug { "Empty output for '${language.id}' in ${folder.name} (#${i + 1})" }
+                    runTime0 = run.runCommand(folder)!!.trim().replace("[\\s\\n]+".toRegex(), "")
+                    tries++
+                }
+
                 val runTime = runTime0.toDoubleOrNull() ?: error("Failed to parse output: '$runTime0'")
 
                 logger.debug { "${language.language} Run in '${folder.name}': $runTime${config.measure.unit} (#${i + 1})" }

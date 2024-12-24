@@ -196,11 +196,9 @@ header {
 }
 
 header img {
-    min-height: 24px;
     max-height: 96px;
     height: 5vh;
 
-    min-width: 24px;
     max-width: 96px;
     width: auto;
 
@@ -226,11 +224,11 @@ header a {
 
     width: 65vw;
     max-width: 1200px;
-    min-width: 300px;
+    min-width: 800px;
 
     height: auto;
     max-height: 600px;
-    min-height: 150px;
+    min-height: 400px;
 
     background-color: black;
 }
@@ -240,11 +238,11 @@ header a {
 
     width: 65vw;
     max-width: 1000px;
-    min-width: 300px;
+    min-width: 750px;
 
     height: auto;
     max-height: 600px;
-    min-height: 180px;
+    min-height: 450px;
 
     background-color: black;
 }
@@ -287,6 +285,7 @@ td img:hover {
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
 
     flex-direction: column;
     margin-bottom: 6vh;
@@ -350,7 +349,7 @@ img.platform-logo:hover {
 
     width: 20vw;
     min-height: 128px;
-    min-width: 64px;
+    min-width: 128px;
     max-height: 512px;
     max-width: 256px;
 
@@ -412,16 +411,17 @@ img.platform-logo:hover {
     border-radius: 1em;
 }
 
-#all-time div {
+#all-time > div {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    column-gap: 5%;
 }
 
-#all-time div div {
+#all-time > div > div {
     display: flex;
     align-items: center;
-    width: 46%;
+    min-width: 40%;
 }
 
 .benchmark-table td, th {
