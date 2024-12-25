@@ -21,7 +21,7 @@ val arch = when(System.getProperty("os.arch").lowercase()) {
     else -> error("Unsupported architecture")
 }
 val kotlinNativeSuffix = if (os == "windows") ".exe" else ".kexe"
-val s = File.separator
+val s: String = File.separator ?: "/"
 
 private const val NANO = "ns"
 private const val MICRO = "µs"
@@ -125,17 +125,18 @@ data class BenchmarkResult(
 
 }
 
-suspend fun String.runCommand(folder: File): String? = coroutineScope {
+suspend fun String.runCommand(folder: File, pipe: Boolean = false): String? = coroutineScope {
     val str = this@runCommand
     var exitCode = -1
 
     try {
         val parts = split("\\s".toRegex())
-        val process = ProcessBuilder(*parts.toTypedArray())
+        val builder = ProcessBuilder(*parts.toTypedArray())
             .directory(folder)
-            .redirectOutput(ProcessBuilder.Redirect.PIPE)
-            .redirectError(ProcessBuilder.Redirect.PIPE)
-            .start()
+
+        if (pipe) builder.inheritIO()
+
+        val process = builder.start()
 
         val waiting = launch {
             if (!logger.isDebugEnabled()) return@launch
