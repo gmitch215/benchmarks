@@ -90,7 +90,7 @@
   id: c-gnu
   file-name: main.c
   color: "555555"
-  compile: gcc main.c ../../lib/c/nanotime/nanotime.c ../../lib/c/base64/base64.c ../../lib/c/md5/md5.c -o main.c.gnu.o -w -O0
+  compile: gcc main.c ../../lib/c/nanotime/nanotime.c ../../lib/c/base64/base64.c -o main.c.gnu.o -w -O0
   compile-extra:
     windows: "-lws2_32"
     linux: "-lm"
@@ -103,7 +103,7 @@
   id: c-llvm
   file-name: main.c
   color: "888888"
-  compile: clang main.c ../../lib/c/nanotime/nanotime.c ../../lib/c/base64/base64.c ../../lib/c/md5/md5.c -o main.c.llvm.o -w -O0
+  compile: clang main.c ../../lib/c/nanotime/nanotime.c ../../lib/c/base64/base64.c -o main.c.llvm.o -w -O0
   compile-extra:
     linux: "-lm"
   run: main.c.llvm.o
