@@ -11,8 +11,10 @@ dependencies:
       - ktor-http-macosx64
       - ktor-http-cio-macosx64
       - ktor-network-macosx64
+      - ktor-network-macosx64;cinterop-network
       - ktor-network-tls-macosx64
       - ktor-utils-macosx64
+      - ktor-utils-macosx64;cinterop-threadUtils
       - ktor-serialization-macosx64
       - ktor-sse-macosx64
       - ktor-websockets-macosx64

@@ -11,8 +11,10 @@ dependencies:
       - ktor-http-linuxx64
       - ktor-http-cio-linuxx64
       - ktor-network-linuxx64
+      - ktor-network-linuxx64;cinterop-network
       - ktor-network-tls-linuxx64
       - ktor-utils-linuxx64
+      - ktor-utils-linuxx64;cinterop-threadUtils
       - ktor-serialization-linuxx64
       - ktor-sse-linuxx64
       - ktor-websockets-linuxx64
