@@ -15,7 +15,47 @@ You can navigate to the website [here](https://benchmarks.gmitch215.xyz), or by 
 
 This repository also features the ability to benchmark all the algorithms locally.
 
-### Prerequisites
+### Running Specific Benchmarks
+
+You can navigate through the folders and run the benchmarks for a specific algorithm. 
+Use the `run` command in [`config.yml`](./benchmarks/config.yml) to run the benchmarks properly without errors.
+
+#### For Compiled Languages
+
+Any language with a `compile` command in the [`config.yml`](./benchmarks/config.yml) file needs to be compiled first before it can run with the `run` commmand.
+
+To compile the code, you can run the `compileBenchmark` task in the root directory for the repository:
+
+```bash
+./gradlew compileBenchmark -Planguage={language} -Pfile={file}
+```
+
+The task accepts two parameters:
+
+`language` - ID of the language in the [`config.yml`](./benchmarks/config.yml) file
+`file` - File to compile relative to the `benchmarks` directory
+
+For example, to compile the HTTP GET benchmark for Kotlin/Native, you would run:
+
+```bash
+./gradlew compileBenchmark -Planguage=kotlin-native -Pfile=http-get/main.kt
+```
+
+Then, you can run the file in the terminal:
+
+```bash
+# Windows
+main.kt.exe
+
+# macOS/Linux
+main.kt.kexe
+```
+
+`http-get` measures in `ms` according to its benchmark [`config.yml`](./benchmarks/http-get/config.yml), so the output will be in milliseconds.
+
+### Running All Benchmarks
+
+#### Prerequisites
 
 **All** command line tools present in [`config.yml`](./benchmarks/config.yml) must be installed. You can determine if you meet them by running
 the `version`, `compile`, and/or `run` commands in the terminal.
@@ -24,9 +64,9 @@ Here are some notable examples:
 
 - `java` for Java (*Requires Java 21 or higher*)
 - `kotlinc` for Kotlin JVM
-  - This requires the `KOTLIN_HOME` environment variable to be set to the Kotlin compiler directory (**not** the bin directory). 
+  - This requires the `KOTLIN_HOME` environment variable to be set to the Kotlin compiler directory (**not** the bin directory).
 - `kotlinc-native` for Kotlin Native
-  - This requires the `KOTLIN_NATIVE_HOME` environment variable to be set to the Kotlin Native compiler directory (**not** the bin directory). 
+  - This requires the `KOTLIN_NATIVE_HOME` environment variable to be set to the Kotlin Native compiler directory (**not** the bin directory).
 - `ruby` for Ruby
 - `python` for Python
 - `gcc`/`g++` **and** `clang`/`clang++` for C/C++
@@ -39,8 +79,6 @@ You can test if you have the necessary tools and setup by running the `validate`
 ```bash
 ./gradlew validate
 ```
-
-### Running Benchmarks
 
 #### IntelliJ IDEA
 
