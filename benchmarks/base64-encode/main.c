@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../../lib/nanotime/nanotime.h"
-#include "../../lib/c-base64/base64.h"
+#include "../../lib/c/nanotime/nanotime.h"
+#include "../../lib/c/base64/base64.h"
 
 int main() {
     uint64_t before = nanotime_now();

@@ -3,7 +3,7 @@
 #include <time.h>
 
 #define HTTP_IMPLEMENTATION
-#include "../../lib/clibs/http.h"
+#include "../../lib/c/clibs/http.h"
 
 int main() {
     clock_t before = (clock() * 1000) / CLOCKS_PER_SEC;

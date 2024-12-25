@@ -2,7 +2,7 @@
 #include <chrono>
 #include <string>
 
-#include "../../lib/cpp-base64/include/base64.hpp"
+#include "../../lib/cpp/base64/include/base64.hpp"
 
 int main() {
     const auto before = std::chrono::steady_clock::now();

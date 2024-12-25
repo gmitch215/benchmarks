@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "../../lib/nanotime/nanotime.h"
+#include "../../lib/c/nanotime/nanotime.h"
 
 uint64_t next(uint64_t n) {
     if (n % 2 == 0) {

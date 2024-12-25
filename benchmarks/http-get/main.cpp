@@ -2,7 +2,7 @@
 #include <chrono>
 
 #define HTTP_IMPLEMENTATION
-#include "../../lib/clibs/http.h"
+#include "../../lib/c/clibs/http.h"
 
 int main() {
     const auto before = std::chrono::steady_clock::now();

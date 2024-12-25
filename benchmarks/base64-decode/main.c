@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../../lib/nanotime/nanotime.h"
-#include "../../lib/c-base64/base64.h"
+#include "../../lib/c/nanotime/nanotime.h"
+#include "../../lib/c/base64/base64.h"
 
 int main() {
     char* i1 = "SGVsbG8sIFdvcmxkIQ==";

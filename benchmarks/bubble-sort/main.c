@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "../../lib/nanotime/nanotime.h"
+#include "../../lib/c/nanotime/nanotime.h"
 
 void swap(int* xp, int* yp){
     int temp = *xp;

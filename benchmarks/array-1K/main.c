@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "../../lib/nanotime/nanotime.h"
+#include "../../lib/c/nanotime/nanotime.h"
 
 int main() {
     uint64_t before = nanotime_now();

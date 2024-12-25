@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "../../lib/nanotime/nanotime.h"
+#include "../../lib/c/nanotime/nanotime.h"
 
 int binarySearch(int arr[], int x) {
     int low = 0;
