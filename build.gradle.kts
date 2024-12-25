@@ -104,12 +104,7 @@ tasks {
         dependsOn("downloadLibraries")
 
         val language = project.findProperty("language")?.toString()
-        if (language == null)
-            throw IllegalArgumentException("Language must be specified")
-
         val file = project.findProperty("file")?.toString()
-        if (file == null)
-            throw IllegalArgumentException("File must be specified")
 
         mainClass.set("xyz.gmitch215.benchmarks.CompileBenchmark")
         classpath = sourceSets["main"].runtimeClasspath
