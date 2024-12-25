@@ -25,6 +25,7 @@ const val EMPTY_RETRY_COUNT = 10
 val json = Json {
     prettyPrint = true
 }
+lateinit var LIBRARY_DIRECTORY: File
 
 private fun countChildren(count: AtomicInteger, job: Job) {
     count.incrementAndGet()
@@ -37,8 +38,9 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
 
     val input = File(args[0])
     val output = File(input, "output")
+    LIBRARY_DIRECTORY = File(args[1])
 
-    val filter = args.getOrNull(1)?.let { Regex(it) }
+    val filter = args.getOrNull(2)?.let { Regex(it) }
     if (filter != null)
         logger.info { "Filtering benchmarks with '$filter'" }
 
@@ -56,8 +58,6 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
     // Run Benchmarks
 
     val results = mutableMapOf<String, List<BenchmarkResult>>()
-    val disabledForRanking = mutableSetOf<String>()
-    val mutex = Mutex()
 
     val job = launch(Dispatchers.Default) {
         for (lang in languages) {
@@ -78,13 +78,7 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
                         val result = runBenchmark(lang, f, out).await()
                         logger.debug { "Received result for '$name' under '${lang.id}'" }
 
-                        if (result == null) {
-                            mutex.withLock {
-                                disabledForRanking.add(lang.id)
-                            }
-
-                            return@launch // Disabled Language
-                        }
+                        if (result == null) return@launch // Disabled Language
 
                         if (results.contains(name))
                             results[f.name] = results[f.name]!! + result
@@ -127,7 +121,7 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
     // Rank Benchmarks
     job.invokeOnCompletion {
         launch {
-            rankBenchmarks(results.filterKeys { it !in disabledForRanking }, output)
+            rankBenchmarks(results, output)
         }
     }
 
@@ -281,6 +275,9 @@ fun CoroutineScope.runBenchmark(language: Language, folder: File, out: File) = a
 
         if (language.id == "kotlin-native")
             run += kotlinNativeSuffix
+
+        if (';' in run && os != "windows")
+            run = run.replace(";", ":")
 
         logger.debug { "Running Command for '${language.id}': '$run' in ${folder.absolutePath}" }
 
@@ -445,6 +442,7 @@ data class Language(
     val compile: String? = null,
     @SerialName("compile-extra")
     val compileExtra: Map<String, String> = emptyMap(),
+    val libraries: Map<String, String> = emptyMap(),
     val cleanup: List<String>? = null,
 ) {
 
@@ -486,6 +484,35 @@ data class Language(
 
                 if (extra != null)
                     compile0 += " $extra"
+            }
+
+            if (libraries.isNotEmpty()) {
+                val flag = libraries["flag"] ?: error("No flag found for select libraries in '$id'")
+                val repeat = libraries["repeat"]?.toBoolean() == true
+                val escapePaths = libraries["escape-paths"]?.toBoolean() == true
+                val suffix = libraries["suffix"] ?: error("No file suffix found for select libraries in '$id'")
+                val separator = if (os == "windows") ";" else ":"
+
+                val subdir = libraries["$os-$arch"] ?: libraries[os] ?: libraries["default"] ?: error("No library configuration found for $os-$arch for '$id'")
+                val dir = File(LIBRARY_DIRECTORY, subdir)
+
+                if (!dir.exists())
+                    error("Library directory does not exist: ${dir.absolutePath}")
+
+                val files = dir.walkTopDown()
+                    .filter { it.isFile && it.extension == suffix }
+
+                if (repeat) {
+                    val path = files.joinToString(" $flag") {
+                        if (escapePaths) "\"${it.absolutePath}\"" else it.absolutePath
+                    }
+                    compile0 += " $flag$path"
+                } else {
+                    val files0 = files.joinToString(separator) { it.absolutePath }
+                    val path = if (escapePaths) "\"$files0\"" else files0
+
+                    compile0 += " $flag$path"
+                }
             }
 
             return compile0
