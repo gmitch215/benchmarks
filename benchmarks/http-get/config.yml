@@ -5,5 +5,3 @@ output: MILLISECONDS
 tags:
   - "web"
   - "request"
-disabled:
-  - "kotlin-native"
