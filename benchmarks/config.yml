@@ -39,7 +39,7 @@
     escape-paths: true
     suffix: jar
     default: kotlin/jvm
-  run: java -cp "main.kt.jar;../../lib/kotlin/jvm/*" -Xint MainKt
+  run: java -cp "main.kt.jar;../../lib/kotlin/jvm/*;" -Xint MainKt
   cleanup:
     - main.kt.jar
   version: kotlinc -version
