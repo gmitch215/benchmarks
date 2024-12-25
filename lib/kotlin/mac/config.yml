@@ -1,0 +1,27 @@
+type: klib
+dependencies:
+  - namespace: io/ktor
+    version: 3.0.3
+    paths:
+      - ktor-io-macosx64
+      - ktor-io-macosx64;cinterop-mutex
+      - ktor-client-core-macosx64
+      - ktor-client-cio-macosx64
+      - ktor-events-macosx64
+      - ktor-http-macosx64
+      - ktor-http-cio-macosx64
+      - ktor-network-macosx64
+      - ktor-network-tls-macosx64
+      - ktor-utils-macosx64
+      - ktor-serialization-macosx64
+      - ktor-sse-macosx64
+      - ktor-websockets-macosx64
+      - ktor-websocket-serialization-macosx64
+  - namespace: org/jetbrains/kotlinx
+    paths:
+      - kotlinx-coroutines-core-macosx64-1.10.1
+      - kotlinx-io-core-macosx64-0.6.0
+      - kotlinx-io-bytestring-macosx64-0.6.0
+      - kotlinx-serialization-core-macosx64-1.7.3
+      - atomicfu-macosx64-0.26.1
+      - atomicfu-macosx64-0.26.1;cinterop-interop

@@ -56,6 +56,17 @@ tasks {
                 include("main.kt.kexe.*/**")
             }
         )
+
+        delete(
+            fileTree("lib") {
+                include("**/*.dll")
+                include("**/*.dylib")
+                include("**/*.so")
+                include("**/*.jar")
+                include("**/*.klib")
+                include("**/*.pdb")
+            }
+        )
     }
 
     processResources {
@@ -80,15 +91,47 @@ tasks {
         doLast { output.writeText("true") }
     }
 
+    register("downloadLibraries", JavaExec::class) {
+        mainClass.set("xyz.gmitch215.benchmarks.libraries.Downloader")
+        classpath = sourceSets["main"].runtimeClasspath
+        args = listOfNotNull(
+            file("lib").absolutePath
+        )
+        jvmArgs = listOf("-XX:+HeapDumpOnOutOfMemoryError")
+    }
+
+    register("compileBenchmark", JavaExec::class) {
+        dependsOn("downloadLibraries")
+
+        val language = project.findProperty("language")?.toString()
+        if (language == null)
+            throw IllegalArgumentException("Language must be specified")
+
+        val file = project.findProperty("file")?.toString()
+        if (file == null)
+            throw IllegalArgumentException("File must be specified")
+
+        mainClass.set("xyz.gmitch215.benchmarks.CompileBenchmark")
+        classpath = sourceSets["main"].runtimeClasspath
+        args = listOfNotNull(
+            file("benchmarks/config.yml").absolutePath,
+            file("lib").absolutePath,
+            language,
+            file("benchmarks/$file").absolutePath
+        )
+        jvmArgs = listOf("-XX:+HeapDumpOnOutOfMemoryError")
+    }
+
     // Benchmarking Tasks
 
     register("createBenchmarks", JavaExec::class) {
-        dependsOn("validate")
+        dependsOn("validate", "downloadLibraries")
 
         mainClass.set("xyz.gmitch215.benchmarks.measurement.Benchmarker")
         classpath = sourceSets["main"].runtimeClasspath
         args = listOfNotNull(
             file("benchmarks").absolutePath,
+            file("lib").absolutePath,
             project.findProperty("benchmarkFilter")?.toString()
         )
         jvmArgs = listOf("-Xms512M", "-XX:+HeapDumpOnOutOfMemoryError")

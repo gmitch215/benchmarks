@@ -1,0 +1,27 @@
+type: klib
+dependencies:
+  - namespace: io/ktor
+    version: 3.0.3
+    paths:
+      - ktor-io-mingwx64
+      - ktor-io-mingwx64;cinterop-mutex
+      - ktor-client-core-mingwx64
+      - ktor-client-cio-mingwx64
+      - ktor-events-mingwx64
+      - ktor-http-mingwx64
+      - ktor-http-cio-mingwx64
+      - ktor-network-mingwx64
+      - ktor-network-tls-mingwx64
+      - ktor-utils-mingwx64
+      - ktor-serialization-mingwx64
+      - ktor-sse-mingwx64
+      - ktor-websockets-mingwx64
+      - ktor-websocket-serialization-mingwx64
+  - namespace: org/jetbrains/kotlinx
+    paths:
+      - kotlinx-coroutines-core-mingwx64-1.10.1
+      - kotlinx-io-core-mingwx64-0.6.0
+      - kotlinx-io-bytestring-mingwx64-0.6.0
+      - kotlinx-serialization-core-mingwx64-1.7.3
+      - atomicfu-mingwx64-0.26.1
+      - atomicfu-mingwx64-0.26.1;cinterop-interop

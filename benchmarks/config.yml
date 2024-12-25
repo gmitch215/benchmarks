@@ -34,7 +34,12 @@
   color: "5f3bbe"
   location: KOTLIN_HOME
   compile: kotlinc main.kt -include-runtime -d main.kt.jar
-  run: java -jar main.kt.jar -Xint
+  libraries:
+    flag: "-cp "
+    escape-paths: true
+    suffix: jar
+    default: kotlin/jvm
+  run: java -cp "main.kt.jar;../../lib/kotlin/jvm/*" -Xint MainKt
   cleanup:
     - main.kt.jar
   version: kotlinc -version
@@ -45,6 +50,14 @@
   color: "92316e"
   location: KOTLIN_NATIVE_HOME
   compile: kotlinc-native main.kt -o main.kt -g
+  libraries:
+    flag: "-l "
+    escape-paths: false
+    repeat: true
+    suffix: klib
+    windows: kotlin/windows
+    mac: kotlin/mac
+    linux: kotlin/linux
   run: main.kt
   cleanup:
     - main.kt.exe
@@ -77,7 +90,7 @@
   id: c-gnu
   file-name: main.c
   color: "555555"
-  compile: gcc main.c ../../lib/nanotime/nanotime.c ../../lib/c-base64/base64.c -o main.c.gnu.o -w -O0
+  compile: gcc main.c ../../lib/c/nanotime/nanotime.c ../../lib/c/base64/base64.c ../../lib/c/md5/md5.c -o main.c.gnu.o -w -O0
   compile-extra:
     windows: "-lws2_32"
     linux: "-lm"
@@ -90,7 +103,7 @@
   id: c-llvm
   file-name: main.c
   color: "888888"
-  compile: clang main.c ../../lib/nanotime/nanotime.c ../../lib/c-base64/base64.c -o main.c.llvm.o -w -O0
+  compile: clang main.c ../../lib/c/nanotime/nanotime.c ../../lib/c/base64/base64.c ../../lib/c/md5/md5.c -o main.c.llvm.o -w -O0
   compile-extra:
     linux: "-lm"
   run: main.c.llvm.o

@@ -17,6 +17,8 @@ logs/
 *.dll
 *.jar
 *.pdb
+*.klib
+
 main.kt.kexe.*/
 
 !gradle-wrapper.jar

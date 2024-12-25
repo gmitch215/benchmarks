@@ -1,0 +1,28 @@
+type: jar
+dependencies:
+  - namespace: io/ktor
+    version: 3.0.3
+    paths:
+      - ktor-io-jvm
+      - ktor-client-core-jvm
+      - ktor-client-cio-jvm
+      - ktor-events-jvm
+      - ktor-http-jvm
+      - ktor-http-cio-jvm
+      - ktor-network-jvm
+      - ktor-network-tls-jvm
+      - ktor-utils-jvm
+      - ktor-serialization-jvm
+      - ktor-sse-jvm
+  - namespace: org/jetbrains/kotlinx
+    paths:
+      - kotlinx-coroutines-core-jvm-1.10.1
+      - kotlinx-io-core-jvm-0.6.0
+      - kotlinx-io-bytestring-jvm-0.6.0
+      - kotlinx-serialization-core-jvm-1.7.3
+      - atomicfu-jvm-0.26.1
+  - namespace: org/slf4j
+    version: 2.0.16
+    paths:
+      - slf4j-api
+      - slf4j-simple
