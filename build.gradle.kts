@@ -103,16 +103,16 @@ tasks {
     register("compileBenchmark", JavaExec::class) {
         dependsOn("downloadLibraries")
 
-        val language = project.findProperty("language")?.toString()
+        val language = project.findProperty("language")?.toString() ?: ""
         val file = project.findProperty("file")?.toString()
 
-        mainClass.set("xyz.gmitch215.benchmarks.CompileBenchmark")
+        mainClass.set("xyz.gmitch215.benchmarks.compiler.CompileBenchmark")
         classpath = sourceSets["main"].runtimeClasspath
         args = listOfNotNull(
             file("benchmarks/config.yml").absolutePath,
             file("lib").absolutePath,
             language,
-            file("benchmarks/$file").absolutePath
+            file("benchmarks${if (file != null) "/$file" else ""}").absolutePath
         )
         jvmArgs = listOf("-XX:+HeapDumpOnOutOfMemoryError")
     }
@@ -120,7 +120,7 @@ tasks {
     // Benchmarking Tasks
 
     register("createBenchmarks", JavaExec::class) {
-        dependsOn("validate", "downloadLibraries")
+        dependsOn("validate", "compileBenchmark", "downloadLibraries")
 
         mainClass.set("xyz.gmitch215.benchmarks.measurement.Benchmarker")
         classpath = sourceSets["main"].runtimeClasspath

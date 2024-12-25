@@ -4,8 +4,6 @@ package xyz.gmitch215.benchmarks.measurement
 
 import com.charleskorn.kaml.Yaml
 import kotlinx.coroutines.*
-import kotlinx.coroutines.sync.Mutex
-import kotlinx.coroutines.sync.withLock
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
@@ -257,17 +255,6 @@ fun CoroutineScope.runBenchmark(language: Language, folder: File, out: File) = a
     val results = mutableListOf<Double>()
 
     coroutineScope {
-        val compile = language.absoluteCompile
-        if (compile != null) {
-            logger.debug { "Running Compile Command for '${language.id}': '$compile' in ${folder.absolutePath}" }
-
-            val res = compile.runCommand(folder)
-            if (res != null && res.isNotEmpty())
-                logger.debug { "Compile result: $res" }
-
-            logger.debug { "Compile command finished for '${language.id}' in ${folder.absolutePath}" }
-        }
-
         var run = language.run
 
         if (language.file)
@@ -333,15 +320,6 @@ fun CoroutineScope.runBenchmark(language: Language, folder: File, out: File) = a
         -----
         """.trimIndent()
     }
-
-    if (language.cleanup != null)
-        for (cleanup in language.cleanup) {
-            val file = File(folder, cleanup)
-            if (file.exists()) {
-                file.delete()
-                logger.debug { "Deleted file from cleanup: ${file.absolutePath}" }
-            }
-        }
 
     if (results.isEmpty())
         error("No results found for '${config.name}' on ${language.language}")
