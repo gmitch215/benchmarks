@@ -12,6 +12,7 @@ import kotlinx.serialization.json.*
 import oshi.SystemInfo
 import xyz.gmitch215.benchmarks.*
 import java.io.File
+import java.lang.System
 import java.nio.file.Files
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -255,7 +256,7 @@ fun CoroutineScope.runBenchmark(language: Language, folder: File, out: File) = a
     val results = mutableListOf<Double>()
 
     coroutineScope {
-        var run = language.run
+        var run = language.absoluteRun
 
         if (language.file)
             run = "${folder.absolutePath}${s}$run"
@@ -441,6 +442,45 @@ data class Language(
             return version0
         }
 
+    val librariesFlag: String?
+        get() {
+            if (libraries.isEmpty()) return null
+
+            val flag = libraries["flag"] ?: error("No flag found for select libraries in '$id'")
+            val repeat = libraries["repeat"]?.toBoolean() == true
+            val escapePaths = libraries["escape-paths"]?.toBoolean() == true
+            val suffix = libraries["suffix"] ?: error("No file suffix found for select libraries in '$id'")
+            val main = libraries["main"]
+            val separator = if (os == "windows") ";" else ":"
+
+            val subdir = libraries["$os-$arch"] ?: libraries[os] ?: libraries["default"] ?: error("No library configuration found for $os-$arch for '$id'")
+            val dir = File(LIBRARY_DIRECTORY, subdir)
+
+            if (!dir.exists())
+                error("Library directory does not exist: ${dir.absolutePath}")
+
+            val files = dir.walkTopDown()
+                .filter { it.isFile && it.extension == suffix }
+
+            if (repeat) {
+                val main0 = if (main != null) {
+                    if (escapePaths) "$flag\"$main\" " else "$flag$main "
+                } else ""
+
+                val path = files.joinToString(" $flag") {
+                    if (escapePaths) "\"${it.absolutePath}\"" else it.absolutePath
+                }
+
+                return "$main0$flag$path"
+            } else {
+                val files0 = files.joinToString(separator) { it.absolutePath }
+                val prefix = if (main != null) "$main$separator" else ""
+                val path = if (escapePaths) "\"$prefix$files0\"" else "$prefix$files0"
+
+                return "$flag$path"
+            }
+        }
+
     val absoluteCompile: String?
         get() {
             if (compile == null) return null
@@ -464,36 +504,37 @@ data class Language(
                     compile0 += " $extra"
             }
 
+            if (libraries.isNotEmpty())
+                compile0 += " $librariesFlag"
+
+            return compile0
+        }
+
+    val absoluteRun: String
+        get() {
+            var run0 = run
+
+            if (id == "kotlin-jvm") {
+                val home = System.getenv(location)
+                if (home != null)
+                    run0 = "${home}${s}bin${s}$run0"
+
+                if (os == "windows")
+                    run0 = run0.replaceFirst(" ", ".bat ")
+            }
+
             if (libraries.isNotEmpty()) {
-                val flag = libraries["flag"] ?: error("No flag found for select libraries in '$id'")
-                val repeat = libraries["repeat"]?.toBoolean() == true
-                val escapePaths = libraries["escape-paths"]?.toBoolean() == true
-                val suffix = libraries["suffix"] ?: error("No file suffix found for select libraries in '$id'")
-                val separator = if (os == "windows") ";" else ":"
-
-                val subdir = libraries["$os-$arch"] ?: libraries[os] ?: libraries["default"] ?: error("No library configuration found for $os-$arch for '$id'")
-                val dir = File(LIBRARY_DIRECTORY, subdir)
-
-                if (!dir.exists())
-                    error("Library directory does not exist: ${dir.absolutePath}")
-
-                val files = dir.walkTopDown()
-                    .filter { it.isFile && it.extension == suffix }
-
-                if (repeat) {
-                    val path = files.joinToString(" $flag") {
-                        if (escapePaths) "\"${it.absolutePath}\"" else it.absolutePath
-                    }
-                    compile0 += " $flag$path"
-                } else {
-                    val files0 = files.joinToString(separator) { it.absolutePath }
-                    val path = if (escapePaths) "\"$files0\"" else files0
-
-                    compile0 += " $flag$path"
+                val includeRun = libraries["include-run"]?.toBoolean() == true
+                if (includeRun) {
+                    if (run0.contains(" ")) {
+                        val (first, rest) = run0.split("\\s".toRegex(), limit = 2)
+                        run0 = "$first $librariesFlag $rest"
+                    } else
+                        run0 += " $librariesFlag"
                 }
             }
 
-            return compile0
+            return run0
         }
 
 }
