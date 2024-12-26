@@ -151,14 +151,20 @@ suspend fun String.runCommand(folder: File, pipe: Boolean = false): String? = co
         waiting.cancel("Process finished")
         logger.debug { "Process '$str' finished in ${folder.absolutePath}" }
 
-        exitCode = process.exitValue()
-        if (exitCode != 0) {
-            logger.error { "Failed to run command: '$str' in ${folder.absolutePath} with exit code $exitCode" }
-            error(process.errorStream.bufferedReader().use { it.readText() })
-        }
-
         val stdout = process.inputStream.bufferedReader().use { it.readText() }
         val stderr = process.errorStream.bufferedReader().use { it.readText() }
+        exitCode = process.exitValue()
+
+        if (exitCode != 0) {
+            if (stderr.isNotEmpty() && stdout.isNotEmpty())
+                error("STDOUT: $stdout\nSTDERR: $stderr")
+            else if (stderr.isNotEmpty())
+                error(stderr)
+            else if (stdout.isNotEmpty())
+                error(stdout)
+            else
+                error("No output; Exit Code $exitCode")
+        }
 
         if (stderr.isEmpty())
             return@coroutineScope stdout
