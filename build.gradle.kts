@@ -117,6 +117,24 @@ tasks {
         jvmArgs = listOf("-XX:+HeapDumpOnOutOfMemoryError")
     }
 
+    register("runBenchmark", JavaExec::class) {
+        dependsOn("downloadLibraries")
+        mustRunAfter("compileBenchmark")
+
+        val language = project.findProperty("language")?.toString() ?: ""
+        val file = project.findProperty("file")?.toString()
+
+        mainClass.set("xyz.gmitch215.benchmarks.compiler.RunBenchmark")
+        classpath = sourceSets["main"].runtimeClasspath
+        args = listOfNotNull(
+            file("benchmarks/config.yml").absolutePath,
+            file("lib").absolutePath,
+            language,
+            file("benchmarks${if (file != null) "/$file" else ""}").absolutePath
+        )
+        jvmArgs = listOf("-XX:+HeapDumpOnOutOfMemoryError")
+    }
+
     // Benchmarking Tasks
 
     register("createBenchmarks", JavaExec::class) {
