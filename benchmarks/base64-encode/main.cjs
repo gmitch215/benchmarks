@@ -1,8 +1,8 @@
-let before = process.hrtime.bigint()
-
 const i1 = "Hello, World!"
 const i2 = "The quick brown fox jumps over the lazy dog."
 const i3 = "AaBbCcDdEeFf123456_!@#&*^()$=+-"
+
+let before = process.hrtime.bigint()
 
 Buffer.from(i1).toString('base64')
 Buffer.from(i2).toString('base64')

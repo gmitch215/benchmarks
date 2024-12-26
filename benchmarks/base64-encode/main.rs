@@ -32,11 +32,11 @@ fn encode_base64(input: &[u8]) -> String {
 }
 
 fn main() {
-    let before = SystemTime::now().duration_since(SystemTime::UNIX_EPOCH).unwrap();
-
     let i1 = "Hello, world!";
     let i2 = "The quick brown fox jumps over the lazy dog.";
     let i3 = "AaBbCcDdEeFf123456_!@#&*^()$=+-";
+
+    let before = SystemTime::now().duration_since(SystemTime::UNIX_EPOCH).unwrap();
 
     encode_base64(i1.as_bytes());
     encode_base64(i2.as_bytes());

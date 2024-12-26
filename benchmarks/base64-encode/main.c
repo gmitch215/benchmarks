@@ -6,11 +6,11 @@
 #include "../../lib/c/base64/base64.h"
 
 int main() {
-    uint64_t before = nanotime_now();
-
     char* i1 = "Hello, World!";
     char* i2 = "The quick brown fox jumps over the lazy dog.";
     char* i3 = "AaBbCcDdEeFf123456_!@#&*^()$=+-";
+
+    uint64_t before = nanotime_now();
 
     base64_encode(i1);
     base64_encode(i2);
