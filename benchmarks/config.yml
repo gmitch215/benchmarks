@@ -35,11 +35,13 @@
   location: KOTLIN_HOME
   compile: kotlinc main.kt -include-runtime -d main.kt.jar
   libraries:
+    include-run: true
+    main: main.kt.jar
     flag: "-cp "
     escape-paths: true
     suffix: jar
     default: kotlin/jvm
-  run: java -cp "main.kt.jar;../../lib/kotlin/jvm/*;" -Xint MainKt
+  run: kotlin -Xint MainKt
   cleanup:
     - main.kt.jar
   version: kotlinc -version
