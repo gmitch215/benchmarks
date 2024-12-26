@@ -17,10 +17,27 @@ This repository also features the ability to benchmark all the algorithms locall
 
 ### Running Specific Benchmarks
 
-You can navigate through the folders and run the benchmarks for a specific algorithm. 
-Use the `run` command in [`config.yml`](./benchmarks/config.yml) to run the benchmarks properly without errors.
+Benchmarks offers two gradle tasks: `compileBenchmark` and `runBenchmark`, to run specific benchmarks.
 
-#### For Compiled Languages
+```bash
+./gradlew compileBenchmark runBenchmark -Planguage={language} -Pfile={file}
+```
+
+For example, to run `count-1M` for `c` using Clang, you would run:
+
+```bash
+./gradlew compileBenchmark runBenchmark -Planguage=c-llvm -Pfile=count-1M/main.c
+```
+
+> [!NOTE]
+> `compileBenchmark` is only required to be passed for compiled languages. Gradle will automatically skip interpreted languages passed,
+> like `python` and `ruby`.
+
+```bash
+./gradlew runBenchmark -Planguage=ruby -Pfile=count-1M/main.rb
+```
+
+#### `compileBenchmark`
 
 Any language with a `compile` command in the [`config.yml`](./benchmarks/config.yml) file needs to be compiled first before it can run with the `run` commmand.
 
@@ -42,17 +59,23 @@ For example, to compile the HTTP GET benchmark for Kotlin/Native, you would run:
 ./gradlew compileBenchmark -Planguage=kotlin-native -Pfile=http-get/main.kt
 ```
 
-Then, you can run the file in the terminal:
+#### `runBenchmark`
+
+After compiling the benchmarks, you can run them using the `runBenchmark` task:
 
 ```bash
-# Windows
-main.kt.exe
-
-# macOS/Linux
-main.kt.kexe
+./gradlew runBenchmark -Planguage={language} -Pfile={file}
 ```
 
-`http-get` measures in `ms` according to its benchmark [`config.yml`](./benchmarks/http-get/config.yml), so the output will be in milliseconds.
+The task accepts the same parameters as the `compileBenchmark` task.
+
+For example, to run the HTTP GET benchmark for Kotlin/Native, you do:
+
+```bash
+./gradlew compileBenchmark runBenchmark -Planguage=kotlin-native -Pfile=http-get/main.kt
+```
+
+http-get` measures in `ms` according to its benchmark [`config.yml`](./benchmarks/http-get/config.yml), so the output will be in milliseconds.
 
 ### Running All Benchmarks
 
