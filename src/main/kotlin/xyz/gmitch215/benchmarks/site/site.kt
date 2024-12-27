@@ -314,7 +314,7 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
     }
 
     logger.info { "Finished Site Page Creation" }
-    logger.debug { "Site Size: ${output.walkTopDown().toList().size} Files" }
+    logger.debug { "Site Size: ${output.walkTopDown().filter { "_site" !in it.path }.toList().size} Files" }
 }
 
 // Classes
