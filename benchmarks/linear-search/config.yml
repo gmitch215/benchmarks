@@ -1,0 +1,9 @@
+name: Linear Search (x5)
+description: >
+  Linear Search is a search algorithm that finds the position of a target value within any kind of array.
+  Performs a linear search through 50 integers in an array for the 4th, 11th, 29th, 36th, and 42nd elements.
+measure: NANOSECONDS
+output: MICROSECONDS
+tags:
+  - "number"
+  - "search"
