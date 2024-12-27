@@ -191,7 +191,7 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
             if (gb > 0) "${gb}GB" else "${mb}MB"
         }
 
-        val maxFrequency = si.hardware.processor.maxFreq.run {
+        val freqency = si.hardware.processor.maxFreq.run {
             val ghz = this / 1_000_000_000.0
             val mhz = this / 1_000_000.0
             if (ghz > 0) "${String.format("%,.3f", ghz)}GHz" else "${String.format("%,.3f", mhz)}MHz"
@@ -201,7 +201,7 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
             fun Long.toGB(): String {
                 val gb = this / 1_000_000_000.0
                 val tb = gb / 1_000.0
-                return if (tb > 0) "${String.format("%,.2f", tb)}TB" else "${String.format("%,.2f", gb)}GB"
+                return if (tb >= 1) "${String.format("%,.2f", tb)}TB" else "${String.format("%,.2f", gb)}GB"
             }
 
             "- ${it.name} (${it.model}) - ${it.size.toGB()}"
@@ -226,7 +226,7 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
             ${si.hardware.processor}
             ---
             Max Memory: $maxMemory
-            Max CPU Frequency: $maxFrequency
+            Base CPU Frequency: $freqency
             Processors: ${si.hardware.processor.logicalProcessorCount}
             ---
             Disks:
@@ -447,7 +447,7 @@ data class Language(
 
         val flag = libraries["flag"] ?: error("No flag found for select libraries in '$id'")
         val repeat = libraries["repeat"]?.toBoolean() == true
-        val escapePaths = libraries["escape-paths"]?.toBoolean() == true
+        val escapePaths = libraries["escape-paths"]?.toBoolean() == true && os == "windows"
         val suffix = libraries["suffix"] ?: error("No file suffix found for select libraries in '$id'")
         val main = if (includeMain) libraries["main"] else null
         val separator = if (os == "windows") ";" else ":"
@@ -463,18 +463,18 @@ data class Language(
 
         if (repeat) {
             val main0 = if (main != null) {
-                if (escapePaths && os == "windows") "$flag\"$main\" " else "$flag$main "
+                if (escapePaths) "$flag\"$main\" " else "$flag$main "
             } else ""
 
             val path = files.joinToString(" $flag") {
-                if (escapePaths && os == "windows") "\"${it.absolutePath}\"" else it.absolutePath
+                if (escapePaths) "\"${it.absolutePath}\"" else it.absolutePath
             }
 
             return "$main0$flag$path"
         } else {
             val files0 = files.joinToString(separator) { it.absolutePath }
             val prefix = if (main != null) "$main$separator" else ""
-            val path = if (escapePaths && os == "windows") "\"$prefix$files0\"" else "$prefix$files0"
+            val path = if (escapePaths) "\"$prefix$files0\"" else "$prefix$files0"
 
             return "$flag$path"
         }
