@@ -18,9 +18,9 @@ fn binary_search(arr: [i32; 25], target: i32) -> i32 {
 }
 
 fn main() {
-    let before = SystemTime::now().duration_since(SystemTime::UNIX_EPOCH).unwrap();
-
     let arr: [i32; 25] = [2, 3, 6, 10, 23, 45, 78, 129, 213, 294, 299, 301, 332, 423, 521, 543, 571, 612, 634, 678, 712, 745, 789, 812, 834];
+
+    let before = SystemTime::now().duration_since(SystemTime::UNIX_EPOCH).unwrap();
 
     binary_search(arr, arr[2]);
     binary_search(arr, arr[8]);

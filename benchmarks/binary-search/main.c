@@ -24,9 +24,9 @@ int binarySearch(int arr[], int x) {
 }
 
 int main() {
-    uint64_t before = nanotime_now();
-
     int arr[] = {2, 3, 6, 10, 23, 45, 78, 129, 213, 294, 299, 301, 332, 423, 521, 543, 571, 612, 634, 678, 712, 745, 789, 812, 834};
+
+    uint64_t before = nanotime_now();
 
     binarySearch(arr, arr[2]);
     binarySearch(arr, arr[8]);

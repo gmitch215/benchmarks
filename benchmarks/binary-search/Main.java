@@ -20,11 +20,11 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        long before = System.nanoTime();
-
         int[] arr = new int[] {
-            2, 3, 6, 10, 23, 45, 78, 129, 213, 294, 299, 301, 332, 423, 521, 543, 571, 612, 634, 678, 712, 745, 789, 812, 834
+                2, 3, 6, 10, 23, 45, 78, 129, 213, 294, 299, 301, 332, 423, 521, 543, 571, 612, 634, 678, 712, 745, 789, 812, 834
         };
+
+        long before = System.nanoTime();
 
         binarySearch(arr, arr[2]);
         binarySearch(arr, arr[8]);

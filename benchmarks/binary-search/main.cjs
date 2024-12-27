@@ -18,11 +18,11 @@ function binarySearch(arr, x) {
     return -1
 }
 
-let before = process.hrtime.bigint()
-
 let arr = Array(
     2, 3, 6, 10, 23, 45, 78, 129, 213, 294, 299, 301, 332, 423, 521, 543, 571, 612, 634, 678, 712, 745, 789, 812, 834
 )
+
+let before = process.hrtime.bigint()
 
 binarySearch(arr, arr[2])
 binarySearch(arr, arr[8])
