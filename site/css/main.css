@@ -20,21 +20,24 @@
 }
 
 html {
-    overflow-y: auto;
+    overflow: auto;
     height: 100%;
     width: 100%;
 }
 
 body {
-    overflow-y: hidden;
+    overflow: hidden;
     min-height: 100%;
 }
 
 main {
+    overflow: hidden;
     height: 100%;
     width: 100%;
     min-height: 88vh;
     min-width: 100vw;
+
+    padding-bottom: 4vh !important;
 }
 
 html, body, main {
@@ -288,7 +291,6 @@ td img:hover {
     text-align: center;
 
     flex-direction: column;
-    margin-bottom: 6vh;
 }
 
 .benchmark-root > h1 {
@@ -331,7 +333,7 @@ img.platform-logo:hover {
     display: grid;
 
     grid-template-rows: 1fr 1fr 1fr;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
     column-gap: 10vw;
     row-gap: 5vh;
 
@@ -346,6 +348,7 @@ img.platform-logo:hover {
     border: var(--bg) 4px solid;
     background-color: var(--bg-3);
     box-shadow: var(--shadow);
+    justify-self: center;
 
     width: 20vw;
     min-height: 128px;
@@ -482,7 +485,6 @@ footer {
     width: 100%;
 
     display: flex;
-    margin-top: 4vh;
     padding-bottom: 5vh;
 
     justify-content: center;
