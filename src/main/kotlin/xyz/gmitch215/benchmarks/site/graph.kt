@@ -284,14 +284,14 @@ suspend fun createBenchmarkGraphs(benchmarks: List<Pair<String, String>>, out: F
 
     // Create Median Graph
     launch {
-        val values = data.map { it.second.results.sorted().let { results ->
+        val values = data.map { (it.second.results.sorted().let { results ->
             val size = results.size
             if (size % 2 == 0) {
                 (results[size / 2] + results[size / 2 - 1]) / 2
             } else {
                 results[size / 2]
             }
-        } / it.second.output.multiplier }
+        } * it.second.measure.multiplier) / it.second.output.multiplier }
 
         val median = dataFrameOf(
             "language" to labels,
