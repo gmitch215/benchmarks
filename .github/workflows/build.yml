@@ -104,15 +104,28 @@ jobs:
         with:
           node-version: '20'
       - name: Install JavaScript (Node) Dependencies
-        run: npm --prefix benchmarks ci
+        run: |
+          cd benchmarks
+          npm install
+          cd ..
       - name: Install JavaScript (Deno)
         uses: denoland/setup-deno@v2
         with:
           deno-version: v2.x
+      - name: Install JavaScript (Deno) Dependencies
+        run: |
+            cd benchmarks
+            deno install
+            cd ..
       - name: Install JavaScript (Bun)
         uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
+      - name: Install JavaScript (Bun) Dependencies
+        run: |
+          cd benchmarks
+          bun install
+          cd ..
       - name: Install Kotlin
         uses: gmitch215/setup-kotlin@main
         with:
