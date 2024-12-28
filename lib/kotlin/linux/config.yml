@@ -34,6 +34,9 @@ dependencies:
       - cryptography-core-linuxx64
       - cryptography-random-linuxx64
       - cryptography-bigint-linuxx64
+      - cryptography-serialization-asn1-linuxx64
+      - cryptography-serialization-asn1-modules-linuxx64
+      - cryptography-serialization-pem-linuxx64
       - cryptography-provider-base-linuxx64
       - cryptography-provider-openssl3-api-linuxx64
       - cryptography-provider-openssl3-api-linuxx64;cinterop-declarations

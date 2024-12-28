@@ -32,6 +32,9 @@ dependencies:
       - cryptography-core-mingwx64
       - cryptography-random-mingwx64
       - cryptography-bigint-mingwx64
+      - cryptography-serialization-asn1-mingwx64
+      - cryptography-serialization-asn1-modules-mingwx64
+      - cryptography-serialization-pem-mingwx64
       - cryptography-provider-base-mingwx64
       - cryptography-provider-openssl3-api-mingwx64
       - cryptography-provider-openssl3-api-mingwx64;cinterop-declarations

@@ -33,5 +33,8 @@ dependencies:
       - cryptography-core-jvm
       - cryptography-random-jvm
       - cryptography-bigint-jvm
+      - cryptography-serialization-asn1-jvm
+      - cryptography-serialization-asn1-modules-jvm
+      - cryptography-serialization-pem-jvm
       - cryptography-provider-base-jvm
       - cryptography-provider-jdk-jvm
