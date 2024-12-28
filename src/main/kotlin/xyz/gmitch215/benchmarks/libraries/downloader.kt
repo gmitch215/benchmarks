@@ -14,8 +14,6 @@ import java.net.URI
 
 val logger = KotlinLogging.logger("LibraryDownloader")
 
-const val MAVEN_CENTRAL = "https://repo.maven.apache.org/maven2/"
-
 suspend fun main(args: Array<String>): Unit = coroutineScope {
     logger.info { "Downloading libraries" }
     logger.debug { "Arguments: ${args.joinToString()}" }
@@ -34,6 +32,12 @@ suspend fun main(args: Array<String>): Unit = coroutineScope {
             logger.info { "Processing library configuration: ${config.absolutePath}" }
 
             val configuration = Yaml.default.decodeFromString<LibraryConfiguration>(config.readText())
+            val repository = configuration.repository ?: return@launch
+
+            if (configuration.type == "local") {
+                logger.info { "Skipping library download, using local files: ${config.absolutePath}" }
+                return@launch
+            }
 
             coroutineScope {
                 for ((name, path) in configuration.paths) {
@@ -44,7 +48,7 @@ suspend fun main(args: Array<String>): Unit = coroutineScope {
                             return@launch
                         }
 
-                        val url = URI.create("$MAVEN_CENTRAL$path").toURL()
+                        val url = URI.create("$repository/$path").toURL()
                         logger.info { "Downloading library: $url" }
 
                         val bytes = url.openStream().use { it.readBytes() }
@@ -62,6 +66,7 @@ suspend fun main(args: Array<String>): Unit = coroutineScope {
 @Serializable
 data class LibraryConfiguration(
     val type: String,
+    val repository: String? = null,
     val dependencies: List<DependencyConfiguration>
 ) {
 

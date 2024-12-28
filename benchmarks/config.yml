@@ -33,7 +33,7 @@
   file-name: main.kt
   color: "5f3bbe"
   location: KOTLIN_HOME
-  compile: kotlinc main.kt -include-runtime -d main.kt.jar
+  compile: kotlinc main.kt -d main.kt.jar
   libraries:
     include-run: true
     main: main.kt.jar
@@ -70,8 +70,15 @@
   id: cpp-gnu
   file-name: main.cpp
   color: "004283"
-  compile: g++ main.cpp -o main.cpp.gnu.o -std=c++17 -O0
+  compile: g++
+  libraries:
+    local: true
+    flag: ""
+    separator: " "
+    suffix: o
+    default: cpp
   compile-extra:
+    default: "main.cpp -o main.cpp.gnu.o -std=c++17 -w -O0"
     windows: "-lws2_32"
   run: main.cpp.gnu.o
   cleanup:
@@ -82,7 +89,15 @@
   id: cpp-llvm
   file-name: main.cpp
   color: "006183"
-  compile: clang++ main.cpp -o main.cpp.llvm.o -std=c++17 -w -O0
+  compile: clang++
+  libraries:
+    local: true
+    flag: ""
+    separator: " "
+    suffix: o
+    default: cpp
+  compile-extra:
+    default: "main.cpp -o main.cpp.llvm.o -std=c++17 -w -O0"
   run: main.cpp.llvm.o
   cleanup:
     - main.cpp.llvm.o
@@ -92,8 +107,15 @@
   id: c-gnu
   file-name: main.c
   color: "555555"
-  compile: gcc main.c ../../lib/c/nanotime/nanotime.c ../../lib/c/base64/base64.c -o main.c.gnu.o -w -O0
+  compile: gcc
+  libraries:
+    local: true
+    flag: ""
+    separator: " "
+    suffix: o
+    default: c
   compile-extra:
+    default: "main.c -o main.c.gnu.o -w -O0"
     windows: "-lws2_32"
     linux: "-lm"
   run: main.c.gnu.o
@@ -105,8 +127,15 @@
   id: c-llvm
   file-name: main.c
   color: "888888"
-  compile: clang main.c ../../lib/c/nanotime/nanotime.c ../../lib/c/base64/base64.c -o main.c.llvm.o -w -O0
+  compile: clang
+  libraries:
+    local: true
+    flag: ""
+    separator: " "
+    suffix: o
+    default: c
   compile-extra:
+    default: "main.c -o main.c.llvm.o -w -O0"
     linux: "-lm"
   run: main.c.llvm.o
   cleanup:

@@ -1,0 +1,11 @@
+type: local
+dependencies:
+  - namespace: nanotime
+    paths:
+      - nanotime.c
+  - namespace: base64
+    paths:
+      - base64.c
+  - namespace: md5
+    paths:
+      - md5.c
