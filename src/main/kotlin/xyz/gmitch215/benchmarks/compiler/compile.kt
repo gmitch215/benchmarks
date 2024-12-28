@@ -7,8 +7,9 @@ import io.github.oshai.kotlinlogging.KotlinLogging
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.serialization.decodeFromString
+import xyz.gmitch215.benchmarks.EXCLUDE_FOLDERS
 import xyz.gmitch215.benchmarks.measurement.LIBRARY_DIRECTORY
-import xyz.gmitch215.benchmarks.measurement.Language
+import xyz.gmitch215.benchmarks.Language
 import xyz.gmitch215.benchmarks.runCommand
 import java.io.File
 
@@ -24,7 +25,9 @@ val EXCLUDE_COMPILE = listOf(
     "pdb",
     "class",
     "json",
-    "jar"
+    "jar",
+    "lockb",
+    "lock",
 )
 
 val logger = KotlinLogging.logger("BenchmarkCompiler")
@@ -63,13 +66,22 @@ suspend fun main(args: Array<String>): Unit = coroutineScope {
         return@coroutineScope
     }
 
-    val benchmarks = file.walkTopDown().filter { it.isFile && "output" !in it.path && it.extension !in EXCLUDE_COMPILE }.toList()
+    val benchmarks = file.walkTopDown()
+        .filter { it.isFile && it.extension !in EXCLUDE_COMPILE }
+        .filter {
+            for (folder in EXCLUDE_FOLDERS)
+                if (it.path.contains(folder))
+                    return@filter false
+
+            return@filter true
+        }
+        .toList()
     logger.info { "Compiling ${benchmarks.size} benchmarks" }
     for (benchmark in benchmarks)
         launch {
             val langs = languages.filter { it.fileName.substringAfter('.') == benchmark.extension }
             if (langs.isEmpty())
-                error("Language not found: ${benchmark.extension}")
+                error("Language not found: '${benchmark.extension}' for ${benchmark.absolutePath}")
 
             for (lang in langs) {
                 logger.info { "Compiling ${benchmark.absolutePath} under '${lang.id}'" }

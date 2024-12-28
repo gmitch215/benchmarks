@@ -11,8 +11,9 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import xyz.gmitch215.benchmarks.logger
-import xyz.gmitch215.benchmarks.measurement.BenchmarkConfiguration
-import xyz.gmitch215.benchmarks.measurement.Language
+import xyz.gmitch215.benchmarks.BenchmarkConfiguration
+import xyz.gmitch215.benchmarks.EXCLUDE_FOLDERS
+import xyz.gmitch215.benchmarks.Language
 import java.io.File
 
 suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
@@ -49,7 +50,7 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
 
     logger.info { "Found ${topFolders.size} Platforms" }
 
-    val folders = input.listFiles { file -> file.isDirectory && file.name != "output" } ?: emptyArray()
+    val folders = input.listFiles { file -> file.isDirectory && file.name !in EXCLUDE_FOLDERS } ?: emptyArray()
     logger.debug { "Found ${folders.size} Benchmarks"}
 
     val runs = Yaml.default.decodeFromString<List<Language>>(File(input, "config.yml").readText())

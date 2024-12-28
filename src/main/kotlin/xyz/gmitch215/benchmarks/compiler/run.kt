@@ -7,12 +7,13 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.serialization.decodeFromString
 import xyz.gmitch215.benchmarks.measurement.LIBRARY_DIRECTORY
-import xyz.gmitch215.benchmarks.measurement.Language
+import xyz.gmitch215.benchmarks.Language
 import xyz.gmitch215.benchmarks.runCommand
+import xyz.gmitch215.benchmarks.s
 import java.io.File
 
 suspend fun main(args: Array<String>): Unit = coroutineScope {
-    logger.debug { "Arguments: ${args.joinToString()}" }
+    logger.debug { "Arguments: ${args.joinToString { "'$it'" }}" }
 
     val config = File(args[0])
     LIBRARY_DIRECTORY = File(args[1])
@@ -68,6 +69,13 @@ suspend fun runFile(file: File, lang: Language) {
 
     var cmd = lang.absoluteRun
     logger.info { "Running ${file.absolutePath} under '${lang.id}'" }
+
+    if (lang.file) {
+        val folder = file.parentFile
+        cmd = "${folder.absolutePath}${s}$cmd"
+    }
+
     logger.debug { "Running Command '$cmd' for ${file.absolutePath}" }
+
     cmd.runCommand(file.parentFile, true)
 }

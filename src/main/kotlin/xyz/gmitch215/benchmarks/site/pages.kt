@@ -2,8 +2,8 @@
 
 package xyz.gmitch215.benchmarks.site
 
-import xyz.gmitch215.benchmarks.measurement.BenchmarkConfiguration
-import xyz.gmitch215.benchmarks.measurement.Language
+import xyz.gmitch215.benchmarks.BenchmarkConfiguration
+import xyz.gmitch215.benchmarks.Language
 
 val INDEX_FILE_TEMPLATE: (String) -> String = { platform ->
     """

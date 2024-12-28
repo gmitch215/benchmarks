@@ -8,6 +8,7 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.decodeFromString
+import xyz.gmitch215.benchmarks.Language
 import xyz.gmitch215.benchmarks.logger
 import xyz.gmitch215.benchmarks.runCommand
 import java.io.File

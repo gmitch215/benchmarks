@@ -33,7 +33,7 @@ import org.jetbrains.kotlinx.kandy.letsplot.y
 import org.jetbrains.kotlinx.kandy.util.color.Color
 import xyz.gmitch215.benchmarks.BenchmarkResult
 import xyz.gmitch215.benchmarks.logger
-import xyz.gmitch215.benchmarks.measurement.Language
+import xyz.gmitch215.benchmarks.Language
 import xyz.gmitch215.benchmarks.measurement.RUN_COUNT
 import xyz.gmitch215.benchmarks.measurement.json
 import xyz.gmitch215.benchmarks.repeat

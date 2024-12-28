@@ -6,8 +6,6 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
-import xyz.gmitch215.benchmarks.measurement.BenchmarkConfiguration
-import xyz.gmitch215.benchmarks.measurement.Language
 import java.io.File
 import java.util.*
 
@@ -22,6 +20,11 @@ val arch = when(System.getProperty("os.arch").lowercase()) {
 }
 val kotlinNativeSuffix = if (os == "windows") ".exe" else ".kexe"
 val s: String = File.separator ?: "/"
+
+val EXCLUDE_FOLDERS = listOf(
+    "output",
+    "node_modules"
+)
 
 private const val NANO = "ns"
 private const val MICRO = "µs"

@@ -4,8 +4,6 @@ package xyz.gmitch215.benchmarks.measurement
 
 import com.charleskorn.kaml.Yaml
 import kotlinx.coroutines.*
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.*
@@ -46,10 +44,13 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
     val file = File(input, "config.yml").readText(Charsets.UTF_8)
     val languages = Yaml.default.decodeFromString<List<Language>>(file)
 
+    logger.debug { "Found ${languages.size} Languages" }
+
     logger.info { "Starting Benchmarks on $os" }
 
-    val folders = input.listFiles { f -> f?.let { it.isDirectory && it.name != "output" } == true } ?: emptyArray()
+    val folders = input.listFiles { f -> f?.let { it.isDirectory && it.name !in EXCLUDE_FOLDERS } == true } ?: emptyArray()
     logger.debug { "Found ${folders.size} folders" }
+    logger.debug { "Folders: ${folders.joinToString { it.absolutePath}}" }
 
     if (folders.isEmpty())
         error("No benchmarks found")
@@ -71,6 +72,10 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
                     val name = f.name
                     if (filter != null && !filter.matches(name))
                         continue
+
+                    val config = File(f, "config.yml")
+                    if (!config.exists())
+                        error("Configuration file does not exist: ${config.absolutePath}")
 
                     logger.debug { "Starting benchmark '$name' for '${lang.id}'" }
                     val benchmarkJob = launch {
@@ -261,12 +266,6 @@ fun CoroutineScope.runBenchmark(language: Language, folder: File, out: File) = a
         if (language.file)
             run = "${folder.absolutePath}${s}$run"
 
-        if (language.id == "kotlin-native")
-            run += kotlinNativeSuffix
-
-        if (';' in run && os != "windows")
-            run = run.replace(";", ":")
-
         logger.debug { "Running Command for '${language.id}': '$run' in ${folder.absolutePath}" }
 
         val jobs = mutableListOf<Job>()
@@ -392,148 +391,4 @@ suspend fun rankBenchmarks(results: Map<String, List<BenchmarkResult>>, out: Fil
 
         file.writeText(json.encodeToString(obj))
     }
-}
-
-// Classes
-
-@Serializable
-data class BenchmarkConfiguration(
-    val name: String,
-    var id: String = name,
-    val description: String,
-    val measure: Measurement,
-    val output: Measurement,
-    val tags: List<String> = emptyList(),
-    val disabled: List<String> = emptyList()
-)
-
-@Serializable
-data class Language(
-    val language: String,
-    val id: String,
-    @SerialName("file-name")
-    val fileName: String,
-    val color: String,
-    val file: Boolean = false,
-    val location: String? = null,
-    val run: String,
-    val version: String,
-    val compile: String? = null,
-    @SerialName("compile-extra")
-    val compileExtra: Map<String, String> = emptyMap(),
-    val libraries: Map<String, String> = emptyMap(),
-    val cleanup: List<String>? = null,
-) {
-
-    val absoluteVersion: String
-        get() {
-            var version0 = version
-            if (location != null) {
-                val home = System.getenv(location)
-                if (home != null)
-                    version0 = "${home}${s}bin${s}$version0"
-
-                if (os == "windows") {
-                    val executableSuffix = if (id.contains("kotlin")) ".bat" else ".exe"
-                    version0 = version0.replaceFirst(" ", "$executableSuffix ")
-                }
-            }
-
-            return version0
-        }
-
-    fun librariesFlag(includeMain: Boolean = true): String? {
-        if (libraries.isEmpty()) return null
-
-        val flag = libraries["flag"] ?: error("No flag found for select libraries in '$id'")
-        val repeat = libraries["repeat"]?.toBoolean() == true
-        val escapePaths = libraries["escape-paths"]?.toBoolean() == true && os == "windows"
-        val suffix = libraries["suffix"] ?: error("No file suffix found for select libraries in '$id'")
-        val main = if (includeMain) libraries["main"] else null
-        val separator = if (os == "windows") ";" else ":"
-
-        val subdir = libraries["$os-$arch"] ?: libraries[os] ?: libraries["default"] ?: error("No library configuration found for $os-$arch for '$id'")
-        val dir = File(LIBRARY_DIRECTORY, subdir)
-
-        if (!dir.exists())
-            error("Library directory does not exist: ${dir.absolutePath}")
-
-        val files = dir.walkTopDown()
-            .filter { it.isFile && it.extension == suffix }
-
-        if (repeat) {
-            val main0 = if (main != null) {
-                if (escapePaths) "$flag\"$main\" " else "$flag$main "
-            } else ""
-
-            val path = files.joinToString(" $flag") {
-                if (escapePaths) "\"${it.absolutePath}\"" else it.absolutePath
-            }
-
-            return "$main0$flag$path"
-        } else {
-            val files0 = files.joinToString(separator) { it.absolutePath }
-            val prefix = if (main != null) "$main$separator" else ""
-            val path = if (escapePaths) "\"$prefix$files0\"" else "$prefix$files0"
-
-            return "$flag$path"
-        }
-    }
-
-    val absoluteCompile: String?
-        get() {
-            if (compile == null) return null
-
-            var compile0 = compile
-            if (location != null) {
-                val home = System.getenv(location)
-                if (home != null)
-                    compile0 = "${home}${s}bin${s}$compile0"
-
-                if (os == "windows") {
-                    val executableSuffix = if (id.contains("kotlin")) ".bat" else ".exe"
-                    compile0 = compile0.replaceFirst(" ", "$executableSuffix ")
-                }
-            }
-
-            if (compileExtra.isNotEmpty()) {
-                val extra = compileExtra["$os-$arch"] ?: compileExtra[os]
-
-                if (extra != null)
-                    compile0 += " $extra"
-            }
-
-            if (libraries.isNotEmpty())
-                compile0 += " ${librariesFlag(false)}"
-
-            return compile0
-        }
-
-    val absoluteRun: String
-        get() {
-            var run0 = run
-
-            if (id == "kotlin-jvm") {
-                val home = System.getenv(location)
-                if (home != null)
-                    run0 = "${home}${s}bin${s}$run0"
-
-                if (os == "windows")
-                    run0 = run0.replaceFirst(" ", ".bat ")
-            }
-
-            if (libraries.isNotEmpty()) {
-                val includeRun = libraries["include-run"]?.toBoolean() == true
-                if (includeRun) {
-                    if (run0.contains(" ")) {
-                        val (first, rest) = run0.split("\\s".toRegex(), limit = 2)
-                        run0 = "$first ${librariesFlag()} $rest"
-                    } else
-                        run0 += " ${librariesFlag()}"
-                }
-            }
-
-            return run0
-        }
-
 }
