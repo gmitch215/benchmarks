@@ -1,4 +1,5 @@
 type: jar
+repository: https://repo1.maven.org/maven2
 dependencies:
   - namespace: io/ktor
     version: 3.0.3
@@ -26,3 +27,11 @@ dependencies:
     paths:
       - slf4j-api
       - slf4j-simple
+  - namespace: dev/whyoleg/cryptography
+    version: 0.4.0
+    paths:
+      - cryptography-core-jvm
+      - cryptography-random-jvm
+      - cryptography-bigint-jvm
+      - cryptography-provider-base-jvm
+      - cryptography-provider-jdk-jvm

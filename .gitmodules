@@ -10,3 +10,9 @@
 [submodule "lib/cpp/base64"]
 	path = lib/cpp/base64
 	url = https://github.com/tobiaslocker/base64
+[submodule "lib/c/md5"]
+	path = lib/c/md5
+	url = https://github.com/Zunawe/md5-c
+[submodule "lib/cpp/digest"]
+	path = lib/cpp/digest
+	url = https://github.com/kerukuro/digestpp

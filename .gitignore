@@ -4,7 +4,13 @@
 .kotlin/
 build/
 bin/
+
 benchmarks/output/
+benchmarks/node_modules/
+benchmarks/package-lock.json
+benchmarks/bun.lockb
+benchmarks/deno.lock
+
 site/output/
 site/Gemfile.lock
 logs/

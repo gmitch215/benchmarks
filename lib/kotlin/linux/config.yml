@@ -1,4 +1,5 @@
 type: klib
+repository: https://repo.maven.apache.org/maven2
 dependencies:
   - namespace: io/ktor
     version: 3.0.3
@@ -27,3 +28,14 @@ dependencies:
       - kotlinx-serialization-core-linuxx64-1.7.3
       - atomicfu-linuxx64-0.26.1
       - atomicfu-linuxx64-0.26.1;cinterop-interop
+  - namespace: dev/whyoleg/cryptography
+    version: 0.4.0
+    paths:
+      - cryptography-core-linuxx64
+      - cryptography-random-linuxx64
+      - cryptography-bigint-linuxx64
+      - cryptography-provider-base-linuxx64
+      - cryptography-provider-openssl3-api-linuxx64
+      - cryptography-provider-openssl3-api-linuxx64;cinterop-declarations
+      - cryptography-provider-openssl3-prebuilt-linuxx64
+      - cryptography-provider-openssl3-prebuilt-linuxx64;cinterop-linking

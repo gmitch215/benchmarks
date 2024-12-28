@@ -1,4 +1,5 @@
 type: klib
+repository: https://repo1.maven.org/maven2
 dependencies:
   - namespace: io/ktor
     version: 3.0.3
@@ -27,3 +28,14 @@ dependencies:
       - kotlinx-serialization-core-macosx64-1.7.3
       - atomicfu-macosx64-0.26.1
       - atomicfu-macosx64-0.26.1;cinterop-interop
+  - namespace: dev/whyoleg/cryptography
+    version: 0.4.0
+    paths:
+      - cryptography-core-macosx64
+      - cryptography-random-macosx64
+      - cryptography-bigint-macosx64
+      - cryptography-provider-base-macosx64
+      - cryptography-provider-openssl3-api-macosx64
+      - cryptography-provider-openssl3-api-macosx64;cinterop-declarations
+      - cryptography-provider-openssl3-prebuilt-macosx64
+      - cryptography-provider-openssl3-prebuilt-macosx64;cinterop-linking

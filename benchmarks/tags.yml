@@ -39,6 +39,12 @@
 - id: "compression"
   name: "Compression"
   description: "Benchmarks involving data compression."
+- id: "file"
+  name: "File"
+  description: "Benchmarks involving file I/O operations."
+- id: "encryption"
+  name: "Encryption"
+  description: "Benchmarks involving encryption or decryption."
 
 # Volume Tags
 - id: "100"

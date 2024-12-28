@@ -1,0 +1,10 @@
+name: MD5 Hashing (x25)
+description: >
+  Message Digest 5 (MD5) is a widely used cryptographic hash function that produces a 128-bit (16-byte) hash value. 
+  It is commonly used to verify the integrity of data.
+  This benchmark measures the time taken to hash 25 strings using the MD5 algorithm.
+measure: NANOSECONDS
+output: MICROSECONDS
+tags:
+  - "string"
+  - "encryption"
