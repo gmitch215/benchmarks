@@ -13,3 +13,5 @@ The [`config.yml`](config.yml) file contains the configuration for the benchmark
 ## Dependency Information
 
 This folder also contains various dependency files for each programming language. These files are used to install the dependencies for the benchmarks.
+
+These usually only apply to languages that don't have a `compile` step in the benchmarks. If you are looking for libraries, look in the [`lib`](../lib) directory.
