@@ -1,0 +1,8 @@
+name: File Read
+description: >
+  Performs a read operation on a text file containing five paragraphs of Lorem Ipsum.
+  Note that some operating systems and languages may cache the file, so the first run may be slower than subsequent runs.
+measure: NANOSECONDS
+output: MICROSECONDS
+tags:
+  - "file"
