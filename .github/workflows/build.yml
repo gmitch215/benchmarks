@@ -103,7 +103,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
       - name: Install JavaScript (Node) Dependencies
         run: npm --prefix benchmarks ci
       - name: Install JavaScript (Deno)
