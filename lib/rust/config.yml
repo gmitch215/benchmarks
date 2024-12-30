@@ -1,0 +1,6 @@
+type: local
+setup: cargo build --release
+dependencies:
+  - namespace: target/release/deps
+    all: true
+    file-type: rlib

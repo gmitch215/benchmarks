@@ -11,6 +11,9 @@ benchmarks/package-lock.json
 benchmarks/bun.lockb
 benchmarks/deno.lock
 
+lib/rust/target/
+lib/rust/Cargo.lock
+
 site/output/
 site/Gemfile.lock
 logs/

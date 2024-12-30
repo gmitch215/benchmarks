@@ -217,7 +217,7 @@ suspend fun createBenchmarkGraphs(benchmarks: List<Pair<String, String>>, out: F
         val allTimeF = File(out, "all-time.html")
 
         logger.info { "Writing graph to ${allTimeF.absolutePath}" }
-        allTimeF.writeText("${allTime.toHTML(false)}$STYLE")
+        allTimeF.writeText("<!DOCTYPE html>\n${allTime.toHTML(false)}$STYLE")
     }
 
     val labels = data.map { it.first }
@@ -279,7 +279,7 @@ suspend fun createBenchmarkGraphs(benchmarks: List<Pair<String, String>>, out: F
         val averageF = File(out, "average.html")
 
         logger.info { "Writing graph to ${averageF.absolutePath}" }
-        averageF.writeText("${average.toHTML(false)}$STYLE")
+        averageF.writeText("<!DOCTYPE html>\n${average.toHTML(false)}$STYLE")
     }
 
     // Create Median Graph
@@ -322,7 +322,7 @@ suspend fun createBenchmarkGraphs(benchmarks: List<Pair<String, String>>, out: F
         val medianF = File(out, "median.html")
 
         logger.info { "Writing graph to ${medianF.absolutePath}" }
-        medianF.writeText("${median.toHTML(false)}$STYLE")
+        medianF.writeText("<!DOCTYPE html>\n${median.toHTML(false)}$STYLE")
     }
 
     // Create Low Graph
@@ -360,7 +360,7 @@ suspend fun createBenchmarkGraphs(benchmarks: List<Pair<String, String>>, out: F
         val lowF = File(out, "low.html")
 
         logger.info { "Writing graph to ${lowF.absolutePath}" }
-        lowF.writeText("${low.toHTML(false)}$STYLE")
+        lowF.writeText("<!DOCTYPE html>\n${low.toHTML(false)}$STYLE")
     }
 
     // Create High Graph
@@ -398,7 +398,7 @@ suspend fun createBenchmarkGraphs(benchmarks: List<Pair<String, String>>, out: F
         val highF = File(out, "high.html")
 
         logger.info { "Writing graph to ${highF.absolutePath}" }
-        highF.writeText("${high.toHTML(false)}$STYLE")
+        highF.writeText("<!DOCTYPE html>\n${high.toHTML(false)}$STYLE")
     }
 }
 
@@ -516,7 +516,7 @@ suspend fun createVersusGraphs(benchmarks: List<Pair<String, String>>, runs: Lis
                 val file = File(out, "${l1.id}-vs-${l2.id}.html")
 
                 logger.info { "Writing versus graph [${l1.language}, ${l2.language}] to ${file.absolutePath}" }
-                file.writeText("${versus.toHTML(false)}$STYLE")
+                file.writeText("<!DOCTYPE html>\n${versus.toHTML(false)}$STYLE")
             }
     }.join()
 
@@ -592,5 +592,5 @@ suspend fun createRanksGraph(rankings: JsonObject, out: File) = withContext(Disp
     val rankF = File(out, "rank.html")
 
     logger.info { "Writing graph to ${rankF.absolutePath}" }
-    rankF.writeText("${rank.toHTML(false)}$STYLE")
+    rankF.writeText("<!DOCTYPE html>\n${rank.toHTML(false)}$STYLE")
 }

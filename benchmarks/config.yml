@@ -112,7 +112,6 @@
     local: true
     flag: ""
     separator: " "
-    suffix: o
     default: c
   compile-extra:
     default: "main.c -o main.c.gnu.o -w -O0"
@@ -132,7 +131,6 @@
     local: true
     flag: ""
     separator: " "
-    suffix: o
     default: c
   compile-extra:
     default: "main.c -o main.c.llvm.o -w -O0"
@@ -169,6 +167,11 @@
   file-name: main.rs
   color: "dea584"
   compile: rustc main.rs -o main.rs.o
+  libraries:
+    local: true
+    flag: "--extern "
+    escape-paths: true
+    repeat: true
   run: main.rs.o
   cleanup:
     - main.rs.o

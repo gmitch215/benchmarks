@@ -60,15 +60,14 @@ data class Language(
         val flag = libraries["flag"] ?: error("No flag found for select libraries in '$id'")
         val repeat = libraries["repeat"]?.toBoolean() == true
         val escapePaths = libraries["escape-paths"]?.toBoolean() == true && os == "windows"
-        val suffix = libraries["suffix"] ?: error("No file suffix found for select libraries in '$id'")
         val main = if (includeMain) libraries["main"] else null
         val separator = libraries["separator"] ?: if (os == "windows") ";" else ":"
 
-        val subdir = libraries["${os}-${arch}"] ?: libraries[os] ?: libraries["default"] ?: error("No library configuration found for ${os}-${arch} for '$id'")
+        val subdir = libraries["${os}-${arch}"] ?: libraries[os] ?: libraries["default"] ?: id
         val dir = File(LIBRARY_DIRECTORY, subdir)
 
         if (!dir.exists())
-            error("Library directory does not exist: ${dir.absolutePath}")
+            error("No library configuration found for ${os}-${arch} for '$id'")
 
         val files = mutableListOf<File>()
 
@@ -76,15 +75,25 @@ data class Language(
             val config = Yaml.default.decodeFromString<LibraryConfiguration>(File(dir, "config.yml").readText())
             files.addAll(config.dependencies.flatMap { dep ->
                 val namespace = dep.namespace
-                dep.paths.map {
-                    val file = File(dir, "$namespace/$it")
-                    if (!file.exists()) error("Library file does not exist: ${file.absolutePath}")
 
-                    file
-                }
+                if (dep.all) {
+                    val files = File(dir, namespace).listFiles() ?: emptyArray()
+
+                    files.filter { it.isFile }
+                        .filter { it.extension == dep.fileType || dep.fileType == null }
+                        .toList()
+                } else
+                    dep.paths.map {
+                        val file = File(dir, "$namespace/$it")
+                        if (!file.exists()) error("Library file does not exist: ${file.absolutePath}")
+
+                        file
+                    }
             })
-        } else
+        } else {
+            val suffix = libraries["suffix"] ?: error("No file suffix found for select libraries in '$id'")
             files.addAll(dir.walkTopDown().filter { it.isFile && it.extension == suffix })
+        }
 
         if (repeat) {
             val main0 = if (main != null) {
@@ -92,7 +101,15 @@ data class Language(
             } else ""
 
             val path = files.joinToString(" $flag") {
-                if (escapePaths) "\"${it.absolutePath}\"" else it.absolutePath
+                val p = if (escapePaths) "\"${it.absolutePath}\"" else it.absolutePath
+
+                if (id == "rust") {
+                    val name = it.nameWithoutExtension
+                    val crate = name.substring(3).substringBefore('-')
+                    return@joinToString "$crate=$p"
+                }
+
+                p
             }
 
             return "$main0$flag$path"

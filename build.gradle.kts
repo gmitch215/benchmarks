@@ -65,6 +65,10 @@ tasks {
                 include("**/*.jar")
                 include("**/*.klib")
                 include("**/*.pdb")
+                include("**/*.exe")
+                include("**/*.rlib")
+                include("**/*.rmeta")
+                include("**/*.d")
             }
         )
     }

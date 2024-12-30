@@ -7,8 +7,10 @@ import io.github.oshai.kotlinlogging.KotlinLogging
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
+import xyz.gmitch215.benchmarks.runCommand
 import java.io.File
 import java.net.URI
 
@@ -32,12 +34,20 @@ suspend fun main(args: Array<String>): Unit = coroutineScope {
             logger.info { "Processing library configuration: ${config.absolutePath}" }
 
             val configuration = Yaml.default.decodeFromString<LibraryConfiguration>(config.readText())
-            val repository = configuration.repository ?: return@launch
+
+            val setup = configuration.setup
+            if (setup != null) {
+                logger.info { "Running library setup for ${config.absolutePath}" }
+                setup.runCommand(config.parentFile, true)
+                logger.info { "Library setup complete for ${config.absolutePath}" }
+            }
 
             if (configuration.type == "local") {
                 logger.info { "Skipping library download, using local files: ${config.absolutePath}" }
                 return@launch
             }
+
+            val repository = configuration.repository ?: error("Repository not specified for non-local library: ${config.absolutePath}")
 
             coroutineScope {
                 for ((name, path) in configuration.paths) {
@@ -66,6 +76,7 @@ suspend fun main(args: Array<String>): Unit = coroutineScope {
 @Serializable
 data class LibraryConfiguration(
     val type: String,
+    val setup: String? = null,
     val repository: String? = null,
     val dependencies: List<DependencyConfiguration>
 ) {
@@ -105,5 +116,8 @@ data class LibraryConfiguration(
 data class DependencyConfiguration(
     val namespace: String,
     val version: String? = null,
-    val paths: List<String>
+    val all: Boolean = false,
+    @SerialName("file-type")
+    val fileType: String? = null,
+    val paths: List<String> = emptyList()
 )
