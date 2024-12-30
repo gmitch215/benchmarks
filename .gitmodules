@@ -16,3 +16,6 @@
 [submodule "lib/cpp/digest"]
 	path = lib/cpp/digest
 	url = https://github.com/kerukuro/digestpp
+[submodule "lib/c/sha1"]
+	path = lib/c/sha1
+	url = https://github.com/halloweeks/sha1
