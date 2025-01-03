@@ -16,3 +16,15 @@ updates:
     directory: "site/"
     schedule:
       interval: "daily"
+  - package-ecosystem: "npm"
+    directory: "benchmarks/"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "cargo"
+    directory: "lib/rust/"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "gitsubmodule"
+    directory: "lib/"
+    schedule:
+      interval: "daily"
