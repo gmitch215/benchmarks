@@ -177,3 +177,15 @@
     - main.rs.o
     - main.rs.pdb
   version: rustc --version --verbose
+- language: Zig
+  file: true
+  id: zig
+  file-name: main.zig
+  color: "ec915c"
+  compile: zig build-exe main.zig -femit-bin=main.zig.o -ODebug
+  run: main.zig.o
+  cleanup:
+    - main.zig.o
+    - main.zig.o.obj
+    - main.zig.pdb
+  version: zig version

@@ -28,6 +28,7 @@ val EXCLUDE_COMPILE = listOf(
     "jar",
     "lockb",
     "lock",
+    "obj"
 )
 
 val logger = KotlinLogging.logger("BenchmarkCompiler")
