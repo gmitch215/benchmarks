@@ -1,0 +1,10 @@
+name: Is Prime (100K)
+description: Performs a primality test on all numbers between 1 and 100,000.
+measure: NANOSECONDS
+output: MICROSECONDS
+tags:
+  - "math"
+  - "number"
+  - "100K"
+disabled:
+  - all
