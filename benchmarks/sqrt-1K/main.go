@@ -1,10 +1,8 @@
 package main
 
-import (
-	"fmt"
-	"math"
-)
+import "fmt"
 import "time"
+import "math"
 
 func main() {
 	var before = time.Now().UnixNano()
