@@ -67,6 +67,13 @@ After compiling the benchmarks, you can run them using the `runBenchmark` task:
 ./gradlew runBenchmark -Planguage={language} -Pfile={file}
 ```
 
+> [!NOTE]
+> `compileBenchmark` is only required to be passed for compiled languages. You can use `runBenchmark` for interpreted languages:
+
+```bash
+./gradlew runBenchmark -Planguage=ruby -Pfile=count-1M/main.rb
+```
+
 The task accepts the same parameters as the `compileBenchmark` task.
 
 For example, to run the HTTP GET benchmark for Kotlin/Native, you do:
@@ -75,7 +82,7 @@ For example, to run the HTTP GET benchmark for Kotlin/Native, you do:
 ./gradlew compileBenchmark runBenchmark -Planguage=kotlin-native -Pfile=http-get/main.kt
 ```
 
-http-get` measures in `ms` according to its benchmark [`config.yml`](./benchmarks/http-get/config.yml), so the output will be in milliseconds.
+`http-get` measures in `ms` according to its benchmark [`config.yml`](./benchmarks/http-get/config.yml), so the output will be in milliseconds.
 
 ### Running All Benchmarks
 
@@ -86,7 +93,10 @@ the `version`, `compile`, and/or `run` commands in the terminal.
 
 Here are some notable examples:
 
-- `java` for Java (*Requires Java 21 or higher*)
+- `python` for Python
+- `java` for Java
+  - Using the JDK for Gradle requires Java 21 or higher.
+  - Using the `java` command on the command line requires Java 8 or higher.
 - `kotlinc` for Kotlin JVM
   - This requires the `KOTLIN_HOME` environment variable to be set to the Kotlin compiler directory (**not** the bin directory).
 - `kotlinc-native` for Kotlin Native
@@ -97,6 +107,9 @@ Here are some notable examples:
 - `rustc` for Rust
 - `go` for Go
 - `node`, `deno` **and** `bun` for JavaScript
+- `ruby` for Ruby
+- `php` for PHP
+- `zig` for Zig
 
 You can test if you have the necessary tools and setup by running the `validate` gradle task:
 
