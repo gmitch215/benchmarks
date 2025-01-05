@@ -234,6 +234,7 @@ header a {
     min-height: 400px;
 
     background-color: black;
+    overflow: auto;
 }
 
 .secondary-graph {
@@ -248,6 +249,7 @@ header a {
     min-height: 450px;
 
     background-color: black;
+    overflow: auto;
 }
 
 td {
