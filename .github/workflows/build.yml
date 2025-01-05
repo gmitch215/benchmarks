@@ -212,10 +212,16 @@ jobs:
           cd build/site
           bundle exec jekyll build
           cd ../..
-      - name: Deploy to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v3
+      - name: Archive Site
+        uses: actions/upload-artifact@v4
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy build/site/_site --project-name=benchmarks --commit-dirty=true
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          name: site
+          path: build/site/_site
+      - name: Upload Site
+        uses: shallwefootball/s3-upload-action@master
+        with:
+          aws_key_id: ${{ secrets.CF_R2_ACCESS_KEY }}
+          aws_secret_access_key: ${{ secrets.CF_R2_SECRET_ACCESS_KEY }}
+          aws_bucket: ${{ vars.CF_R2_BUCKET }}
+          endpoint: ${{ secrets.CF_R2_ENDPOINT }}
+          source_dir: 'build/site/_site'
