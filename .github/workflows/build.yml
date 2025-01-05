@@ -41,7 +41,7 @@ jobs:
   benchmark:
     runs-on: ${{ matrix.os }}
     needs: setup
-    timeout-minutes: 90
+    timeout-minutes: 180
 
     strategy:
       fail-fast: false
@@ -206,7 +206,7 @@ jobs:
           mv -fv build/site/_data/results/benchmarks-macos build/site/_data/results/mac
           mv -fv build/site/_data/results/benchmarks-windows build/site/_data/results/windows
       - name: Generate Site
-        run: ./gradlew site --info
+        run: ./gradlew site
       - name: Build Site
         run: |
           cd build/site
