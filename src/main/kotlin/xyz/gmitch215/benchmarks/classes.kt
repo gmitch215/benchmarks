@@ -149,7 +149,11 @@ data class Language(
                 if (defaultExtra != null)
                     compile0 += " $defaultExtra"
 
-                val osExtra = compileExtra["${os}-${arch}"] ?: compileExtra[os]
+                val archExtra = compileExtra["default-$arch"]
+                if (archExtra != null)
+                    compile0 += " $archExtra"
+
+                val osExtra = compileExtra["$os-$arch"] ?: compileExtra[os]
                 if (osExtra != null)
                     compile0 += " $osExtra"
             }
