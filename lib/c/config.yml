@@ -9,3 +9,6 @@ dependencies:
   - namespace: md5
     paths:
       - md5.c
+  - namespace: sha256
+    paths:
+      - sha256.c

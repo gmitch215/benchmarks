@@ -19,3 +19,6 @@
 [submodule "lib/c/sha1"]
 	path = lib/c/sha1
 	url = https://github.com/halloweeks/sha1
+[submodule "lib/c/sha256"]
+	path = lib/c/sha256
+	url = https://github.com/gmitch215/sha256
