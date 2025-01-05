@@ -115,6 +115,8 @@
     default: c
   compile-extra:
     default: "main.c -o main.c.gnu.o -w -O0"
+    default-x64: "-msha -msse4.1"
+    default-x86: "-msha -msse4.1"
     windows: "-lws2_32"
     linux: "-lm"
   run: main.c.gnu.o
@@ -134,6 +136,8 @@
     default: c
   compile-extra:
     default: "main.c -o main.c.llvm.o -w -O0"
+    default-x64: "-msha -msse4.1"
+    default-x86: "-msha -msse4.1"
     linux: "-lm"
   run: main.c.llvm.o
   cleanup:
@@ -188,4 +192,4 @@
     - main.zig.o
     - main.zig.o.obj
     - main.zig.pdb
-  version: zig version
+  version: zig version --verbose
