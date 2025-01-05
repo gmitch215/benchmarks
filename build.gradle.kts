@@ -249,7 +249,7 @@ tasks {
     // Site Preview Tasks
 
     register("copyPreview", Copy::class) {
-        mustRunAfter("clean")
+        mustRunAfter("createBenchmarks", "graphBenchmarks", "clean")
         from("benchmarks/output")
 
         destinationDir = file("build/site/_data/results/$os")
