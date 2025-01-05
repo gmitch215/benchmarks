@@ -1,6 +1,6 @@
-name: SHA1 Hashing (x25)
+name: SHA-1 Hashing (x25)
 description: >
-  Secure Hash Algorithm 1 (SHA1) is a widely used cryptographic hash function that produces a 160-bit (20-byte) hash value. 
+  Secure Hash Algorithm 1 (SHA-1) is a widely used cryptographic hash function that produces a 160-bit (20-byte) hash value. 
   It is commonly used to verify the integrity of data.
   This benchmark measures the time taken to hash 25 strings using the SHA1 algorithm.
 measure: NANOSECONDS
