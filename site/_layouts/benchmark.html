@@ -5,7 +5,8 @@ layout: default
 <link href="/css/disqus.css" rel="stylesheet">
 
 <div class="box condensed" id="top">
-    <h1>Benchmark: {{ page.display }}</h1>
+    <img src="/assets/platform/{{ page.platform }}.png" alt="{{ page.platform | capitalize }}" title="{{ page.platform | capitalize }} Platform" class="platform-logo" />
+    <h1>{{ page.platform | capitalize }} Benchmark: {{ page.display }}</h1>
     {{ content }}
     <div class="box horizontal" id="tags">
         {% for tag in page.tags %}
