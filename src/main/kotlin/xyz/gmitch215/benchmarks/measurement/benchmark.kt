@@ -79,6 +79,20 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
 
                     logger.debug { "Starting benchmark '$name' for '${lang.id}'" }
                     val benchmarkJob = launch {
+                        val outputFile = File(out, "$name.json")
+                        if (outputFile.exists()) {
+                            logger.info { "Skipping existing benchmark '${outputFile.absolutePath}'" }
+
+                            val data = json.decodeFromString<BenchmarkResult>(outputFile.readText())
+                            if (results.contains(name))
+                                results[f.name] = results[f.name]!! + data
+                            else
+                                results[f.name] = listOf(data)
+
+                            logger.debug { "Loaded existing benchmark '${name}' for '${lang.id}'" }
+                            return@launch
+                        }
+
                         val result = runBenchmark(lang, f, out).await()
                         logger.debug { "Received result for '$name' under '${lang.id}'" }
 
@@ -344,28 +358,24 @@ suspend fun rankBenchmarks(results: Map<String, List<BenchmarkResult>>, out: Fil
     val obj = buildJsonObject {
         val scores = mutableMapOf<String, Int>()
 
-        coroutineScope {
-            for ((name, results) in results) {
-                launch {
-                    val sorted = results.sortedBy { it.results.sum() }
+        for ((name, results) in results) {
+            val sorted = results.sortedBy { it.results.sum() }
 
-                    put(name, buildJsonObject {
-                        put("summary", JsonArray(sorted.map { JsonPrimitive(it.languageName) }.toList()))
-                        put("verbose", buildJsonObject {
-                            for ((i, result) in sorted.withIndex()) {
-                                scores[result.languageName] = scores.getOrDefault(result.languageName, 0) + i
-                                put(result.languageName, buildJsonObject {
-                                    put("rank", i + 1)
-                                    put("id", result.languageId)
-                                    put("avg", result.avg)
-                                    put("low", result.low)
-                                    put("high", result.high)
-                                })
-                            }
+            put(name, buildJsonObject {
+                put("summary", JsonArray(sorted.map { JsonPrimitive(it.languageName) }.toList()))
+                put("verbose", buildJsonObject {
+                    for ((i, result) in sorted.withIndex()) {
+                        scores[result.languageName] = scores.getOrDefault(result.languageName, 0) + i
+                        put(result.languageName, buildJsonObject {
+                            put("rank", i + 1)
+                            put("id", result.languageId)
+                            put("avg", result.avg)
+                            put("low", result.low)
+                            put("high", result.high)
                         })
-                    })
-                }
-            }
+                    }
+                })
+            })
         }
 
         put("overall", buildJsonObject {
