@@ -218,6 +218,7 @@ jobs:
           name: site
           path: build/site/_site
       - name: Upload Site
+        if: ${{ github.event_name != 'pull_request' && github.ref_name == 'master' }}
         uses: shallwefootball/s3-upload-action@master
         with:
           aws_key_id: ${{ secrets.CF_R2_ACCESS_KEY }}
