@@ -226,3 +226,4 @@ jobs:
           aws_bucket: ${{ vars.CF_R2_BUCKET }}
           endpoint: ${{ secrets.CF_R2_ENDPOINT }}
           source_dir: 'build/site/_site'
+          destination_dir: ''
