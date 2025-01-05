@@ -25,6 +25,7 @@ val VERSUS_INDEX_TEMPLATE: (String) -> String = { platform ->
     title: Versus - ${platform.replaceFirstChar { it.uppercase() }}
     type: Versus
     suburl: /versus/
+    folders: true
     ---
     """.trimIndent()
 }
