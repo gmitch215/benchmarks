@@ -4,7 +4,7 @@
 
 #include "../../lib/c/nanotime/nanotime.h"
 
-int min(int a, int b){
+int jmin(int a, int b){
     if (b > a)
         return a;
     else
@@ -16,7 +16,7 @@ int jumpSearch(int arr[], int x) {
     int step = sqrt(n);
     int prev = 0;
 
-    while (arr[min(step, n) - 1] < x) {
+    while (arr[jmin(step, n) - 1] < x) {
         prev = step;
         step += sqrt(n);
         if (prev >= n)
@@ -25,7 +25,7 @@ int jumpSearch(int arr[], int x) {
  
     while (arr[prev] < x) {
         prev++;
-        if (prev == min(step, n))
+        if (prev == jmin(step, n))
             return -1;
     }
 
