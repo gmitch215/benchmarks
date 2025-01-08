@@ -5,7 +5,7 @@ modified_dir="$2"
 
 if [[ ! -d "$original_dir" || ! -d "$modified_dir" ]]; then
   echo "Both directories must exist"
-  return 1
+  exit 1
 fi
 
 find "$modified_dir" -type f | while read modified_file; do
