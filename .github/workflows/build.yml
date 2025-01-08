@@ -167,7 +167,14 @@ jobs:
       - name: Cache Compile Binaries
         uses: actions/cache@v4
         with:
-          path: benchmarks/**/*.{o,exe,kexe,jar,pdb,class}
+          path: |
+            benchmarks/**/*.o
+            benchmarks/**/*.exe
+            benchmarks/**/*.kexe
+            benchmarks/**/*.out
+            benchmarks/**/*.class
+            benchmarks/**/*.jar
+            benchmarks/**/*.pdb
           key: ${{ runner.os }}-compile-${{ hashFiles('benchmarks/**/*', 'lib/**/*') }}
           restore-keys: |
             ${{ runner.os }}-compile-
