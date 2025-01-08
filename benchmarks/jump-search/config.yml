@@ -1,0 +1,10 @@
+name: Jump Search (x5)
+description: >
+  Jump Search is a search algorithm that "jumps" between elements within a sorted array, then performs a linear search.
+  Performs a linear search through 25 sorted integers for the third, ninth, 13th, 16th, and 21st elements.
+  Implementations modified from to GeeksforGeeks.
+measure: NANOSECONDS
+output: MICROSECONDS
+tags:
+  - "number"
+  - "search"
