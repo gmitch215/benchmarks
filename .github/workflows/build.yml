@@ -92,7 +92,7 @@ jobs:
             ~/.konan/kotlin-native-prebuilt-${{ matrix.name }}-*
           key: ${{ runner.os }}-konan-${{ hashFiles('**/Dependencies.kt') }}
           restore-keys: |
-            ${{ runner.os }}-konan-
+            ${{ runner.os }}-konan
       # Start Daemon
       - name: Change Permissions
         run: chmod +x ./gradlew
@@ -162,6 +162,15 @@ jobs:
       - name: Install Zig
         uses: mlugg/setup-zig@v1
       # Benchmarking
+      - name: Install Libraries
+        run: ./gradlew downloadLibraries
+      - name: Cache Compile Binaries
+        uses: actions/cache@v4
+        with:
+          path: benchmarks/**/*.{o,exe,kexe,jar,pdb,class}
+          key: ${{ runner.os }}-compile-${{ hashFiles('benchmarks/**/*', 'lib/**/*') }}
+          restore-keys: |
+            ${{ runner.os }}-compile-
       - name: Create Benchmarks
         run: ./gradlew benchmark
       - name: Upload Benchmarks
