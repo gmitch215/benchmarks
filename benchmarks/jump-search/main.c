@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 #include "../../lib/c/nanotime/nanotime.h"
 
@@ -7,7 +8,7 @@ int min(int a, int b){
     if (b > a)
         return a;
     else
-      return b;
+        return b;
 }
 
 int jumpSearch(int arr[], int x) {
@@ -15,7 +16,7 @@ int jumpSearch(int arr[], int x) {
     int step = sqrt(n);
     int prev = 0;
 
-    while (arr[min(step, n)-1] < x) {
+    while (arr[min(step, n) - 1] < x) {
         prev = step;
         step += sqrt(n);
         if (prev >= n)
