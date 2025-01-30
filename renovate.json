@@ -4,6 +4,7 @@
     "config:recommended",
     "group:allNonMajor"
   ],
+  "dependencyDashboard": false,
   "git-submodules": {
     "enabled": true
   },
