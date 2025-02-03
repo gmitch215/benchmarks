@@ -246,6 +246,7 @@ jobs:
       pages: write
       id-token: write
 
+    name: Deploy Site
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
