@@ -19,8 +19,8 @@ dependencies {
     implementation("org.jsoup:jsoup:1.18.3")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.0")
-    implementation("com.charleskorn.kaml:kaml:0.67.1")
-    implementation("org.jetbrains.kotlinx:kandy-lets-plot:0.7.1")
+    implementation("com.charleskorn.kaml:kaml:0.70.0")
+    implementation("org.jetbrains.kotlinx:kandy-lets-plot:0.8.0")
     implementation("com.github.oshi:oshi-core:6.6.6")
 
     runtimeOnly("ch.qos.logback:logback-classic:1.5.16")
