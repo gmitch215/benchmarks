@@ -235,6 +235,7 @@ jobs:
           path: build/site/_site
 
   deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     needs: site
 
@@ -251,6 +252,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        with:
-          preview: ${{ github.event_name != 'push' || github.ref != 'refs/heads/master' }}
-          timeout: 7200000
