@@ -101,7 +101,7 @@ suspend fun compileFile(file: File, lang: Language) {
         val outputs = lang.cleanup.map { File(file.parentFile, it) }
         logger.debug { "Checking for compiled files: ${outputs.joinToString()}" }
         if (outputs.any { it.exists() }) {
-            logger.info { "Skipping compilation of '${lang.id}' for ${file.absolutePath}: Already Compiled" }
+            logger.warn { "Skipping compilation for ${file.absolutePath}: Already Compiled" }
             return
         }
     }

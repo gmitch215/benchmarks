@@ -54,7 +54,7 @@ suspend fun main(args: Array<String>): Unit = coroutineScope {
                     launch {
                         val file = File(config.parentFile, name)
                         if (file.exists()) {
-                            logger.info { "Library already downloaded: ${file.absolutePath}" }
+                            logger.debug { "Library already downloaded: ${file.absolutePath}" }
                             return@launch
                         }
 
