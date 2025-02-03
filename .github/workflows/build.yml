@@ -229,28 +229,27 @@ jobs:
           bundle exec jekyll build
           cd ../..
       - name: Archive Site
-        uses: actions/upload-artifact@v4
+        id: deployment
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: site
           path: build/site/_site
-      - name: Calculate Previous Site Revision
-        id: prev-run
-        run: echo "PREVIOUS_RUN_ID=$((${{ github.run_id }} - 1))" >> "$GITHUB_OUTPUT"
-      - name: Download Previous Site
-        uses: actions/download-artifact@v4
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: site
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    permissions:
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
         with:
-          name: site
-          path: build/old_site
-          run-id: ${{ steps.prev-run.outputs.PREVIOUS_RUN_ID }}
-      - name: Remove Duplicate Files
-        run: bash .github/remove_duplicates.sh build/old_site build/site/_site
-      - name: Upload Site
-        if: ${{ github.event_name != 'pull_request' && github.ref_name == 'master' }}
-        uses: shallwefootball/s3-upload-action@master
-        with:
-          aws_key_id: ${{ secrets.CF_R2_ACCESS_KEY }}
-          aws_secret_access_key: ${{ secrets.CF_R2_SECRET_ACCESS_KEY }}
-          aws_bucket: ${{ vars.CF_R2_BUCKET }}
-          endpoint: ${{ secrets.CF_R2_ENDPOINT }}
-          source_dir: 'build/site/_site'
-          destination_dir: ''
+          preview: ${{ github.event_name != 'push' || github.ref != 'refs/heads/master' }}
+          timeout: 7200000
