@@ -24,7 +24,7 @@ dependencies {
     implementation("com.github.oshi:oshi-core:6.7.0")
 
     runtimeOnly("ch.qos.logback:logback-classic:1.5.17")
-    implementation("io.github.oshai:kotlin-logging:7.0.4")
+    implementation("io.github.oshai:kotlin-logging:7.0.5")
 }
 
 java {
