@@ -129,7 +129,7 @@ jobs:
       - name: Install Kotlin
         uses: gmitch215/setup-kotlin@main
         with:
-          version: '2.1.0'
+          version: '2.1.20'
           install-native: true
       - name: Install Unix Kotlin/Native Dependencies
         if: ${{ matrix.name != 'windows' }}
@@ -140,7 +140,7 @@ jobs:
       - name: Install Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.3'
+          ruby-version: '3.4'
           bundler-cache: true
       - name: Install Go
         uses: actions/setup-go@v5
@@ -206,7 +206,7 @@ jobs:
       - name: Install Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.3'
+          ruby-version: '3.4'
           bundler-cache: true
           working-directory: site
       - name: Change Permissions
