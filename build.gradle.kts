@@ -19,12 +19,12 @@ dependencies {
     implementation("org.jsoup:jsoup:1.19.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.0")
-    implementation("com.charleskorn.kaml:kaml:0.73.0")
+    implementation("com.charleskorn.kaml:kaml:0.74.0")
     implementation("org.jetbrains.kotlinx:kandy-lets-plot:0.8.0")
     implementation("com.github.oshi:oshi-core:6.8.0")
 
     runtimeOnly("ch.qos.logback:logback-classic:1.5.18")
-    implementation("io.github.oshai:kotlin-logging:7.0.5")
+    implementation("io.github.oshai:kotlin-logging:7.0.6")
 }
 
 java {
