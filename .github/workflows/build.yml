@@ -160,7 +160,7 @@ jobs:
         with:
           cache: 'false'
       - name: Install Zig
-        uses: mlugg/setup-zig@v1
+        uses: mlugg/setup-zig@v2
       # Benchmarking
       - name: Install Libraries
         run: ./gradlew downloadLibraries
