@@ -102,7 +102,8 @@ Here are some notable examples:
 - `kotlinc-native` for Kotlin Native
   - This requires the `KOTLIN_NATIVE_HOME` environment variable to be set to the Kotlin Native compiler directory (**not** the bin directory).
 - `ruby` for Ruby
-- `python` for Python
+- `native-image` for GraalVM
+  - This requires the `GRAALVM_HOME` environment variable to be set to the GraalVM directory (**not** the bin directory).
 - `gcc`/`g++` **and** `clang`/`clang++` for C/C++
 - `rustc` for Rust
 - `go` for Go

@@ -19,6 +19,13 @@ data class BenchmarkConfiguration(
     val disabled: List<String> = emptyList()
 )
 
+val windowsSuffixes = mapOf(
+    "kotlin-jvm" to ".bat",
+    "kotlin-native" to ".bat",
+    "graalvm-precompile" to ".exe",
+    "graalvm" to ".cmd"
+)
+
 @Serializable
 data class Language(
     val language: String,
@@ -30,11 +37,14 @@ data class Language(
     val location: String? = null,
     val run: String,
     val version: String,
+    val precompile: String? = null,
     val compile: String? = null,
     @SerialName("compile-extra")
     val compileExtra: Map<String, String> = emptyMap(),
     val libraries: Map<String, String> = emptyMap(),
     val cleanup: List<String>? = null,
+    @SerialName("parallel-limit")
+    val parallelLimit: Int? = null
 ) {
 
     val absoluteVersion: String
@@ -46,7 +56,7 @@ data class Language(
                     version0 = "${home}${s}bin${s}$version0"
 
                 if (os == "windows") {
-                    val executableSuffix = if (id.contains("kotlin")) ".bat" else ".exe"
+                    val executableSuffix = windowsSuffixes[id] ?: ".exe"
                     version0 = version0.replaceFirst(" ", "$executableSuffix ")
                 }
             }
@@ -122,6 +132,36 @@ data class Language(
         }
     }
 
+    val absolutePrecompile: String?
+        get() {
+            if (precompile == null) return null
+
+            var precompile0 = precompile
+            if (location != null) {
+                val home = System.getenv(location)
+                if (home != null)
+                    precompile0 = "${home}${s}bin${s}$precompile0"
+
+                if (os == "windows") {
+                    val executableSuffix = windowsSuffixes["$id-precompile"] ?: windowsSuffixes[id] ?: ".exe"
+                    precompile0 = precompile0.replaceFirst(" ", "$executableSuffix ")
+                }
+            }
+
+            if (libraries.isNotEmpty()) {
+                val includePrecompile = libraries["include-precompile"]?.toBoolean() == true
+                if (includePrecompile) {
+                    if (precompile0.contains(" ")) {
+                        val (first, rest) = precompile0.split("\\s".toRegex(), limit = 2)
+                        precompile0 = "$first ${librariesFlag()} $rest"
+                    } else
+                        precompile0 += " ${librariesFlag()}"
+                }
+            }
+
+            return precompile0
+        }
+
     val absoluteCompile: String?
         get() {
             if (compile == null) return null
@@ -133,7 +173,7 @@ data class Language(
                     compile0 = "${home}${s}bin${s}$compile0"
 
                 if (os == "windows") {
-                    val executableSuffix = if (id.contains("kotlin")) ".bat" else ".exe"
+                    val executableSuffix = windowsSuffixes[id] ?: ".exe"
                     compile0 = compile0.replaceFirst(" ", "$executableSuffix ")
                 }
             }

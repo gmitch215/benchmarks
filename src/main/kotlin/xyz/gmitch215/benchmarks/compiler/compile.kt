@@ -4,6 +4,7 @@ package xyz.gmitch215.benchmarks.compiler
 
 import com.charleskorn.kaml.Yaml
 import io.github.oshai.kotlinlogging.KotlinLogging
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.serialization.decodeFromString
@@ -86,7 +87,9 @@ suspend fun main(args: Array<String>): Unit = coroutineScope {
 
             for (lang in langs) {
                 logger.info { "Compiling ${benchmark.absolutePath} under '${lang.id}'" }
-                launch {
+
+                val dispatcher = Dispatchers.Default.limitedParallelism(lang.parallelLimit ?: 32, "Compile ${lang.id}")
+                launch(dispatcher) {
                     compileFile(benchmark, lang)
                 }
             }
@@ -106,7 +109,16 @@ suspend fun compileFile(file: File, lang: Language) {
         }
     }
 
-    var cmd = lang.absoluteCompile
+    val precompile = lang.absolutePrecompile
+    if (precompile != null) {
+        logger.info { "Precompiling ${file.absolutePath} under '${lang.id}'" }
+
+        logger.debug { "Running Precompile Command '$precompile' for ${file.absolutePath}" }
+        precompile.runCommand(file.parentFile, true)
+        logger.info { "Precompilation complete for '${file.absolutePath}'" }
+    }
+
+    val cmd = lang.absoluteCompile
     if (cmd == null) {
         logger.info { "Skipping language '${lang.id}' as there is no compile command" }
         return

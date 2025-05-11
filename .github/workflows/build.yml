@@ -161,6 +161,13 @@ jobs:
           cache: 'false'
       - name: Install Zig
         uses: mlugg/setup-zig@v2
+      - name: Install GraalVM
+        uses: graalvm/setup-graalvm@v1
+        with:
+          java-version: 21
+          distribution: 'graalvm'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          set-java-home: false
       # Benchmarking
       - name: Install Libraries
         run: ./gradlew downloadLibraries

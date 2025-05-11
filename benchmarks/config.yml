@@ -193,3 +193,18 @@
     - main.zig.o.obj
     - main.zig.pdb
   version: zig version --verbose
+- language: GraalVM
+  file: true
+  id: graalvm
+  file-name: Main.java
+  color: "dd830c"
+  location: GRAALVM_HOME
+  precompile: javac Main.java
+  compile: native-image --no-fallback Main -o main.graalvm -O0 --silent --parallelism=1 -J-Xmx2G -J-Xms2G --enable-monitoring=all --enable-http --enable-https
+  run: main.graalvm
+  cleanup:
+    - Main.class
+    - main.graalvm
+    - main.graalvm.exe
+  version: native-image --version
+  parallel-limit: 2
