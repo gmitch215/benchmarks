@@ -5,7 +5,6 @@ package xyz.gmitch215.benchmarks.measurement
 import com.charleskorn.kaml.Yaml
 import kotlinx.coroutines.*
 import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.*
 import oshi.SystemInfo
 import xyz.gmitch215.benchmarks.*
@@ -203,27 +202,34 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
         val si = SystemInfo()
 
         // Hardware Information
+        fun Long.toBytes(): String {
+            val kb = this / 1_000.0
+            val mb = kb / 1_000.0
+            val gb = mb / 1_000.0
+            val tb = gb / 1_000.0
 
-        val maxMemory = si.hardware.memory.total.run {
-            val mb = this / 1_000_000
-            val gb = mb / 1_000
-            if (gb > 0) "${gb}GB" else "${mb}MB"
+            return when {
+                tb > 1 -> "${String.format("%,.3f", tb)}TB"
+                gb > 1 -> "${String.format("%,.3f", gb)}GB"
+                mb > 1 -> "${String.format("%,.3f", mb)}MB"
+                kb > 1 -> "${String.format("%,.3f", kb)}KB"
+                else -> "${this}B"
+            }
         }
 
-        val freqency = si.hardware.processor.maxFreq.run {
+        fun Long.toFrequency(): String {
             val ghz = this / 1_000_000_000.0
             val mhz = this / 1_000_000.0
-            if (ghz > 0) "${String.format("%,.3f", ghz)}GHz" else "${String.format("%,.3f", mhz)}MHz"
+            return if (ghz > 0) "${String.format("%,.3f", ghz)}GHz" else "${String.format("%,.3f", mhz)}MHz"
+        }
+
+        val memory = si.hardware.memory
+        val physicalMemory = memory.physicalMemory.joinToString("\n") {
+            "- ${it.capacity.toBytes()} ${it.memoryType} (${it.bankLabel}) @ ${it.clockSpeed.toFrequency()} #${it.partNumber}"
         }
 
         val disks = si.hardware.diskStores.joinToString("\n") {
-            fun Long.toGB(): String {
-                val gb = this / 1_000_000_000.0
-                val tb = gb / 1_000.0
-                return if (tb >= 1) "${String.format("%,.2f", tb)}TB" else "${String.format("%,.2f", gb)}GB"
-            }
-
-            "- ${it.name} (${it.model}) - ${it.size.toGB()}"
+            "- ${it.name} (${it.model}) - ${it.size.toBytes()}"
         }
 
         // JVM Information
@@ -234,6 +240,8 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
             if (gb > 0) "${gb}GB" else "${mb}MB"
         }
 
+        val cpu = si.hardware.processor.processorIdentifier
+
         val text = """
             $date
             $os-$arch ${System.getProperty("os.version")}
@@ -241,12 +249,18 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
             ${si.hardware.computerSystem.model} - ${si.hardware.computerSystem.manufacturer}
             ${si.operatingSystem.bitness} Bit
             ---
-            CPU: 
-            ${si.hardware.processor}
+            CPU: ${cpu.name} ${cpu.model.trim()}
+            CPU Identifier: ${cpu.identifier}
+            CPU Vendor: ${cpu.vendor}
+            CPU Microarchitecture: ${cpu.microarchitecture}
+            CPU Frequency: ${si.hardware.processor.maxFreq.toFrequency()}
+            CPU Processors: ${si.hardware.processor.logicalProcessorCount}
             ---
-            Max Memory: $maxMemory
-            Base CPU Frequency: $freqency
-            Processors: ${si.hardware.processor.logicalProcessorCount}
+            Memory Page Size: ${memory.pageSize.toBytes()}
+            Max Memory: ${memory.total.toBytes()}
+            Max Virtual Memory: ${memory.virtualMemory.virtualMax.toBytes()}
+            Physical Memory:
+            $physicalMemory
             ---
             Disks:
             $disks
@@ -254,6 +268,8 @@ suspend fun main(args: Array<String>): Unit = withContext(Dispatchers.IO) {
             JVM Max Memory: $jvmMaxMemory
             Available CPU Cores: ${Runtime.getRuntime().availableProcessors()}
             """.lines().joinToString("\n") { it.trim() }
+
+        logger.debug { "Platform information:\n$text" }
 
         osFile.writeText(text)
 
