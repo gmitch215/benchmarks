@@ -200,7 +200,7 @@
   color: "dd830c"
   location: GRAALVM_HOME
   precompile: javac Main.java
-  compile: native-image --no-fallback Main -o main.graalvm -O0 --silent --parallelism=1 -J-Xmx2G -J-Xms2G --enable-monitoring=all --enable-http --enable-https
+  compile: native-image --no-fallback Main -o main.graalvm -O0 --silent --parallelism=2 -J-Xmx2G -J-Xms2G --enable-monitoring=all --enable-http --enable-https
   run: main.graalvm
   cleanup:
     - Main.class
