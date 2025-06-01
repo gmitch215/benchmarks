@@ -21,7 +21,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.1")
     implementation("com.charleskorn.kaml:kaml:0.80.1")
     implementation("org.jetbrains.kotlinx:kandy-lets-plot:0.8.0")
-    implementation("com.github.oshi:oshi-core:6.8.1")
+    implementation("com.github.oshi:oshi-core:6.8.2")
 
     runtimeOnly("ch.qos.logback:logback-classic:1.5.18")
     implementation("io.github.oshai:kotlin-logging:7.0.7")
