@@ -168,6 +168,10 @@ jobs:
           distribution: 'graalvm'
           github-token: ${{ secrets.GITHUB_TOKEN }}
           set-java-home: false
+      - name: Install Dub
+        uses: dlang-community/setup-dlang@v2
+        with:
+          compiler: dmd
       # Benchmarking
       - name: Install Libraries
         run: ./gradlew downloadLibraries
