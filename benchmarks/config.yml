@@ -149,6 +149,16 @@
   color: "701516"
   run: ruby main.rb
   version: ruby --version
+- language: D
+  file: true
+  id: d
+  file-name: main.d
+  color: "AC4D48"
+  compile: dub build --sinlge -b=release main.d
+  run: main.d.o
+  cleanup:
+    - main.d.o
+  version: go version
 - language: Go
   file: true
   id: go
