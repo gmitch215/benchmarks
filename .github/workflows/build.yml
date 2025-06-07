@@ -182,6 +182,7 @@ jobs:
             benchmarks/**/*.class
             benchmarks/**/*.jar
             benchmarks/**/*.pdb
+            benchmarks/**/*.graalvm
           key: ${{ runner.os }}-compile-${{ hashFiles('benchmarks/**/*', 'lib/**/*') }}
           restore-keys: |
             ${{ runner.os }}-compile-
