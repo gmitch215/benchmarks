@@ -4,7 +4,7 @@ public class Main {
         long before = System.nanoTime();
 
         int n = 0;
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 31; i++) {
             n = 1 << i;
         }
 
