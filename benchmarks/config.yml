@@ -98,6 +98,7 @@
     default: cpp
   compile-extra:
     default: "main.cpp -o main.cpp.llvm.o -std=c++17 -w -O0"
+    windows: "-lws2_32"
   run: main.cpp.llvm.o
   cleanup:
     - main.cpp.llvm.o
@@ -139,6 +140,7 @@
     default-x64: "-msha -msse4.1"
     default-x86: "-msha -msse4.1"
     linux: "-lm"
+    windows: "-lws2_32"
   run: main.c.llvm.o
   cleanup:
     - main.c.llvm.o
@@ -153,12 +155,14 @@
   file: true
   id: d
   file-name: main.d
-  color: "AC4D48"
-  compile: dub build --sinlge -b=release main.d
+  color: "ac4d48"
+  compile: dub build --single -b=release main.d
   run: main.d.o
+  append-exe: true
   cleanup:
     - main.d.o
-  version: go version
+    - main.d.o.exe
+  version: dmd --version
 - language: Go
   file: true
   id: go
@@ -212,6 +216,7 @@
   precompile: javac Main.java
   compile: native-image --no-fallback Main -o main.graalvm -O0 --silent --parallelism=2 -J-Xmx2G -J-Xms2G --enable-monitoring=all --enable-http --enable-https
   run: main.graalvm
+  append-exe: true
   cleanup:
     - Main.class
     - main.graalvm

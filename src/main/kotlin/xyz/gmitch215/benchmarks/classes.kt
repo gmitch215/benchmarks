@@ -36,6 +36,8 @@ data class Language(
     val file: Boolean = false,
     val location: String? = null,
     val run: String,
+    @SerialName("append-exe")
+    val appendExe: Boolean = false,
     val version: String,
     val precompile: String? = null,
     val compile: String? = null,
@@ -204,6 +206,9 @@ data class Language(
     val absoluteRun: String
         get() {
             var run0 = run
+
+            if (os == "windows" && appendExe)
+                run0 += ".exe"
 
             if (id == "kotlin-jvm") {
                 val home = System.getenv(location)
