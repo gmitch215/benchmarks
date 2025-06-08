@@ -172,6 +172,8 @@ jobs:
         uses: dlang-community/setup-dlang@v2
         with:
           compiler: dmd
+          gh_token: ${{ github.token }}
+          gdmd_sha: latest
       # Benchmarking
       - name: Install Libraries
         run: ./gradlew downloadLibraries
