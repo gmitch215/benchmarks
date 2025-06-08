@@ -10,7 +10,7 @@ void main()
 {
     auto sw = StopWatch(AutoStart.yes);
 
-    foreach (i; 0.0 .. 10_000.0)
+    foreach (i; 0.0 .. 100_000.0)
     {
         sqrt(i);
     }

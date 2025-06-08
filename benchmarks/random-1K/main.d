@@ -2,18 +2,23 @@
 /+dub.sdl:
 targetName "main.d.o"
 +/
+version (Windows)
+    pragma(lib, "bcrypt");
+
 import std.stdio : writeln;
 import std.datetime.stopwatch : StopWatch, AutoStart;
+import std.random : rndGen, uniform;
 
 void main()
 {
     auto sw = StopWatch(AutoStart.yes);
 
-    foreach (i; 0 .. 10_000)
+    float n = 0.0;
+    foreach (i; 0 .. 1_000)
     {
-        auto y = 1.1 + i / 10_000.0;
-        2 ^^ y;
+        n = uniform(0.0, 1.0, rndGen);
     }
+    n = n;
 
     sw.stop();
     writeln(sw.peek.total!"nsecs");

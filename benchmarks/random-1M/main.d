@@ -2,9 +2,12 @@
 /+dub.sdl:
 targetName "main.d.o"
 +/
+version (Windows)
+    pragma(lib, "bcrypt");
+
 import std.stdio : writeln;
 import std.datetime.stopwatch : StopWatch, AutoStart;
-import std.random : random;
+import std.random : rndGen, uniform;
 
 void main()
 {
@@ -13,7 +16,7 @@ void main()
     float n = 0.0;
     foreach (i; 0 .. 1_000_000)
     {
-        n = random();
+        n = uniform(0.0, 1.0, rndGen);
     }
     n = n;
 
