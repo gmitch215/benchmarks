@@ -137,6 +137,12 @@ jobs:
       - name: Install Windows Kotlin/Native Dependencies
         if: ${{ matrix.name == 'windows' }}
         run: benchmarks/kotlinc-native-dependencies.bat
+      - name: Install Dub
+        uses: dlang-community/setup-dlang@v2
+        with:
+          compiler: dmd
+          gh_token: ${{ github.token }}
+          gdmd_sha: latest
       - name: Install Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -168,12 +174,6 @@ jobs:
           distribution: 'graalvm'
           github-token: ${{ secrets.GITHUB_TOKEN }}
           set-java-home: false
-      - name: Install Dub
-        uses: dlang-community/setup-dlang@v2
-        with:
-          compiler: dmd
-          gh_token: ${{ github.token }}
-          gdmd_sha: latest
       # Benchmarking
       - name: Install Libraries
         run: ./gradlew downloadLibraries
