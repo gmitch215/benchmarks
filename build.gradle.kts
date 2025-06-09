@@ -19,7 +19,7 @@ dependencies {
     implementation("org.jsoup:jsoup:1.20.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.1")
-    implementation("com.charleskorn.kaml:kaml:0.80.1")
+    implementation("com.charleskorn.kaml:kaml:0.81.0")
     implementation("org.jetbrains.kotlinx:kandy-lets-plot:0.8.0")
     implementation("com.github.oshi:oshi-core:6.8.2")
 
