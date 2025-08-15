@@ -226,7 +226,7 @@ jobs:
       - name: Change Permissions
         run: chmod +x ./gradlew
       - name: Download Artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           pattern: benchmarks-*
           path: build/site/_data/results/
