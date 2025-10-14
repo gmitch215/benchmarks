@@ -100,7 +100,7 @@ jobs:
         run: ./gradlew project tasks dependencies
       # Runtimes
       - name: Install JavaScript (Node)
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: '22'
       - name: Install JavaScript (Node) Dependencies
