@@ -195,7 +195,7 @@ jobs:
       - name: Create Benchmarks
         run: ./gradlew benchmark
       - name: Upload Benchmarks
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: benchmarks-${{ matrix.name }}
           path: benchmarks/output
@@ -226,7 +226,7 @@ jobs:
       - name: Change Permissions
         run: chmod +x ./gradlew
       - name: Download Artifacts
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           pattern: benchmarks-*
           path: build/site/_data/results/
