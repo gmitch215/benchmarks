@@ -1,8 +1,8 @@
 import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
 
 plugins {
-    kotlin("jvm") version "2.2.20"
-    kotlin("plugin.serialization") version "2.2.20"
+    kotlin("jvm") version "2.2.21"
+    kotlin("plugin.serialization") version "2.2.21"
 }
 
 group = "xyz.gmitch215"
@@ -19,11 +19,11 @@ dependencies {
     implementation("org.jsoup:jsoup:1.21.2")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
-    implementation("com.charleskorn.kaml:kaml:0.96.0")
+    implementation("com.charleskorn.kaml:kaml:0.102.0")
     implementation("org.jetbrains.kotlinx:kandy-lets-plot:0.8.1")
-    implementation("com.github.oshi:oshi-core:6.9.0")
+    implementation("com.github.oshi:oshi-core:6.9.1")
 
-    runtimeOnly("ch.qos.logback:logback-classic:1.5.18")
+    runtimeOnly("ch.qos.logback:logback-classic:1.5.20")
     implementation("io.github.oshai:kotlin-logging:7.0.13")
 }
 
